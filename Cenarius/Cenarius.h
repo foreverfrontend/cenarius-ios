@@ -10,7 +10,9 @@
   #define _CENARIUS_
 
 #import "CNRSConfig.h"
+#import "CNRSViewController.h"
 #import "CNRSWebViewController.h"
+#import "CDVViewCoroller.h"
 
 #import "CNRSWidget.h"
 
@@ -32,6 +34,10 @@
 #import "CNRSNavTitleWidget.h"
 #import "CNRSAlertDialogWidget.h"
 #import "CNRSPullRefreshWidget.h"
+#import "CNRSCordovaWidget.h"
+#import "CNRSNativeWidget.h"
+#import "CNRSWebWidget.h"
+#import "CNRSNavMenuWidget.h"
 #endif
 
 #endif /* _CENARIUS_ */
