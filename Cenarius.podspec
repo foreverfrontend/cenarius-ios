@@ -11,9 +11,4 @@ Pod::Spec.new do |s|
   s.frameworks  = "Foundation","UIKit"
   s.dependency "AFNetworking"
   s.requires_arc = true
-
-  s.subspec 'Cordova' do |ss|
-    ss.source_files = 'Cenarius/Cordova'
-  end
-
 end
