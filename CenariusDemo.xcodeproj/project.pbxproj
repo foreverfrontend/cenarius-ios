@@ -68,8 +68,6 @@
 		0C9EC8561DB46F66003BFB38 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC83B1DB46F66003BFB38 /* NSMutableArray+QueueAdditions.m */; };
 		0C9EC8571DB46F66003BFB38 /* cordova.js in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC83C1DB46F66003BFB38 /* cordova.js */; };
 		0C9EC8581DB46F66003BFB38 /* VERSION in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC83D1DB46F66003BFB38 /* VERSION */; };
-		0C9EC8591DB46F66003BFB38 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC83E1DB46F66003BFB38 /* LICENSE */; };
-		0C9EC85A1DB46F66003BFB38 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC83F1DB46F66003BFB38 /* README.md */; };
 		0C9EC8601DB4B728003BFB38 /* CNRSNativeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC85F1DB4B728003BFB38 /* CNRSNativeWidget.m */; };
 		0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8621DB4C737003BFB38 /* CNRSWebWidget.m */; };
 		0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8651DB5B01B003BFB38 /* CNRSNavMenuWidget.m */; };
@@ -203,8 +201,6 @@
 		0C9EC83B1DB46F66003BFB38 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		0C9EC83C1DB46F66003BFB38 /* cordova.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = cordova.js; sourceTree = "<group>"; };
 		0C9EC83D1DB46F66003BFB38 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
-		0C9EC83E1DB46F66003BFB38 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		0C9EC83F1DB46F66003BFB38 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0C9EC85E1DB4B728003BFB38 /* CNRSNativeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNativeWidget.h; sourceTree = "<group>"; };
 		0C9EC85F1DB4B728003BFB38 /* CNRSNativeWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNativeWidget.m; sourceTree = "<group>"; };
 		0C9EC8611DB4C737003BFB38 /* CNRSWebWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSWebWidget.h; sourceTree = "<group>"; };
@@ -408,8 +404,6 @@
 			isa = PBXGroup;
 			children = (
 				0C9EC7FC1DB46F66003BFB38 /* CordovaLib */,
-				0C9EC83E1DB46F66003BFB38 /* LICENSE */,
-				0C9EC83F1DB46F66003BFB38 /* README.md */,
 			);
 			path = Cordova;
 			sourceTree = "<group>";
@@ -627,7 +621,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C9EC8591DB46F66003BFB38 /* LICENSE in Resources */,
 				0C9EC8571DB46F66003BFB38 /* cordova.js in Resources */,
 				0C9EC6461DAF97A4003BFB38 /* LaunchScreen.storyboard in Resources */,
 				0C9EC6A01DB0B20D003BFB38 /* common_btn_arrowback@3x.png in Resources */,
@@ -719,7 +712,6 @@
 				0C9EC8431DB46F66003BFB38 /* CDVIntentAndNavigationFilter.m in Sources */,
 				0C9EC6951DAF98B2003BFB38 /* CNRSAlertDialogData.m in Sources */,
 				0C9EC6961DAF98B2003BFB38 /* CNRSModel.m in Sources */,
-				0C9EC85A1DB46F66003BFB38 /* README.md in Sources */,
 				0C9EC6921DAF98B2003BFB38 /* CNRSViewController.m in Sources */,
 				0C9EC8441DB46F66003BFB38 /* CDVLocalStorage.m in Sources */,
 				0C9EC6971DAF98B2003BFB38 /* CNRSAlertDialogWidget.m in Sources */,
