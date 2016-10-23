@@ -7,8 +7,13 @@ Pod::Spec.new do |s|
   s.author             = { "M" => "myeveryheart@qq.com" }
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/macula-projects/cenarius-ios.git", :tag => "#{s.version}" }
-  s.source_files  = "Cenarius"
+  s.source_files  = "Cenarius","Cenarius/**/*","Cenarius/**/**/*","Cenarius/**/**/**/*","Cenarius/**/**/**/**/*"
   s.frameworks  = "Foundation","UIKit"
   s.dependency "AFNetworking"
   s.requires_arc = true
+
+  s.subspec 'Cordova' do |ss|
+    ss.source_files = 'Cenarius/Cordova'
+  end
+
 end
