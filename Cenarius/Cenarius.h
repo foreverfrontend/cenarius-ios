@@ -12,7 +12,7 @@
 #import "CNRSConfig.h"
 #import "CNRSViewController.h"
 #import "CNRSWebViewController.h"
-#import "CDVViewCoroller.h"
+#import "CDVViewController.h"
 
 #import "CNRSWidget.h"
 
