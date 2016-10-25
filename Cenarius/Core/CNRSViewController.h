@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * `CNRSViewController` 是一个 Cenarius Container。
  * 它提供了一个使用 web 技术 html, css, javascript 开发 UI 界面的容器。
- * 基座ViewController，其他ViewController都应该继承它
+ * 其他ViewController都应该继承它
  */
 @interface CNRSViewController : UIViewController
 
@@ -98,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
  打开本地web应用
  
  @param uri 相对路径
+ @param parameters 参数
  */
 - (void)openWebPage:(nonnull NSString *)uri parameters:(nullable NSDictionary *)parameters;
 
@@ -105,6 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
  打开轻应用
  
  @param url 网址
+ @param parameters 参数
  */
 - (void)openLightApp:(nonnull NSString *)url parameters:(nullable NSDictionary *)parameters;
 

@@ -15,7 +15,7 @@
 {
   if ( (self = [super init]) ) {
       
-    _uri = [NSURL URLWithString:dict[@"uri"]];
+    _uri = [NSURL URLWithString:dict[@"file"]];
       _remoteHTML = [[CNRSConfig remoteFolderUrl] URLByAppendingPathComponent:_uri.absoluteString];
       _fileHash = dict[@"hash"];
   }
