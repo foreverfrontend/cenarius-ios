@@ -60,6 +60,17 @@
 @synthesize webViewEngine = _webViewEngine;
 @dynamic webView;
 
+//修改：新增
+- (instancetype)initWithURI:(NSURL *)uri
+{
+    self = [super initWithURI:uri];
+    if (self)
+    {
+        [self __init];
+    }
+    return self;
+}
+
 - (void)__init
 {
     if ((self != nil) && !self.initialized) {
