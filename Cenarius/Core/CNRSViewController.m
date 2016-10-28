@@ -23,6 +23,7 @@
 #import "CNRSCordovaWidget.h"
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
+#import "CNRSConfig.h"
 
 @interface CNRSViewController ()
 
@@ -123,6 +124,15 @@
 
 - (NSURL *)htmlURL
 {
+    if ([CNRSConfig isDevelopModeEnable])
+    {
+        NSString *docPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
+                      firstObject] stringByAppendingPathComponent:[CNRSConfig routesResourcePath]];
+        docPath = [@"file://" stringByAppendingString:docPath];
+        NSURL *url = [NSURL URLWithString:docPath];
+        url = [url URLByAppendingPathComponent:self.uri.absoluteString];
+        return url;
+    }
     return [self cnrs_htmlURLWithUri:self.uri htmlFileURL:self.htmlFileURL];
 }
 
@@ -177,7 +187,7 @@
 {
   if (!htmlFileURL)
   {
-      if (uri.query.length != 0 && uri.fragment.length != 0)
+      if (uri.query.length != 0 || uri.fragment.length != 0)
       {
           // 为了方便 escape 正确的 uri，做了下面的假设。之后放弃 iOS 7 后可以改用 `queryItem` 来实现。
           // 做个合理假设：html URL 中不应该有 query string 和 fragment。

@@ -112,7 +112,7 @@ static NSString * const RoutesMapFile = @"routes.json";
 + (void)setRemoteFolderUrl:(NSURL *)remoteFolderUrl;
 
 /**
- * 读取 remoteFolderUrl。
+ * 等待route刷新的callback
  */
 + (nullable NSURL *)remoteFolderUrl;
 
@@ -133,6 +133,16 @@ static NSString * const RoutesMapFile = @"routes.json";
  读取返回按钮图标偏移
  */
 + (UIEdgeInsets )backButtonImageEdgeInsets;
+
+/**
+ 是否启用调试模式。开启后，会禁用路由表。Cenarius Container 会读取Docment目录。
+ */
++ (void)setDevelopModeEnable:(BOOL)isDevelopModeEnable;
+
+/**
+ * 读取 Cenarius Container 是否启用调试模式。该缺省是关闭的。Cenarius Container 会读取Docment目录。
+ */
++ (BOOL)isDevelopModeEnable;
 
 @end
 

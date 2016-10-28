@@ -22,6 +22,7 @@ static NSURL *sRoutesMapURL;
 static NSURL *sRemoteFolderUrl;
 static UIImage *sBackButtonImage;
 static UIEdgeInsets sBackButtonImageEdgeInsets;
+static BOOL sIsDevelopModeEnable;
 
 static NSString * const DefaultCNRSScheme = @"cenarius";
 static NSString * const DefaultCNRSHost = @"cenarius-container";
@@ -174,6 +175,18 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 + (UIEdgeInsets )backButtonImageEdgeInsets
 {
     return sBackButtonImageEdgeInsets;
+}
+
++ (void)setDevelopModeEnable:(BOOL)isDevelopModeEnable
+{
+    @synchronized (self) {
+        sIsDevelopModeEnable = isDevelopModeEnable;
+    }
+}
+
++ (BOOL)isDevelopModeEnable
+{
+    return sIsDevelopModeEnable;
 }
 
 @end
