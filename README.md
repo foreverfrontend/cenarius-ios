@@ -115,6 +115,15 @@ Cenarius 使用 uri 来标识页面。提供一个正确的 uri 就可以创建�
 
 有了预置资源文件和缓存文件的双重保证，一般用户打开 Cenarius 页面时都不会临时向服务器请求资源文件。这大大提升了用户打开页面的体验。
 
+#### 开发模式
+
+```objective-c
+[CNRSConfig setDevelopModeEnable:YES];
+```
+
+开发模式允许 H5 人员通过替换文件的方式迅速更新文件。
+启用开发模式后，路由功能将失效。url 加载目录为 Documents/<RoutesResourcePath>/
+
 ### 使用 CNRSViewController
 
 你可以直接使用 `CNRSViewController` 作为你的混合开发客户端容器。或者你也可以继承 `CNRSViewController`，在 `CNRSViewController` 基础上实现你自己的客户端容器。
