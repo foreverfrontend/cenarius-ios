@@ -76,7 +76,7 @@ Cenarius 使用 uri 来标识页面。提供一个正确的 uri 就可以创建�
 #### 设置预置资源文件路径
 
 ```objective-c
-[CNRSConfig setRoutesResourcePath:@"hybrid"];
+[CNRSConfig setRoutesResourcePath:@"www"];
 ```
 
 使用 Cenarius 一般会预置一份路由表，以及资源文件在应用包中。这样就可以减少用户的下载，加快第一次打开页面的速度。在没有网络的情况下，如果没有数据请求的话，页面也可访问。这都有利于用户体验。
@@ -122,7 +122,11 @@ Cenarius 使用 uri 来标识页面。提供一个正确的 uri 就可以创建�
 ```
 
 开发模式允许 H5 人员通过替换文件的方式迅速更新文件。
-启用开发模式后，路由功能将失效。url 加载目录为 Documents/<RoutesResourcePath>/
+启用开发模式后，路由功能将失效。url 加载目录为 
+
+```
+Documents/www/
+```
 
 ### 使用 CNRSViewController
 

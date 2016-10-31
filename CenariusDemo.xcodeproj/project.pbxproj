@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C4085461DC775CB00CE2CE3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C4085451DC775CB00CE2CE3 /* www */; };
 		0C7416681DBB198B00D4F802 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0C7416671DBB198B00D4F802 /* config.xml */; };
 		0C9EC6381DAF97A4003BFB38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6371DAF97A4003BFB38 /* main.m */; };
 		0C9EC63B1DAF97A4003BFB38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC63A1DAF97A4003BFB38 /* AppDelegate.m */; };
@@ -41,7 +42,6 @@
 		0C9EC6A01DB0B20D003BFB38 /* common_btn_arrowback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC69E1DB0B20D003BFB38 /* common_btn_arrowback@3x.png */; };
 		0C9EC6A71DB0C161003BFB38 /* NativeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6A51DB0C161003BFB38 /* NativeViewController.m */; };
 		0C9EC6A81DB0C161003BFB38 /* NativeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC6A61DB0C161003BFB38 /* NativeViewController.xib */; };
-		0C9EC6AB1DB0C9EB003BFB38 /* hybrid in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC6AA1DB0C9EB003BFB38 /* hybrid */; };
 		0C9EC6CE1DB346D1003BFB38 /* CNRSCordovaWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6CD1DB346D1003BFB38 /* CNRSCordovaWidget.m */; };
 		0C9EC8601DB4B728003BFB38 /* CNRSNativeWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC85F1DB4B728003BFB38 /* CNRSNativeWidget.m */; };
 		0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8621DB4C737003BFB38 /* CNRSWebWidget.m */; };
@@ -74,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C4085451DC775CB00CE2CE3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		0C7416671DBB198B00D4F802 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		0C9EC6331DAF97A4003BFB38 /* CenariusDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CenariusDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9EC6371DAF97A4003BFB38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		0C9EC6A41DB0C161003BFB38 /* NativeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeViewController.h; sourceTree = "<group>"; };
 		0C9EC6A51DB0C161003BFB38 /* NativeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeViewController.m; sourceTree = "<group>"; };
 		0C9EC6A61DB0C161003BFB38 /* NativeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeViewController.xib; sourceTree = "<group>"; };
-		0C9EC6AA1DB0C9EB003BFB38 /* hybrid */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hybrid; sourceTree = "<group>"; };
 		0C9EC6CC1DB346D1003BFB38 /* CNRSCordovaWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSCordovaWidget.h; sourceTree = "<group>"; };
 		0C9EC6CD1DB346D1003BFB38 /* CNRSCordovaWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSCordovaWidget.m; sourceTree = "<group>"; };
 		0C9EC85E1DB4B728003BFB38 /* CNRSNativeWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNativeWidget.h; sourceTree = "<group>"; };
@@ -391,7 +391,7 @@
 		0C9EC6A91DB0C9DC003BFB38 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				0C9EC6AA1DB0C9EB003BFB38 /* hybrid */,
+				0C4085451DC775CB00CE2CE3 /* www */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -599,11 +599,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C4085461DC775CB00CE2CE3 /* www in Resources */,
 				0C9EC6461DAF97A4003BFB38 /* LaunchScreen.storyboard in Resources */,
 				0C9EC6A01DB0B20D003BFB38 /* common_btn_arrowback@3x.png in Resources */,
 				0C7416681DBB198B00D4F802 /* config.xml in Resources */,
 				0C9EC6431DAF97A4003BFB38 /* Assets.xcassets in Resources */,
-				0C9EC6AB1DB0C9EB003BFB38 /* hybrid in Resources */,
 				0C9EC6411DAF97A4003BFB38 /* Main.storyboard in Resources */,
 				0C9EC69F1DB0B20D003BFB38 /* common_btn_arrowback@2x.png in Resources */,
 				0C9EC6A81DB0C161003BFB38 /* NativeViewController.xib in Resources */,
