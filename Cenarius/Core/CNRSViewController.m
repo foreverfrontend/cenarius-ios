@@ -194,38 +194,13 @@
           CNRSWarnLog(@"local html 's format is not right! Url has query and fragment.");
       }
 
-      htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
-//      // 没有设置 htmlFileURL，则使用本地 html 文件或者服务器读取 html 文件。
-//      
-//      htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:self.uri];
-//      
-//      if ([CNRSConfig isCacheEnable]) {
-//          // 如果缓存启用，尝试读取本地文件。如果没有本地文件（本地文件包括缓存，和资源文件夹），则从服务器读取。
-//          NSURL *localHtmlURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:self.uri];
-//          if (localHtmlURL) {
-//              htmlFileURL = localHtmlURL;
-//          }
-//      }
-//      else {
-//          htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:self.uri];
-//      }
+      htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
+      if (!htmlFileURL) {
+          htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+      }
   }
 
     return htmlFileURL;
-
-//  if (htmlFileURL.query.length != 0 && htmlFileURL.fragment.length != 0) {
-//    // 为了方便 escape 正确的 uri，做了下面的假设。之后放弃 iOS 7 后可以改用 `queryItem` 来实现。
-//    // 做个合理假设：html URL 中不应该有 query string 和 fragment。
-//    CNRSWarnLog(@"local html 's format is not right! Url has query and fragment.");
-//  }
-//
-//  // `absoluteString` 返回的是已经 escape 过的文本，这里先转换为原始文本。
-//  NSString *uriText = uri.absoluteString.stringByRemovingPercentEncoding;
-//  // 把 uri 的原始文本所有内容全部 escape。
-//  NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@""];
-//  uriText = [uriText stringByAddingPercentEncodingWithAllowedCharacters:set];
-//
-//  return  [NSURL URLWithString:[NSString stringWithFormat:@"%@?uri=%@", htmlFileURL.absoluteString, uriText]];
 }
 
 //- (void)cnrs_resetControllerAppearance

@@ -80,6 +80,11 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
     if (localHtmlURL) {
         request.URL = localHtmlURL;
     }
+    else
+    {
+        NSURL *remoteHtmlURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+        request.URL = remoteHtmlURL;
+    }
     
 //  NSURL *localURL = [self cnrs_localFileURL:request.URL];
 //  if (localURL) {

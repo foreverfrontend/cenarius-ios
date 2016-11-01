@@ -78,14 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Save the route file with url.
  */
-- (void)saveRouteFileData:(NSData *)data withRoute:(CNRSRoute *)route;
-
-/**
- * 从缓存中读取出 `url` 下载的资源。
- *
- * Read the route file according url.
- */
-- (nullable NSData *)routeFileDataForRemoteURL:(NSURL *)url;
+- (void)saveRouteFileData:(nullable NSData *)data withRoute:(CNRSRoute *)route;
 
 /**
  * 获取 route 对于的本地 url。先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil。

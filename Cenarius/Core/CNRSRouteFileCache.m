@@ -91,12 +91,20 @@
 
 - (void)saveRoutesMapFile:(NSData *)data
 {
-  NSString *filePath = [self.cachePath stringByAppendingPathComponent:RoutesMapFile];
-  if (data == nil) {
-    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-  } else {
-    [data writeToFile:filePath atomically:YES];
-  }
+    NSString *filePath = [self.cachePath stringByAppendingPathComponent:RoutesMapFile];
+    if (data == nil) {
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+    } else {
+        //删除不用的和更新的文件
+        NSArray *newRoutes = [self routesWithData:data];
+        NSArray *oldRoutes = [self routesWithData:[self cacheRoutesMapFile]];
+        if (newRoutes && oldRoutes)
+        {
+            [self cnrs_deleteOldFilesWithNewRoutes:newRoutes oldRoutes:oldRoutes];
+        }
+        //保存新routes
+        [data writeToFile:filePath atomically:YES];
+    }
 }
 
 - (NSData *)routesMapFile
@@ -160,16 +168,6 @@
         // 写数据
         [data writeToFile:filePath atomically:YES];
     }
-}
-
-- (NSData *)routeFileDataForRemoteURL:(NSURL *)url
-{
-    NSString *filePath = [self routeFilePathForRemoteURL:url];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        return [NSData dataWithContentsOfFile:filePath];
-    }
-    
-    return nil;
 }
 
 - (NSArray *)routesWithData:(NSData *)data
@@ -268,40 +266,36 @@
     return nil;
 }
 
-//准备删除
-- (NSString *)routeFilePathForRemoteURL:(NSURL *)url
+- (void)cnrs_deleteOldFilesWithNewRoutes:(NSArray *)newRoutes oldRoutes:(NSArray *)oldRoutes
 {
-    NSString *filePath = [self cnrs_cachedRouteFilePathForRemoteURL:url];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        return filePath;
+    //找到需要删除的和更新的文件
+    NSMutableArray *changedRoutes = [[NSMutableArray alloc] init];
+    NSMutableArray *deletedRoutes = [[NSMutableArray alloc] init];
+    for (CNRSRoute *oldRoute in oldRoutes)
+    {
+        BOOL isDeleted = YES;
+        for (CNRSRoute *newRoute in newRoutes)
+        {
+            if ([oldRoute.uri.absoluteString isEqualToString:newRoute.uri.absoluteString])
+            {
+                isDeleted = NO;
+                if (![newRoute.fileHash isEqualToString:oldRoute.fileHash])
+                {
+                    [changedRoutes addObject:oldRoute];
+                }
+            }
+        }
+        if (isDeleted)
+        {
+            [deletedRoutes addObject:oldRoute];
+        }
     }
     
-    filePath = [self cnrs_resourceRouteFilePathForRemoteURL:url];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        return filePath;
+    [deletedRoutes addObjectsFromArray:changedRoutes];
+    for (CNRSRoute *route in deletedRoutes)
+    {
+        [self saveRouteFileData:nil withRoute:route];
     }
-    
-    return nil;
 }
-
-- (NSString *)cnrs_cachedRouteFilePathForRemoteURL:(NSURL *)url
-{
-    NSString *md5 = [[url.absoluteString dataUsingEncoding:NSUTF8StringEncoding] md5];
-    NSString *filename = [self.cachePath stringByAppendingPathComponent:md5];
-    return [filename stringByAppendingPathExtension:url.pathExtension];
-}
-
-- (NSString *)cnrs_resourceRouteFilePathForRemoteURL:(NSURL *)url
-{
-    NSString *filename = nil;
-    NSArray *pathComps = url.pathComponents;
-    if (pathComps.count > 2) { // 取后两位作为文件路径
-        filename = [[pathComps subarrayWithRange:NSMakeRange(pathComps.count - 2, 2)] componentsJoinedByString:@"/"];
-    } else {
-        filename = url.path;
-    }
-    return [self.resourcePath stringByAppendingPathComponent:filename];
-}
-
 
 @end
