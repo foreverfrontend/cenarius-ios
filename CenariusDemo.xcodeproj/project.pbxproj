@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C40501E1DC841E900652492 /* CNRSLoginWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C40501D1DC841E900652492 /* CNRSLoginWidget.m */; };
 		0C4085461DC775CB00CE2CE3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C4085451DC775CB00CE2CE3 /* www */; };
 		0C7416681DBB198B00D4F802 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0C7416671DBB198B00D4F802 /* config.xml */; };
 		0C9EC6381DAF97A4003BFB38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6371DAF97A4003BFB38 /* main.m */; };
@@ -74,6 +75,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C40501C1DC841E900652492 /* CNRSLoginWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSLoginWidget.h; sourceTree = "<group>"; };
+		0C40501D1DC841E900652492 /* CNRSLoginWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSLoginWidget.m; sourceTree = "<group>"; };
 		0C4085451DC775CB00CE2CE3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		0C7416671DBB198B00D4F802 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		0C9EC6331DAF97A4003BFB38 /* CenariusDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CenariusDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -370,6 +373,8 @@
 				0C9EC8621DB4C737003BFB38 /* CNRSWebWidget.m */,
 				0C9EC8641DB5B01B003BFB38 /* CNRSNavMenuWidget.h */,
 				0C9EC8651DB5B01B003BFB38 /* CNRSNavMenuWidget.m */,
+				0C40501C1DC841E900652492 /* CNRSLoginWidget.h */,
+				0C40501D1DC841E900652492 /* CNRSLoginWidget.m */,
 				0C9EC6791DAF98B2003BFB38 /* Model */,
 			);
 			path = Widget;
@@ -688,6 +693,7 @@
 				0CAFF23C1DBC688000B09978 /* CDVHandleOpenURL.m in Sources */,
 				0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */,
 				0CAFF2431DBC688000B09978 /* CDVCommandDelegateImpl.m in Sources */,
+				0C40501E1DC841E900652492 /* CNRSLoginWidget.m in Sources */,
 				0C9EC6951DAF98B2003BFB38 /* CNRSAlertDialogData.m in Sources */,
 				0CAFF23B1DBC688000B09978 /* CDVGestureHandler.m in Sources */,
 				0C9EC6961DAF98B2003BFB38 /* CNRSModel.m in Sources */,

@@ -266,7 +266,7 @@
     [[self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
 
       CNRSDebugLog(@"Download %@", response.URL);
-      CNRSDebugLog(@"Response: %@", response);
+//      CNRSDebugLog(@"Response: %@", response);
 
       if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
         success = NO;

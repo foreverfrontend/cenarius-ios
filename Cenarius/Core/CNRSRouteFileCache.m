@@ -41,8 +41,11 @@
 {
   // cache dir
   if (!cachePath) {
-    // 默认缓存路径：<Library>/<bundle identifier>.cenarius
-    cachePath = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".cenarius"];
+//    // 默认缓存路径：<Library>/<bundle identifier>.cenarius
+//    cachePath = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".cenarius"];
+      
+      // 默认缓存路径：<Library>/www
+      cachePath = @"www";
   }
 
   if (![cachePath isAbsolutePath]) {
@@ -143,6 +146,18 @@
     }
     else
     {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        // 删除旧文件
+        if ([fileManager fileExistsAtPath:filePath]) {
+            [fileManager removeItemAtURL:[NSURL URLWithString:filePath] error:nil];
+        }
+        
+        // 创建目录
+        [fileManager createDirectoryAtPath:[filePath stringByDeletingLastPathComponent]
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:nil];
+        // 写数据
         [data writeToFile:filePath atomically:YES];
     }
 }
@@ -216,8 +231,12 @@
 
 - (NSString *)cnrs_cacheRouteFilePathForRoute:(CNRSRoute *)route
 {
-    NSString *cacheFileName = [self.cachePath stringByAppendingPathComponent:route.fileHash];
-    NSString *cacheFilePath = [cacheFileName stringByAppendingPathExtension:route.uri.pathExtension];
+//    //用hash做文件名
+//    NSString *cacheFileName = [self.cachePath stringByAppendingPathComponent:route.fileHash];
+//    NSString *cacheFilePath = [cacheFileName stringByAppendingPathExtension:route.uri.pathExtension];
+    
+    //不用hash做文件名
+    NSString *cacheFilePath = [self.cachePath stringByAppendingPathComponent:route.uri.absoluteString];
     return cacheFilePath;
 }
 
