@@ -23,6 +23,7 @@ static NSURL *sRemoteFolderUrl;
 static UIImage *sBackButtonImage;
 static UIEdgeInsets sBackButtonImageEdgeInsets;
 static BOOL sIsDevelopModeEnable;
+static BOOL sIsLogEnable;
 
 static NSString * const DefaultCNRSScheme = @"cenarius";
 static NSString * const DefaultCNRSHost = @"cenarius-container";
@@ -187,6 +188,18 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 + (BOOL)isDevelopModeEnable
 {
     return sIsDevelopModeEnable;
+}
+
++ (void)setLogEnable:(BOOL)isLogEnable
+{
+    @synchronized (self) {
+        sIsLogEnable = isLogEnable;
+    }
+}
+
++ (BOOL)isLogEnable
+{
+    return sIsLogEnable;
 }
 
 @end

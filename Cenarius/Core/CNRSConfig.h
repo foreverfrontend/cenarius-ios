@@ -144,6 +144,16 @@ static NSString * const RoutesMapFile = @"routes.json";
  */
 + (BOOL)isDevelopModeEnable;
 
+/**
+ 设置输出 log
+ */
++ (void)setLogEnable:(BOOL)isLogEnable;
+
+/**
+ 是否输出 log
+ */
++ (BOOL)isLogEnable;
+
 @end
 
 NS_ASSUME_NONNULL_END
