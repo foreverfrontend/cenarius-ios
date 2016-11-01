@@ -8,7 +8,7 @@
 
 #import "CNRSLoginWidget.h"
 #import "CNRSViewController.h"
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 
 @interface CNRSLoginWidget ()
 
