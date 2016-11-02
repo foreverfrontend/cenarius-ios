@@ -127,10 +127,10 @@
     if ([CNRSConfig isDevelopModeEnable])
     {
         NSString *docPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
-                      firstObject] stringByAppendingPathComponent:[CNRSConfig routesResourcePath]];
+                              firstObject] stringByAppendingPathComponent:[CNRSConfig routesResourcePath]];
         docPath = [@"file://" stringByAppendingString:docPath];
-        NSURL *url = [NSURL URLWithString:docPath];
-        url = [url URLByAppendingPathComponent:self.uri.absoluteString];
+        NSString *urlStr = [docPath stringByAppendingPathComponent:self.uri.absoluteString];
+        NSURL *url = [NSURL URLWithString:urlStr];
         return url;
     }
     return [self cnrs_htmlURLWithUri:self.uri htmlFileURL:self.htmlFileURL];
@@ -185,7 +185,7 @@
 
 - (NSURL *)cnrs_htmlURLWithUri:(NSURL *)uri htmlFileURL:(NSURL *)htmlFileURL
 {
-  if (!htmlFileURL)
+  if (htmlFileURL == nil)
   {
       if (uri.query.length != 0 || uri.fragment.length != 0)
       {
@@ -195,7 +195,7 @@
       }
 
       htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
-      if (!htmlFileURL) {
+      if (htmlFileURL == nil) {
           htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
       }
   }
