@@ -23,6 +23,7 @@ static NSURL *sRemoteFolderUrl;
 static UIImage *sBackButtonImage;
 static UIEdgeInsets sBackButtonImageEdgeInsets;
 static BOOL sIsDevelopModeEnable;
+static NSString *sLoginService;
 static NSString *sLoginAppKey;
 static NSString *sLoginAppSecret;
 
@@ -191,9 +192,10 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
     return sIsDevelopModeEnable;
 }
 
-+ (void)setLoginWithAppKey:(NSString *)appKey AppSecret:(NSString *)appSecret
++ (void)setLoginWithService:(NSString *)service appKey:(NSString *)appKey appSecret:(NSString *)appSecret
 {
     @synchronized (self) {
+        sLoginService = service;
         sLoginAppKey = appKey;
         sLoginAppSecret = appSecret;
     }
@@ -207,6 +209,11 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 +(NSString *)loginAppSecret
 {
     return sLoginAppSecret;
+}
+
++(NSString *)loginService
+{
+    return sLoginService;
 }
 
 @end

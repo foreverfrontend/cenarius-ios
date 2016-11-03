@@ -147,7 +147,7 @@ static NSString * const RoutesMapFile = @"routes.json";
 /**
  设置登录的 appKey appSecret
  */
-+ (void)setLoginWithAppKey:(NSString *)appKey AppSecret:(NSString *)appSecret;
++ (void)setLoginWithService:(NSString *)service appKey:(NSString *)appKey appSecret:(NSString *)appSecret;
 
 /**
  获取登录 appKey
@@ -158,6 +158,11 @@ static NSString * const RoutesMapFile = @"routes.json";
  获取登录 appSecret
  */
 +(NSString *)loginAppSecret;
+
+/**
+ 获取登录 service
+ */
++(NSString *)loginService;
 
 @end
 

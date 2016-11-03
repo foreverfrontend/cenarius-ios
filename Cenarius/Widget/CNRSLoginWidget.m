@@ -11,8 +11,6 @@
 #import "AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
 
-#define kService @"https://uim-test.infinitus.com.cn/oauth20/accessToken"
-//#define kService @"http://172.21.29.53:8080/macula-uim-webapp/oauth20/accessToken"
 #define kTerminalType @"mobile"
 
 @interface CNRSLoginWidget ()
@@ -52,10 +50,11 @@
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    NSString *service = [CNRSConfig loginService];
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
-    if (appKey == nil || appSecret == nil) {
-        CNRSLog(@"先设置 appKey 和 appSecret");
+    if (service == nil || appKey == nil || appSecret == nil) {
+        CNRSLog(@"先设置 service appKey appSecret");
         completion(NO);
         return;
     }
@@ -68,7 +67,7 @@
     
     NSString *sign = [self md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;
-    [manager POST:kService parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:service parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"%@",token);
         if (token) {
