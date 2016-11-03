@@ -8,9 +8,15 @@
 
 #import "CNRSWidget.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * `CNRSLoginWidget` 实现登录。
  */
 @interface CNRSLoginWidget : NSObject<CNRSWidget>
-+ (void)createAccessTokenWithUsername:(NSString *)username password:(NSString *)password;
+
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success))completion;
+
+NS_ASSUME_NONNULL_END
+
 @end

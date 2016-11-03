@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
 //  Config Cenarius
-//    [CNRSConfig setDevelopModeEnable:YES];
+    [CNRSConfig setDevelopModeEnable:YES];
     [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"http://172.20.70.80/hybrid"]];
     [CNRSConfig setRoutesResourcePath:@"www222"];
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];

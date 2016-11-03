@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CNRSWebViewController.h"
-#import "CNRSLoginWidget.h"
+
 
 @interface ViewController ()
 
@@ -47,9 +47,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)login:(id)sender
-{
-    [CNRSLoginWidget createAccessTokenWithUsername:@"0009704" password:@"Admin123"];
-}
 
 @end

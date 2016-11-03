@@ -144,15 +144,20 @@ static NSString * const RoutesMapFile = @"routes.json";
  */
 + (BOOL)isDevelopModeEnable;
 
-///**
-// 设置输出 log
-// */
-//+ (void)setLogEnable:(BOOL)isLogEnable;
-//
-///**
-// 是否输出 log
-// */
-//+ (BOOL)isLogEnable;
+/**
+ 设置登录的 appKey appSecret
+ */
++ (void)setLoginWithAppKey:(NSString *)appKey AppSecret:(NSString *)appSecret;
+
+/**
+ 获取登录 appKey
+ */
++ (NSString *)loginAppKey;
+
+/**
+ 获取登录 appSecret
+ */
++(NSString *)loginAppSecret;
 
 @end
 

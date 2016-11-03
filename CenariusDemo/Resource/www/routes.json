@@ -1,10 +1,18 @@
 [
   {
+    "file": "build/a.html",
+    "hash": "a196f666247c2e3252fb4fd61e216c40"
+  },
+  {
+    "file": "build/b.html",
+    "hash": "b9c57c6d9ac9711e7167a47ceb724c1b"
+  },
+  {
     "file": "build/index.html",
-    "hash": "8c16c85d8e2ca8b7088c68be17ea8b61"
+    "hash": "66f8d78feea6219794f47df008f57fcb"
   },
   {
     "file": "build/index.js",
-    "hash": "70c84eebd1833611da8dd65d5dedc3ff"
+    "hash": "d974f3751525f4856b2ecfe7164d25f9"
   }
 ]

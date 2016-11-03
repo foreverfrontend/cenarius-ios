@@ -14,8 +14,6 @@
 #define kService @"https://uim-test.infinitus.com.cn/oauth20/accessToken"
 //#define kService @"http://172.21.29.53:8080/macula-uim-webapp/oauth20/accessToken"
 #define kTerminalType @"mobile"
-#define kAppKey @"BUPM"
-#define kAppSecret @"rfGd23Yhjd92JkpWe"
 
 @interface CNRSLoginWidget ()
 
@@ -49,25 +47,38 @@
     
 }
 
-+ (void)createAccessTokenWithUsername:(NSString *)username password:(NSString *)password
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    parameters[@"app_key"] = kAppKey;
+    NSString *appKey = [CNRSConfig loginAppKey];
+    NSString *appSecret = [CNRSConfig loginAppSecret];
+    if (appKey == nil || appSecret == nil) {
+        CNRSLog(@"先设置 appKey 和 appSecret");
+        completion(NO);
+        return;
+    }
+    parameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
     parameters[@"username"] = username;
     parameters[@"password"] = password;
     parameters[@"terminalType"] = kTerminalType;
     parameters[@"remenberMe"] = @"true";
     
-    NSString *sign = [self md5Signature:parameters secret:kAppSecret];
+    NSString *sign = [self md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;
     [manager POST:kService parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"%@",token);
+        if (token) {
+            completion(YES);
+        }
+        else{
+            completion(NO);
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        completion(NO);
     }];
 
 }
