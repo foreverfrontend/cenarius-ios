@@ -149,18 +149,45 @@
 - (NSURL *)localHtmlURLForURI:(NSURL *)uri
 {
     //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
-    CNRSRoute *route = [self cnrs_routeForURI:uri];
-    CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-    return [routeFileCache routeFileURLForRoute:route];
+    NSURL *baseUri = [NSURL URLWithString:uri.path];
+    CNRSRoute *route = [self cnrs_routeForURI:baseUri];
+    NSURL *url = [[CNRSRouteFileCache sharedInstance] routeFileURLForRoute:route];
+    
+    return [self finalUrlWithBaseUrl:url uri:uri];
 }
 
 - (NSURL *)remoteHtmlURLForURI:(NSURL *)uri
 {
-  CNRSRoute *route = [self cnrs_routeForURI:uri];
-  if (route) {
-    return  route.remoteHTML;
-  }
-  return nil;
+    NSURL *baseUri = [NSURL URLWithString:uri.path];
+    CNRSRoute *route = [self cnrs_routeForURI:baseUri];
+    if (route)
+    {
+        return  [self finalUrlWithBaseUrl:route.remoteHTML uri:uri];
+    }
+    return nil;
+}
+
+- (NSURL *)finalUrlWithBaseUrl:(NSURL *)url uri:(NSURL *)uri
+{
+    if (url != nil)
+    {
+        NSString *parameterString = uri.parameterString;
+        NSString *query = uri.query;
+        NSString *fragment = uri.fragment;
+        NSString *urlString = url.absoluteString;
+        if (parameterString.length > 0) {
+            urlString = [[NSString alloc] initWithFormat:@"%@;%@",urlString,parameterString];
+        }
+        if (query.length > 0) {
+            urlString = [[NSString alloc] initWithFormat:@"%@?%@",urlString,query];
+        }
+        if (fragment.length > 0) {
+            urlString = [[NSString alloc] initWithFormat:@"%@#%@",urlString,fragment];
+        }
+        url = [NSURL URLWithString:urlString];
+    }
+    
+    return url;
 }
 
 //- (BOOL)isRoutesContainRemoteURL:(NSURL *)remoteURL
@@ -187,7 +214,7 @@
     return nil;
 }
 
-- (nullable NSURL *)uriForUrl:(NSURL *)url
+- (NSURL *)uriForUrl:(NSURL *)url
 {
     NSURL *uri = nil;
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];

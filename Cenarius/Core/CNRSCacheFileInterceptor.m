@@ -186,8 +186,7 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
 
 + (NSURL *)cnrs_uriForRequest:(NSURLRequest *)request
 {
-    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    NSURL *uri = [routeManager uriForUrl:request.URL];
+    NSURL *uri = [[CNRSRouteManager sharedInstance] uriForUrl:request.URL];
     return uri;
 }
 

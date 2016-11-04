@@ -186,21 +186,14 @@
 
 - (NSURL *)cnrs_htmlURLWithUri:(NSURL *)uri htmlFileURL:(NSURL *)htmlFileURL
 {
-  if (htmlFileURL == nil)
-  {
-      if (uri.query.length != 0 || uri.fragment.length != 0)
-      {
-          // 为了方便 escape 正确的 uri，做了下面的假设。之后放弃 iOS 7 后可以改用 `queryItem` 来实现。
-          // 做个合理假设：html URL 中不应该有 query string 和 fragment。
-          CNRSWarnLog(@"local html 's format is not right! Url has query and fragment.");
-      }
-
-      htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
-      if (htmlFileURL == nil) {
-          htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
-      }
-  }
-
+    if (htmlFileURL == nil)
+    {
+        htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
+        if (htmlFileURL == nil) {
+            htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+        }
+    }
+    
     return htmlFileURL;
 }
 

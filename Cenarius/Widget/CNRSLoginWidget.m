@@ -63,7 +63,7 @@
     parameters[@"username"] = username;
     parameters[@"password"] = password;
     parameters[@"terminalType"] = kTerminalType;
-    parameters[@"remenberMe"] = @"true";
+    parameters[@"rememberMe"] = @"true";
     
     NSString *sign = [self md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;

@@ -35,7 +35,7 @@
 
 - (IBAction)openWeb:(id)sender
 {
-    [super openWebPage:@"build/index.html" parameters:nil];
+    [super openWebPage:@"build/index.html;param=value?query=value#ref" parameters:nil];
 }
 
 - (IBAction)openCordova:(id)sender {
