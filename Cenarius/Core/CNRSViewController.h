@@ -168,10 +168,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  登录
 
- @param service    服务器地址
  @param username   用户名
  @param password   密码
- @param completion 更新登录后将执行这个 block
+ @param completion 登录后将执行这个 block
  */
 + (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success))completion;
 

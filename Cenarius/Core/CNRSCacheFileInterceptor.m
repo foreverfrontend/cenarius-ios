@@ -106,9 +106,6 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
 {
   NSURLRequest *request = connection.currentRequest;
 
-//  if (![request.URL isFileURL] &&
-//      [[self class] shouldInterceptRequest:request] &&
-//      [[self class] cnrs_isCacheableResponse:response])
     if (![request.URL isFileURL] && [[self class] shouldInterceptRequest:request])
   {
       self.responseDataFilePath = [self cnrs_temporaryFilePath];
@@ -158,9 +155,9 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
 {
     //拦截包含uri的request
     NSURL *uri = [self cnrs_uriForRequest:request];
-    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    NSURL *remoteHtmlURL = [routeManager remoteHtmlURLForURI:uri];
-    if (remoteHtmlURL)
+    NSURL *baseUri = [NSURL URLWithString:uri.path];
+    CNRSRoute *route = [[CNRSRouteManager sharedInstance] routeForURI:baseUri];
+    if (route)
     {
         //uri 在路由表中
         return YES;

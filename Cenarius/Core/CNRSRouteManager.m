@@ -150,7 +150,7 @@
 {
     //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
     NSURL *baseUri = [NSURL URLWithString:uri.path];
-    CNRSRoute *route = [self cnrs_routeForURI:baseUri];
+    CNRSRoute *route = [self routeForURI:baseUri];
     NSURL *url = [[CNRSRouteFileCache sharedInstance] routeFileURLForRoute:route];
     
     return [self finalUrlWithBaseUrl:url uri:uri];
@@ -159,7 +159,7 @@
 - (NSURL *)remoteHtmlURLForURI:(NSURL *)uri
 {
     NSURL *baseUri = [NSURL URLWithString:uri.path];
-    CNRSRoute *route = [self cnrs_routeForURI:baseUri];
+    CNRSRoute *route = [self routeForURI:baseUri];
     if (route)
     {
         return  [self finalUrlWithBaseUrl:route.remoteHTML uri:uri];
@@ -171,13 +171,9 @@
 {
     if (url != nil)
     {
-        NSString *parameterString = uri.parameterString;
         NSString *query = uri.query;
         NSString *fragment = uri.fragment;
         NSString *urlString = url.absoluteString;
-        if (parameterString.length > 0) {
-            urlString = [[NSString alloc] initWithFormat:@"%@;%@",urlString,parameterString];
-        }
         if (query.length > 0) {
             urlString = [[NSString alloc] initWithFormat:@"%@?%@",urlString,query];
         }
@@ -317,7 +313,7 @@
   }
 }
 
-- (CNRSRoute *)cnrs_routeForURI:(NSURL *)uri
+- (CNRSRoute *)routeForURI:(NSURL *)uri
 {
     NSString *uriString = uri.absoluteString;
     if (uriString.length == 0) {

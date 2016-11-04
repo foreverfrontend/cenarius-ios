@@ -11,8 +11,6 @@
 #import "AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
 
-#define kTerminalType @"mobile"
-
 @interface CNRSLoginWidget ()
 
 @property (nonatomic, strong) NSDictionary *cnrsDictionary;
@@ -62,7 +60,7 @@
     parameters[@"timestamp"] = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
     parameters[@"username"] = username;
     parameters[@"password"] = password;
-    parameters[@"terminalType"] = kTerminalType;
+    parameters[@"terminalType"] = @"mobile";
     parameters[@"rememberMe"] = @"true";
     
     NSString *sign = [self md5Signature:parameters secret:appSecret];

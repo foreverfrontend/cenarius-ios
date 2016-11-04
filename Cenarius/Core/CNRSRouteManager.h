@@ -94,6 +94,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSURL *)uriForUrl:(NSURL *)url;
 
+/**
+ 获取 uri 对应的 route，可能没有
+ 
+ @param uri uri
+ 
+ @return route
+ */
+- (nullable CNRSRoute *)routeForURI:(NSURL *)uri;
+
 @end
 
 NS_ASSUME_NONNULL_END
