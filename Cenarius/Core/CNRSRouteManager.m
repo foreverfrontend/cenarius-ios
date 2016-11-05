@@ -129,19 +129,19 @@
       return;
     }
 
-      //先更新 `routes.json` 及内存中的 `routes`，然后下载最新 routes 中的资源文件
+      //先更新 `routes.json` 及内存中的 `routes`
       CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
       NSArray *routes = [routeFileCache routesWithData:data];
       self.routes = routes;
       [routeFileCache saveRoutesMapFile:data];
+      APICompletion(YES);
+      //然后下载最新 routes 中的资源文件
       [self cnrs_downloadFilesWithinRoutes:routes completion:^(BOOL success) {
       if (success) {
 //        self.routes = routes;
 //        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
 //        [routeFileCache saveRoutesMapFile:data];
       }
-
-      APICompletion(success);
     }];
   }] resume];
 }
