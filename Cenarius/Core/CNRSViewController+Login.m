@@ -11,10 +11,17 @@
 
 @implementation CNRSViewController (Login)
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success))completion
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken))completion
 {
     [CNRSLoginWidget loginWithUsername:username password:password completion:completion];
 }
 
++ (NSString *)getAccessToken{
+    return [CNRSLoginWidget getAccessToken];
+}
 
++(void)logout
+{
+    [CNRSLoginWidget logout];
+}
 @end

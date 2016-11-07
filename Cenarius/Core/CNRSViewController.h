@@ -172,8 +172,17 @@ NS_ASSUME_NONNULL_BEGIN
  @param password   密码
  @param completion 登录后将执行这个 block
  */
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success))completion;
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString *accessToken))completion;
 
+/**
+ * 获取 AccessToken
+ */
++ (NSString *)getAccessToken;
+
+/**
+ * 登出
+ */
++(void)logout;
 
 NS_ASSUME_NONNULL_END
 

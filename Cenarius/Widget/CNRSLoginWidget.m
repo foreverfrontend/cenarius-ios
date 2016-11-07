@@ -11,6 +11,8 @@
 #import "AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
 
+#define kAccessTokenKey @"CNRSAccessToken"
+
 @interface CNRSLoginWidget ()
 
 @property (nonatomic, strong) NSDictionary *cnrsDictionary;
@@ -43,7 +45,7 @@
     
 }
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success))completion
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -53,7 +55,7 @@
     NSString *appSecret = [CNRSConfig loginAppSecret];
     if (service == nil || appKey == nil || appSecret == nil) {
         CNRSLog(@"先设置 service appKey appSecret");
-        completion(NO);
+        completion(NO, nil);
         return;
     }
     parameters[@"app_key"] = appKey;
@@ -69,15 +71,41 @@
         NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"%@",token);
         if (token) {
-            completion(YES);
+            [self saveAccessToken:token];
+            completion(YES, token);
         }
         else{
-            completion(NO);
+            completion(NO, nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completion(NO);
+        completion(NO, nil);
     }];
 
+}
+
++ (void)logout
+{
+    [self deleteAccessToken];
+}
+
++ (NSString *)getAccessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:kAccessTokenKey];
+}
+
++(void)saveAccessToken:(NSString *)accessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:accessToken forKey:kAccessTokenKey];
+    [userDefaults synchronize];
+}
+
++(void)deleteAccessToken
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:kAccessTokenKey];
+    [userDefaults synchronize];
 }
 
 /**
