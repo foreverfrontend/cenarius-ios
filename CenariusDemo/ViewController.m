@@ -42,6 +42,12 @@
     [super openCordovaPage:@"build/index.html" parameters:nil];
 }
 
+- (IBAction)login:(id)sender {
+    [CNRSViewController loginWithUsername:@"0009704"  password:@"Admin123" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
+        
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

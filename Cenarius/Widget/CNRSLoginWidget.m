@@ -45,17 +45,17 @@
     
 }
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken))completion
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken, NSString *errorMessage))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     NSString *service = [CNRSConfig loginService];
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
     if (service == nil || appKey == nil || appSecret == nil) {
-        CNRSLog(@"先设置 service appKey appSecret");
-        completion(NO, nil);
+        completion(NO, nil, @"先设置 service appKey appSecret");
         return;
     }
     parameters[@"app_key"] = appKey;
@@ -68,17 +68,18 @@
     NSString *sign = [self md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;
     [manager POST:service parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 //        NSLog(@"%@",token);
-        if (token) {
+        NSString *token = responseObject[@"access_token"];
+        if (token.length > 0) {
             [self saveAccessToken:token];
-            completion(YES, token);
+            completion(YES, token, nil);
         }
         else{
-            completion(NO, nil);
+            completion(NO, nil, responseObject[@"error_msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completion(NO, nil);
+        completion(NO, nil, @"系统错误");
     }];
 
 }

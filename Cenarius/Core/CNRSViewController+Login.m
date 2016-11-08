@@ -11,7 +11,7 @@
 
 @implementation CNRSViewController (Login)
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken))completion
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken, NSString *errorMessage))completion
 {
     [CNRSLoginWidget loginWithUsername:username password:password completion:completion];
 }

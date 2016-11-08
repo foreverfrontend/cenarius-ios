@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface CNRSLoginWidget : NSObject<CNRSWidget>
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString *accessToken))completion;
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage))completion;
 
 + (NSString *)getAccessToken;
 
