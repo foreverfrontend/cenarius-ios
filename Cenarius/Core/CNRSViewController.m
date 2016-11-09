@@ -145,7 +145,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self cnrs_enablePopGesture];
+    [self enablePopGesture];
 }
 
 - (void)openLightApp:(NSString *)url parameters:(NSDictionary *)parameters
@@ -156,7 +156,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self cnrs_enablePopGesture];
+    [self enablePopGesture];
 }
 
 - (void)openNativePage:(NSString *)className parameters:(NSDictionary *)parameters
@@ -168,7 +168,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self cnrs_enablePopGesture];
+    [self enablePopGesture];
 }
 
 - (void)openCordovaPage:(NSString *)uri parameters:(NSDictionary *)parameters
@@ -179,7 +179,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self cnrs_enablePopGesture];
+    [self enablePopGesture];
 }
 
 #pragma mark - Private Methods
@@ -226,7 +226,7 @@
 //  return YES;
 //}
 
-- (void)cnrs_enablePopGesture
+- (void)enablePopGesture
 {
     //开启iOS7的滑动返回效果
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {

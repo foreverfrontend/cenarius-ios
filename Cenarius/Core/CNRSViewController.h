@@ -127,6 +127,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)openCordovaPage:(nonnull NSString *)uri parameters:(nullable NSDictionary *)parameters;
 
+/**
+ 开启滑动返回手势
+ */
+- (void)enablePopGesture;
+
 @end
 
 
