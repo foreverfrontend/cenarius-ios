@@ -315,6 +315,7 @@
 
 - (CNRSRoute *)routeForURI:(NSURL *)uri
 {
+    uri = [NSURL URLWithString:[self cnrs_deleteSlash:uri.absoluteString]];
     NSString *uriString = uri.absoluteString;
     if (uriString.length == 0) {
         return nil;
@@ -329,6 +330,23 @@
     }
     
     return nil;
+}
+
+/**
+ 删除多余 /
+ */
+- (NSString *)cnrs_deleteSlash:(NSString *)uri
+{
+    if ([uri containsString:@"//"])
+    {
+        uri = [uri stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+        uri = [self cnrs_deleteSlash:uri];
+    }
+    if ([uri hasPrefix:@"/"])
+    {
+        uri = [uri substringFromIndex:1];
+    }
+    return uri;
 }
 
 @end
