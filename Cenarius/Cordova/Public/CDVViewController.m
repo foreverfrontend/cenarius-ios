@@ -219,7 +219,11 @@
     NSURL* appURL = nil;
     
     //修改：如果是通过uri打开，找到对应的url
-    if (self.uri)
+    if (self.htmlFileURL)
+    {
+        return self.htmlFileURL;
+    }
+    else if (self.uri)
     {
         NSURL *requsetUrl = [self htmlURL];
         return requsetUrl;
