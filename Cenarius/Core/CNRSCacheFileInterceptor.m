@@ -74,17 +74,28 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
     request = [self.request mutableCopy];
   }
 
-    // 如果缓存启用，尝试读取本地文件。如果没有本地文件（本地文件包括缓存，和资源文件夹），则从服务器读取。
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
     NSURL *uri = [[self class] cnrs_uriForRequest:request];
-    NSURL *localHtmlURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
-    if (localHtmlURL) {
-        request.URL = localHtmlURL;
-    }
-    else
+    //路由表
+    if ([routeManager isInRoutes:uri])
     {
-        NSURL *remoteHtmlURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
-        request.URL = remoteHtmlURL;
+        NSURL *localHtmlURL = [routeManager localHtmlURLForURI:uri];
+        if (localHtmlURL) {
+            request.URL = localHtmlURL;
+        }
+        else
+        {
+            NSURL *remoteHtmlURL = [routeManager remoteHtmlURLForURI:uri];
+            request.URL = remoteHtmlURL;
+        }
     }
+    else if ([routeManager isInWhiteList:uri])
+    {
+        NSString *urlString = [[CNRSRouteFileCache sharedInstance] resourceFilePathForUri:uri];
+        request.URL = [NSURL URLWithString:urlString];
+    }
+    
+    
     
 //  NSURL *localURL = [self cnrs_localFileURL:request.URL];
 //  if (localURL) {
@@ -153,13 +164,19 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
 
 + (BOOL)shouldInterceptRequest:(NSURLRequest *)request
 {
-    //拦截包含uri的request
     NSURL *uri = [self cnrs_uriForRequest:request];
     NSURL *baseUri = [NSURL URLWithString:uri.path];
-    CNRSRoute *route = [[CNRSRouteManager sharedInstance] routeForURI:baseUri];
-    if (route)
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    
+    //拦截在路由表中的uri
+    if ([routeManager isInRoutes:baseUri])
     {
-        //uri 在路由表中
+        return YES;
+    }
+    
+    //拦截在白名单中的uri
+    if ([routeManager isInWhiteList:baseUri])
+    {
         return YES;
     }
     

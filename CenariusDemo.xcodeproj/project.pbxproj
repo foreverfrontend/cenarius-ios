@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2BD4E01DD3509D007AF9A7 /* CNRSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */; };
 		0C40501E1DC841E900652492 /* CNRSLoginWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C40501D1DC841E900652492 /* CNRSLoginWidget.m */; };
 		0C4085461DC775CB00CE2CE3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C4085451DC775CB00CE2CE3 /* www */; };
 		0C5358541DCB508100E68303 /* CNRSViewController+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5358531DCB508100E68303 /* CNRSViewController+Login.m */; };
@@ -76,6 +77,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C2BD4DE1DD3509D007AF9A7 /* CNRSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNavigationController.h; sourceTree = "<group>"; };
+		0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNavigationController.m; sourceTree = "<group>"; };
 		0C40501C1DC841E900652492 /* CNRSLoginWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSLoginWidget.h; sourceTree = "<group>"; };
 		0C40501D1DC841E900652492 /* CNRSLoginWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSLoginWidget.m; sourceTree = "<group>"; };
 		0C4050261DC8BCB600652492 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 				0C9EC69A1DB07DDE003BFB38 /* CNRSWebViewController.h */,
 				0C9EC69B1DB07DDE003BFB38 /* CNRSWebViewController.m */,
 				0C9EC6701DAF98B2003BFB38 /* CNRSWidget.h */,
+				0C2BD4DE1DD3509D007AF9A7 /* CNRSNavigationController.h */,
+				0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				0CAFF24C1DBC688000B09978 /* CDVUserAgentUtil.m in Sources */,
 				0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */,
 				0CAFF23D1DBC688000B09978 /* CDVIntentAndNavigationFilter.m in Sources */,
+				0C2BD4E01DD3509D007AF9A7 /* CNRSNavigationController.m in Sources */,
 				0C9EC6A71DB0C161003BFB38 /* NativeViewController.m in Sources */,
 				0C9EC68B1DAF98B2003BFB38 /* CNRSCacheFileInterceptor.m in Sources */,
 				0CAFF2441DBC688000B09978 /* CDVCommandQueue.m in Sources */,

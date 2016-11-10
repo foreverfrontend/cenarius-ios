@@ -73,7 +73,7 @@
         <!--Navigation Controller-->
         <scene sceneID="HOP-RV-dnD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gpy-GP-nTQ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gpy-GP-nTQ" customClass="CNRSNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dMy-38-E8S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

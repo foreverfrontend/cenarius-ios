@@ -17,6 +17,7 @@ static NSString *sCNRSUserAgent;
 static NSURL *sRoutesMapURL;
 static NSString *sRoutesCachePath;
 static NSString *sRoutesResourcePath;
+static NSArray *sRoutesWhiteList;
 static BOOL sIsCacheEnable = YES;
 static NSURL *sRoutesMapURL;
 static NSURL *sRemoteFolderUrl;
@@ -94,6 +95,18 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 + (NSString *)routesResourcePath
 {
   return sRoutesResourcePath;
+}
+
++ (void)setRoutesWhiteList:(NSArray *)whiteList
+{
+    @synchronized (self) {
+        sRoutesWhiteList = whiteList;
+    }
+}
+
++ (NSArray *)routesWhiteList
+{
+    return sRoutesWhiteList;
 }
 
 + (void)setExternalUserAgent:(NSString *)externalUserAgent

@@ -103,6 +103,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable CNRSRoute *)routeForURI:(NSURL *)uri;
 
+/**
+ uri 是否在路由表中
+ */
+- (BOOL)isInRoutes:(NSURL *)uri;
+
+/**
+ uri 是否在白名单中
+ */
+- (BOOL)isInWhiteList:(NSURL *)uri;
+
 @end
 
 NS_ASSUME_NONNULL_END

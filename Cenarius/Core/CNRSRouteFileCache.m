@@ -212,6 +212,13 @@
     return nil;
 }
 
+- (NSString *)resourceFilePathForUri:(NSURL *)uri
+{
+    NSString *resourceFileName = uri.absoluteString;
+    NSString *resourceFilePath = [self.resourcePath stringByAppendingPathComponent:resourceFileName];
+    return resourceFilePath;
+}
+
 #pragma mark - Private methods
 
 /**
@@ -258,9 +265,7 @@
     {
         if ([resourceRoute.fileHash isEqualToString:route.fileHash])
         {
-            NSString *resourceFileName = resourceRoute.uri.absoluteString;
-            NSString *resourceFilePath = [self.resourcePath stringByAppendingPathComponent:resourceFileName];
-            return resourceFilePath;
+            return [self resourceFilePathForUri:resourceRoute.uri];
         }
     }
     return nil;

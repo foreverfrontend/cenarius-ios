@@ -145,7 +145,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self enablePopGesture];
+//    [self enablePopGesture];
 }
 
 - (void)openLightApp:(NSString *)url parameters:(NSDictionary *)parameters
@@ -156,7 +156,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self enablePopGesture];
+//    [self enablePopGesture];
 }
 
 - (void)openNativePage:(NSString *)className parameters:(NSDictionary *)parameters
@@ -168,7 +168,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self enablePopGesture];
+//    [self enablePopGesture];
 }
 
 - (void)openCordovaPage:(NSString *)uri parameters:(NSDictionary *)parameters
@@ -179,7 +179,7 @@
         controller.cnrsDictionary = parameters;
     }
     [self.navigationController pushViewController:controller animated:YES];
-    [self enablePopGesture];
+//    [self enablePopGesture];
 }
 
 #pragma mark - Private Methods

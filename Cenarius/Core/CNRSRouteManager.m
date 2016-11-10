@@ -321,6 +321,7 @@
         return nil;
     }
     
+    //路由表
     for (CNRSRoute *route in self.routes)
     {
         if ([route.uri.absoluteString isEqualToString:uri.absoluteString])
@@ -330,6 +331,32 @@
     }
     
     return nil;
+}
+
+- (BOOL)isInRoutes:(NSURL *)uri
+{
+    CNRSRoute *route = [self routeForURI:uri];
+    if (route)
+    {
+        //uri 在路由表中
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)isInWhiteList:(NSURL *)uri
+{
+    NSArray *whiteList = [CNRSConfig routesWhiteList];
+    for (NSString *path in whiteList)
+    {
+        if ([uri.pathComponents.firstObject hasPrefix:path])
+        {
+            return YES;
+        }
+        
+    }
+    
+    return NO;
 }
 
 /**
