@@ -165,19 +165,22 @@ static NSString * const CNRSCacheFileInterceptorHandledKey = @"CNRSCacheFileInte
 + (BOOL)shouldInterceptRequest:(NSURLRequest *)request
 {
     NSURL *uri = [self cnrs_uriForRequest:request];
-    NSURL *baseUri = [NSURL URLWithString:uri.path];
-    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    
-    //拦截在路由表中的uri
-    if ([routeManager isInRoutes:baseUri])
+    if (uri)
     {
-        return YES;
-    }
-    
-    //拦截在白名单中的uri
-    if ([routeManager isInWhiteList:baseUri])
-    {
-        return YES;
+        NSURL *baseUri = [NSURL URLWithString:uri.path];
+        CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+        
+        //拦截在路由表中的uri
+        if ([routeManager isInRoutes:baseUri])
+        {
+            return YES;
+        }
+        
+        //拦截在白名单中的uri
+        if ([routeManager isInWhiteList:baseUri])
+        {
+            return YES;
+        }
     }
     
     return NO;
