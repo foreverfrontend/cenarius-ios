@@ -74,6 +74,7 @@
         if (token.length > 0) {
             [self saveAccessToken:token];
             completion(YES, token, nil);
+//            [self getProfile];
         }
         else{
             completion(NO, nil, responseObject[@"error_msg"]);
@@ -82,6 +83,18 @@
         completion(NO, nil, @"系统错误");
     }];
 
+}
+
++ (void)getProfile{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"accessToken"] = [self getAccessToken];
+    [manager GET:@"https://uim-test.infinitus.com.cn/oauth20/profile" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 + (void)logout

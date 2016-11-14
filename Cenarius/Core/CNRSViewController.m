@@ -61,8 +61,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
-  [NSURLProtocol registerClass:CNRSCacheFileInterceptor.class];
     
     // Widgets
     CNRSPullRefreshWidget *pullRefreshWidget = [[CNRSPullRefreshWidget alloc] init];
@@ -87,40 +85,28 @@
 //    let headers = ["Customer-Authorization": "Bearer token"]
 //    let parameters = ["apikey": "apikey value"]
 //    let requestDecorator = RXRRequestDecorator(headers: headers, parameters: parameters)
+    
+    [CNRSCacheFileInterceptor registerInterceptor];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self onPageVisible];
+//  [self onPageVisible];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
   [super viewDidDisappear:animated];
-  [self onPageInvisible];
+//  [self onPageInvisible];
 }
 
 - (void)dealloc
 {
-  [NSURLProtocol unregisterClass:CNRSCacheFileInterceptor.class];
+  [CNRSCacheFileInterceptor unregisterInterceptor];
 }
 
 #pragma mark - Public methods
-
-- (void)onPageVisible
-{
-//  // Call the WebView's visiblity change hook for javascript.
-//  CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageVisible: %@",
-//              [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageVisible()"]);
-}
-
-- (void)onPageInvisible
-{
-//  // Call the WebView's visiblity change hook for javascript.
-//  CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageInvisible: %@",
-//              [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageInvisible()"]);
-}
 
 - (NSURL *)htmlURL
 {
@@ -171,6 +157,42 @@
     [self.navigationController pushViewController:controller animated:YES];
 //    [self enablePopGesture];
 }
+
+#pragma mark - Native Call WebView JavaScript interfaces.
+
+//- (void)onPageVisible
+//{
+//    // Call the WebView's visiblity change hook for javascript.
+//    [self callJavaScript:@"window.Cenarius.Lifecycle.onPageVisible" jsonParameter:nil];
+//}
+//
+//- (void)onPageInvisible
+//{
+//    // Call the WebView's visiblity change hook for javascript.
+//    [self callJavaScript:@"window.Cenarius.Lifecycle.onPageInvisible" jsonParameter:nil];
+//}
+//
+//- (NSString *)callJavaScript:(NSString *)function jsonParameter:(NSString *)jsonParameter
+//{
+//    NSString *jsCall;
+//    if (jsonParameter) {
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\'" withString:@"\\\'"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\r" withString:@"\\r"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\f" withString:@"\\f"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\u2028" withString:@"\\u2028"];
+//        jsonParameter = [jsonParameter stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
+//        jsCall = [NSString stringWithFormat:@"%@('%@')", function, jsonParameter];
+//    } else {
+//        jsCall = [NSString stringWithFormat:@"%@()", function];
+//    }
+//    NSString *result = [_webView stringByEvaluatingJavaScriptFromString:jsCall];
+//    CNRSDebugLog(@"jsCall: function:%@, parameter %@, result: %@", function, jsonParameter, result);
+//    return result;
+//}
+
 
 #pragma mark - Private Methods
 

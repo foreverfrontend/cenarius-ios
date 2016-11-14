@@ -10,6 +10,7 @@
 #import "CNRSContainerAPI.h"
 
 static NSArray<id<CNRSContainerAPI>> *sContainerAPIs;
+static NSInteger sRegisterInterceptorCounter;
 
 @implementation CNRSContainerInterceptor
 
@@ -17,6 +18,30 @@ static NSArray<id<CNRSContainerAPI>> *sContainerAPIs;
 {
   sContainerAPIs = mockers;
 }
+
++ (BOOL)registerInterceptor
+{
+    @synchronized (self) {
+        sRegisterInterceptorCounter += 1;
+    }
+    return [NSURLProtocol registerClass:[self class]];
+}
+
++ (void)unregisterInterceptor
+{
+    @synchronized (self) {
+        sRegisterInterceptorCounter -= 1;
+        if (sRegisterInterceptorCounter < 0) {
+            sRegisterInterceptorCounter = 0;
+        }
+    }
+    
+    if (sRegisterInterceptorCounter == 0) {
+        return [NSURLProtocol unregisterClass:[self class]];
+    }
+}
+
+#pragma mark - Implement NSURLProtocol methods
 
 + (NSArray<id<CNRSContainerAPI>> *)containerAPIs
 {

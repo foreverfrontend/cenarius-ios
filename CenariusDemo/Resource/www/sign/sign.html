@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/jquery@3.1.1/dist/jquery.js"></script>
+    <script>
+        $.ajax({
+            url: 'https://uim-test.infinitus.com.cn/oauth20/profile',
+            type: 'POST',
+            success: function(data) {
+                console.log(data)
+            }
+        })
+    </script>
+</body>
+</html>

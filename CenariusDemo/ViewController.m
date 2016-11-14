@@ -39,7 +39,7 @@
 }
 
 - (IBAction)openCordova:(id)sender {
-    [super openCordovaPage:@"build/index.html" parameters:nil];
+    [super openCordovaPage:@"sign/sign.html" parameters:nil];
 }
 
 - (IBAction)login:(id)sender {

@@ -11,6 +11,7 @@
 #import "CNRSDecorator.h"
 
 static NSArray<id<CNRSDecorator>> *sDecorators;
+static NSInteger sRegisterInterceptorCounter;
 
 @implementation CNRSRequestInterceptor
 
@@ -22,6 +23,28 @@ static NSArray<id<CNRSDecorator>> *sDecorators;
 + (NSArray<id<CNRSDecorator>> *)decorators
 {
   return sDecorators;
+}
+
++ (BOOL)registerInterceptor
+{
+    @synchronized (self) {
+        sRegisterInterceptorCounter += 1;
+    }
+    return [NSURLProtocol registerClass:[self class]];
+}
+
++ (void)unregisterInterceptor
+{
+    @synchronized (self) {
+        sRegisterInterceptorCounter -= 1;
+        if (sRegisterInterceptorCounter < 0) {
+            sRegisterInterceptorCounter = 0;
+        }
+    }
+    
+    if (sRegisterInterceptorCounter == 0) {
+        return [NSURLProtocol unregisterClass:[self class]];
+    }
 }
 
 #pragma mark - Implement NSURLProtocol methods

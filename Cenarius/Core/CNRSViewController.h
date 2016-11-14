@@ -68,16 +68,24 @@ NS_ASSUME_NONNULL_BEGIN
 // * 重新加载 WebView。 
 // */
 //- (void)reloadWebView;
-
-/**
- * 通知 WebView 页面显示，缺省会在 viewWillAppear 里调用。本方法可以由业务层自主定制向 WebView 通知 onPageVisible 的时机。
- */
-- (void)onPageVisible;
-
-/**
- * 通知 WebView 页面消失，缺省会在 viewDidDisappear 里调用。本方法可以由业务层自主定制向 WebView 通知 onPageInvisible 的时机。
- */
-- (void)onPageInvisible;
+//
+///**
+// * 通知 WebView 页面显示，缺省会在 viewWillAppear 里调用。本方法可以由业务层自主定制向 WebView 通知 onPageVisible 的时机。
+// */
+//- (void)onPageVisible;
+//
+///**
+// * 通知 WebView 页面消失，缺省会在 viewDidDisappear 里调用。本方法可以由业务层自主定制向 WebView 通知 onPageInvisible 的时机。
+// */
+//- (void)onPageInvisible;
+//
+///**
+// * 调用 WebView 的一个 JavaScript 函数，并传入一个 json 串作为参数。
+// *
+// * @param function 调用的函数。
+// * @param jsonParameter 传递的参数，json 串。
+// */
+//- (nullable NSString *)callJavaScript:(NSString *)function jsonParameter:(nullable NSString *)jsonParameter;
 
 /**
  获取html的URL地址，可能是本地或服务器
