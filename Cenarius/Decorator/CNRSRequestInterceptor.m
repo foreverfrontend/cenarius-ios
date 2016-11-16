@@ -55,10 +55,10 @@ static NSInteger sRegisterInterceptorCounter;
   if ([self isRequestIgnored:request]) {
     return NO;
   }
-  // 请求不是来自浏览器，不处理
-  if (![request.allHTTPHeaderFields[@"User-Agent"] hasPrefix:@"Mozilla"]) {
-    return NO;
-  }
+//  // 请求不是来自浏览器，不处理
+//  if (![request.allHTTPHeaderFields[@"User-Agent"] hasPrefix:@"Mozilla"]) {
+//    return NO;
+//  }
 
   for (id<CNRSDecorator> decorator in sDecorators) {
     if ([decorator shouldInterceptRequest:request]){
