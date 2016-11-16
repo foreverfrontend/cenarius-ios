@@ -74,7 +74,7 @@
         if (token.length > 0) {
             [self saveAccessToken:token];
             completion(YES, token, nil);
-//            [self getProfile];
+            [self gw];
         }
         else{
             completion(NO, nil, responseObject[@"error_msg"]);
@@ -85,11 +85,38 @@
 
 }
 
++ (void)gw{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    parameters[@"access_token"] = [self getAccessToken];
+    parameters[@"app_key"] = @"gbss";
+    parameters[@"timestamp"] = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
+    NSString *sign = [self md5Signature:parameters secret:@"007febfe89bd4b1799d77373890777f4"];
+    parameters[@"sign"] = sign;
+    
+    
+    [manager GET:@"http://172.21.28.72:6089/helloworld/orders/S0063232871" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+
+}
+
 + (void)getProfile{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    parameters[@"accessToken"] = [self getAccessToken];
+    NSString *appKey = [CNRSConfig loginAppKey];
+    NSString *appSecret = [CNRSConfig loginAppSecret];
+    parameters[@"app_key"] = appKey;
+    parameters[@"timestamp"] = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
+    
+    NSString *sign = [self md5Signature:parameters secret:appSecret];
+    parameters[@"sign"] = sign;
+    parameters[@"access_token"] = [self getAccessToken];
+    
     [manager GET:@"https://uim-test.infinitus.com.cn/oauth20/profile" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -171,32 +171,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri;
 
-@end
-
-/**
- * 暴露出 Login 相关的接口。
- */
-@interface CNRSViewController (Login)
-
-/**
- 登录
-
- @param username   用户名
- @param password   密码
- @param completion 登录后将执行这个 block
- */
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString  * _Nullable accessToken, NSString * _Nullable errorMessage))completion;
-
-/**
- * 获取 AccessToken
- */
-+ (NSString *)getAccessToken;
-
-/**
- * 登出
- */
-+(void)logout;
-
 NS_ASSUME_NONNULL_END
 
 @end

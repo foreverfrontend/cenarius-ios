@@ -15,11 +15,32 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface CNRSLoginWidget : NSObject<CNRSWidget>
 
+/**
+ 登录
+ 
+ @param username   用户名
+ @param password   密码
+ @param completion 登录后将执行这个 block
+ */
 + (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage))completion;
 
+/**
+ * 获取 AccessToken
+ */
 + (NSString *)getAccessToken;
 
+/**
+ * 登出
+ */
 + (void)logout;
+
+/**
+ * md5签名
+ *
+ * @param params 传给服务器的参数
+ * @param secret 分配给你的APP_SECRET
+ */
++(NSString *)md5Signature:(NSDictionary *)params secret:(NSString *)secret;
 
 NS_ASSUME_NONNULL_END
 

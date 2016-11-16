@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "CNRSWebViewController.h"
-
+#import "CNRSLoginWidget.h"
 
 @interface ViewController ()
 
@@ -43,7 +43,7 @@
 }
 
 - (IBAction)login:(id)sender {
-    [CNRSViewController loginWithUsername:@"0009704"  password:@"Admin123" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
+    [CNRSLoginWidget loginWithUsername:@"0009704"  password:@"Admin123" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
         
     }];
 }

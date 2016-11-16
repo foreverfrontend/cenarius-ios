@@ -24,6 +24,10 @@
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
 #import "CNRSConfig.h"
+#import "CNRSOpenApiRequestDecorator.h"
+#import "CNRSRequestDecorator.h"
+#import "CNRSRequestInterceptor.h"
+
 
 @interface CNRSViewController ()
 
@@ -81,11 +85,12 @@
 //    RXRContainerInterceptor.setContainerAPIs([geoContainerAPI, logContainerAPI])
 //    URLProtocol.registerClass(RXRContainerInterceptor.self)
     
-//    // Decorators
-//    let headers = ["Customer-Authorization": "Bearer token"]
-//    let parameters = ["apikey": "apikey value"]
-//    let requestDecorator = RXRRequestDecorator(headers: headers, parameters: parameters)
+    // Decorators
+    CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
+    [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
+    [CNRSRequestInterceptor registerInterceptor];
     
+    //CacheFile
     [CNRSCacheFileInterceptor registerInterceptor];
 }
 
@@ -103,7 +108,8 @@
 
 - (void)dealloc
 {
-  [CNRSCacheFileInterceptor unregisterInterceptor];
+    [CNRSRequestInterceptor unregisterInterceptor];
+    [CNRSCacheFileInterceptor unregisterInterceptor];
 }
 
 #pragma mark - Public methods

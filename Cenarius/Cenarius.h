@@ -22,6 +22,7 @@
 #import "CNRSContainerAPI.h"
 
 #import "CNRSRequestInterceptor.h"
+#import "CNRSOpenApiRequestDecorator.h"
 #import "CNRSDecorator.h"
 #import "CNRSRequestDecorator.h"
 
@@ -38,6 +39,7 @@
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
 #import "CNRSNavMenuWidget.h"
+#import "CNRSLoginWidget.h"
 #endif
 
 #endif /* _CENARIUS_ */

@@ -7,7 +7,6 @@
 //
 
 #import "NSDictionary+CNRSMultipleItems.h"
-#import "NSURL+Cenarius.h"
 
 @implementation NSDictionary (CNRSMultipleItems)
 
@@ -24,7 +23,5 @@
   id obj = [self objectForKey:key];
   return [obj isKindOfClass:[NSArray class]] ? obj : (obj ? [NSArray arrayWithObject:obj] : nil);
 }
-
-
 
 @end

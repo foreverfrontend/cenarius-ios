@@ -5,11 +5,14 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="https://unpkg.com/jquery@3.1.1/dist/jquery.js"></script>
+    <script src="../jquery.js"></script>
     <script>
         $.ajax({
-            url: 'https://uim-test.infinitus.com.cn/oauth20/profile',
+            url: 'https://uim-test.infinitus.com.cn/oauth20/profile?p1=1&p2=2',
             type: 'POST',
+            headers: {
+                "X-Requested-With": "OpenAPIRequest"
+            },
             success: function(data) {
                 console.log(data)
             }
