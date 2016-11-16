@@ -42,6 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSString *)md5Signature:(NSDictionary *)params secret:(NSString *)secret;
 
+/**
+ * 获取个人信息
+ */
++ (void)getProfile;
+
 NS_ASSUME_NONNULL_END
 
 @end
