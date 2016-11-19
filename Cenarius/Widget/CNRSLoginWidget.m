@@ -93,7 +93,7 @@
     parameters[@"sign"] = sign;
     
     
-    [manager GET:@"http://172.21.28.72:6089/helloworld/orders/S0063232871" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:@"https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

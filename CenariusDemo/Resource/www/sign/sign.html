@@ -8,11 +8,14 @@
     <script src="../jquery.js"></script>
     <script>
         $.ajax({
-            url: 'https://uim-test.infinitus.com.cn/oauth20/profile?p1=1&p2=2',
+            url: 'https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor',
             type: 'POST',
             headers: {
                 "X-Requested-With": "OpenAPIRequest"
             },
+            data: {
+                name : 'name'
+            }
             success: function(data) {
                 console.log(data)
             }
