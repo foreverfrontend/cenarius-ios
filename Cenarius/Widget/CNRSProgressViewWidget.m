@@ -30,6 +30,7 @@
 {
     _isFinishLoad = NO;
     _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.01667 target:self selector:@selector(timerCallback) userInfo:nil repeats:YES];
+    [self.superview bringSubviewToFront:self];
 }
 
 - (void)finishLoad

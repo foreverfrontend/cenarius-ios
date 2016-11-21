@@ -44,9 +44,6 @@
 
 @property (atomic, strong) NSURL* openURL;
 
-//修改：添加的属性
-@property (strong, nonatomic) UIBarButtonItem *backButton;//返回按钮
-
 @end
 
 @implementation CDVViewController
@@ -368,9 +365,10 @@
         }
     }];
     
-    //修改：自定义返回按钮
+    //修改：自定义返回按钮，进度条
     [self _initBackButton];
     self.navigationItem.leftBarButtonItems = @[_backButton];
+    [self _initProgressView];
 }
 
 - (void)_initBackButton
@@ -407,7 +405,18 @@
     }
 }
 
-
+- (void)_initProgressView
+{
+    CGRect frame = CGRectZero;
+    if (self.navigationController != nil && self.navigationController.navigationBarHidden == NO && self.navigationController.navigationBar.hidden == NO) {
+        frame = CGRectMake(0, 0, self.view.frame.size.width, 2);
+    }
+    else{
+        frame = CGRectMake(0, 0, 64, 2);
+    }
+    _progressView = [[CNRSProgressViewWidget alloc] initWithFrame:frame];
+    [self.view addSubview:_progressView];
+}
 
 - (NSArray*)parseInterfaceOrientations:(NSArray*)orientations
 {

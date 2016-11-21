@@ -43,6 +43,9 @@
 {
     NSLog(@"Resetting plugins due to page load.");
     CDVViewController* vc = (CDVViewController*)self.enginePlugin.viewController;
+    
+    //修改：进度条
+    [vc.progressView startLoad];
 
     [vc.commandQueue resetRequestId];
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginResetNotification object:self.enginePlugin.webView]];
@@ -55,6 +58,9 @@
 {
     NSLog(@"Finished load of: %@", theWebView.request.URL);
     CDVViewController* vc = (CDVViewController*)self.enginePlugin.viewController;
+    
+    //修改：进度条
+    [vc.progressView finishLoad];
 
     // It's safe to release the lock even if this is just a sub-frame that's finished loading.
     [CDVUserAgentUtil releaseLock:vc.userAgentLockToken];
@@ -70,6 +76,9 @@
 - (void)webView:(UIWebView*)theWebView didFailLoadWithError:(NSError*)error
 {
     CDVViewController* vc = (CDVViewController*)self.enginePlugin.viewController;
+    
+    //修改：进度条
+    [vc.progressView finishLoad];
 
     [CDVUserAgentUtil releaseLock:vc.userAgentLockToken];
 

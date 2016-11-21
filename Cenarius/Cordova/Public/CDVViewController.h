@@ -27,6 +27,7 @@
 #import "CDVPlugin.h"
 #import "CDVWebViewEngineProtocol.h"
 #import "CNRSViewController.h"
+#import "CNRSProgressViewWidget.h"
 
 //修改：原来继承自UIViewController
 @interface CDVViewController : CNRSViewController <CDVScreenOrientationDelegate>{
@@ -69,6 +70,10 @@
  The address of the lock token used for controlling access to setting the user-agent
  */
 @property (nonatomic, readonly) NSInteger* userAgentLockToken;
+
+//修改：添加的属性
+@property (strong, nonatomic) UIBarButtonItem *backButton;//返回按钮
+@property (strong, nonatomic) CNRSProgressViewWidget *progressView;//进度条
 
 - (UIView*)newCordovaViewWithFrame:(CGRect)bounds;
 
