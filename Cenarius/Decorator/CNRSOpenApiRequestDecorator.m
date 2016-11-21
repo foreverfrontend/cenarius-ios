@@ -28,6 +28,8 @@
   {
       if ([request.allHTTPHeaderFields[@"X-Requested-With"] isEqualToString:@"OpenAPIRequest"])
       {
+//          NSData *bodyData = request.HTTPBody;
+//          NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
           return YES;
       }
   }

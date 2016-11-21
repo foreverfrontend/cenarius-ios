@@ -57,8 +57,8 @@
 {
     if (_routesMapURL != routesMapURL) {
         _routesMapURL = routesMapURL;
-//        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-//        self.routes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
+        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
+        self.routes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
     }
 }
 
@@ -101,7 +101,6 @@
                 item(success);
             }
             [self.updateRoutesCompletions removeAllObjects];
-            self.updatingRoutes = NO;
         });
     };
     
@@ -129,7 +128,7 @@
             return;
         }
         
-        //先更新 `routes.json` 及内存中的 `routes`
+        //先更新内存中的 routes
         CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
         NSArray *routes = [routeFileCache routesWithData:data];
         self.routes = routes;
@@ -137,6 +136,7 @@
         
         //然后下载最新 routes 中的资源文件
         [routeFileCache saveRoutesMapFile:data];
+        self.updatingRoutes = NO;
         [self cnrs_downloadFilesWithinRoutes:routes completion:^(BOOL success) {
             if (success) {
                 //        self.routes = routes;
@@ -358,6 +358,10 @@
     }
     
     return NO;
+}
+
+- (BOOL)isUpdatingRoutes{
+    return self.updatingRoutes;
 }
 
 /**
