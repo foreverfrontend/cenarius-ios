@@ -113,6 +113,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)isInWhiteList:(NSURL *)uri;
 
+/**
+ 是否正在更新路由表（路由表还没保存）
+ */
+- (BOOL)isUpdatingRoutes;
+
 @end
 
 NS_ASSUME_NONNULL_END

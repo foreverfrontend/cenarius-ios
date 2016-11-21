@@ -73,6 +73,7 @@
 		0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2371DBC688000B09978 /* NSDictionary+CordovaPreferences.m */; };
 		0CAFF2501DBC688000B09978 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */; };
 		0CBC80381DDBFC43009610BC /* CNRSOpenApiRequestDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC80371DDBFC43009610BC /* CNRSOpenApiRequestDecorator.m */; };
+		0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */; };
 		6D7AEFA68B93E9C4E1F874F8 /* libPods-CenariusDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5251B4E2A192BF31E78489B7 /* libPods-CenariusDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -215,6 +216,8 @@
 		0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		0CBC80361DDBFC43009610BC /* CNRSOpenApiRequestDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSOpenApiRequestDecorator.h; sourceTree = "<group>"; };
 		0CBC80371DDBFC43009610BC /* CNRSOpenApiRequestDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSOpenApiRequestDecorator.m; sourceTree = "<group>"; };
+		0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSProgressViewWidget.h; sourceTree = "<group>"; };
+		0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSProgressViewWidget.m; sourceTree = "<group>"; };
 		128AD749238C0A58074E137D /* Pods-CenariusDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusDemo/Pods-CenariusDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5251B4E2A192BF31E78489B7 /* libPods-CenariusDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CenariusDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5EB94BBF6CC7E2C1508314 /* Pods-CenariusDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusDemo/Pods-CenariusDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				0C9EC8651DB5B01B003BFB38 /* CNRSNavMenuWidget.m */,
 				0C40501C1DC841E900652492 /* CNRSLoginWidget.h */,
 				0C40501D1DC841E900652492 /* CNRSLoginWidget.m */,
+				0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */,
+				0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */,
 				0C9EC6791DAF98B2003BFB38 /* Model */,
 			);
 			path = Widget;
@@ -719,6 +724,7 @@
 				0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */,
 				0C9EC6CE1DB346D1003BFB38 /* CNRSCordovaWidget.m in Sources */,
 				0C9EC6891DAF98B2003BFB38 /* NSURL+Cenarius.m in Sources */,
+				0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */,
 				0CAFF2461DBC688000B09978 /* CDVInvokedUrlCommand.m in Sources */,
 				0CBC80381DDBFC43009610BC /* CNRSOpenApiRequestDecorator.m in Sources */,
 				0C9EC6861DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m in Sources */,

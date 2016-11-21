@@ -11,6 +11,7 @@
 #import "CNRSRoute.h"
 #import "CNRSLogging.h"
 #import "NSData+CNRSDigest.h"
+#import "CNRSRouteManager.h"
 
 @implementation CNRSRouteFileCache
 
@@ -212,6 +213,11 @@
     return nil;
 }
 
+- (NSString *)cacheFilePathForUri:(NSURL *)uri{
+    NSString *cacheFilePath = [self.cachePath stringByAppendingPathComponent:uri.absoluteString];
+    return cacheFilePath;
+}
+
 - (NSString *)resourceFilePathForUri:(NSURL *)uri
 {
     NSString *resourceFileName = uri.absoluteString;
@@ -236,13 +242,26 @@
 
 - (NSString *)cnrs_cacheRouteFilePathForRoute:(CNRSRoute *)route
 {
-//    //用hash做文件名
-//    NSString *cacheFileName = [self.cachePath stringByAppendingPathComponent:route.fileHash];
-//    NSString *cacheFilePath = [cacheFileName stringByAppendingPathExtension:route.uri.pathExtension];
-    
-    //不用hash做文件名
-    NSString *cacheFilePath = [self.cachePath stringByAppendingPathComponent:route.uri.absoluteString];
-    return cacheFilePath;
+    //路由表正在更新的时候需要对比 hash
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    if ([routeManager isUpdatingRoutes])
+    {
+        NSArray *cacheRoutes = [self routesWithData:[self cacheRoutesMapFile]];
+        for (CNRSRoute *cacheRoute in cacheRoutes)
+        {
+            if ([cacheRoute.uri.absoluteString isEqualToString:route.uri.absoluteString] && [cacheRoute.fileHash isEqualToString:route.fileHash])
+            {
+                return [self cacheFilePathForUri:cacheRoute.uri];
+            }
+        }
+        
+        return nil;
+    }
+    else
+    {
+        NSString *cacheFilePath = [self.cachePath stringByAppendingPathComponent:route.uri.absoluteString];
+        return cacheFilePath;
+    }
 }
 
 /**

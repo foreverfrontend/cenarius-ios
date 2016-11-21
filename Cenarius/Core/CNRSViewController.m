@@ -86,9 +86,9 @@
 //    URLProtocol.registerClass(RXRContainerInterceptor.self)
     
     // Decorators
-    CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
-    [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
-    [CNRSRequestInterceptor registerInterceptor];
+//    CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
+//    [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
+//    [CNRSRequestInterceptor registerInterceptor];
     
     //CacheFile
     [CNRSCacheFileInterceptor registerInterceptor];
@@ -108,7 +108,7 @@
 
 - (void)dealloc
 {
-    [CNRSRequestInterceptor unregisterInterceptor];
+//    [CNRSRequestInterceptor unregisterInterceptor];
     [CNRSCacheFileInterceptor unregisterInterceptor];
 }
 
