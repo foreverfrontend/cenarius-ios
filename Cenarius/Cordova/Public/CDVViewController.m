@@ -407,14 +407,14 @@
 
 - (void)_initProgressView
 {
-    CGRect frame = CGRectZero;
-    if (self.navigationController != nil && self.navigationController.navigationBarHidden == NO && self.navigationController.navigationBar.hidden == NO) {
-        frame = CGRectMake(0, 0, self.view.frame.size.width, 2);
-    }
-    else{
-        frame = CGRectMake(0, 0, 64, 2);
-    }
-    _progressView = [[CNRSProgressViewWidget alloc] initWithFrame:frame];
+//    CGRect frame = CGRectZero;
+//    if (self.navigationController != nil && self.navigationController.navigationBarHidden == NO && self.navigationController.navigationBar.hidden == NO) {
+//        frame = CGRectMake(0, 0, self.view.frame.size.width, 2);
+//    }
+//    else{
+//        frame = CGRectMake(0, 0, 64, 2);
+//    }
+    _progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
     [self.view addSubview:_progressView];
 }
 
