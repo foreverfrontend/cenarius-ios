@@ -7,16 +7,15 @@
 //
 
 #import "CNRSWebViewController.h"
+#import "CNRSProgressViewWidget.h"
 
 @interface CNRSWebViewController ()
 
 @property (nonatomic, strong) NSURL *requestURL;
-@property (strong, nonatomic) UIProgressView *progressView;//进度条
+@property (strong, nonatomic) CNRSProgressViewWidget *progressView;//进度条
 @property (strong, nonatomic) UIBarButtonItem *backButton;//返回按钮
 @property (strong, nonatomic) UIBarButtonItem *closeButton;//关闭按钮
 @property (strong, nonatomic) UIBarButtonItem *refreshButton;//刷新按钮
-@property (nonatomic) BOOL isWebViewFinishLoad;
-@property (strong, nonatomic) NSTimer *progressTimer;
 
 @end
 
@@ -24,17 +23,6 @@
 @implementation CNRSWebViewController
 
 #pragma mark - LifeCycle
-
-//- (instancetype)initWithHtmlFileURL:(NSURL *)htmlFileURL
-//{
-//    self = [super initWithNibName:nil bundle:nil];
-//    if (self) {
-//        _htmlFileURL = htmlFileURL;
-//        _requestURL = htmlFileURL;
-//        
-//    }
-//    return self;
-//}
 
 - (void)viewDidLoad
 {
@@ -57,28 +45,7 @@
     }
     
     [self reloadWebView];
-    
-//    [NSURLProtocol registerClass:CNRSCacheFileInterceptor.class];
 }
-
-
-
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    [self onPageVisible];
-//}
-//
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    [super viewDidDisappear:animated];
-//    [self onPageInvisible];
-//}
-
-//- (void)dealloc
-//{
-//    [NSURLProtocol unregisterClass:CNRSCacheFileInterceptor.class];
-//}
 
 #pragma mark - Public methods
 
@@ -92,28 +59,20 @@
     {
         [_webView loadRequest:[NSURLRequest requestWithURL:self.requestURL]];
     }
-    
-//    //暂时禁用缓存
-//    if (_htmlFileURL) {
-//        [_webView loadRequest:[NSURLRequest requestWithURL:self.htmlFileURL]];
-//    }
-//    else{
-//        [_webView loadRequest:[NSURLRequest requestWithURL:self.uri]];
-//    }
 }
 
 - (void)onPageVisible
 {
     // Call the WebView's visiblity change hook for javascript.
-    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageVisible: %@",
-                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageVisible()"]);
+//    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageVisible: %@",
+//                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageVisible()"]);
 }
 
 - (void)onPageInvisible
 {
     // Call the WebView's visiblity change hook for javascript.
-    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageInvisible: %@",
-                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageInvisible()"]);
+//    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageInvisible: %@",
+//                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageInvisible()"]);
 }
 
 - (void)_initNav
@@ -166,8 +125,7 @@
 
 - (void)_initProgressView
 {
-    _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
-    _progressView.trackTintColor = [UIColor clearColor];
+    _progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
     [self.view addSubview:_progressView];
 }
 
@@ -207,40 +165,6 @@
     else
     {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-///**
-// *  刷新当前页面
-// *
-// *  @param sender 触发控件
-// */
-//- (void)_refresh:(id)sender
-//{
-//    [self.webView reload];
-//}
-
--(void)timerCallback
-{
-    if (_isWebViewFinishLoad)
-    {
-        if (_progressView.progress >= 1)
-        {
-            _progressView.hidden = YES;
-            [_progressTimer invalidate];
-        }
-        else
-        {
-            _progressView.progress += 0.1;
-        }
-    }
-    else
-    {
-        _progressView.progress += 0.05;
-        if (_progressView.progress >= 0.95)
-        {
-            _progressView.progress = 0.95;
-        }
     }
 }
 
@@ -286,20 +210,19 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    _isWebViewFinishLoad = NO;
-    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.01667 target:self selector:@selector(timerCallback) userInfo:nil repeats:YES];
+    [_progressView startLoad];
     [self cnrs_resetControllerAppearance];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    _isWebViewFinishLoad = YES;
+    [_progressView finishLoad];
     [self cnrs_resetControllerAppearance];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    _isWebViewFinishLoad = YES;
+    [_progressView finishLoad];
     [self cnrs_resetControllerAppearance];
 }
 

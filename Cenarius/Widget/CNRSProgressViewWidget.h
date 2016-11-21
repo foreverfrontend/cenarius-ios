@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+/**
+ 提供加载时的进度条，仿微信
+ */
 @interface CNRSProgressViewWidget : UIProgressView
 
 /**
