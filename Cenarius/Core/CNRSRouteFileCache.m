@@ -17,77 +17,77 @@
 
 + (CNRSRouteFileCache *)sharedInstance
 {
-  static CNRSRouteFileCache *instance = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    instance = [[CNRSRouteFileCache alloc] init];
-    instance.cachePath = [CNRSConfig routesCachePath];
-    instance.resourcePath = [CNRSConfig routesResourcePath];
-  });
-  return instance;
+    static CNRSRouteFileCache *instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[CNRSRouteFileCache alloc] init];
+        instance.cachePath = [CNRSConfig routesCachePath];
+        instance.resourcePath = [CNRSConfig routesResourcePath];
+    });
+    return instance;
 }
 
 - (instancetype)initWithCachePath:(NSString *)cachePath
                      resourcePath:(NSString *)resourcePath
 {
-  self = [super init];
-  if (self) {
-  }
-  return self;
+    self = [super init];
+    if (self) {
+    }
+    return self;
 }
 
 #pragma mark - Save & Read methods
 
 - (void)setCachePath:(NSString *)cachePath
 {
-  // cache dir
-  if (!cachePath) {
-//    // 默认缓存路径：<Library>/<bundle identifier>.cenarius
-//    cachePath = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".cenarius"];
-      
-      // 默认缓存路径：<Library>/www
-      cachePath = @"www";
-  }
-
-  if (![cachePath isAbsolutePath]) {
-    cachePath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)
-                  firstObject] stringByAppendingPathComponent:cachePath];
-  }
-
-  _cachePath = [cachePath copy];
-
-  NSError *error;
-  [[NSFileManager defaultManager] createDirectoryAtPath:_cachePath
-                            withIntermediateDirectories:YES
-                                             attributes:@{}
-                                                  error:&error];
-  if (error) {
-    CNRSDebugLog(@"Failed to create directory: %@", _cachePath);
-  }
+    // cache dir
+    if (!cachePath) {
+        //    // 默认缓存路径：<Library>/<bundle identifier>.cenarius
+        //    cachePath = [[[NSBundle mainBundle] bundleIdentifier] stringByAppendingString:@".cenarius"];
+        
+        // 默认缓存路径：<Library>/www
+        cachePath = @"www";
+    }
+    
+    if (![cachePath isAbsolutePath]) {
+        cachePath = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)
+                      firstObject] stringByAppendingPathComponent:cachePath];
+    }
+    
+    _cachePath = [cachePath copy];
+    
+    NSURL *cachePathUrl = [NSURL URLWithString:_cachePath];
+    NSError *error;
+    [[NSFileManager defaultManager] createDirectoryAtURL:cachePathUrl withIntermediateDirectories:YES attributes:nil error:&error];
+    if (error) {
+        CNRSDebugLog(@"Failed to create directory: %@", _cachePath);
+    }
+    // 把这个目录设置为不用iCloud备份
+    [cachePathUrl setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:nil];
 }
 
 - (void)setResourcePath:(NSString *)resourcePath
 {
-  // resource dir
-  if (!resourcePath && [resourcePath length] > 0) {
-    // 默认资源路径：<Bundle>/cenarius
-    resourcePath = [[NSBundle mainBundle] pathForResource:@"cenarius" ofType:nil];
-  }
-
-  if (![resourcePath isAbsolutePath]) {
-    resourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:resourcePath];
-  }
-  _resourcePath = [resourcePath copy];
+    // resource dir
+    if (!resourcePath && [resourcePath length] > 0) {
+        // 默认资源路径：<Bundle>/cenarius
+        resourcePath = [[NSBundle mainBundle] pathForResource:@"cenarius" ofType:nil];
+    }
+    
+    if (![resourcePath isAbsolutePath]) {
+        resourcePath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:resourcePath];
+    }
+    _resourcePath = [resourcePath copy];
 }
 
 - (void)cleanCache
 {
-  NSFileManager *manager = [NSFileManager defaultManager];
-  [manager removeItemAtPath:self.cachePath error:nil];
-  [manager createDirectoryAtPath:self.cachePath
-     withIntermediateDirectories:YES
-                      attributes:@{}
-                           error:NULL];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:self.cachePath error:nil];
+    [manager createDirectoryAtPath:self.cachePath
+       withIntermediateDirectories:YES
+                        attributes:@{}
+                             error:NULL];
 }
 
 - (void)saveRoutesMapFile:(NSData *)data
@@ -121,8 +121,8 @@
     {
         return resourceRoutesMapFile;
     }
-
-  return nil;
+    
+    return nil;
 }
 
 - (NSData *)cacheRoutesMapFile

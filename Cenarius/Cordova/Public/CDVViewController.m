@@ -414,8 +414,8 @@
 //    else{
 //        frame = CGRectMake(0, 0, 64, 2);
 //    }
-    _progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
-    [self.view addSubview:_progressView];
+    self.progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
+    [self.view addSubview:self.progressView];
 }
 
 - (NSArray*)parseInterfaceOrientations:(NSArray*)orientations
