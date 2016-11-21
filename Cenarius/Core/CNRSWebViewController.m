@@ -220,7 +220,7 @@
 //    [self.webView reload];
 //}
 
--(void)_timerCallback
+-(void)timerCallback
 {
     if (_isWebViewFinishLoad)
     {
@@ -286,16 +286,20 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    _isWebViewFinishLoad = NO;
+    _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.01667 target:self selector:@selector(timerCallback) userInfo:nil repeats:YES];
     [self cnrs_resetControllerAppearance];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    _isWebViewFinishLoad = YES;
     [self cnrs_resetControllerAppearance];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+    _isWebViewFinishLoad = YES;
     [self cnrs_resetControllerAppearance];
 }
 

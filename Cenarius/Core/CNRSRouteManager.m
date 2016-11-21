@@ -107,7 +107,7 @@
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:60];
+                                                       timeoutInterval:5];
     // 更新 Http UserAgent Header
     NSString *externalUserAgent = [CNRSConfig externalUserAgent];
     if (externalUserAgent) {
@@ -125,6 +125,7 @@
         
         if (((NSHTTPURLResponse *)response).statusCode != 200) {
             APICompletion(NO);
+            self.updatingRoutes = NO;
             return;
         }
         

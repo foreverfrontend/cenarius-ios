@@ -242,11 +242,6 @@
 
 - (NSString *)cnrs_cacheRouteFilePathForRoute:(CNRSRoute *)route
 {
-//    //用hash做文件名
-//    NSString *cacheFileName = [self.cachePath stringByAppendingPathComponent:route.fileHash];
-//    NSString *cacheFilePath = [cacheFileName stringByAppendingPathExtension:route.uri.pathExtension];
-    
-    //不用hash做文件名
     //路由表正在更新的时候需要对比 hash
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
     if ([routeManager isUpdatingRoutes])
