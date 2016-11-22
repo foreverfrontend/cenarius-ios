@@ -58,9 +58,8 @@
     [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
     NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
     if (kvPair.count == 2) {
-//      [pairs cnrs_addItem:[[kvPair objectAtIndex:1] cnrs_decodingStringUsingURLEscape]
-//                  forKey:[[kvPair objectAtIndex:0] cnrs_decodingStringUsingURLEscape]];
-        [pairs setObject:[[kvPair objectAtIndex:1] cnrs_decodingStringUsingURLEscape] forKey:[[kvPair objectAtIndex:0] cnrs_decodingStringUsingURLEscape]];
+      [pairs cnrs_addItem:[[kvPair objectAtIndex:1] cnrs_decodingStringUsingURLEscape]
+                  forKey:[[kvPair objectAtIndex:0] cnrs_decodingStringUsingURLEscape]];
     }
   }
 
@@ -78,27 +77,29 @@
 - (NSDictionary *)cnrs_openApiQueryDictionary
 {
     NSDictionary *oldParameters = self.cnrs_queryDictionary;
+    // 多值合并
+    
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:oldParameters];
     NSString *access_token = [CNRSLoginWidget getAccessToken];
     NSString *app_key = [CNRSConfig loginAppKey];
     NSNumber *timestamp = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
     
-    if (oldParameters[@"access_token"] == nil && access_token)
+    if (access_token)
     {
         parameters[@"access_token"] = access_token;
     }
-    if (oldParameters[@"app_key"] == nil && app_key)
+    if (app_key)
     {
         parameters[@"app_key"] = app_key;
     }
-    if (oldParameters[@"timestamp"] == nil && timestamp)
+    if (timestamp)
     {
         parameters[@"timestamp"] = timestamp;
     }
     
     NSString *appSecret = [CNRSConfig loginAppSecret];
     NSString *sign = [CNRSLoginWidget md5Signature:parameters secret:appSecret];
-    if (oldParameters[@"sign"] == nil && sign)
+    if (sign)
     {
         parameters[@"sign"] = sign;
     }

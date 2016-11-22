@@ -10,19 +10,33 @@
 
 @implementation NSMutableDictionary (CNRSMultipleItems)
 
-- (void)cnrs_addItem:(id)item forKey:(id<NSCopying>)aKey {
+- (void)cnrs_addItem:(NSString *)item forKey:(NSString *)aKey
+{
     if (item == nil) {
         return;
     }
     id obj = [self objectForKey:aKey];
-    if (obj) {
-        NSMutableArray *array = [NSMutableArray arrayWithObject:obj];
-        [array addObject:item];
-        [self setObject:array forKey:aKey];
+    NSMutableArray *array = nil;
+    if ([obj isKindOfClass:[NSArray class]]) {
+        array = [NSMutableArray arrayWithArray:obj];
+    } else {
+        array = obj ? [NSMutableArray arrayWithObject:obj] : [NSMutableArray array];
     }
-    else{
-        [self setObject:item forKey:aKey];
-    }
+    [array addObject:item];
+    [self setObject:[array copy] forKey:aKey];
+
+//    if (item == nil) {
+//        return;
+//    }
+//    id obj = [self objectForKey:aKey];
+//    if (obj) {
+//        NSMutableArray *array = [NSMutableArray arrayWithObject:nil];
+//        [array addObject:item];
+//        [self setObject:array forKey:aKey];
+//    }
+//    else{
+//        [self setObject:item forKey:aKey];
+//    }
 }
 
 @end

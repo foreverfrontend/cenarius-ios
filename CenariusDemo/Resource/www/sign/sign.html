@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+	<meta charset="UTF-8">
+	<title>Document</title>
 </head>
+
 <body>
-    <script src="../jquery.js"></script>
-    <script>
+	<script src="../jquery.js"></script>
+	<script>
         $.ajax({
-            url: 'https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor',
+            url: 'https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor?p=p2&p=p4&a=z&p=p3&p=p5',
             type: 'POST',
             headers: {
                 "X-Requested-With": "OpenAPIRequest"
             },
             data: {
-                name : 'name'
+                dk1 : 'v1',
+                dk2 : 'v2'
             },
             success: function(data) {
                 console.log(data)
@@ -22,4 +25,5 @@
         })
     </script>
 </body>
+
 </html>

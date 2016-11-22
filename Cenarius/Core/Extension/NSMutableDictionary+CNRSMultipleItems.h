@@ -16,6 +16,6 @@
  * @param item 待添加的元素
  * @param aKey 关键字
  */
-- (void)cnrs_addItem:(id)item forKey:(id<NSCopying>)aKey;
+- (void)cnrs_addItem:(NSString *)item forKey:(NSString *)aKey;
 
 @end
