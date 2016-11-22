@@ -35,22 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)logout;
 
 /**
- * md5签名
- *
- * @param params 传给服务器的参数
- * @param secret 分配给你的APP_SECRET
- */
-+(NSString *)md5Signature:(NSDictionary *)params secret:(NSString *)secret;
-
-
-/**
- 返回签名之后的 Query
-
- @param request 原 request
- */
-+ (NSString *)openApiQuery:(NSURLRequest *)request;
-
-/**
  * 获取个人信息
  */
 + (void)getProfile;

@@ -7,7 +7,9 @@
 //
 
 #import "CNRSOpenApiRequestDecorator.h"
-#import "CNRSLoginWidget.h"
+#import "NSURL+Cenarius.h"
+#import "CNRSOpenApi.h"
+#import "NSDictionary+CNRSMultipleItems.h"
 
 @implementation CNRSOpenApiRequestDecorator
 
@@ -61,12 +63,14 @@
     //    }
     //  }
     
-    NSString *query = [CNRSLoginWidget openApiQuery:request];
+    NSString *query = [CNRSOpenApi openApiQuery:request];
     if (query) {
         NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
         urlComps.query = query;
         request.URL = urlComps.URL;
     }
 }
+
+
 
 @end

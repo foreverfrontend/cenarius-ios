@@ -20,6 +20,7 @@
 
 #import "CNRSContainerInterceptor.h"
 #import "CNRSContainerAPI.h"
+#import "CNRSOpenApi.h"
 
 #import "CNRSRequestInterceptor.h"
 #import "CNRSOpenApiRequestDecorator.h"
