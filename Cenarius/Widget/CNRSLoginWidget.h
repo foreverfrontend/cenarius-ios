@@ -42,6 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 +(NSString *)md5Signature:(NSDictionary *)params secret:(NSString *)secret;
 
+
+/**
+ 返回签名之后的 Query
+
+ @param request 原 request
+ */
++ (NSString *)openApiQuery:(NSURLRequest *)request;
+
 /**
  * 获取个人信息
  */

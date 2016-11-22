@@ -7,7 +7,7 @@
 //
 
 #import "CNRSOpenApiRequestDecorator.h"
-#import "NSURL+Cenarius.h"
+#import "CNRSLoginWidget.h"
 
 @implementation CNRSOpenApiRequestDecorator
 
@@ -26,11 +26,8 @@
 {
   if ([request.URL cnrs_isHttpOrHttps])
   {
-      if ([request.allHTTPHeaderFields[@"X-Requested-With"] isEqualToString:@"OpenAPIRequest"])
+      if ([request.allHTTPHeaderFields[@"X-Requested-With"] isEqualToString:@"OpenAPIRequest"] && request.URL.cnrs_queryDictionary[@"sign"] == nil)
       {
-          
-          NSData *bodyData = request.HTTPBody;
-          NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
           return YES;
       }
   }
@@ -48,8 +45,6 @@
 //  }];
 
   // Request url parameters
-    NSDictionary *parameters = request.URL.cnrs_openApiQueryDictionary;
-    
 //  NSMutableDictionary *parametersEncoded = [NSMutableDictionary dictionaryWithDictionary:self.parameters];
 //  for (NSString *pair in [request.URL.query componentsSeparatedByString:@"&"])
 //  {
@@ -66,7 +61,7 @@
 //    }
 //  }
 
-  NSString *query = [NSURL cnrs_queryFromDictionary:parameters];
+    NSString *query = [CNRSLoginWidget openApiQuery:request];
   if (query) {
     NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
     urlComps.query = query;

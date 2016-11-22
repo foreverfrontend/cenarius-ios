@@ -34,9 +34,4 @@
  */
 - (NSDictionary *)cnrs_jsonDictionary;
 
-/**
- 返回签名之后的 parameters
- */
-- (NSDictionary *)cnrs_openApiQueryDictionary;
-
 @end

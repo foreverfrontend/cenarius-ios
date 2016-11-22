@@ -10,6 +10,7 @@
 #import "CNRSViewController.h"
 #import "AFNetworking.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "NSString+CNRSURLEscape.h"
 
 #define kAccessTokenKey @"CNRSAccessToken"
 
@@ -194,6 +195,71 @@
             result[8], result[9], result[10], result[11],
             result[12], result[13], result[14], result[15]
             ];
+}
+
++ (NSString *)openApiQuery:(NSURLRequest *)request
+{
+    NSString *query = request.URL.query;
+    
+    NSString *parameterString = [[NSString alloc] initWithString:query];
+    NSData *bodyData = request.HTTPBody;
+    if (bodyData)
+    {
+        NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+        if (query.length > 0)
+        {
+            parameterString = [NSString stringWithFormat:@"%@&%@",query,bodyString];
+        }
+        else
+        {
+            parameterString = bodyString;
+        }
+    }
+    
+    // 多值合并
+    NSMutableDictionary *sortMutableDictionary = [[NSMutableDictionary alloc] init];
+    NSDictionary *oldParameters = [parameterString cnrs_queryDictionary];
+    for (NSString *key in oldParameters)
+    {
+        NSArray *array = oldParameters[key];
+        array = [array sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NSComparisonResult result = [obj1 compare:obj2];
+            return result;
+        }];
+        NSString *value = array[0];
+        for (NSInteger i = 1; i < array.count; i++) {
+            value = [[value stringByAppendingString:key] stringByAppendingString:array[i]];
+        }
+        sortMutableDictionary[key] = value;
+    }
+    
+    //加入系统级参数
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:sortMutableDictionary];
+    NSString *token = [CNRSLoginWidget getAccessToken];
+    NSString *appKey = [CNRSConfig loginAppKey];
+    NSString *appSecret = [CNRSConfig loginAppSecret];
+    NSNumber *timestamp = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
+    
+    if (token == nil || appKey == nil || appSecret == nil) {
+        return nil;
+    }
+    
+    parameters[@"access_token"] = token;
+    parameters[@"app_key"] = appKey;
+    parameters[@"timestamp"] = timestamp;
+    
+    //签名
+    NSString *sign = [CNRSLoginWidget md5Signature:parameters secret:appSecret];
+    if (query.length > 0)
+    {
+        query = [NSString stringWithFormat:@"%@&access_token=%@&app_key=%@&timestamp=%@&sign%@",query,token,appKey,timestamp,sign];
+    }
+    else
+    {
+        query = [NSString stringWithFormat:@"access_token=%@&app_key=%@&timestamp=%@&sign%@",token,appKey,timestamp,sign];
+    }
+    
+    return query;
 }
 
 @end

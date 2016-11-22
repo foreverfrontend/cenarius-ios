@@ -20,4 +20,9 @@
  */
 - (NSString *)cnrs_decodingStringUsingURLEscape;
 
+/**
+ * 将 query 以字典形式返回。
+ */
+- (NSDictionary *)cnrs_queryDictionary;
+
 @end

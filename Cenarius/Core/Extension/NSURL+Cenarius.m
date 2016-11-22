@@ -8,62 +8,37 @@
 
 #import "NSURL+Cenarius.h"
 #import "NSString+CNRSURLEscape.h"
-#import "NSMutableDictionary+CNRSMultipleItems.h"
 #import "NSDictionary+CNRSMultipleItems.h"
-#import "CNRSConfig.h"
-#import "CNRSLoginWidget.h"
-
+#import "NSString+CNRSURLEscape.h"
 
 @implementation NSURL (Cenarius)
 
 + (NSString *)cnrs_queryFromDictionary:(NSDictionary *)dict
 {
-  NSMutableArray *pairs = [NSMutableArray array];
-  [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
-    [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
-  }];
-
-  NSString *query = nil;
-  if (pairs.count > 0) {
-    query = [pairs componentsJoinedByString:@"&"];
-  }
-  return query;
+    NSMutableArray *pairs = [NSMutableArray array];
+    [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
+    }];
+    
+    NSString *query = nil;
+    if (pairs.count > 0) {
+        query = [pairs componentsJoinedByString:@"&"];
+    }
+    return query;
 }
 
 - (BOOL)cnrs_isHttpOrHttps
 {
-  if ([self.scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
-      [self.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {
-    return YES;
-  }
-  return NO;
+    if ([self.scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
+        [self.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+        return YES;
+    }
+    return NO;
 }
 
 - (NSDictionary *)cnrs_queryDictionary {
-  NSString *query = [self query];
-  if ([query length] == 0) {
-    return nil;
-  }
-
-  // Replace '+' with space
-  query = [query stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
-
-  NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:@"&;"];
-  NSMutableDictionary *pairs = [NSMutableDictionary dictionary];
-
-  NSScanner *scanner = [[NSScanner alloc] initWithString:query];
-  while (![scanner isAtEnd]) {
-    NSString *pairString = nil;
-    [scanner scanUpToCharactersFromSet:delimiterSet intoString:&pairString];
-    [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
-    NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
-    if (kvPair.count == 2) {
-      [pairs cnrs_addItem:[[kvPair objectAtIndex:1] cnrs_decodingStringUsingURLEscape]
-                  forKey:[[kvPair objectAtIndex:0] cnrs_decodingStringUsingURLEscape]];
-    }
-  }
-
-  return [pairs copy];
+    NSString *query = [self query];
+    return [query cnrs_queryDictionary];
 }
 
 - (NSDictionary *)cnrs_jsonDictionary
@@ -72,39 +47,6 @@
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
     return jsonDic;
-}
-
-- (NSDictionary *)cnrs_openApiQueryDictionary
-{
-    NSDictionary *oldParameters = self.cnrs_queryDictionary;
-    // 多值合并
-    
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:oldParameters];
-    NSString *access_token = [CNRSLoginWidget getAccessToken];
-    NSString *app_key = [CNRSConfig loginAppKey];
-    NSNumber *timestamp = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
-    
-    if (access_token)
-    {
-        parameters[@"access_token"] = access_token;
-    }
-    if (app_key)
-    {
-        parameters[@"app_key"] = app_key;
-    }
-    if (timestamp)
-    {
-        parameters[@"timestamp"] = timestamp;
-    }
-    
-    NSString *appSecret = [CNRSConfig loginAppSecret];
-    NSString *sign = [CNRSLoginWidget md5Signature:parameters secret:appSecret];
-    if (sign)
-    {
-        parameters[@"sign"] = sign;
-    }
-    
-    return parameters;
 }
 
 
