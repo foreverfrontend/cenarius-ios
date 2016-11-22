@@ -199,7 +199,7 @@
 
 + (NSString *)openApiQuery:(NSURLRequest *)request
 {
-    NSString *query = request.URL.query;
+    NSString *query = request.URL.query ? request.URL.query : @"";
     
     NSString *parameterString = [[NSString alloc] initWithString:query];
     NSData *bodyData = request.HTTPBody;
@@ -252,11 +252,11 @@
     NSString *sign = [CNRSLoginWidget md5Signature:parameters secret:appSecret];
     if (query.length > 0)
     {
-        query = [NSString stringWithFormat:@"%@&access_token=%@&app_key=%@&timestamp=%@&sign%@",query,token,appKey,timestamp,sign];
+        query = [NSString stringWithFormat:@"%@&access_token=%@&app_key=%@&timestamp=%@&sign=%@",query,token,appKey,timestamp,sign];
     }
     else
     {
-        query = [NSString stringWithFormat:@"access_token=%@&app_key=%@&timestamp=%@&sign%@",token,appKey,timestamp,sign];
+        query = [NSString stringWithFormat:@"access_token=%@&app_key=%@&timestamp=%@&sign=%@",token,appKey,timestamp,sign];
     }
     
     return query;
