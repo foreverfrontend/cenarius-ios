@@ -183,8 +183,11 @@
     }
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    for (NSDictionary *item in JSON) {
-        [items addObject:[[CNRSRoute alloc] initWithDictionary:item]];
+    for (NSDictionary *item in JSON)
+    {
+        @autoreleasepool {
+            [items addObject:[[CNRSRoute alloc] initWithDictionary:item]];
+        }
     }
     
     return items;
