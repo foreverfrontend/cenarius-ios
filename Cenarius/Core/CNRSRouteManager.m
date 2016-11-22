@@ -204,9 +204,11 @@
                                           path:[remoteURL path]];
     for (CNRSRoute *route in self.routes)
     {
-        if ([route.remoteHTML.absoluteString isEqualToString:URL.absoluteString])
-        {
-            return route;
+        @autoreleasepool {
+            if ([route.remoteHTML.absoluteString isEqualToString:URL.absoluteString])
+            {
+                return route;
+            }
         }
     }
     return nil;
@@ -275,38 +277,40 @@
     
     BOOL __block success = YES;
     
-    for (CNRSRoute *route in routes) {
-        
-        // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
-        if ([self localHtmlURLForURI:route.uri]) {
-            continue;
-        }
-        
-        if (downloadGroup) { dispatch_group_enter(downloadGroup); }
-        
-        // 文件不存在，下载下来。
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
-                                                               cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                           timeoutInterval:60];
-        [[self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-            
-            CNRSDebugLog(@"Download %@", response.URL);
-            //      CNRSDebugLog(@"Response: %@", response);
-            
-            if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
-                success = NO;
-                if (downloadGroup) { dispatch_group_leave(downloadGroup); }
-                
-                CNRSDebugLog(@"Fail to move download remote html: %@", error);
-                return;
+    for (CNRSRoute *route in routes)
+    {
+        @autoreleasepool
+        {
+            // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
+            if ([self localHtmlURLForURI:route.uri]) {
+                continue;
             }
             
-            NSData *data = [NSData dataWithContentsOfURL:location];
-            [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
+            if (downloadGroup) { dispatch_group_enter(downloadGroup); }
             
-            if (downloadGroup) { dispatch_group_leave(downloadGroup); }
-        }] resume];
-    }
+            // 文件不存在，下载下来。
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
+                                                                   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                               timeoutInterval:60];
+            [[self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+                
+                CNRSDebugLog(@"Download %@", response.URL);
+                //      CNRSDebugLog(@"Response: %@", response);
+                
+                if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
+                    success = NO;
+                    if (downloadGroup) { dispatch_group_leave(downloadGroup); }
+                    
+                    CNRSDebugLog(@"Fail to move download remote html: %@", error);
+                    return;
+                }
+                
+                NSData *data = [NSData dataWithContentsOfURL:location];
+                [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
+                
+                if (downloadGroup) { dispatch_group_leave(downloadGroup); }
+            }] resume];
+        }}
     
     if (downloadGroup) {
         dispatch_group_notify(downloadGroup, dispatch_get_main_queue(), ^{
@@ -326,9 +330,11 @@
     //路由表
     for (CNRSRoute *route in self.routes)
     {
-        if ([route.uri.absoluteString isEqualToString:uri.absoluteString])
-        {
-            return route;
+        @autoreleasepool {
+            if ([route.uri.absoluteString isEqualToString:uri.absoluteString])
+            {
+                return route;
+            }
         }
     }
     
@@ -351,11 +357,12 @@
     NSArray *whiteList = [CNRSConfig routesWhiteList];
     for (NSString *path in whiteList)
     {
-        if ([uri.pathComponents.firstObject hasPrefix:path])
-        {
-            return YES;
+        @autoreleasepool {
+            if ([uri.pathComponents.firstObject hasPrefix:path])
+            {
+                return YES;
+            }
         }
-        
     }
     
     return NO;

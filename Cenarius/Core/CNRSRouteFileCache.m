@@ -249,9 +249,12 @@
         NSArray *cacheRoutes = [self routesWithData:[self cacheRoutesMapFile]];
         for (CNRSRoute *cacheRoute in cacheRoutes)
         {
-            if ([cacheRoute.uri.absoluteString isEqualToString:route.uri.absoluteString] && [cacheRoute.fileHash isEqualToString:route.fileHash])
+            @autoreleasepool
             {
-                return [self cacheFilePathForUri:cacheRoute.uri];
+                if ([cacheRoute.uri.absoluteString isEqualToString:route.uri.absoluteString] && [cacheRoute.fileHash isEqualToString:route.fileHash])
+                {
+                    return [self cacheFilePathForUri:cacheRoute.uri];
+                }
             }
         }
         
@@ -282,9 +285,12 @@
     NSArray *resourceRoutes = [self routesWithData:[self resourceRoutesMapFile]];
     for (CNRSRoute *resourceRoute in resourceRoutes)
     {
-        if ([resourceRoute.fileHash isEqualToString:route.fileHash])
+        @autoreleasepool
         {
-            return [self resourceFilePathForUri:resourceRoute.uri];
+            if ([resourceRoute.fileHash isEqualToString:route.fileHash])
+            {
+                return [self resourceFilePathForUri:resourceRoute.uri];
+            }
         }
     }
     return nil;
@@ -297,28 +303,35 @@
     NSMutableArray *deletedRoutes = [[NSMutableArray alloc] init];
     for (CNRSRoute *oldRoute in oldRoutes)
     {
-        BOOL isDeleted = YES;
-        for (CNRSRoute *newRoute in newRoutes)
+        @autoreleasepool
         {
-            if ([oldRoute.uri.absoluteString isEqualToString:newRoute.uri.absoluteString])
+            BOOL isDeleted = YES;
+            for (CNRSRoute *newRoute in newRoutes)
             {
-                isDeleted = NO;
-                if (![newRoute.fileHash isEqualToString:oldRoute.fileHash])
+                if ([oldRoute.uri.absoluteString isEqualToString:newRoute.uri.absoluteString])
                 {
-                    [changedRoutes addObject:oldRoute];
+                    isDeleted = NO;
+                    if (![newRoute.fileHash isEqualToString:oldRoute.fileHash])
+                    {
+                        [changedRoutes addObject:oldRoute];
+                    }
                 }
             }
-        }
-        if (isDeleted)
-        {
-            [deletedRoutes addObject:oldRoute];
+            if (isDeleted)
+            {
+                [deletedRoutes addObject:oldRoute];
+            }
         }
     }
     
     [deletedRoutes addObjectsFromArray:changedRoutes];
     for (CNRSRoute *route in deletedRoutes)
     {
-        [self saveRouteFileData:nil withRoute:route];
+        @autoreleasepool
+        {
+            [self saveRouteFileData:nil withRoute:route];
+        }
+        
     }
 }
 

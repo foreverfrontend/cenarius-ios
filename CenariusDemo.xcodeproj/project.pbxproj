@@ -594,6 +594,7 @@
 				TargetAttributes = {
 					0C9EC6321DAF97A4003BFB38 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 2U9E6844GR;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -864,6 +865,7 @@
 			baseConfigurationReference = 128AD749238C0A58074E137D /* Pods-CenariusDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2U9E6844GR;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CenariusDemo/PrefixHeader.pch";
@@ -880,6 +882,7 @@
 			baseConfigurationReference = CB5EB94BBF6CC7E2C1508314 /* Pods-CenariusDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2U9E6844GR;
 				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CenariusDemo/PrefixHeader.pch";
