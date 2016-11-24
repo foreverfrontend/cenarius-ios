@@ -118,13 +118,6 @@ static NSInteger sRegisterInterceptorCounter;
         request.URL = [NSURL fileURLWithPath:urlString];
     }
     
-    
-    
-    //  NSURL *localURL = [self cnrs_localFileURL:request.URL];
-    //  if (localURL) {
-    //    request.URL = localURL;
-    //  }
-    
     [[self class] markRequestAsIgnored:request];
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
 }
