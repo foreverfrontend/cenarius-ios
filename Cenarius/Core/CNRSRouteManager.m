@@ -159,6 +159,7 @@
 {
     //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
     NSURL *baseUri = [NSURL URLWithString:uri.path];
+    //最新的在内存中的 route
     CNRSRoute *route = [self routeForURI:baseUri];
     NSURL *url = [[CNRSRouteFileCache sharedInstance] routeFileURLForRoute:route];
     

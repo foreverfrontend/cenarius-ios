@@ -251,7 +251,7 @@
         {
             @autoreleasepool
             {
-                if ([cacheRoute.uri.absoluteString isEqualToString:route.uri.absoluteString] && [cacheRoute.fileHash isEqualToString:route.fileHash])
+                if ([cacheRoute.fileHash isEqualToString:route.fileHash])
                 {
                     return [self cacheFilePathForUri:cacheRoute.uri];
                 }
@@ -262,8 +262,7 @@
     }
     else
     {
-        NSString *cacheFilePath = [self.cachePath stringByAppendingPathComponent:route.uri.absoluteString];
-        return cacheFilePath;
+        return [self cacheFilePathForUri:route.uri];
     }
 }
 
@@ -293,6 +292,7 @@
             }
         }
     }
+    
     return nil;
 }
 
