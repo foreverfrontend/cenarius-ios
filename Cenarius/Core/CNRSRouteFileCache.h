@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Save routes map file with file name : `routes.json`.
  */
-- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes;
+- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes routesData:(NSData *)routesData;
 
 /**
  * 读取 Route Map File。

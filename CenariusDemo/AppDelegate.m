@@ -21,7 +21,7 @@
     
 //  Config Cenarius
 //    [CNRSConfig setDevelopModeEnable:YES];
-    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"https://emcsdev.infinitus.com.cn/h5/www222"]];
+    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"https://emcsdev.infinitus.com.cn/h5/www"]];
     [CNRSConfig setRoutesResourcePath:@"www"];
     [CNRSConfig setRoutesWhiteList:@[@"cordova",@"sign"]];
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];

@@ -55,8 +55,8 @@
 {
     if (_routesMapURL != routesMapURL) {
         _routesMapURL = routesMapURL;
-        //        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        //        self.routes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
+        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
+        self.cacheRoutes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
     }
 }
 
@@ -142,7 +142,7 @@
         APICompletion(YES);
         
         //然后下载最新 routes 中的资源文件
-        [routeFileCache saveRoutesMapFile:self.routes cacheRoutes:self.cacheRoutes];
+        [routeFileCache saveRoutesMapFile:self.routes cacheRoutes:self.cacheRoutes routesData:data];
         self.cacheRoutes = self.routes;
         self.updatingRoutes = NO;
         [self cnrs_downloadFilesWithinRoutes:routes completion:^(BOOL success) {

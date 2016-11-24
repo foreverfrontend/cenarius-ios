@@ -90,7 +90,7 @@
                              error:NULL];
 }
 
-- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes
+- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes routesData:(NSData *)routesData
 {
     NSString *filePath = [self.cachePath stringByAppendingPathComponent:RoutesMapFile];
     if (routes == nil) {
@@ -102,7 +102,7 @@
             [self cnrs_deleteOldFilesWithNewRoutes:routes oldRoutes:cacheRoutes];
         }
         //保存新routes
-        [routes writeToFile:filePath atomically:YES];
+        [routesData writeToFile:filePath atomically:YES];
     }
 }
 
@@ -301,12 +301,13 @@
     //找到需要删除的和更新的文件
     NSMutableArray *changedRoutes = [[NSMutableArray alloc] init];
     NSMutableArray *deletedRoutes = [[NSMutableArray alloc] init];
+    NSMutableArray *newMutableRoutes = [NSMutableArray arrayWithArray:newRoutes];
     for (CNRSRoute *oldRoute in oldRoutes)
     {
         @autoreleasepool
         {
             BOOL isDeleted = YES;
-            for (CNRSRoute *newRoute in newRoutes)
+            for (CNRSRoute *newRoute in newMutableRoutes)
             {
                 if ([oldRoute.uri.absoluteString isEqualToString:newRoute.uri.absoluteString])
                 {
@@ -315,15 +316,18 @@
                     {
                         [changedRoutes addObject:oldRoute];
                     }
+                    [newMutableRoutes removeObject:newRoute];
+                    break;
                 }
             }
+            
             if (isDeleted)
             {
                 [deletedRoutes addObject:oldRoute];
             }
         }
     }
-    
+
     [deletedRoutes addObjectsFromArray:changedRoutes];
     for (CNRSRoute *route in deletedRoutes)
     {
