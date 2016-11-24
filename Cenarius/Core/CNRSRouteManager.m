@@ -18,8 +18,6 @@
 @interface CNRSRouteManager ()
 
 @property (nonatomic, strong) NSURLSession *session;
-
-@property (nonatomic, strong) NSArray<CNRSRoute *> *routes;
 @property (nonatomic, assign) BOOL updatingRoutes;
 @property (nonatomic, strong) NSMutableArray *updateRoutesCompletions;
 
@@ -57,8 +55,8 @@
 {
     if (_routesMapURL != routesMapURL) {
         _routesMapURL = routesMapURL;
-        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        self.routes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
+//        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
+//        self.routes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
     }
 }
 
@@ -66,14 +64,14 @@
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.cachePath = cachePath;
-//    self.routes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
+    self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
 }
 
 - (void)setResoucePath:(NSString *)resourcePath
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.resourcePath = resourcePath;
-//    self.routes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
+    self.resourceRoutes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
 }
 
 - (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion
@@ -124,6 +122,14 @@
         CNRSDebugLog(@"Response: %@", response);
         
         if (((NSHTTPURLResponse *)response).statusCode != 200) {
+            if (self.cacheRoutes)
+            {
+                self.routes = self.cacheRoutes;
+            }
+            else
+            {
+                self.routes = self.resourceRoutes;
+            }
             APICompletion(NO);
             self.updatingRoutes = NO;
             return;
@@ -136,7 +142,8 @@
         APICompletion(YES);
         
         //然后下载最新 routes 中的资源文件
-        [routeFileCache saveRoutesMapFile:data];
+        [routeFileCache saveRoutesMapFile:self.routes cacheRoutes:self.cacheRoutes];
+        self.cacheRoutes = self.routes;
         self.updatingRoutes = NO;
         [self cnrs_downloadFilesWithinRoutes:routes completion:^(BOOL success) {
             if (success) {
