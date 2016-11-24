@@ -27,7 +27,7 @@
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];
     [CNRSConfig setCNRSProtocolHost:@"cenarius-container"];
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"BUPM" appSecret:@"rfGd23Yhjd92JkpWe"];
+    [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"gbss-bupm"];
     [CNRSViewController updateRouteFilesWithCompletion:nil];
     
     return YES;
