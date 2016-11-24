@@ -245,10 +245,9 @@
 {
     //路由表正在更新的时候需要对比 hash
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    if ([routeManager isUpdatingRoutes])
+    if (routeManager.cacheRoutes && routeManager.cacheRoutes != routeManager.routes)
     {
-        NSArray *cacheRoutes = [self routesWithData:[self cacheRoutesMapFile]];
-        for (CNRSRoute *cacheRoute in cacheRoutes)
+        for (CNRSRoute *cacheRoute in routeManager.cacheRoutes)
         {
             @autoreleasepool
             {
@@ -283,8 +282,8 @@
 
 - (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route
 {
-    NSArray *resourceRoutes = [self routesWithData:[self resourceRoutesMapFile]];
-    for (CNRSRoute *resourceRoute in resourceRoutes)
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    for (CNRSRoute *resourceRoute in routeManager.resourceRoutes)
     {
         @autoreleasepool
         {
