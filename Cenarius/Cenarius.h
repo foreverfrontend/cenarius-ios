@@ -17,6 +17,7 @@
 #import "CNRSWidget.h"
 
 #import "CNRSNSURLProtocol.h"
+#import "CNRSHTTPSessionManager.h"
 
 #import "CNRSContainerInterceptor.h"
 #import "CNRSContainerAPI.h"
