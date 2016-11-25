@@ -137,19 +137,38 @@
         
         //先更新内存中的 routes
         CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        NSArray *routes = [routeFileCache routesWithData:data];
-        self.routes = routes;
-        APICompletion(YES);
+        self.routes = [routeFileCache routesWithData:data];
         
-        //然后下载最新 routes 中的资源文件
-        [routeFileCache saveRoutesMapFile:self.routes cacheRoutes:self.cacheRoutes routesData:data];
-        self.cacheRoutes = self.routes;
-        self.updatingRoutes = NO;
-        [self cnrs_downloadFilesWithinRoutes:routes completion:^(BOOL success) {
-            if (success) {
-                //        self.routes = routes;
-                //        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-                //        [routeFileCache saveRoutesMapFile:data];
+        //优先下载
+        NSArray *downloadFirstList = [CNRSConfig downloadFirstList];
+        NSMutableArray *downloadFirstRoutes = [[NSMutableArray alloc] init];
+        for (NSString *uri in downloadFirstList)
+        {
+            CNRSRoute *route = [self routeForURI:[NSURL URLWithString:uri]];
+            [downloadFirstRoutes addObject:route];
+        }
+        [self cnrs_downloadFilesWithinRoutes:downloadFirstRoutes completion:^(BOOL success) {
+            if (success)
+            {
+                //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
+                self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
+                APICompletion(YES);
+                
+                //然后下载最新 routes 中的资源文件
+                self.updatingRoutes = NO;
+                [self cnrs_downloadFilesWithinRoutes:self.routes completion:^(BOOL success) {
+                    if (success)
+                    {
+                        // 所有文件更新到最新，保存路由表
+                        self.cacheRoutes = self.routes;
+                        [routeFileCache saveRoutesMapFile:data];
+                    }
+                }];
+            }
+            else
+            {
+                //优先下载失败
+                APICompletion(NO);
             }
         }];
     }] resume];

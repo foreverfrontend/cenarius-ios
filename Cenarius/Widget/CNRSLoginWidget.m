@@ -73,6 +73,7 @@
             completion(YES, token, nil);
 //            [self gw];
 //            [self getProfile];
+//            NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
         }
         else{
             completion(NO, nil, responseObject[@"error_msg"]);
@@ -88,7 +89,7 @@
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     parameters[@"access_token"] = [self getAccessToken];
     parameters[@"app_key"] = @"gbss";
-    parameters[@"timestamp"] = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
+    parameters[@"timestamp"] = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
     NSString *sign = [CNRSOpenApi md5Signature:parameters secret:@"007febfe89bd4b1799d77373890777f4"];
     parameters[@"sign"] = sign;
     

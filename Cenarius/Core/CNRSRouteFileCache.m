@@ -90,17 +90,20 @@
                              error:NULL];
 }
 
-- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes routesData:(NSData *)routesData
+- (void)saveRoutesMapFile:(NSData *)routesData
 {
     NSString *filePath = [self.cachePath stringByAppendingPathComponent:RoutesMapFile];
-    if (routes == nil) {
+    if (routesData == nil)
+    {
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
-    } else {
-        //删除不用的和更新的文件
-        if (routes && cacheRoutes)
-        {
-            [self cnrs_deleteOldFilesWithNewRoutes:routes oldRoutes:cacheRoutes];
-        }
+    }
+    else
+    {
+//        //删除不用的和更新的文件
+//        if (routes && cacheRoutes)
+//        {
+//            [self cnrs_deleteOldFilesWithNewRoutes:routes oldRoutes:cacheRoutes];
+//        }
         //保存新routes
         [routesData writeToFile:filePath atomically:YES];
     }
@@ -169,7 +172,7 @@
     }
 }
 
-- (NSArray *)routesWithData:(NSData *)data
+- (NSMutableArray *)routesWithData:(NSData *)data
 {
     if (data == nil) {
         return nil;
@@ -335,7 +338,6 @@
         {
             [self saveRouteFileData:nil withRoute:route];
         }
-        
     }
 }
 

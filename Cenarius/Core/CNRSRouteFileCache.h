@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Save routes map file with file name : `routes.json`.
  */
-- (void)saveRoutesMapFile:(NSArray *)routes cacheRoutes:(NSArray *)cacheRoutes routesData:(NSData *)routesData;
+- (void)saveRoutesMapFile:(NSData *)routesData;
 
 /**
  * 读取 Route Map File。
@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return routes
  */
-- (nullable NSArray *)routesWithData:(NSData *)data;
+- (nullable NSMutableArray *)routesWithData:(NSData *)data;
 
 /**
  获取 uri 对应的资源文件夹地址

@@ -28,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  * - 对象创建后。
  * - 当通过 `htmlForURI:` 没有找到目标 html 时。
  */
-@property (nonatomic, strong) NSArray<CNRSRoute *> *routes;
-@property (nonatomic, strong) NSArray<CNRSRoute *> *cacheRoutes;
-@property (nonatomic, strong) NSArray<CNRSRoute *> *resourceRoutes;
+@property (nonatomic, strong) NSMutableArray<CNRSRoute *> *routes;
+@property (nonatomic, strong) NSMutableArray<CNRSRoute *> *cacheRoutes;
+@property (nonatomic, strong) NSMutableArray<CNRSRoute *> *resourceRoutes;
 
 /**
  * 读取 Routes Map 信息的 URL 地址。路由表应该由服务器提供。

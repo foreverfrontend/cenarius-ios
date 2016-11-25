@@ -106,7 +106,7 @@
     NSString *token = [CNRSLoginWidget getAccessToken];
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
-    NSNumber *timestamp = [NSNumber numberWithInteger:[NSDate date].timeIntervalSince1970 * 1000];
+    NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
     
     if (token == nil || appKey == nil || appSecret == nil) {
         return nil;

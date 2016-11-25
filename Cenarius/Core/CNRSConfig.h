@@ -91,6 +91,16 @@ static NSString * const RoutesMapFile = @"routes.json";
 + (NSArray *)routesWhiteList;
 
 /**
+ 设置路由表白名单
+ */
++ (void)setDownloadFirstList:(NSArray *)downloadFirstList;
+
+/**
+ 读取优先下载名单，下载完成才能进 app
+ */
++ (NSArray *)downloadFirstList;
+
+/**
  * 设置 Cenarius 接收的外部 User-Agent。Cenarius 会将这个 UserAgent 加到其所发出的所有的请求的 Headers 中。
  */
 + (void)setExternalUserAgent:(NSString *)userAgent;
