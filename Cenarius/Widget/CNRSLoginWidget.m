@@ -10,6 +10,7 @@
 #import "CNRSViewController.h"
 #import "AFNetworking.h"
 #import "CNRSOpenApi.h"
+#import "CNRSHTTPSessionManager.h"
 
 #define kAccessTokenKey @"CNRSAccessToken"
 
@@ -83,23 +84,15 @@
     }];
 }
 
-+ (void)gw{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
++ (void)gw
+{
+    CNRSHTTPSessionManager *manager = [CNRSHTTPSessionManager sharedInstance];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    parameters[@"access_token"] = [self getAccessToken];
-    parameters[@"app_key"] = @"gbss";
-    parameters[@"timestamp"] = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    NSString *sign = [CNRSOpenApi md5Signature:parameters secret:@"007febfe89bd4b1799d77373890777f4"];
-    parameters[@"sign"] = sign;
-    
-    
-    [manager GET:@"https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:@"https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
-
 }
 
 + (void)getProfile
