@@ -8,7 +8,6 @@
 
 #import "CNRSLoginWidget.h"
 #import "CNRSViewController.h"
-#import "AFNetworking.h"
 #import "CNRSOpenApi.h"
 #import "CNRSHTTPSessionManager.h"
 
