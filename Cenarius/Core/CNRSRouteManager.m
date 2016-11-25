@@ -313,16 +313,18 @@
                 continue;
             }
             
-            if (downloadGroup) { dispatch_group_enter(downloadGroup); }
-            
+            if (downloadGroup)
+            {
+                dispatch_group_enter(downloadGroup);
+            }
+
             // 文件不存在，下载下来。
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
                                                                    cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                                timeoutInterval:60];
-            [[self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+            NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
                 
                 CNRSDebugLog(@"Download %@", response.URL);
-                //      CNRSDebugLog(@"Response: %@", response);
                 
                 if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
                     success = NO;
@@ -336,7 +338,9 @@
                 [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
                 
                 if (downloadGroup) { dispatch_group_leave(downloadGroup); }
-            }] resume];
+            }];
+            downloadTask.priority = NSURLSessionTaskPriorityLow;
+            [downloadTask resume];
         }}
     
     if (downloadGroup) {
