@@ -155,13 +155,13 @@
                 APICompletion(YES);
                 
                 //然后下载最新 routes 中的资源文件
-                self.updatingRoutes = NO;
                 [self cnrs_downloadFilesWithinRoutes:self.routes completion:^(BOOL success) {
                     if (success)
                     {
                         // 所有文件更新到最新，保存路由表
                         self.cacheRoutes = self.routes;
                         [routeFileCache saveRoutesMapFile:data];
+                        self.updatingRoutes = NO;
                     }
                 }];
             }

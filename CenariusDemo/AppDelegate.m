@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "CNRSConfig.h"
 #import "CNRSViewController.h"
+#import "CNRSOpenApiRequestDecorator.h"
+#import "CNRSRequestDecorator.h"
+#import "CNRSRequestInterceptor.h"
 
 @interface AppDelegate ()
 
@@ -29,6 +32,13 @@
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"gbss-bupm"];
     [CNRSViewController updateRouteFilesWithCompletion:nil];
+    // Decorators
+    CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
+    [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
+    [CNRSRequestInterceptor registerInterceptor];
+    
+    //CacheFile
+    [CNRSCacheFileInterceptor registerInterceptor];
     
     return YES;
 }
