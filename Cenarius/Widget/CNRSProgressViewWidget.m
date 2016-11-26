@@ -22,6 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.trackTintColor = [UIColor clearColor];
+        self.tintColor = [UIColor greenColor];
     }
     return self;
 }
@@ -54,7 +55,7 @@
     }
     else
     {
-        self.progress += 0.05;
+        self.progress += 0.01;//0.05
         if (self.progress >= 0.95)
         {
             self.progress = 0.95;

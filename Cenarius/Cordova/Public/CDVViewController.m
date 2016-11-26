@@ -414,7 +414,7 @@
 //    else{
 //        frame = CGRectMake(0, 0, 64, 2);
 //    }
-    self.progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 2)];
+    self.progressView = [[CNRSProgressViewWidget alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 4)];
     [self.view addSubview:self.progressView];
 }
 

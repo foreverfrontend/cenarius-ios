@@ -106,16 +106,16 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:5];
-    // 更新 Http UserAgent Header
-    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
-    if (externalUserAgent) {
-        NSString *userAgent = [request.allHTTPHeaderFields objectForKey:@"User-Agent"];
-        NSString *newUserAgent = externalUserAgent;
-        if (userAgent) {
-            newUserAgent = [@[userAgent, externalUserAgent] componentsJoinedByString:@" "];
-        }
-        [request setValue:newUserAgent forHTTPHeaderField:@"User-Agent"];
-    }
+//    // 更新 Http UserAgent Header
+//    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
+//    if (externalUserAgent) {
+//        NSString *userAgent = [request.allHTTPHeaderFields objectForKey:@"User-Agent"];
+//        NSString *newUserAgent = externalUserAgent;
+//        if (userAgent) {
+//            newUserAgent = [@[userAgent, externalUserAgent] componentsJoinedByString:@" "];
+//        }
+//        [request setValue:newUserAgent forHTTPHeaderField:@"User-Agent"];
+//    }
     
     [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         CNRSDebugLog(@"Download %@", response.URL);
@@ -163,12 +163,16 @@
                         [routeFileCache saveRoutesMapFile:data];
                         self.updatingRoutes = NO;
                     }
+                    else{
+                        self.updatingRoutes = NO;
+                    }
                 }];
             }
             else
             {
                 //优先下载失败
                 APICompletion(NO);
+                self.updatingRoutes = NO;
             }
         }];
     }] resume];
