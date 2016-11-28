@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, assign) BOOL updatingRoutes;
-@property (nonatomic, strong) NSMutableArray *updateRoutesCompletions;
 
 @end
 
@@ -43,8 +42,6 @@
         _session = [NSURLSession sessionWithConfiguration:sessionCfg
                                                  delegate:nil
                                             delegateQueue:[[NSOperationQueue alloc] init]];
-        
-        _updateRoutesCompletions = [NSMutableArray array];
     }
     return self;
 }
@@ -81,24 +78,11 @@
         return;
     }
     
-    if (completion) {
-        [self.updateRoutesCompletions addObject:completion];
-    }
-    
     if (self.updatingRoutes) {
         return;
     }
     
     self.updatingRoutes = YES;
-    
-    void (^APICompletion)(BOOL) = ^(BOOL success){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            for (void (^item)(BOOL) in self.updateRoutesCompletions) {
-                item(success);
-            }
-            [self.updateRoutesCompletions removeAllObjects];
-        });
-    };
     
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
@@ -128,7 +112,7 @@
             {
                 self.routes = self.resourceRoutes;
             }
-            APICompletion(NO);
+            completion(NO);
             self.updatingRoutes = NO;
             return;
         }
@@ -150,7 +134,7 @@
             {
                 //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
                 self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
-                APICompletion(YES);
+                completion(YES);
                 
                 //然后下载最新 routes 中的资源文件
                 [self cnrs_downloadFilesWithinRoutes:self.routes completion:^(BOOL success) {
@@ -169,7 +153,7 @@
             else
             {
                 //优先下载失败
-                APICompletion(NO);
+                completion(NO);
                 self.updatingRoutes = NO;
             }
         }];
