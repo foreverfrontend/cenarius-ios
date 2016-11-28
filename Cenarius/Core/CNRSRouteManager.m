@@ -341,7 +341,7 @@
                 
                 if (downloadGroup) { dispatch_group_leave(downloadGroup); }
             }];
-//            downloadTask.priority = NSURLSessionTaskPriorityLow;
+            downloadTask.priority = NSURLSessionTaskPriorityLow;
             [downloadTask resume];
         }}
     
