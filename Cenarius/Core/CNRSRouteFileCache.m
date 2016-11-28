@@ -149,7 +149,7 @@
 
 - (void)saveRouteFileData:(NSData *)data withRoute:(CNRSRoute *)route
 {
-    NSString *filePath = [self cnrs_cacheRouteFilePathForRoute:route];
+    NSString *filePath = [self cacheFilePathForUri:route.uri];
     if (data == nil)
     {
         [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
