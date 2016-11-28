@@ -6,7 +6,7 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "CNRSCacheFileInterceptor.h"
 #import "CNRSRouteManager.h"
 #import "CNRSLogging.h"

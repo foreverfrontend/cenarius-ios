@@ -6,7 +6,7 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import "NSDictionary+CNRSMultipleItems.h"
 #import "NSURL+Cenarius.h"
 #import "CNRSViewController.h"

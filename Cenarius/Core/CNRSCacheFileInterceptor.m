@@ -99,7 +99,7 @@ static NSInteger sRegisterInterceptorCounter;
     
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
     NSURL *uri = [[self class] cnrs_uriForRequest:request];
-    //路由表
+    //拦截在路由表中的uri
     if ([routeManager isInRoutes:uri])
     {
         NSURL *localHtmlURL = [routeManager localHtmlURLForURI:uri];
@@ -112,6 +112,7 @@ static NSInteger sRegisterInterceptorCounter;
             request.URL = remoteHtmlURL;
         }
     }
+    //拦截在白名单中的uri
     else if ([routeManager isInWhiteList:uri])
     {
         NSString *urlString = [[CNRSRouteFileCache sharedInstance] resourceFilePathForUri:uri];
@@ -193,7 +194,7 @@ static NSInteger sRegisterInterceptorCounter;
         }
         
         //拦截在白名单中的uri
-        if ([routeManager isInWhiteList:baseUri])
+        else if ([routeManager isInWhiteList:baseUri])
         {
             return YES;
         }

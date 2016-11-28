@@ -6,8 +6,6 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "CNRSViewController.h"
 #import "CNRSWebViewController.h"
 #import "CDVViewController.h"

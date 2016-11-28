@@ -47,6 +47,7 @@
 
 + (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken, NSString *errorMessage))completion
 {
+//    NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];

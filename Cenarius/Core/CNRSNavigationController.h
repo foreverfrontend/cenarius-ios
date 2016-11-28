@@ -6,8 +6,7 @@
 //  Copyright (c) 2014年 gdcattsoft. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
 
 @protocol CNRSViewControllerPanReturnBackDelegate <NSObject>
 

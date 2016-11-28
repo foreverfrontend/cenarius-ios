@@ -7,7 +7,6 @@
 //
 
 #import "CNRSRequestInterceptor.h"
-
 #import "CNRSDecorator.h"
 
 static NSArray<id<CNRSDecorator>> *sDecorators;

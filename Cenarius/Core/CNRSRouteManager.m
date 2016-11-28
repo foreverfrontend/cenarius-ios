@@ -6,8 +6,6 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "CNRSRouteManager.h"
 #import "CNRSRouteFileCache.h"
 #import "CNRSConfig.h"
@@ -343,7 +341,7 @@
                 
                 if (downloadGroup) { dispatch_group_leave(downloadGroup); }
             }];
-            downloadTask.priority = NSURLSessionTaskPriorityLow;
+//            downloadTask.priority = NSURLSessionTaskPriorityLow;
             [downloadTask resume];
         }}
     

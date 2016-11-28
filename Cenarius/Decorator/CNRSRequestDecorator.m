@@ -7,7 +7,6 @@
 //
 
 #import "CNRSRequestDecorator.h"
-
 #import "NSURL+Cenarius.h"
 
 @implementation CNRSRequestDecorator

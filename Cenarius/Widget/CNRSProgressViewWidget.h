@@ -6,8 +6,7 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
+@import UIKit;
 
 /**
  提供加载时的进度条，仿微信

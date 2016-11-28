@@ -6,7 +6,7 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-@import Foundation;
+@import UIKit;
 
 @class CNRSRoute;
 
