@@ -79,6 +79,7 @@
     }
     
     if (self.updatingRoutes) {
+        completion(NO);
         return;
     }
     
@@ -302,7 +303,7 @@
         return;
     }
     
-    NSMutableArray *downloadRoutes = [NSMutableArray arrayWithArray:routes];
+    NSMutableArray *downloadRoutes = [[NSMutableArray alloc] initWithArray:routes];
     CNRSRoute *route = downloadRoutes[0];
     
     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
