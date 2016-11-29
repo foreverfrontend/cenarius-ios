@@ -56,7 +56,7 @@
     
     _cachePath = [cachePath copy];
     
-    NSURL *cachePathUrl = [NSURL URLWithString:_cachePath];
+    NSURL *cachePathUrl = [NSURL fileURLWithPath:_cachePath];
     NSError *error;
     [[NSFileManager defaultManager] createDirectoryAtURL:cachePathUrl withIntermediateDirectories:YES attributes:nil error:&error];
     if (error) {
