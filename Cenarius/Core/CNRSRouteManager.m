@@ -87,7 +87,7 @@
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:5];
+                                                       timeoutInterval:60];
     //    // 更新 Http UserAgent Header
     //    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
     //    if (externalUserAgent) {
@@ -172,6 +172,10 @@
 - (NSURL *)localHtmlURLForURI:(NSURL *)uri
 {
     //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
+    if (uri == nil)
+    {
+        return nil;
+    }
     NSURL *baseUri = [NSURL URLWithString:uri.path];
     //最新的在内存中的 route
     CNRSRoute *route = [self routeForURI:baseUri];
@@ -304,7 +308,7 @@
     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
     if ([self localHtmlURLForURI:route.uri])
     {
-        [downloadRoutes removeObject:route];
+        [downloadRoutes removeObjectAtIndex:0];
         [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
         return;
     }
@@ -329,7 +333,7 @@
               {
                   // 下载失败，仅删除旧文件
                   [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
-                  [downloadRoutes removeObject:route];
+                  [downloadRoutes removeObjectAtIndex:0];
                   [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
                   return;
               }
@@ -337,7 +341,7 @@
           
           NSData *data = [NSData dataWithContentsOfURL:location];
           [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-          [downloadRoutes removeObject:route];
+          [downloadRoutes removeObjectAtIndex:0];
           [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
       }];
     
