@@ -88,76 +88,85 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:5];
-//    // 更新 Http UserAgent Header
-//    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
-//    if (externalUserAgent) {
-//        NSString *userAgent = [request.allHTTPHeaderFields objectForKey:@"User-Agent"];
-//        NSString *newUserAgent = externalUserAgent;
-//        if (userAgent) {
-//            newUserAgent = [@[userAgent, externalUserAgent] componentsJoinedByString:@" "];
-//        }
-//        [request setValue:newUserAgent forHTTPHeaderField:@"User-Agent"];
-//    }
+    //    // 更新 Http UserAgent Header
+    //    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
+    //    if (externalUserAgent) {
+    //        NSString *userAgent = [request.allHTTPHeaderFields objectForKey:@"User-Agent"];
+    //        NSString *newUserAgent = externalUserAgent;
+    //        if (userAgent) {
+    //            newUserAgent = [@[userAgent, externalUserAgent] componentsJoinedByString:@" "];
+    //        }
+    //        [request setValue:newUserAgent forHTTPHeaderField:@"User-Agent"];
+    //    }
     
-    [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        CNRSDebugLog(@"Download %@", response.URL);
-        CNRSDebugLog(@"Response: %@", response);
-        
-        if (((NSHTTPURLResponse *)response).statusCode != 200) {
-            if (self.cacheRoutes)
-            {
-                self.routes = self.cacheRoutes;
-            }
-            else
-            {
-                self.routes = self.resourceRoutes;
-            }
-            completion(NO);
-            self.updatingRoutes = NO;
-            return;
-        }
-        
-        //先更新内存中的 routes
-        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        self.routes = [routeFileCache routesWithData:data];
-        
-        //优先下载
-        NSArray *downloadFirstList = [CNRSConfig downloadFirstList];
-        NSMutableArray *downloadFirstRoutes = [[NSMutableArray alloc] init];
-        for (NSString *uri in downloadFirstList)
-        {
-            CNRSRoute *route = [self routeForURI:[NSURL URLWithString:uri]];
-            [downloadFirstRoutes addObject:route];
-        }
-        [self cnrs_downloadFilesWithinRoutes:downloadFirstRoutes completion:^(BOOL success) {
-            if (success)
-            {
-                //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
-                self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
-                completion(YES);
-                
-                //然后下载最新 routes 中的资源文件
-                [self cnrs_downloadFilesWithinRoutes:self.routes completion:^(BOOL success) {
-                    if (success)
-                    {
-                        // 所有文件更新到最新，保存路由表
-                        self.cacheRoutes = self.routes;
-                        [routeFileCache saveRoutesMapFile:data];
-                        self.updatingRoutes = NO;
-                    }
-                    else{
-                        self.updatingRoutes = NO;
-                    }
-                }];
-            }
-            else
-            {
-                //优先下载失败
-                completion(NO);
-                self.updatingRoutes = NO;
-            }
-        }];
-    }] resume];
+    [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+      {
+          dispatch_async(dispatch_get_main_queue(), ^{
+              CNRSDebugLog(@"Download %@", response.URL);
+              CNRSDebugLog(@"Response: %@", response);
+              
+              if (((NSHTTPURLResponse *)response).statusCode != 200) {
+                  if (self.cacheRoutes)
+                  {
+                      self.routes = self.cacheRoutes;
+                  }
+                  else
+                  {
+                      self.routes = self.resourceRoutes;
+                  }
+                  completion(NO);
+                  self.updatingRoutes = NO;
+                  return;
+              }
+              
+              //先更新内存中的 routes
+              CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
+              self.routes = [routeFileCache routesWithData:data];
+              
+              //优先下载
+              NSArray *downloadFirstList = [CNRSConfig downloadFirstList];
+              NSMutableArray *downloadFirstRoutes = [[NSMutableArray alloc] init];
+              for (NSString *uri in downloadFirstList)
+              {
+                  CNRSRoute *route = [self routeForURI:[NSURL URLWithString:uri]];
+                  [downloadFirstRoutes addObject:route];
+              }
+              [self cnrs_downloadFilesWithinRoutes:downloadFirstRoutes shouldDownloadAll:YES completion:^(BOOL success) {
+                  dispatch_async(dispatch_get_main_queue(), ^{
+                      if (success)
+                      {
+                          //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
+                          self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
+                          completion(YES);
+                          
+                          dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                              //然后下载最新 routes 中的资源文件
+                              [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:NO completion:^(BOOL success) {
+                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                      if (success)
+                                      {
+                                          // 所有文件更新到最新，保存路由表
+                                          self.cacheRoutes = self.routes;
+                                          [routeFileCache saveRoutesMapFile:data];
+                                          self.updatingRoutes = NO;
+                                      }
+                                      else{
+                                          self.updatingRoutes = NO;
+                                      }
+                                  });
+                              }];
+                          });
+                      }
+                      else
+                      {
+                          //优先下载失败
+                          completion(NO);
+                          self.updatingRoutes = NO;
+                      }
+                  });
+              }];
+          });
+      }] resume];
 }
 
 - (NSURL *)localHtmlURLForURI:(NSURL *)uri
@@ -281,59 +290,59 @@
 /**
  *  下载 `routes` 中的资源文件。
  */
-- (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes completion:(void (^)(BOOL success))completion
+- (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion
 {
-    dispatch_group_t downloadGroup = nil;
-    if (completion) {
-        downloadGroup = dispatch_group_create();
-    }
-    
-    BOOL __block success = YES;
-    
-    for (CNRSRoute *route in routes)
+    if (routes.count == 0)
     {
-        @autoreleasepool
-        {
-            // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
-            if ([self localHtmlURLForURI:route.uri]) {
-                continue;
-            }
-            
-            if (downloadGroup)
-            {
-                dispatch_group_enter(downloadGroup);
-            }
-
-            // 文件不存在，下载下来。
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
-                                                                   cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                               timeoutInterval:60];
-            NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
-                
-                CNRSDebugLog(@"Download %@", response.URL);
-                
-                if (error || ((NSHTTPURLResponse *)response).statusCode != 200) {
-                    success = NO;
-                    if (downloadGroup) { dispatch_group_leave(downloadGroup); }
-                    
-                    CNRSDebugLog(@"Fail to move download remote html: %@", error);
-                    return;
-                }
-                
-                NSData *data = [NSData dataWithContentsOfURL:location];
-                [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-                
-                if (downloadGroup) { dispatch_group_leave(downloadGroup); }
-            }];
-            downloadTask.priority = NSURLSessionTaskPriorityLow;
-            [downloadTask resume];
-        }}
-    
-    if (downloadGroup) {
-        dispatch_group_notify(downloadGroup, dispatch_get_main_queue(), ^{
-            completion(success);
-        });
+        completion(YES);
+        return;
     }
+    
+    NSMutableArray *downloadRoutes = [NSMutableArray arrayWithArray:routes];
+    CNRSRoute *route = downloadRoutes[0];
+    
+    // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
+    if ([self localHtmlURLForURI:route.uri])
+    {
+        [downloadRoutes removeObject:route];
+        [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+        return;
+    }
+    
+    // 文件不存在，下载下来
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:60];
+    NSURLSessionDownloadTask *downloadTask = [self.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
+      {
+          CNRSDebugLog(@"Download %@", response.URL);
+          
+          if (error || ((NSHTTPURLResponse *)response).statusCode != 200)
+          {
+              CNRSDebugLog(@"Fail to download remote html: %@", error);
+              if (shouldDownloadAll)
+              {
+                  completion(NO);
+                  return;
+              }
+              else
+              {
+                  // 下载失败，仅删除旧文件
+                  [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
+                  [downloadRoutes removeObject:route];
+                  [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+                  return;
+              }
+          }
+          
+          NSData *data = [NSData dataWithContentsOfURL:location];
+          [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
+          [downloadRoutes removeObject:route];
+          [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+      }];
+    
+    downloadTask.priority = NSURLSessionTaskPriorityLow;
+    [downloadTask resume];
 }
 
 - (CNRSRoute *)routeForURI:(NSURL *)uri

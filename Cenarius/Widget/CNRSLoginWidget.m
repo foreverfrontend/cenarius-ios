@@ -47,7 +47,7 @@
 
 + (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken, NSString *errorMessage))completion
 {
-//    NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+    NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
@@ -74,7 +74,7 @@
             completion(YES, token, nil);
 //            [self gw];
 //            [self getProfile];
-//            NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
+            NSLog(@"%@",[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]);
         }
         else{
             completion(NO, nil, responseObject[@"error_msg"]);

@@ -27,6 +27,7 @@
     [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"https://emcsdev.infinitus.com.cn/h5/www"]];
     [CNRSConfig setRoutesResourcePath:@"www"];
     [CNRSConfig setRoutesWhiteList:@[@"cordova",@"sign"]];
+    [CNRSConfig setDownloadFirstList:@[@"activity/assets/fonts/e-webfont.eot"]];
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];
     [CNRSConfig setCNRSProtocolHost:@"cenarius-container"];
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
