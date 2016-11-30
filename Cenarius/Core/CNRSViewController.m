@@ -22,6 +22,7 @@
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
 #import "CNRSConfig.h"
+#import "CNRSRouteFileCache.h"
 
 @interface CNRSViewController ()
 
