@@ -297,24 +297,28 @@
  */
 - (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion
 {
+    [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:0];
+}
+
+- (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion index:(int)index
+{
     if (routes.count == 0)
     {
         completion(YES);
         return;
     }
     
-    NSMutableArray *downloadRoutes = [[NSMutableArray alloc] initWithArray:routes];
-    CNRSRoute *route = downloadRoutes[0];
+    CNRSRoute *route = routes[0];
     
     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
     if ([self localHtmlURLForURI:route.uri])
     {
-        [downloadRoutes removeObjectAtIndex:0];
-        [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+        [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:++index];
         return;
     }
     
     // 文件不存在，下载下来
+    __block int blockIndex = index;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:route.remoteHTML
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:60];
@@ -334,16 +338,14 @@
               {
                   // 下载失败，仅删除旧文件
                   [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
-                  [downloadRoutes removeObjectAtIndex:0];
-                  [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+                  [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:++blockIndex];
                   return;
               }
           }
           
           NSData *data = [NSData dataWithContentsOfURL:location];
           [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-          [downloadRoutes removeObjectAtIndex:0];
-          [self cnrs_downloadFilesWithinRoutes:downloadRoutes shouldDownloadAll:shouldDownloadAll completion:completion];
+          [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:++blockIndex];
       }];
     
     downloadTask.priority = NSURLSessionTaskPriorityLow;
