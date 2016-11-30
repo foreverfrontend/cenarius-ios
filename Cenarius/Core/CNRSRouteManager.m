@@ -302,7 +302,7 @@
 
 - (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion index:(int)index
 {
-    if (routes.count == 0)
+    if (index >= routes.count)
     {
         completion(YES);
         return;
