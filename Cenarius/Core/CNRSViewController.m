@@ -22,7 +22,6 @@
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
 #import "CNRSConfig.h"
-#import "CNRSRouteFileCache.h"
 
 @interface CNRSViewController ()
 
@@ -207,8 +206,7 @@
         {
             htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
             if (htmlFileURL == nil) {
-                // 为了解决跨域问题，需要加载 file
-                htmlFileURL = [NSURL fileURLWithPath:[[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:uri]];
+                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
             }
         }
     }
