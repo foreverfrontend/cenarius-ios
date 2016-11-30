@@ -19,24 +19,24 @@
   [routeManager updateRoutesWithCompletion:completion];
 }
 
-+ (BOOL)isRouteExistForURI:(NSURL *)uri
-{
-  CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-  NSURL *remoteHtml = [routeManager remoteHtmlURLForURI:uri];
-  if (remoteHtml) {
-    return YES;
-  }
-  return NO;
-}
-
-+ (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri
-{
-  CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-  NSURL *localHtml = [routeManager localHtmlURLForURI:uri];
-  if (localHtml) {
-    return YES;
-  }
-  return NO;
-}
+//+ (BOOL)isRouteExistForURI:(NSURL *)uri
+//{
+//  CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+//  NSURL *remoteHtml = [routeManager remoteHtmlURLForURI:uri];
+//  if (remoteHtml) {
+//    return YES;
+//  }
+//  return NO;
+//}
+//
+//+ (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri
+//{
+//  CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+//  NSURL *localHtml = [routeManager localHtmlURLForURI:uri];
+//  if (localHtml) {
+//    return YES;
+//  }
+//  return NO;
+//}
 
 @end

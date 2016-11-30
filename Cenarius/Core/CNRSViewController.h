@@ -157,19 +157,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)updateRouteFilesWithCompletion:(nullable void (^)(BOOL success))completion;
 
-/**
- * 判断存在对应于 uri 的 route 信息
- *
- * @param uri 待判断的 uri
- */
-+ (BOOL)isRouteExistForURI:(NSURL *)uri;
-
-/**
- * 判断存在对应于 uri 的 route 信息
- *
- * @param uri 待判断的 uri
- */
-+ (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri;
+///**
+// * 判断存在对应于 uri 的 route 信息
+// *
+// * @param uri 待判断的 uri
+// */
+//+ (BOOL)isRouteExistForURI:(NSURL *)uri;
+//
+///**
+// * 判断存在对应于 uri 的 route 信息
+// *
+// * @param uri 待判断的 uri
+// */
+//+ (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri;
 
 NS_ASSUME_NONNULL_END
 

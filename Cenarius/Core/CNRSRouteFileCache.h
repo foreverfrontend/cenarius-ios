@@ -105,6 +105,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSMutableArray *)routesWithData:(NSData *)data;
 
 /**
+ 获取 uri 对应的缓存文件夹地址
+ */
+- (NSString *)cacheFilePathForUri:(NSURL *)uri;
+
+/**
  获取 uri 对应的资源文件夹地址
  */
 - (NSString *)resourceFilePathForUri:(NSURL *)uri;

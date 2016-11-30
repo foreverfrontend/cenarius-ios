@@ -206,7 +206,8 @@
         {
             htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
             if (htmlFileURL == nil) {
-                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+                // 为了解决跨域问题，需要加载 file
+                htmlFileURL = [NSURL fileURLWithPath:[[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:uri]];
             }
         }
     }
