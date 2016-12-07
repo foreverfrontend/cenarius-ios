@@ -36,6 +36,11 @@
 
 - (void)finishLoad
 {
+    [self performSelector:@selector(setFinish) withObject:nil afterDelay:1];
+}
+
+- (void)setFinish
+{
     _isFinishLoad = YES;
 }
 
