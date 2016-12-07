@@ -85,7 +85,7 @@
     }
     
     // 多值合并
-    NSMutableDictionary *sortMutableDictionary = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     NSDictionary *oldParameters = [parameterString cnrs_queryDictionary];
     for (NSString *key in oldParameters)
     {
@@ -98,11 +98,10 @@
         for (NSInteger i = 1; i < array.count; i++) {
             value = [[value stringByAppendingString:key] stringByAppendingString:array[i]];
         }
-        sortMutableDictionary[key] = value;
+        parameters[key] = value;
     }
     
     // 加入系统级参数
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:sortMutableDictionary];
     NSString *token = [CNRSLoginWidget getAccessToken];
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];

@@ -9,18 +9,27 @@
 <body>
     <script src="../cenariusIntercept.js"></script>
 	<script src="../jquery.js"></script>
-	<script>
+<!--	<script>-->
+<!--        $.ajax({-->
+<!--            url: 'https://channel-dev.infinitus.com.cn/mobile/guest/bupm/dealerInfo',-->
+<!--            type: 'GET',-->
+<!--            headers: {-->
+<!--                "X-Requested-With": "OpenAPIRequest"-->
+<!--            },-->
+<!--            success: function(data) {-->
+<!--                console.log(data)-->
+<!--            }-->
+<!--        })-->
+<!--    </script>-->
+    <script>
         $.ajax({
-            url: 'https://channel-dev.infinitus.com.cn/mobile/guest/bupm/dealerInfo',
-            type: 'GET',
-            headers: {
-                "X-Requested-With": "OpenAPIRequest"
-            },
-            success: function(data) {
+               url: 'https://cms-dev.infinitus.com.cn/admin/api/info?SiteID=122&user=pcuser',
+               type: 'GET',
+               success: function(data) {
                 console.log(data)
-            }
-        })
-    </script>
+                }
+               })
+        </script>
 </body>
 
 </html>

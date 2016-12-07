@@ -248,7 +248,7 @@
 {
     //路由表正在更新的时候需要对比 hash
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    if (routeManager.cacheRoutes && routeManager.cacheRoutes != routeManager.routes)
+    if (routeManager.cacheRoutes != routeManager.routes)
     {
         for (CNRSRoute *cacheRoute in routeManager.cacheRoutes)
         {

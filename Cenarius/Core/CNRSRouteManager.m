@@ -51,7 +51,7 @@
     if (_routesMapURL != routesMapURL) {
         _routesMapURL = routesMapURL;
         CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        self.cacheRoutes = [routeFileCache routesWithData:[[CNRSRouteFileCache sharedInstance] routesMapFile]];
+        self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
     }
 }
 
@@ -59,14 +59,14 @@
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.cachePath = cachePath;
-    self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
+    self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
 }
 
 - (void)setResoucePath:(NSString *)resourcePath
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.resourcePath = resourcePath;
-    self.resourceRoutes = [routeFileCache routesWithData:[routeFileCache routesMapFile]];
+    self.resourceRoutes = [routeFileCache routesWithData:[routeFileCache resourceRoutesMapFile]];
 }
 
 - (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion
@@ -107,14 +107,14 @@
               CNRSDebugLog(@"Response: %@", response);
               
               if (((NSHTTPURLResponse *)response).statusCode != 200) {
-                  if (self.cacheRoutes)
-                  {
-                      self.routes = self.cacheRoutes;
-                  }
-                  else
-                  {
-                      self.routes = self.resourceRoutes;
-                  }
+//                  if (self.cacheRoutes)
+//                  {
+//                      self.routes = self.cacheRoutes;
+//                  }
+//                  else
+//                  {
+//                      self.routes = self.resourceRoutes;
+//                  }
                   completion(NO);
                   self.updatingRoutes = NO;
                   return;
@@ -138,8 +138,16 @@
                       dispatch_async(dispatch_get_main_queue(), ^{
                           if (success)
                           {
-                              //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
-                              self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
+                              if (self.cacheRoutes == nil)
+                              {
+                                  //优先下载成功，如果没有 cacheRoutes，立马保存
+                                  self.cacheRoutes = self.routes;
+                                  [routeFileCache saveRoutesMapFile:data];
+                              }
+                              else{
+                                  //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
+                                  self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
+                              }
                               completion(YES);
                               
                               dispatch_async(dispatch_get_global_queue(0, 0), ^{

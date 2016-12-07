@@ -25,13 +25,14 @@
 //  Config Cenarius
 //    [CNRSConfig setDevelopModeEnable:YES];
     [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"https://emcsdev.infinitus.com.cn/h5/www"]];
+//    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"http://172.20.70.80/hybrid"]];
     [CNRSConfig setRoutesResourcePath:@"www"];
     [CNRSConfig setRoutesWhiteList:@[@"cordova",@"sign"]];
-    [CNRSConfig setDownloadFirstList:@[@"activity/assets/fonts/e-webfont.eot"]];
+//    [CNRSConfig setDownloadFirstList:@[@"activity/assets/fonts/e-webfont.eot"]];
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];
     [CNRSConfig setCNRSProtocolHost:@"cenarius-container"];
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"gbss-bupm"];
+    [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"rfGd23Yhjd92JkpWe"];
     // Decorators
     CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
     [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
