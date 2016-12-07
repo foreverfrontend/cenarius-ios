@@ -70,9 +70,9 @@
 		0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2371DBC688000B09978 /* NSDictionary+CordovaPreferences.m */; };
 		0CAFF2501DBC688000B09978 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */; };
 		0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */; };
-		0CC2C9A81DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9A31DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.m */; };
-		0CC2C9A91DF83B9E00EDDCD8 /* CNRSNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9A51DF83B9E00EDDCD8 /* CNRSNSURLProtocol.m */; };
-		0CC2C9AA1DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9A71DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.m */; };
+		0CC2C9B11DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9AC1DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.m */; };
+		0CC2C9B21DF83C9B00EDDCD8 /* CNRSNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9AE1DF83C9B00EDDCD8 /* CNRSNSURLProtocol.m */; };
+		0CC2C9B31DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9B01DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.m */; };
 		6D7AEFA68B93E9C4E1F874F8 /* libPods-CenariusDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5251B4E2A192BF31E78489B7 /* libPods-CenariusDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -209,12 +209,12 @@
 		0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSProgressViewWidget.h; sourceTree = "<group>"; };
 		0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSProgressViewWidget.m; sourceTree = "<group>"; };
-		0CC2C9A21DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSCacheFileInterceptor.h; sourceTree = "<group>"; };
-		0CC2C9A31DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSCacheFileInterceptor.m; sourceTree = "<group>"; };
-		0CC2C9A41DF83B9E00EDDCD8 /* CNRSNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNSURLProtocol.h; sourceTree = "<group>"; };
-		0CC2C9A51DF83B9E00EDDCD8 /* CNRSNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNSURLProtocol.m; sourceTree = "<group>"; };
-		0CC2C9A61DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSOpenApiRequestDecorator.h; sourceTree = "<group>"; };
-		0CC2C9A71DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSOpenApiRequestDecorator.m; sourceTree = "<group>"; };
+		0CC2C9AB1DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSCacheFileInterceptor.h; sourceTree = "<group>"; };
+		0CC2C9AC1DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSCacheFileInterceptor.m; sourceTree = "<group>"; };
+		0CC2C9AD1DF83C9B00EDDCD8 /* CNRSNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNSURLProtocol.h; sourceTree = "<group>"; };
+		0CC2C9AE1DF83C9B00EDDCD8 /* CNRSNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNSURLProtocol.m; sourceTree = "<group>"; };
+		0CC2C9AF1DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSOpenApiRequestInterceptor.h; sourceTree = "<group>"; };
+		0CC2C9B01DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSOpenApiRequestInterceptor.m; sourceTree = "<group>"; };
 		128AD749238C0A58074E137D /* Pods-CenariusDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusDemo/Pods-CenariusDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		5251B4E2A192BF31E78489B7 /* libPods-CenariusDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CenariusDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB5EB94BBF6CC7E2C1508314 /* Pods-CenariusDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusDemo/Pods-CenariusDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -528,12 +528,12 @@
 		0CC2C9A11DF83B9E00EDDCD8 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
-				0CC2C9A21DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.h */,
-				0CC2C9A31DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.m */,
-				0CC2C9A41DF83B9E00EDDCD8 /* CNRSNSURLProtocol.h */,
-				0CC2C9A51DF83B9E00EDDCD8 /* CNRSNSURLProtocol.m */,
-				0CC2C9A61DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.h */,
-				0CC2C9A71DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.m */,
+				0CC2C9AB1DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.h */,
+				0CC2C9AC1DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.m */,
+				0CC2C9AD1DF83C9B00EDDCD8 /* CNRSNSURLProtocol.h */,
+				0CC2C9AE1DF83C9B00EDDCD8 /* CNRSNSURLProtocol.m */,
+				0CC2C9AF1DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.h */,
+				0CC2C9B01DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.m */,
 			);
 			path = Interceptor;
 			sourceTree = "<group>";
@@ -699,6 +699,7 @@
 				0CAFF23E1DBC688000B09978 /* CDVLocalStorage.m in Sources */,
 				0C9EC6981DAF98B2003BFB38 /* CNRSNavTitleWidget.m in Sources */,
 				0C1B7C821DE92A2C009E6AEC /* CNRSOpenApi.m in Sources */,
+				0CC2C9B31DF83C9B00EDDCD8 /* CNRSOpenApiRequestInterceptor.m in Sources */,
 				0C9EC8601DB4B728003BFB38 /* CNRSNativeWidget.m in Sources */,
 				0CAFF23F1DBC688000B09978 /* CDVUIWebViewDelegate.m in Sources */,
 				0CAFF23C1DBC688000B09978 /* CDVHandleOpenURL.m in Sources */,
@@ -717,13 +718,12 @@
 				0C9EC63B1DAF97A4003BFB38 /* AppDelegate.m in Sources */,
 				0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */,
 				0C9EC6CE1DB346D1003BFB38 /* CNRSCordovaWidget.m in Sources */,
-				0CC2C9AA1DF83B9E00EDDCD8 /* CNRSOpenApiRequestDecorator.m in Sources */,
 				0C9EC6891DAF98B2003BFB38 /* NSURL+Cenarius.m in Sources */,
 				0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */,
 				0CAFF2461DBC688000B09978 /* CDVInvokedUrlCommand.m in Sources */,
 				0C9EC6861DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m in Sources */,
 				0CAFF24C1DBC688000B09978 /* CDVUserAgentUtil.m in Sources */,
-				0CC2C9A91DF83B9E00EDDCD8 /* CNRSNSURLProtocol.m in Sources */,
+				0CC2C9B21DF83C9B00EDDCD8 /* CNRSNSURLProtocol.m in Sources */,
 				0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */,
 				0CAFF23D1DBC688000B09978 /* CDVIntentAndNavigationFilter.m in Sources */,
 				0C2BD4E01DD3509D007AF9A7 /* CNRSNavigationController.m in Sources */,
@@ -739,7 +739,7 @@
 				0C9EC6381DAF97A4003BFB38 /* main.m in Sources */,
 				0CAFF24A1DBC688000B09978 /* CDVTimer.m in Sources */,
 				0CAFF24D1DBC688000B09978 /* CDVViewController.m in Sources */,
-				0CC2C9A81DF83B9E00EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */,
+				0CC2C9B11DF83C9B00EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */,
 				0C9EC6991DAF98B2003BFB38 /* CNRSPullRefreshWidget.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

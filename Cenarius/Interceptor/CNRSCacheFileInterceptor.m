@@ -13,14 +13,14 @@
 #import "CNRSRouteManager.h"
 #import "CNRSConfig.h"
 
-@interface CNRSCacheFileInterceptor ()<NSURLSessionDataDelegate,NSURLSessionTaskDelegate>
+@interface CNRSCacheFileInterceptor ()
 
-@property (nonatomic, strong) NSURLSessionDataTask *dataTask;
 @property (nonatomic, strong) NSMutableData *mutableData;
 @property (nonatomic, strong) CNRSRoute *route;
 
 @end
 
+static NSMutableDictionary *routeDictionary;
 
 @implementation CNRSCacheFileInterceptor
 
@@ -28,31 +28,59 @@
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
-    if (![CNRSConfig isCacheEnable])
+    // 请求被忽略（被标记为忽略或者已经请求过），不处理
+    if ([self isRequestIgnored:request])
     {
         return NO;
     }
     
     // 不是 HTTP 或 FILE 请求，不处理
-    if (![request.URL cnrs_isHttpOrHttps] && !request.URL.isFileURL) {
+    if (![request.URL isHttpOrHttps] && !request.URL.isFileURL) {
         return NO;
     }
     
-    // 请求被忽略（被标记为忽略或者已经请求过），不处理
-    if ([self isRequestIgnored:request]) {
-        return NO;
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    NSURL *uri = [routeManager uriForUrl:request.URL];
+    if (uri)
+    {
+        if (routeDictionary == nil)
+        {
+            routeDictionary = [[NSMutableDictionary alloc] init];
+        }
+        NSURL *finalUrl = nil;
+        NSURL *baseUri = [NSURL URLWithString:uri.path];
+        //拦截在路由表中的uri
+        CNRSRoute *route = [routeManager routeForURI:baseUri];
+        if (route)
+        {
+            NSURL *localHtmlURL = [routeManager localHtmlURLForRoute:route uri:uri];
+            if (localHtmlURL) {
+                finalUrl = localHtmlURL;
+            }
+            else
+            {
+                NSURL *remoteHtmlURL = [routeManager remoteHtmlURLForRoute:route uri:uri];
+                finalUrl = remoteHtmlURL;
+            }
+            
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:route, @"route", finalUrl, @"finalUrl",nil];
+            [routeDictionary setObject:dic forKey:request.URL];
+            
+            return YES;
+        }
+        //拦截在白名单中的uri
+        else if ([routeManager isInWhiteList:baseUri])
+        {
+            NSString *urlString = [[CNRSRouteFileCache sharedInstance] resourceFilePathForUri:uri];
+            finalUrl = [NSURL fileURLWithPath:urlString];
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:finalUrl, @"finalUrl",nil];
+            [routeDictionary setObject:dic forKey:request.URL];
+            
+            return YES;
+        }
     }
-    //  // 请求不是来自浏览器，不处理
-    //  if (![request.allHTTPHeaderFields[@"User-Agent"] hasPrefix:@"Mozilla"]) {
-    //    return NO;
-    //  }
     
-//     // 如果请求不需要被拦截，不处理
-//        if (![self shouldInterceptRequest:request]) {
-//            return NO;
-//        }
-    
-    return YES;
+    return NO;
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
@@ -61,46 +89,16 @@
 }
 
 - (void)startLoading
-{    
+{
     CNRSDebugLog(@"Intercept <%@> within <%@>", self.request.URL, self.request.mainDocumentURL);
     
-    self.route = nil;
     NSMutableURLRequest *request = nil;
-    if ([self.request isKindOfClass:[NSMutableURLRequest class]]) {
-        request = (NSMutableURLRequest *)self.request;
-    } else {
-        request = [self.request mutableCopy];
-    }
+    request = [self.request mutableCopy];
     
-    NSURL *uri = [[self class] cnrs_uriForRequest:request];
-    if (uri)
-    {
-        NSURL *baseUri = [NSURL URLWithString:uri.path];
-        CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-        
-        //拦截在路由表中的uri
-        CNRSRoute *route = [routeManager routeForURI:baseUri];
-        if (route)
-        {
-            self.route = route;
-            NSURL *localHtmlURL = [routeManager localHtmlURLForRoute:route uri:uri];
-            if (localHtmlURL) {
-                request.URL = localHtmlURL;
-            }
-            else
-            {
-                NSURL *remoteHtmlURL = [routeManager remoteHtmlURLForRoute:route uri:uri];
-                request.URL = remoteHtmlURL;
-            }
-        }
-        //拦截在白名单中的uri
-        else if ([routeManager isInWhiteList:baseUri])
-        {
-            NSString *urlString = [[CNRSRouteFileCache sharedInstance] resourceFilePathForUri:uri];
-            request.URL = [NSURL fileURLWithPath:urlString];
-        }
-    }
-
+    NSDictionary *dic = [routeDictionary objectForKey:self.request.URL];
+    self.route = [dic objectForKey:@"route"];
+    request.URL = [dic objectForKey:@"finalUrl"];
+    
     [[self class] markRequestAsIgnored:request];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
@@ -111,8 +109,11 @@
 
 - (void)stopLoading
 {
+    [routeDictionary removeObjectForKey:self.request.URL];
     [self.dataTask cancel];
+    self.dataTask = nil;
     self.mutableData = nil;
+    self.route = nil;
 }
 
 #pragma mark - NSURLSessionDataDelegate
@@ -146,14 +147,6 @@
         }
         [self.client URLProtocolDidFinishLoading:self];
     }
-}
-
-#pragma mark - Private methods
-
-+ (NSURL *)cnrs_uriForRequest:(NSURLRequest *)request
-{
-    NSURL *uri = [[CNRSRouteManager sharedInstance] uriForUrl:request.URL];
-    return uri;
 }
 
 @end
