@@ -111,17 +111,6 @@ static NSString * const RoutesMapFile = @"routes.json";
 + (void)updateConfig;
 
 /**
- * 全局设置 Cenarius Container 是否使用路由文件的本地 Cache。
- * 如果使用，优先读取本地缓存的 html 文件；如果不使用，则每次都读取服务器的 html 文件。
- */
-+ (void)setCacheEnable:(BOOL)isCacheEnable;
-
-/**
- * 读取 Cenarius Container 是否使用缓存的全局配置。该缺省是打开的。Cenarius Container 会使用缓存保存 html 文件。
- */
-+ (BOOL)isCacheEnable;
-
-/**
  * 设置远程资源地址。
  */
 + (void)setRemoteFolderUrl:(NSURL *)remoteFolderUrl;

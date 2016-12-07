@@ -38,7 +38,7 @@
     }
     
     [self _initWebView];
-
+    
     if (self.htmlFileURL)
     {
         [self _initProgressView];
@@ -64,15 +64,15 @@
 - (void)onPageVisible
 {
     // Call the WebView's visiblity change hook for javascript.
-//    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageVisible: %@",
-//                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageVisible()"]);
+    //    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageVisible: %@",
+    //                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageVisible()"]);
 }
 
 - (void)onPageInvisible
 {
     // Call the WebView's visiblity change hook for javascript.
-//    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageInvisible: %@",
-//                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageInvisible()"]);
+    //    CNRSDebugLog(@"window.Cenarius.Lifecycle.onPageInvisible: %@",
+    //                 [_webView stringByEvaluatingJavaScriptFromString:@"window.Cenarius.Lifecycle.onPageInvisible()"]);
 }
 
 - (void)_initNav
@@ -180,11 +180,6 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
         return YES;
     }
     
-//    // http:// or https:// 开头，则打开网页
-//    if ([reqURL cnrs_isHttpOrHttps]) {
-//        return ![self cnrs_openWebPage:reqURL];
-//    }
-    
     NSString *scheme = [CNRSConfig cnrsProtocolScheme];
     NSString *host = [CNRSConfig cnrsProtocolHost];
     
@@ -232,9 +227,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 {
     self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     
-//    NSString *bgColor = [self.webView stringByEvaluatingJavaScriptFromString:
-//                         @"window.getComputedStyle(document.getElementsByTagName('body')[0]).backgroundColor"];
-//    self.webView.backgroundColor = [UIColor cnrs_colorWithComponent:bgColor] ?: [UIColor whiteColor];
+    //    NSString *bgColor = [self.webView stringByEvaluatingJavaScriptFromString:
+    //                         @"window.getComputedStyle(document.getElementsByTagName('body')[0]).backgroundColor"];
+    //    self.webView.backgroundColor = [UIColor cnrs_colorWithComponent:bgColor] ?: [UIColor whiteColor];
 }
 
 //- (BOOL)cnrs_openWebPage:(NSURL *)url
@@ -253,7 +248,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 //    } else if ([delegate respondsToSelector:@selector(application:handleOpenURL:)]) {
 //        [delegate application:[UIApplication sharedApplication] handleOpenURL:url];
 //    }
-//    
+//
 //    return YES;
 //}
 

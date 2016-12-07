@@ -34,11 +34,6 @@ static NSMutableDictionary *routeDictionary;
         return NO;
     }
     
-    if (![CNRSConfig isCacheEnable])
-    {
-        return NO;
-    }
-    
     // 不是 HTTP 或 FILE 请求，不处理
     if (![request.URL isHttpOrHttps] && !request.URL.isFileURL) {
         return NO;

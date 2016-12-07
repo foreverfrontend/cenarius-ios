@@ -19,7 +19,6 @@ static NSString *sRoutesCachePath;
 static NSString *sRoutesResourcePath;
 static NSArray *sRoutesWhiteList;
 static NSArray *sDownloadFirstList;
-static BOOL sIsCacheEnable = YES;
 static NSURL *sRoutesMapURL;
 static NSURL *sRemoteFolderUrl;
 static UIImage *sBackButtonImage;
@@ -154,18 +153,6 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
   routeManager.routesMapURL = sRoutesMapURL;
   [routeManager setCachePath:sRoutesCachePath];
   [routeManager setResoucePath:sRoutesResourcePath];
-}
-
-+ (void)setCacheEnable:(BOOL)isCacheEnable
-{
-  @synchronized (self) {
-    sIsCacheEnable = isCacheEnable;
-  }
-}
-
-+(BOOL)isCacheEnable
-{
-  return sIsCacheEnable;
 }
 
 + (void)setRemoteFolderUrl:(NSURL *)remoteFolderUrl
