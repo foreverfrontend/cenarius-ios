@@ -15,23 +15,23 @@
  *
  * @param dict 需要转换成的 query 的 dictionary。
  */
-+ (NSString *)cnrs_queryFromDictionary:(NSDictionary *)dict;
++ (NSString *)queryFromDictionary:(NSDictionary *)dict;
 
 /**
  * 该 url 的 scheme 是否是 http 或 https？
  */
-- (BOOL)cnrs_isHttpOrHttps;
+- (BOOL)isHttpOrHttps;
 
 /**
  * 将该 url 的 query 以字典形式返回。
  */
-- (NSDictionary *)cnrs_queryDictionary;
+- (NSDictionary *)queryDictionary;
 
 /**
  从url的query中取出key为data的value（json格式），把value转成字典
  
  @return value的字典
  */
-- (NSDictionary *)cnrs_jsonDictionary;
+- (NSDictionary *)jsonDictionary;
 
 @end

@@ -13,7 +13,7 @@
 
 @implementation NSURL (Cenarius)
 
-+ (NSString *)cnrs_queryFromDictionary:(NSDictionary *)dict
++ (NSString *)queryFromDictionary:(NSDictionary *)dict
 {
     NSMutableArray *pairs = [NSMutableArray array];
     [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
@@ -27,7 +27,7 @@
     return query;
 }
 
-- (BOOL)cnrs_isHttpOrHttps
+- (BOOL)isHttpOrHttps
 {
     if ([self.scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
         [self.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {
@@ -36,14 +36,14 @@
     return NO;
 }
 
-- (NSDictionary *)cnrs_queryDictionary {
+- (NSDictionary *)queryDictionary {
     NSString *query = [self query];
-    return [query cnrs_queryDictionary];
+    return [query queryDictionary];
 }
 
-- (NSDictionary *)cnrs_jsonDictionary
+- (NSDictionary *)jsonDictionary
 {
-    NSString *string = [[self cnrs_queryDictionary] cnrs_itemForKey:@"data"];
+    NSString *string = [[self queryDictionary] itemForKey:@"data"];
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
     return jsonDic;

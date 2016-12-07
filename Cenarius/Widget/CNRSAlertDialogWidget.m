@@ -32,7 +32,7 @@
 
 - (void)prepareWithURL:(NSURL *)URL
 {
-  NSString *string = [[URL cnrs_queryDictionary] cnrs_itemForKey:@"data"];
+  NSString *string = [[URL queryDictionary] itemForKey:@"data"];
   self.alertDialogData = [[CNRSAlertDialogData alloc] initWithString:string];
 }
 

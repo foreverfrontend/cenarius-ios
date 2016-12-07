@@ -30,7 +30,7 @@
 
 - (void)prepareWithURL:(NSURL *)URL
 {
-    _cnrsDictionary = [URL cnrs_jsonDictionary];
+    _cnrsDictionary = [URL jsonDictionary];
     _title = _cnrsDictionary[@"title"];
 }
 

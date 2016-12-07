@@ -10,7 +10,7 @@
 
 @implementation NSMutableDictionary (CNRSMultipleItems)
 
-- (void)cnrs_addItem:(NSString *)item forKey:(NSString *)aKey
+- (void)addItem:(NSString *)item forKey:(NSString *)aKey
 {
     if (item == nil) {
         return;

@@ -7,7 +7,7 @@
 //
 
 #import "CNRSHTTPSessionManager.h"
-#import "CNRSRequestInterceptor.h"
+#import "CNRSOpenApiRequestInterceptor.h"
 
 @implementation CNRSHTTPSessionManager
 
@@ -18,7 +18,7 @@
     dispatch_once(&onceToken, ^{
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
         NSMutableArray * protocolsArray = [sessionConfiguration.protocolClasses mutableCopy];
-        [protocolsArray insertObject:[CNRSRequestInterceptor class] atIndex:0];
+        [protocolsArray insertObject:[CNRSOpenApiRequestInterceptor class] atIndex:0];
         sessionConfiguration.protocolClasses = protocolsArray;
         instance = [[CNRSHTTPSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
     });

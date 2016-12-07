@@ -11,7 +11,7 @@
 
 @implementation NSString (CNRSURLEscape)
 
-- (NSString *)cnrs_encodingStringUsingURLEscape
+- (NSString *)encodingStringUsingURLEscape
 {
   CFStringRef originStringRef = (__bridge_retained CFStringRef)self;
   CFStringRef escapedStringRef = CFURLCreateStringByAddingPercentEscapes(NULL,
@@ -24,7 +24,7 @@
   return escapedString;
 }
 
-- (NSString *)cnrs_decodingStringUsingURLEscape
+- (NSString *)decodingStringUsingURLEscape
 {
   CFStringRef originStringRef = (__bridge_retained CFStringRef)self;
   CFStringRef escapedStringRef = CFURLCreateStringByReplacingPercentEscapesUsingEncoding(NULL,
@@ -36,7 +36,7 @@
   return escapedString;
 }
 
-- (NSDictionary *)cnrs_queryDictionary {
+- (NSDictionary *)queryDictionary {
     NSString *query = self;
     if ([query length] == 0) {
         return nil;
@@ -55,8 +55,8 @@
         [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
         NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
         if (kvPair.count == 2) {
-            [pairs cnrs_addItem:[[kvPair objectAtIndex:1] cnrs_decodingStringUsingURLEscape]
-                         forKey:[[kvPair objectAtIndex:0] cnrs_decodingStringUsingURLEscape]];
+            [pairs addItem:[[kvPair objectAtIndex:1] decodingStringUsingURLEscape]
+                         forKey:[[kvPair objectAtIndex:0] decodingStringUsingURLEscape]];
         }
     }
     

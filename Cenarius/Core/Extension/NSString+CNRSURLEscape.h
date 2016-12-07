@@ -13,16 +13,16 @@
 /**
  * url 字符串编码
  */
-- (NSString *)cnrs_encodingStringUsingURLEscape;
+- (NSString *)encodingStringUsingURLEscape;
 
 /**
  * url 字符串解码
  */
-- (NSString *)cnrs_decodingStringUsingURLEscape;
+- (NSString *)decodingStringUsingURLEscape;
 
 /**
  * 将 query 以字典形式返回。
  */
-- (NSDictionary *)cnrs_queryDictionary;
+- (NSDictionary *)queryDictionary;
 
 @end

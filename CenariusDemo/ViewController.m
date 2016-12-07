@@ -43,7 +43,7 @@
 }
 
 - (IBAction)login:(id)sender {
-    [CNRSLoginWidget loginWithUsername:@"0009704"  password:@"Admin123" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
+    [CNRSLoginWidget loginWithUsername:@"337304000"  password:@"123444" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
         
     }];
 }

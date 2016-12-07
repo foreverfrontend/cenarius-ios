@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (CNRSMultipleItems)
 
-- (id)cnrs_itemForKey:(id)key {
+- (id)itemForKey:(id)key {
   id obj = [self objectForKey:key];
   if ([obj isKindOfClass:[NSArray class]]) {
     return [obj count] > 0 ? [obj objectAtIndex:0] : nil;
@@ -19,7 +19,7 @@
   }
 }
 
-- (NSArray *)cnrs_allItemsForKey:(id)key {
+- (NSArray *)allItemsForKey:(id)key {
   id obj = [self objectForKey:key];
   return [obj isKindOfClass:[NSArray class]] ? obj : (obj ? [NSArray arrayWithObject:obj] : nil);
 }

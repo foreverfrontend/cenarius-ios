@@ -7,11 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "CNRSConfig.h"
-#import "CNRSViewController.h"
-#import "CNRSOpenApiRequestDecorator.h"
-#import "CNRSRequestDecorator.h"
-#import "CNRSRequestInterceptor.h"
+#import "Cenarius.h"
 
 @interface AppDelegate ()
 
@@ -33,17 +29,15 @@
     [CNRSConfig setCNRSProtocolHost:@"cenarius-container"];
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"rfGd23Yhjd92JkpWe"];
-    // Decorators
-//    CNRSOpenApiRequestDecorator *openApiRequestDecorator = [[CNRSOpenApiRequestDecorator alloc] init];
-//    [CNRSRequestInterceptor setDecorators:@[openApiRequestDecorator]];
-//    [CNRSRequestInterceptor registerInterceptor];
-    
-    //CacheFile
+    [CNRSConfig updateConfig];
+    // 先注册 H5 拦截
     [CNRSCacheFileInterceptor registerInterceptor];
-    [CNRSViewController updateRouteFilesWithCompletion:^(BOOL success) {
-        // 进入
+    // 再注册 OpenApi 拦截
+    [CNRSOpenApiRequestInterceptor registerInterceptor];
+    // 获取最新路由表
+    [CNRSRouteManager updateRouteFilesWithCompletion:^(BOOL success) {
+        
     }];
-    
     
     return YES;
 }

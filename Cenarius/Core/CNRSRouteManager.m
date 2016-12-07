@@ -50,8 +50,6 @@
 {
     if (_routesMapURL != routesMapURL) {
         _routesMapURL = routesMapURL;
-        CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-        self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
     }
 }
 
@@ -67,6 +65,11 @@
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.resourcePath = resourcePath;
     self.resourceRoutes = [routeFileCache routesWithData:[routeFileCache resourceRoutesMapFile]];
+}
+
++ (void)updateRouteFilesWithCompletion:(void (^)(BOOL success))completion
+{
+    [[CNRSRouteManager sharedInstance] updateRoutesWithCompletion:completion];
 }
 
 - (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion
@@ -264,7 +267,7 @@
     NSString *urlString = url.absoluteString;
     //HTTP
     NSString *remoteFolderUrlString = [CNRSConfig remoteFolderUrl].absoluteString;
-    if ([url cnrs_isHttpOrHttps])
+    if ([url isHttpOrHttps])
     {
         uri = [self cnrs_deleteString:remoteFolderUrlString fromString:urlString];
         if (uri)

@@ -62,13 +62,6 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
   return DefaultCNRSHost;
 }
 
-//+ (void)setRoutesMapURL:(NSURL *)routesMapURL
-//{
-//  @synchronized (self) {
-//    sRoutesMapURL = routesMapURL;
-//  }
-//}
-
 + (NSURL *)routesMapURL
 {
   return sRoutesMapURL;

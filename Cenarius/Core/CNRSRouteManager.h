@@ -69,18 +69,16 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 立即同步路由表。
  *
- * @param completion 同步完成后的回调，可以为 nil
+ * @param completion 同步完成后的回调
  */
-- (void)updateRoutesWithCompletion:(nullable void (^)(BOOL success))completion;
+- (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion;
 
-///**
-// 远程 URL 是否在路由表里
-//
-// @param remoteURL 远程 URL
-//
-// @return <#return value description#>
-// */
-//- (BOOL)isRoutesContainRemoteURL:(NSURL *)remoteURL;
+/**
+ * 立即同步路由表。
+ *
+ * @param completion 同步完成后的回调
+ */
++ (void)updateRouteFilesWithCompletion:(void (^)(BOOL success))completion;
 
 /**
  查找 远程 url 对应的 route。

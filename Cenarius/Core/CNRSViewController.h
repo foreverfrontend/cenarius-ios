@@ -142,37 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-
-#pragma mark - Public Route Methods
-
-/**
- * 暴露出 Route 相关的接口。
- */
-@interface CNRSViewController (Router)
-
-/**
- * 更新 Route Files。
- *
- * @param completion 更新完成后将执行这个 block。
- */
-+ (void)updateRouteFilesWithCompletion:(nullable void (^)(BOOL success))completion;
-
-///**
-// * 判断存在对应于 uri 的 route 信息
-// *
-// * @param uri 待判断的 uri
-// */
-//+ (BOOL)isRouteExistForURI:(NSURL *)uri;
-//
-///**
-// * 判断存在对应于 uri 的 route 信息
-// *
-// * @param uri 待判断的 uri
-// */
-//+ (BOOL)isLocalRouteFileExistForURI:(NSURL *)uri;
-
 NS_ASSUME_NONNULL_END
 
-@end
 
 

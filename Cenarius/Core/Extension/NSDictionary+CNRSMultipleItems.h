@@ -18,7 +18,7 @@
  *
  * @param key 关键字
  */
-- (id)cnrs_itemForKey:(id)key;
+- (id)itemForKey:(id)key;
 
 /**
  * 字典对应该关键字的元素，该元素如果是数组，返回该数组。
@@ -28,6 +28,6 @@
  *
  * @param key 关键字
  */
-- (NSArray *)cnrs_allItemsForKey:(id)key;
+- (NSArray *)allItemsForKey:(id)key;
 
 @end

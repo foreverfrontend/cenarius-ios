@@ -69,6 +69,10 @@
 {
     NSString *query = request.URL.query ? request.URL.query : @"";
     
+    //test
+//    query = @"access_token=bFV0bEFFZnp6b1lUWEFRL1ZlMVdTMXMyZS9vdzBiU0ZycFNOZnQ1MGFtNG9oZ0xxbHBKSGVSaU1YVld4R1QxSSMjMzM3MzA0MDAw&appVersion=2.0.1&app_key=gbss-bupm&brand=iPhone&coreVersion=10.1&imei&machineModel=x86_64&model=0&netType=WiFi&os=0&osVersion=10.1&screen=1242x2208&terminalType=mobile&timestamp=1481103555156&imei=";
+    
+    
     NSString *parameterString = [[NSString alloc] initWithString:query];
     NSData *bodyData = request.HTTPBody;
     if (bodyData)
@@ -86,7 +90,7 @@
     
     // 多值合并
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    NSDictionary *oldParameters = [parameterString cnrs_queryDictionary];
+    NSDictionary *oldParameters = [parameterString queryDictionary];
     for (NSString *key in oldParameters)
     {
         NSArray *array = oldParameters[key];
@@ -106,11 +110,11 @@
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
     NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    
+
     if (token == nil || appKey == nil || appSecret == nil) {
         return nil;
     }
-    
+
     parameters[@"access_token"] = token;
     parameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;

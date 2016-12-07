@@ -50,11 +50,6 @@ static NSString * const RoutesMapFile = @"routes.json";
  */
 + (NSString *)cnrsProtocolHost;
 
-///**
-// * 设置 Routes Map URL。
-// */
-//+ (void)setRoutesMapURL:(NSURL *)routesMapURL;
-
 /**
  * 读取 Routes Map URL。
  */

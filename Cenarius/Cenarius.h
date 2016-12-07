@@ -18,15 +18,12 @@
 
 #import "CNRSNSURLProtocol.h"
 #import "CNRSHTTPSessionManager.h"
+#import "CNRSOpenApiRequestInterceptor.h"
+#import "CNRSCacheFileInterceptor.h"
 
 #import "CNRSContainerInterceptor.h"
 #import "CNRSContainerAPI.h"
 #import "CNRSOpenApi.h"
-
-#import "CNRSRequestInterceptor.h"
-#import "CNRSOpenApiRequestDecorator.h"
-#import "CNRSDecorator.h"
-#import "CNRSRequestDecorator.h"
 
 #import "NSURL+Cenarius.h"
 #import "NSDictionary+CNRSMultipleItems.h"
