@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param request 对应请求
  */
-- (BOOL)shouldInterceptRequest:(NSURLRequest *)request;
++ (BOOL)shouldInterceptRequest:(NSURLRequest *)request;
 
 /**
  * 对该请求的修改动作

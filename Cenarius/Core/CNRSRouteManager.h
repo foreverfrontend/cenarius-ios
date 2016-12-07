@@ -57,10 +57,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSURL *)localHtmlURLForURI:(NSURL *)uri;
 
+- (nullable NSURL *)localHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri;
+
 /**
  * 查找 uri 对应的服务器上 html 文件。
  */
 - (nullable NSURL *)remoteHtmlURLForURI:(NSURL *)uri;
+
+- (nullable NSURL *)remoteHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri;
 
 /**
  * 立即同步路由表。
@@ -80,18 +84,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  查找 远程 url 对应的 route。
-
+ 
  @param remoteURL 远程 url
-
+ 
  @return route
  */
 - (nullable CNRSRoute *)routeForRemoteURL:(NSURL *)remoteURL;
 
 /**
  获取 url 中的 uri，可能没有
-
+ 
  @param url url
-
+ 
  @return uri
  */
 - (nullable NSURL *)uriForUrl:(NSURL *)url;

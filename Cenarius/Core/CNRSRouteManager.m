@@ -191,8 +191,12 @@
     NSURL *baseUri = [NSURL URLWithString:uri.path];
     //最新的在内存中的 route
     CNRSRoute *route = [self routeForURI:baseUri];
+    return [self localHtmlURLForRoute:route uri:uri];
+}
+
+- (NSURL *)localHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri
+{
     NSURL *url = [[CNRSRouteFileCache sharedInstance] routeFileURLForRoute:route];
-    
     return [self finalUrlWithBaseUrl:url uri:uri];
 }
 
@@ -200,11 +204,12 @@
 {
     NSURL *baseUri = [NSURL URLWithString:uri.path];
     CNRSRoute *route = [self routeForURI:baseUri];
-    if (route)
-    {
-        return  [self finalUrlWithBaseUrl:route.remoteHTML uri:uri];
-    }
-    return nil;
+    return [self remoteHtmlURLForRoute:route uri:uri];
+}
+
+- (NSURL *)remoteHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri
+{
+    return [self finalUrlWithBaseUrl:route.remoteHTML uri:uri];
 }
 
 - (NSURL *)finalUrlWithBaseUrl:(NSURL *)url uri:(NSURL *)uri
