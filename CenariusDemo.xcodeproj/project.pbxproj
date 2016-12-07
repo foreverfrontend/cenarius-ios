@@ -69,9 +69,6 @@
 		0CAFF24E1DBC688000B09978 /* CDVWhitelist.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2351DBC688000B09978 /* CDVWhitelist.m */; };
 		0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2371DBC688000B09978 /* NSDictionary+CordovaPreferences.m */; };
 		0CAFF2501DBC688000B09978 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */; };
-		0CB710A31DF7F82D00630530 /* CNRSCacheFileInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB7109E1DF7F82D00630530 /* CNRSCacheFileInterceptor.m */; };
-		0CB710A41DF7F82D00630530 /* CNRSNSURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB710A01DF7F82D00630530 /* CNRSNSURLProtocol.m */; };
-		0CB710A51DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CB710A21DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.m */; };
 		0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */; };
 		6D7AEFA68B93E9C4E1F874F8 /* libPods-CenariusDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5251B4E2A192BF31E78489B7 /* libPods-CenariusDemo.a */; };
 /* End PBXBuildFile section */
@@ -207,12 +204,6 @@
 		0CAFF2371DBC688000B09978 /* NSDictionary+CordovaPreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CordovaPreferences.m"; sourceTree = "<group>"; };
 		0CAFF2381DBC688000B09978 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
-		0CB7109D1DF7F82D00630530 /* CNRSCacheFileInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSCacheFileInterceptor.h; sourceTree = "<group>"; };
-		0CB7109E1DF7F82D00630530 /* CNRSCacheFileInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSCacheFileInterceptor.m; sourceTree = "<group>"; };
-		0CB7109F1DF7F82D00630530 /* CNRSNSURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNSURLProtocol.h; sourceTree = "<group>"; };
-		0CB710A01DF7F82D00630530 /* CNRSNSURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNSURLProtocol.m; sourceTree = "<group>"; };
-		0CB710A11DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSOpenApiRequestInterceptor.h; sourceTree = "<group>"; };
-		0CB710A21DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSOpenApiRequestInterceptor.m; sourceTree = "<group>"; };
 		0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSProgressViewWidget.h; sourceTree = "<group>"; };
 		0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSProgressViewWidget.m; sourceTree = "<group>"; };
 		128AD749238C0A58074E137D /* Pods-CenariusDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusDemo/Pods-CenariusDemo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -308,7 +299,6 @@
 		0C9EC6521DAF98B2003BFB38 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				0CB7109C1DF7F82200630530 /* Interceptor */,
 				0C9EC6531DAF98B2003BFB38 /* Extension */,
 				0C9EC6621DAF98B2003BFB38 /* CNRSConfig.h */,
 				0C9EC6631DAF98B2003BFB38 /* CNRSConfig.m */,
@@ -525,19 +515,6 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
-		0CB7109C1DF7F82200630530 /* Interceptor */ = {
-			isa = PBXGroup;
-			children = (
-				0CB7109D1DF7F82D00630530 /* CNRSCacheFileInterceptor.h */,
-				0CB7109E1DF7F82D00630530 /* CNRSCacheFileInterceptor.m */,
-				0CB710A11DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.h */,
-				0CB710A21DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.m */,
-				0CB7109F1DF7F82D00630530 /* CNRSNSURLProtocol.h */,
-				0CB710A01DF7F82D00630530 /* CNRSNSURLProtocol.m */,
-			);
-			name = Interceptor;
-			sourceTree = "<group>";
-		};
 		BBD344781ABE90A2510BC820 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,10 +694,8 @@
 				0C9EC63B1DAF97A4003BFB38 /* AppDelegate.m in Sources */,
 				0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */,
 				0C9EC6CE1DB346D1003BFB38 /* CNRSCordovaWidget.m in Sources */,
-				0CB710A31DF7F82D00630530 /* CNRSCacheFileInterceptor.m in Sources */,
 				0C9EC6891DAF98B2003BFB38 /* NSURL+Cenarius.m in Sources */,
 				0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */,
-				0CB710A51DF7F82D00630530 /* CNRSOpenApiRequestInterceptor.m in Sources */,
 				0CAFF2461DBC688000B09978 /* CDVInvokedUrlCommand.m in Sources */,
 				0C9EC6861DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m in Sources */,
 				0CAFF24C1DBC688000B09978 /* CDVUserAgentUtil.m in Sources */,
@@ -735,7 +710,6 @@
 				0C9EC6841DAF98B2003BFB38 /* CNRSContainerInterceptor.m in Sources */,
 				0CAFF2401DBC688000B09978 /* CDVUIWebViewEngine.m in Sources */,
 				0C9EC6881DAF98B2003BFB38 /* NSString+CNRSURLEscape.m in Sources */,
-				0CB710A41DF7F82D00630530 /* CNRSNSURLProtocol.m in Sources */,
 				0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m in Sources */,
 				0C9EC6381DAF97A4003BFB38 /* main.m in Sources */,
 				0CAFF24A1DBC688000B09978 /* CDVTimer.m in Sources */,
