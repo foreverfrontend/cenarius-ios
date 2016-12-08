@@ -29,8 +29,9 @@
 
 - (BOOL)isHttpOrHttps
 {
-    if ([self.scheme caseInsensitiveCompare:@"http"] == NSOrderedSame ||
-        [self.scheme caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+    NSString *scheme = [self.scheme uppercaseString];
+    if ([scheme isEqualToString:@"HTTP"] || [scheme isEqualToString:@"HTTPS"])
+    {
         return YES;
     }
     return NO;
