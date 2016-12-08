@@ -30,4 +30,9 @@
  */
 - (NSArray *)allItemsForKey:(id)key;
 
+/**
+ * 将一个字典内容转换成 url 的 query 的形式。
+ */
+- (NSString *)queryString;
+
 @end

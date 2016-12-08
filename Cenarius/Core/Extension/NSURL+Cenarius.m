@@ -13,20 +13,6 @@
 
 @implementation NSURL (Cenarius)
 
-+ (NSString *)queryFromDictionary:(NSDictionary *)dict
-{
-    NSMutableArray *pairs = [NSMutableArray array];
-    [dict enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
-        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
-    }];
-    
-    NSString *query = nil;
-    if (pairs.count > 0) {
-        query = [pairs componentsJoinedByString:@"&"];
-    }
-    return query;
-}
-
 - (BOOL)isHttpOrHttps
 {
     NSString *scheme = [self.scheme uppercaseString];

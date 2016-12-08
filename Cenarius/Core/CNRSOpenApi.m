@@ -67,12 +67,16 @@
 
 + (NSString *)openApiQuery:(NSURLRequest *)request
 {
+    NSString *token = [CNRSLoginWidget getAccessToken];
+    NSString *appKey = [CNRSConfig loginAppKey];
+    NSString *appSecret = [CNRSConfig loginAppSecret];
+    NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
+    
+    if (appKey == nil || appSecret == nil) {
+        return nil;
+    }
+    
     NSString *query = request.URL.query ? request.URL.query : @"";
-    
-    //test
-//    query = @"access_token=bFV0bEFFZnp6b1lUWEFRL1ZlMVdTMXMyZS9vdzBiU0ZycFNOZnQ1MGFtNG9oZ0xxbHBKSGVSaU1YVld4R1QxSSMjMzM3MzA0MDAw&appVersion=2.0.1&app_key=gbss-bupm&brand=iPhone&coreVersion=10.1&imei&machineModel=x86_64&model=0&netType=WiFi&os=0&osVersion=10.1&screen=1242x2208&terminalType=mobile&timestamp=1481103555156&imei=";
-    
-    
     NSString *parameterString = [[NSString alloc] initWithString:query];
     NSData *bodyData = request.HTTPBody;
     if (bodyData)
@@ -106,30 +110,17 @@
     }
     
     // 加入系统级参数
-    NSString *token = [CNRSLoginWidget getAccessToken];
-    NSString *appKey = [CNRSConfig loginAppKey];
-    NSString *appSecret = [CNRSConfig loginAppSecret];
-    NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-
-    if (token == nil || appKey == nil || appSecret == nil) {
-        return nil;
+    if (token)
+    {
+        parameters[@"access_token"] = token;
     }
-
-    parameters[@"access_token"] = token;
     parameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
-    if (query.length > 0)
-    {
-        query = [NSString stringWithFormat:@"%@&access_token=%@&app_key=%@&timestamp=%@&sign=%@",query,token,appKey,timestamp,sign];
-    }
-    else
-    {
-        query = [NSString stringWithFormat:@"access_token=%@&app_key=%@&timestamp=%@&sign=%@",token,appKey,timestamp,sign];
-    }
-    
+    query = [[parameters queryString] stringByAppendingFormat:@"&sign=%@",sign];
+        
     return query;
 }
 

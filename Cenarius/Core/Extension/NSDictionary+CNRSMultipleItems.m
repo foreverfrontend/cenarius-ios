@@ -24,4 +24,18 @@
   return [obj isKindOfClass:[NSArray class]] ? obj : (obj ? [NSArray arrayWithObject:obj] : nil);
 }
 
+- (NSString *)queryString
+{
+    NSMutableArray *pairs = [NSMutableArray array];
+    [self enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+        [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, obj]];
+    }];
+    
+    NSString *query = nil;
+    if (pairs.count > 0) {
+        query = [pairs componentsJoinedByString:@"&"];
+    }
+    return query;
+}
+
 @end

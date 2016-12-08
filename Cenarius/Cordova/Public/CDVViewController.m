@@ -68,6 +68,16 @@
     return self;
 }
 
+- (instancetype)initWithHtmlFileURL:(NSURL *)htmlFileURL
+{
+    self = [super initWithHtmlFileURL:htmlFileURL];
+    if (self)
+    {
+        [self __init];
+    }
+    return self;
+}
+
 - (void)__init
 {
     if ((self != nil) && !self.initialized) {
