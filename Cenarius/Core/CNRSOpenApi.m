@@ -67,15 +67,6 @@
 
 + (NSString *)openApiQuery:(NSURLRequest *)request
 {
-    NSString *token = [CNRSLoginWidget getAccessToken];
-    NSString *appKey = [CNRSConfig loginAppKey];
-    NSString *appSecret = [CNRSConfig loginAppSecret];
-    NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    
-    if (appKey == nil || appSecret == nil) {
-        return nil;
-    }
-    
     NSString *query = request.URL.query ? request.URL.query : @"";
     NSString *parameterString = [[NSString alloc] initWithString:query];
     NSData *bodyData = request.HTTPBody;
@@ -110,11 +101,18 @@
     }
     
     // 加入系统级参数
-    if (token)
+    NSString *token = [CNRSLoginWidget getAccessToken];
+    NSString *appKey = [CNRSConfig loginAppKey];
+    NSString *appSecret = [CNRSConfig loginAppSecret];
+    NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
+    if (token && [request.allHTTPHeaderFields[@"Without-Access-Token"] isEqualToString:@"True"] == NO)
     {
         parameters[@"access_token"] = token;
     }
-    parameters[@"app_key"] = appKey;
+    if (appKey)
+    {
+        parameters[@"app_key"] = appKey;
+    }
     parameters[@"timestamp"] = timestamp;
     
     // 签名
