@@ -10,6 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "NSString+CNRSURLEscape.h"
 #import "CNRSLoginWidget.h"
+#import "CNRSHTTPRequestSerializer.h"
 
 @implementation CNRSOpenApi
 
@@ -65,14 +66,26 @@
             ];
 }
 
-+ (NSString *)openApiQuery:(NSURLRequest *)request
++ (NSString *)openApiQuery:(NSMutableURLRequest *)request
 {
     NSString *query = request.URL.query ? request.URL.query : @"";
     NSString *parameterString = [[NSString alloc] initWithString:query];
-    NSData *bodyData = request.HTTPBody;
-    if (bodyData)
+    
+    if ([request.HTTPMethod isEqualToString:@"GET"] == NO && [request.HTTPMethod isEqualToString:@"HEAD"] == NO && [request.HTTPMethod isEqualToString:@"DELETE"] == NO )
     {
-        NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+        // 参数会在 body 里
+        NSString *bodyString = nil;
+        NSData *bodyData = request.HTTPBody; // H5 的 body
+        NSDictionary *bodyDic = [NSURLProtocol propertyForKey:NSURLRequestParametersKey inRequest:request]; // AF 的 body
+        if (bodyData)
+        {
+            bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
+        }
+        else if (bodyDic)
+        {
+            bodyString = [bodyDic queryString];
+        }
+        // 把 body 的字符串加到 query 中
         if (query.length > 0)
         {
             parameterString = [NSString stringWithFormat:@"%@&%@",query,bodyString];
@@ -115,7 +128,7 @@
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
     query = [[parameters queryString] stringByAppendingFormat:@"&sign=%@",sign];
-        
+   
     return query;
 }
 

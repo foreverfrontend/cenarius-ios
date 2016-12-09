@@ -83,11 +83,6 @@ static NSMutableDictionary *routeDictionary;
     return NO;
 }
 
-+ (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
-{
-    return request;
-}
-
 - (void)startLoading
 {
     CNRSDebugLog(@"Intercept <%@> within <%@>", self.request.URL, self.request.mainDocumentURL);

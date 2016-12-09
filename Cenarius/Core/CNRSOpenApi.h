@@ -24,6 +24,6 @@
  
  @param request 原 request
  */
-+ (NSString *)openApiQuery:(NSURLRequest *)request;
++ (NSString *)openApiQuery:(NSMutableURLRequest *)request;
 
 @end
