@@ -109,10 +109,7 @@
     {
         parameters[@"access_token"] = token;
     }
-    if (appKey)
-    {
-        parameters[@"app_key"] = appKey;
-    }
+    parameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;
     
     // 签名
