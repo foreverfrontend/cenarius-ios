@@ -52,15 +52,17 @@
     
     [[self class] markRequestAsIgnored:request];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    self.dataTask = [session dataTaskWithRequest:request];
-    [self.dataTask resume];
+    self.cnrsSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    self.cnrsDataTask = [self.cnrsSession dataTaskWithRequest:request];
+    [self.cnrsDataTask resume];
 }
 
 - (void)stopLoading
 {
-    [self.dataTask cancel];
-    self.dataTask = nil;
+    [self.cnrsDataTask cancel];
+    [self.cnrsSession invalidateAndCancel];
+    self.cnrsDataTask = nil;
+    self.cnrsSession = nil;
 }
 
 #pragma mark - NSURLSessionDataDelegate

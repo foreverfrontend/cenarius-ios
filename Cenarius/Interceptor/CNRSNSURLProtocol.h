@@ -10,7 +10,8 @@
 
 @interface CNRSNSURLProtocol : NSURLProtocol<NSURLSessionDataDelegate,NSURLSessionTaskDelegate>
 
-@property (nonatomic, strong) NSURLSessionDataTask *dataTask;
+@property (nonatomic, strong) NSURLSessionDataTask *cnrsDataTask;
+@property (nonatomic, strong) NSURLSession *cnrsSession;
 
 /**
  * 将该请求标记为可以忽略

@@ -96,17 +96,19 @@ static NSMutableDictionary *routeDictionary;
     
     [[self class] markRequestAsIgnored:request];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    self.dataTask = [session dataTaskWithRequest:request];
-    [self.dataTask resume];
+    self.cnrsSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    self.cnrsDataTask = [self.cnrsSession dataTaskWithRequest:request];
+    [self.cnrsDataTask resume];
     self.mutableData = [[NSMutableData alloc] init];
 }
 
 - (void)stopLoading
 {
     [routeDictionary removeObjectForKey:self.request.URL];
-    [self.dataTask cancel];
-    self.dataTask = nil;
+    [self.cnrsDataTask cancel];
+    [self.cnrsSession invalidateAndCancel];
+    self.cnrsDataTask = nil;
+    self.cnrsSession = nil;
     self.mutableData = nil;
     self.route = nil;
 }

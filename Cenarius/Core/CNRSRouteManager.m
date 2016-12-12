@@ -92,17 +92,6 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                        timeoutInterval:60];
-    //    // 更新 Http UserAgent Header
-    //    NSString *externalUserAgent = [CNRSConfig externalUserAgent];
-    //    if (externalUserAgent) {
-    //        NSString *userAgent = [request.allHTTPHeaderFields objectForKey:@"User-Agent"];
-    //        NSString *newUserAgent = externalUserAgent;
-    //        if (userAgent) {
-    //            newUserAgent = [@[userAgent, externalUserAgent] componentsJoinedByString:@" "];
-    //        }
-    //        [request setValue:newUserAgent forHTTPHeaderField:@"User-Agent"];
-    //    }
-    
     [[self.session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
       {
           dispatch_async(dispatch_get_main_queue(), ^{
