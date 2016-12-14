@@ -68,7 +68,11 @@
 
 + (NSString *)openApiQuery:(NSMutableURLRequest *)request
 {
+    // 原 query
     NSString *query = request.URL.query ? request.URL.query : @"";
+    NSMutableDictionary *queryParameters = [[NSMutableDictionary alloc] initWithDictionary:[query queryDictionary]];
+    
+    // 用来签名的 string
     NSString *parameterString = [[NSString alloc] initWithString:query];
     
     if ([request.HTTPMethod isEqualToString:@"GET"] == NO && [request.HTTPMethod isEqualToString:@"HEAD"] == NO && [request.HTTPMethod isEqualToString:@"DELETE"] == NO )
@@ -97,6 +101,7 @@
     }
     
     // 多值合并
+    // 用来签名的 parameters
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
     NSDictionary *oldParameters = [parameterString queryDictionary];
     for (NSString *key in oldParameters)
@@ -121,13 +126,19 @@
     if (token && [request.allHTTPHeaderFields[@"Without-Access-Token"] isEqualToString:@"True"] == NO)
     {
         parameters[@"access_token"] = token;
+        queryParameters[@"access_token"] = token;
     }
     parameters[@"app_key"] = appKey;
+    queryParameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;
+    queryParameters[@"timestamp"] = timestamp;
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
-    query = [[parameters queryString] stringByAppendingFormat:@"&sign=%@",sign];
+    
+    // 把签名参数加到 query 中
+    queryParameters[@"sign"] = sign;
+    query = [queryParameters queryString];
    
     return query;
 }

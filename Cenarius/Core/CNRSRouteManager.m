@@ -114,7 +114,17 @@
               for (NSString *uri in downloadFirstList)
               {
                   CNRSRoute *route = [self routeForURI:[NSURL URLWithString:uri]];
-                  [downloadFirstRoutes addObject:route];
+                  if (route)
+                  {
+                      [downloadFirstRoutes addObject:route];
+                  }
+                  else
+                  {
+                      //优先下载失败
+                      completion(NO);
+                      self.updatingRoutes = NO;
+                      return;
+                  }
               }
               
               [self cnrs_downloadFilesWithinRoutes:downloadFirstRoutes shouldDownloadAll:YES completion:^(BOOL success) {
