@@ -285,12 +285,16 @@
 
 - (NSURL *)cnrs_deleteString:(NSString *)deleteString fromString:(NSString *)string
 {
-    NSRange range = [string rangeOfString:deleteString];
-    if (range.location != NSNotFound)
+    if (deleteString && string)
     {
-        NSString *finalString = [string substringFromIndex:range.location + range.length + 1];
-        return [NSURL URLWithString:finalString];
+        NSRange range = [string rangeOfString:deleteString];
+        if (range.location != NSNotFound)
+        {
+            NSString *finalString = [string substringFromIndex:range.location + range.length + 1];
+            return [NSURL URLWithString:finalString];
+        }
     }
+    
     return nil;
 }
 
