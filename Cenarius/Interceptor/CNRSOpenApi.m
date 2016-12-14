@@ -144,7 +144,7 @@
     }
     if (shouldAddToken)
     {
-        query = [[NSString alloc] initWithFormat:@"&access_token=%@",token];
+        query = [[NSString alloc] initWithFormat:@"%@&access_token=%@",query,token];
     }
    
     return query;
