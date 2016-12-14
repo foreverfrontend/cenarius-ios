@@ -70,7 +70,6 @@
 {
     // 原 query
     NSString *query = request.URL.query ? request.URL.query : @"";
-    NSMutableDictionary *queryParameters = [[NSMutableDictionary alloc] initWithDictionary:[query queryDictionary]];
     
     // 用来签名的 string
     NSString *parameterString = [[NSString alloc] initWithString:query];
@@ -123,22 +122,30 @@
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
     NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    if (token && [request.allHTTPHeaderFields[@"Without-Access-Token"] isEqualToString:@"True"] == NO)
+    BOOL shouldAddToken = token && [request.allHTTPHeaderFields[@"Without-Access-Token"] isEqualToString:@"True"] == NO;
+    if (shouldAddToken)
     {
         parameters[@"access_token"] = token;
-        queryParameters[@"access_token"] = token;
     }
     parameters[@"app_key"] = appKey;
-    queryParameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;
-    queryParameters[@"timestamp"] = timestamp;
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
     
     // 把签名参数加到 query 中
-    queryParameters[@"sign"] = sign;
-    query = [queryParameters queryString];
+    if (query.length > 0)
+    {
+        query = [[NSString alloc] initWithFormat:@"%@&app_key=%@&timestamp=%@&sign=%@",query,appKey,timestamp,sign];
+    }
+    else
+    {
+        query = [[NSString alloc] initWithFormat:@"app_key=%@&timestamp=%@&sign=%@",appKey,timestamp,sign];
+    }
+    if (shouldAddToken)
+    {
+        query = [[NSString alloc] initWithFormat:@"&access_token=%@",token];
+    }
    
     return query;
 }
