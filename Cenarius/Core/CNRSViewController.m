@@ -198,7 +198,7 @@
                                   firstObject] stringByAppendingPathComponent:[CNRSConfig routesResourcePath]];
             CNRSLog(@"docPath %@",docPath);
             NSString *urlStr = [docPath stringByAppendingPathComponent:self.uri.absoluteString];
-            NSURL *url = [NSURL fileURLWithPath:urlStr];
+            NSURL *url = [NSURL URLWithString:[@"file://" stringByAppendingString:urlStr]];
             return url;
         }
         else
