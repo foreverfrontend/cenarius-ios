@@ -28,6 +28,12 @@ static NSMutableDictionary *routeDictionary;
 
 + (BOOL)canInitWithRequest:(NSURLRequest *)request
 {
+    // 开发模式不处理
+    if ([CNRSConfig isDevelopModeEnable])
+    {
+        return NO;
+    }
+    
     // 请求被忽略（被标记为忽略或者已经请求过），不处理
     if ([self isRequestIgnored:request])
     {
