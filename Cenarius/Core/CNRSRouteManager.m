@@ -74,10 +74,15 @@
 
 - (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion
 {
-    NSParameterAssert([NSThread isMainThread]);
+    if ([CNRSConfig isDevelopModeEnable])
+    {
+        completion(YES);
+        return;
+    }
     
     if (self.routesMapURL == nil) {
         CNRSDebugLog(@"[Warning] `routesRemoteURL` not set.");
+        completion(NO);
         return;
     }
     

@@ -197,9 +197,8 @@
             NSString *docPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)
                                   firstObject] stringByAppendingPathComponent:[CNRSConfig routesResourcePath]];
             CNRSLog(@"docPath %@",docPath);
-            docPath = [@"file://" stringByAppendingString:docPath];
             NSString *urlStr = [docPath stringByAppendingPathComponent:self.uri.absoluteString];
-            NSURL *url = [NSURL URLWithString:urlStr];
+            NSURL *url = [NSURL fileURLWithPath:urlStr];
             return url;
         }
         else
