@@ -68,8 +68,9 @@
 
 + (NSString *)openApiQuery:(NSMutableURLRequest *)request
 {
-    // 原 query
+    // 原 query, 需要 decode
     NSString *query = request.URL.query ? request.URL.query : @"";
+    query = [query decodingStringUsingURLEscape];
     
     // 用来签名的 string
     NSString *parameterString = [[NSString alloc] initWithString:query];
@@ -88,6 +89,8 @@
         {
             bodyString = [bodyDic queryString];
         }
+        // 原 body, 需要 decode
+        bodyString = [bodyString decodingStringUsingURLEscape];
         // 把 body 的字符串加到 query 中
         if (query.length > 0)
         {

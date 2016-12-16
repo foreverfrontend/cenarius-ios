@@ -10,10 +10,13 @@
         <script src="../jquery.js"></script>
         <script>
             $.ajax({
-                   url: 'https://gateway-dev.infinitus.com.cn/api/gbss-dealer/users',
-                   type: 'GET',
+                   url: 'https://gateway-dev.infinitus.com.cn/api/gbss-dealer/users?p=中文',
+                   type: 'POST',
                    headers: {
                    "X-Requested-With": "OpenAPIRequest"
+                   },
+                   data: {
+                   "D": "English"
                    },
                    success: function(data) {
                    console.log(data)
