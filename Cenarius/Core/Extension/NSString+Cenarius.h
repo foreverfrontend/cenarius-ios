@@ -1,5 +1,5 @@
 //
-//  NSString+CNRSURLEscape.h
+//  NSString+Cenarius.h
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-@interface NSString (CNRSURLEscape)
+@interface NSString (Cenarius)
 
 /**
  * url 字符串编码
@@ -24,5 +24,15 @@
  * 将 query 以字典形式返回。
  */
 - (NSDictionary *)queryDictionary;
+
+/**
+ *  转换为Base64编码
+ */
+
+- (NSString *)base64EncodedString;
+/**
+ *  将Base64编码还原
+ */
+- (NSString *)base64DecodedString;
 
 @end

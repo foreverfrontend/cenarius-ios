@@ -7,9 +7,9 @@
 //
 
 #import "NSURL+Cenarius.h"
-#import "NSString+CNRSURLEscape.h"
-#import "NSDictionary+CNRSMultipleItems.h"
-#import "NSString+CNRSURLEscape.h"
+#import "NSString+Cenarius.h"
+#import "NSDictionary+Cenarius.h"
+#import "NSString+Cenarius.h"
 
 @implementation NSURL (Cenarius)
 

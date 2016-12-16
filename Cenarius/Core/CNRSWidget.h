@@ -7,7 +7,7 @@
 //
 
 @import Foundation;
-#import "NSDictionary+CNRSMultipleItems.h"
+#import "NSDictionary+Cenarius.h"
 #import "NSURL+Cenarius.h"
 #import "CNRSViewController.h"
 

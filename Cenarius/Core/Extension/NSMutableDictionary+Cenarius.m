@@ -1,14 +1,14 @@
 //
-//  NSMutableDictionary+CNRSMultipleItems.m
+//  NSMutableDictionary+Cenarius.m
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import "NSMutableDictionary+CNRSMultipleItems.h"
+#import "NSMutableDictionary+Cenarius.h"
 
-@implementation NSMutableDictionary (CNRSMultipleItems)
+@implementation NSMutableDictionary (Cenarius)
 
 - (void)addItem:(NSString *)item forKey:(NSString *)aKey
 {

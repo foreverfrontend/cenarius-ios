@@ -1,12 +1,12 @@
 //
-//  NSData+CNRSDigest.m
+//  NSData+Cenarius.m
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import "NSData+CNRSDigest.h"
+#import "NSData+Cenarius.h"
 #include <CommonCrypto/CommonDigest.h>
 
 #define CNRS_DIGEST_PERFORM(_LENGTH, _FUNCTION) \
@@ -25,7 +25,7 @@
   } while (0); \
   return [result copy]
 
-@implementation NSData (CNRSDigest)
+@implementation NSData (Cenarius)
 
 - (NSString *)md5
 {

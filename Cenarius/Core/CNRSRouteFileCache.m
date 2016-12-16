@@ -10,7 +10,7 @@
 #import "CNRSConfig.h"
 #import "CNRSRoute.h"
 #import "CNRSLogging.h"
-#import "NSData+CNRSDigest.h"
+#import "NSData+Cenarius.h"
 #import "CNRSRouteManager.h"
 
 @implementation CNRSRouteFileCache

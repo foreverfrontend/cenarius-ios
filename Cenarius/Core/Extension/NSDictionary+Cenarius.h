@@ -1,5 +1,5 @@
 //
-//  NSDictionary+CNRSMultipleItems.h
+//  NSDictionary+Cenarius.h
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-@interface NSDictionary (CNRSMultipleItems)
+@interface NSDictionary (Cenarius)
 
 /**
  * 字典对应关键字的元素，该元素如果是数组，返回数组的首个元素。

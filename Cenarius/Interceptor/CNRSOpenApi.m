@@ -8,7 +8,7 @@
 
 #import "CNRSOpenApi.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "NSString+CNRSURLEscape.h"
+#import "NSString+Cenarius.h"
 #import "CNRSLoginWidget.h"
 #import "CNRSHTTPRequestSerializer.h"
 
@@ -125,11 +125,11 @@
     NSString *appKey = [CNRSConfig loginAppKey];
     NSString *appSecret = [CNRSConfig loginAppSecret];
     NSString *timestamp = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    BOOL shouldAddToken = token && [request.allHTTPHeaderFields[@"Without-Access-Token"] isEqualToString:@"True"] == NO;
-    if (shouldAddToken)
+    if (token == nil)
     {
-        parameters[@"access_token"] = token;
+        token = [self getAnonymousToken];
     }
+    parameters[@"access_token"] = token;
     parameters[@"app_key"] = appKey;
     parameters[@"timestamp"] = timestamp;
     
@@ -139,18 +139,23 @@
     // 把签名参数加到 query 中
     if (query.length > 0)
     {
-        query = [[NSString alloc] initWithFormat:@"%@&app_key=%@&timestamp=%@&sign=%@",query,appKey,timestamp,sign];
+        query = [[NSString alloc] initWithFormat:@"%@&app_key=%@&timestamp=%@&sign=%@&access_token=%@",query,appKey,timestamp,sign,token];
     }
     else
     {
-        query = [[NSString alloc] initWithFormat:@"app_key=%@&timestamp=%@&sign=%@",appKey,timestamp,sign];
+        query = [[NSString alloc] initWithFormat:@"app_key=%@&timestamp=%@&sign=%@&access_token=%@",appKey,timestamp,sign,token];
     }
-    if (shouldAddToken)
-    {
-        query = [[NSString alloc] initWithFormat:@"%@&access_token=%@",query,token];
-    }
-   
+    
     return query;
+}
+
+/**
+ 获取匿名token
+ */
++ (NSString *)getAnonymousToken
+{
+    NSString *token = [[NSString alloc] initWithFormat:@"ANONYMOUS##%@",[[NSUUID UUID] UUIDString]];
+    return [token base64EncodedString];
 }
 
 @end

@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+CNRSMultipleItems.h
+//  NSMutableDictionary+Cenarius.h
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-@interface NSMutableDictionary (CNRSMultipleItems)
+@interface NSMutableDictionary (Cenarius)
 
 /**
  * 在字典以关键字添加一个元素。

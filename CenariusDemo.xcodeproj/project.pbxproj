@@ -18,10 +18,10 @@
 		0C9EC6431DAF97A4003BFB38 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC6421DAF97A4003BFB38 /* Assets.xcassets */; };
 		0C9EC6461DAF97A4003BFB38 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C9EC6441DAF97A4003BFB38 /* LaunchScreen.storyboard */; };
 		0C9EC6841DAF98B2003BFB38 /* CNRSContainerInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6511DAF98B2003BFB38 /* CNRSContainerInterceptor.m */; };
-		0C9EC6851DAF98B2003BFB38 /* NSData+CNRSDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6551DAF98B2003BFB38 /* NSData+CNRSDigest.m */; };
-		0C9EC6861DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6571DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m */; };
-		0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m */; };
-		0C9EC6881DAF98B2003BFB38 /* NSString+CNRSURLEscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC65B1DAF98B2003BFB38 /* NSString+CNRSURLEscape.m */; };
+		0C9EC6851DAF98B2003BFB38 /* NSData+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6551DAF98B2003BFB38 /* NSData+Cenarius.m */; };
+		0C9EC6861DAF98B2003BFB38 /* NSDictionary+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6571DAF98B2003BFB38 /* NSDictionary+Cenarius.m */; };
+		0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m */; };
+		0C9EC6881DAF98B2003BFB38 /* NSString+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC65B1DAF98B2003BFB38 /* NSString+Cenarius.m */; };
 		0C9EC6891DAF98B2003BFB38 /* NSURL+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC65D1DAF98B2003BFB38 /* NSURL+Cenarius.m */; };
 		0C9EC68A1DAF98B2003BFB38 /* UIColor+Cenarius.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC65F1DAF98B2003BFB38 /* UIColor+Cenarius.m */; };
 		0C9EC68C1DAF98B2003BFB38 /* CNRSConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6631DAF98B2003BFB38 /* CNRSConfig.m */; };
@@ -98,14 +98,14 @@
 		0C9EC64F1DAF98B2003BFB38 /* CNRSContainerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSContainerAPI.h; sourceTree = "<group>"; };
 		0C9EC6501DAF98B2003BFB38 /* CNRSContainerInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSContainerInterceptor.h; sourceTree = "<group>"; };
 		0C9EC6511DAF98B2003BFB38 /* CNRSContainerInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSContainerInterceptor.m; sourceTree = "<group>"; };
-		0C9EC6541DAF98B2003BFB38 /* NSData+CNRSDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CNRSDigest.h"; sourceTree = "<group>"; };
-		0C9EC6551DAF98B2003BFB38 /* NSData+CNRSDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CNRSDigest.m"; sourceTree = "<group>"; };
-		0C9EC6561DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CNRSMultipleItems.h"; sourceTree = "<group>"; };
-		0C9EC6571DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CNRSMultipleItems.m"; sourceTree = "<group>"; };
-		0C9EC6581DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+CNRSMultipleItems.h"; sourceTree = "<group>"; };
-		0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+CNRSMultipleItems.m"; sourceTree = "<group>"; };
-		0C9EC65A1DAF98B2003BFB38 /* NSString+CNRSURLEscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CNRSURLEscape.h"; sourceTree = "<group>"; };
-		0C9EC65B1DAF98B2003BFB38 /* NSString+CNRSURLEscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CNRSURLEscape.m"; sourceTree = "<group>"; };
+		0C9EC6541DAF98B2003BFB38 /* NSData+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Cenarius.h"; sourceTree = "<group>"; };
+		0C9EC6551DAF98B2003BFB38 /* NSData+Cenarius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Cenarius.m"; sourceTree = "<group>"; };
+		0C9EC6561DAF98B2003BFB38 /* NSDictionary+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Cenarius.h"; sourceTree = "<group>"; };
+		0C9EC6571DAF98B2003BFB38 /* NSDictionary+Cenarius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Cenarius.m"; sourceTree = "<group>"; };
+		0C9EC6581DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Cenarius.h"; sourceTree = "<group>"; };
+		0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Cenarius.m"; sourceTree = "<group>"; };
+		0C9EC65A1DAF98B2003BFB38 /* NSString+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Cenarius.h"; sourceTree = "<group>"; };
+		0C9EC65B1DAF98B2003BFB38 /* NSString+Cenarius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Cenarius.m"; sourceTree = "<group>"; };
 		0C9EC65C1DAF98B2003BFB38 /* NSURL+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+Cenarius.h"; sourceTree = "<group>"; };
 		0C9EC65D1DAF98B2003BFB38 /* NSURL+Cenarius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+Cenarius.m"; sourceTree = "<group>"; };
 		0C9EC65E1DAF98B2003BFB38 /* UIColor+Cenarius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Cenarius.h"; sourceTree = "<group>"; };
@@ -336,14 +336,14 @@
 		0C9EC6531DAF98B2003BFB38 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0C9EC6541DAF98B2003BFB38 /* NSData+CNRSDigest.h */,
-				0C9EC6551DAF98B2003BFB38 /* NSData+CNRSDigest.m */,
-				0C9EC6561DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.h */,
-				0C9EC6571DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m */,
-				0C9EC6581DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.h */,
-				0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m */,
-				0C9EC65A1DAF98B2003BFB38 /* NSString+CNRSURLEscape.h */,
-				0C9EC65B1DAF98B2003BFB38 /* NSString+CNRSURLEscape.m */,
+				0C9EC6541DAF98B2003BFB38 /* NSData+Cenarius.h */,
+				0C9EC6551DAF98B2003BFB38 /* NSData+Cenarius.m */,
+				0C9EC6561DAF98B2003BFB38 /* NSDictionary+Cenarius.h */,
+				0C9EC6571DAF98B2003BFB38 /* NSDictionary+Cenarius.m */,
+				0C9EC6581DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.h */,
+				0C9EC6591DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m */,
+				0C9EC65A1DAF98B2003BFB38 /* NSString+Cenarius.h */,
+				0C9EC65B1DAF98B2003BFB38 /* NSString+Cenarius.m */,
 				0C9EC65C1DAF98B2003BFB38 /* NSURL+Cenarius.h */,
 				0C9EC65D1DAF98B2003BFB38 /* NSURL+Cenarius.m */,
 				0C9EC65E1DAF98B2003BFB38 /* UIColor+Cenarius.h */,
@@ -725,7 +725,7 @@
 				0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */,
 				0CC2C9CC1DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.m in Sources */,
 				0CAFF2461DBC688000B09978 /* CDVInvokedUrlCommand.m in Sources */,
-				0C9EC6861DAF98B2003BFB38 /* NSDictionary+CNRSMultipleItems.m in Sources */,
+				0C9EC6861DAF98B2003BFB38 /* NSDictionary+Cenarius.m in Sources */,
 				0CAFF24C1DBC688000B09978 /* CDVUserAgentUtil.m in Sources */,
 				0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */,
 				0CC2C9CE1DFBE4C300EDDCD8 /* CNRSNSURLProtocol.m in Sources */,
@@ -737,12 +737,12 @@
 				0C9EC6A71DB0C161003BFB38 /* NativeViewController.m in Sources */,
 				0CAFF2441DBC688000B09978 /* CDVCommandQueue.m in Sources */,
 				0C9EC68E1DAF98B2003BFB38 /* CNRSRoute.m in Sources */,
-				0C9EC6851DAF98B2003BFB38 /* NSData+CNRSDigest.m in Sources */,
+				0C9EC6851DAF98B2003BFB38 /* NSData+Cenarius.m in Sources */,
 				0CAFF23A1DBC688000B09978 /* CDVJSON_private.m in Sources */,
 				0C9EC6841DAF98B2003BFB38 /* CNRSContainerInterceptor.m in Sources */,
 				0CAFF2401DBC688000B09978 /* CDVUIWebViewEngine.m in Sources */,
-				0C9EC6881DAF98B2003BFB38 /* NSString+CNRSURLEscape.m in Sources */,
-				0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+CNRSMultipleItems.m in Sources */,
+				0C9EC6881DAF98B2003BFB38 /* NSString+Cenarius.m in Sources */,
+				0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m in Sources */,
 				0C9EC6381DAF97A4003BFB38 /* main.m in Sources */,
 				0CAFF24A1DBC688000B09978 /* CDVTimer.m in Sources */,
 				0CAFF24D1DBC688000B09978 /* CDVViewController.m in Sources */,

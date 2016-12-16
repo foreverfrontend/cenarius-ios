@@ -1,14 +1,14 @@
 //
-//  NSDictionary+CNRSMultipleItems.m
+//  NSDictionary+Cenarius.m
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import "NSDictionary+CNRSMultipleItems.h"
+#import "NSDictionary+Cenarius.h"
 
-@implementation NSDictionary (CNRSMultipleItems)
+@implementation NSDictionary (Cenarius)
 
 - (id)itemForKey:(id)key {
   id obj = [self objectForKey:key];

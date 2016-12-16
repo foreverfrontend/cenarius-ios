@@ -28,8 +28,8 @@
 #import "CNRSOpenApi.h"
 
 #import "NSURL+Cenarius.h"
-#import "NSDictionary+CNRSMultipleItems.h"
-#import "NSString+CNRSURLEscape.h"
+#import "NSDictionary+Cenarius.h"
+#import "NSString+Cenarius.h"
 
 #if DSK_WIDGET
 #import "CNRSModel.h"

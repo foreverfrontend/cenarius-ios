@@ -1,15 +1,15 @@
 //
-//  NSString+CNRSURLEscape.m
+//  NSString+Cenarius.m
 //  Cenarius
 //
 //  Created by M on 2016/10/13.
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import "NSString+CNRSURLEscape.h"
-#import "NSMutableDictionary+CNRSMultipleItems.h"
+#import "NSString+Cenarius.h"
+#import "NSMutableDictionary+Cenarius.h"
 
-@implementation NSString (CNRSURLEscape)
+@implementation NSString (Cenarius)
 
 - (NSString *)encodingStringUsingURLEscape
 {
@@ -61,6 +61,18 @@
     }
     
     return [pairs copy];
+}
+
+- (NSString *)base64EncodedString
+{
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    return [data base64EncodedStringWithOptions:0];
+}
+
+- (NSString *)base64DecodedString
+{
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:self options:0];
+    return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
 }
 
 @end
