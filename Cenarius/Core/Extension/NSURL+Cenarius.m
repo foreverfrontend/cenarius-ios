@@ -30,7 +30,7 @@
 
 - (NSDictionary *)jsonDictionary
 {
-    NSString *string = [[self queryDictionary] itemForKey:@"data"];
+    NSString *string = [[self.absoluteString decodingStringUsingURLEscape] substringFromIndex:[@"cenarius://cenarius-container/widget/web?data=" length]];
     NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
     return jsonDic;
