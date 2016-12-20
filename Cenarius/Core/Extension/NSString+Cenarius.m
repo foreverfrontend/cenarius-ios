@@ -54,10 +54,11 @@
         [scanner scanUpToCharactersFromSet:delimiterSet intoString:&pairString];
         [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
         NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
-        if (kvPair.count == 2) {
-            [pairs addItem:[[kvPair objectAtIndex:1] decodingStringUsingURLEscape]
-                         forKey:[[kvPair objectAtIndex:0] decodingStringUsingURLEscape]];
-        }
+        NSString *key = [kvPair firstObject];
+        NSRange range = [pairString rangeOfString:[key stringByAppendingString:@"="]];
+        NSString *value = [pairString substringFromIndex:range.length];
+        [pairs addItem:[key decodingStringUsingURLEscape]
+                forKey:[value decodingStringUsingURLEscape]];
     }
     
     return [pairs copy];
