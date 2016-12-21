@@ -42,10 +42,7 @@
         return nil;
     }
     
-    // Replace '+' with space
-    query = [query stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
-    
-    NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:@"&;"];
+    NSCharacterSet *delimiterSet = [NSCharacterSet characterSetWithCharactersInString:@"&"];
     NSMutableDictionary *pairs = [NSMutableDictionary dictionary];
     
     NSScanner *scanner = [[NSScanner alloc] initWithString:query];
@@ -57,8 +54,7 @@
         NSString *key = [kvPair firstObject];
         NSRange range = [pairString rangeOfString:[key stringByAppendingString:@"="]];
         NSString *value = [pairString substringFromIndex:range.length];
-        [pairs addItem:[key decodingStringUsingURLEscape]
-                forKey:[value decodingStringUsingURLEscape]];
+        [pairs addItem:value forKey:key];
     }
     
     return [pairs copy];

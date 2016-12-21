@@ -24,7 +24,7 @@
 }
 
 - (NSDictionary *)queryDictionary {
-    NSString *query = [self query];
+    NSString *query = [[self query] decodingStringUsingURLEscape];
     return [query queryDictionary];
 }
 
