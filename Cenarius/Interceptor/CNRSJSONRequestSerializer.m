@@ -1,14 +1,14 @@
 //
-//  CNRSHTTPRequestSerializer.m
-//  Cenarius
+//  CNRSJSONRequestSerializer.m
+//  CenariusDemo
 //
-//  Created by M on 2016/12/9.
+//  Created by M on 2016/12/26.
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#import "CNRSHTTPRequestSerializer.h"
+#import "CNRSJSONRequestSerializer.h"
 
-@implementation CNRSHTTPRequestSerializer
+@implementation CNRSJSONRequestSerializer
 
 - (NSMutableURLRequest *)requestWithMethod:(NSString *)method
                                  URLString:(NSString *)URLString

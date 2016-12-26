@@ -33,61 +33,61 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 
 + (void)setCNRSProtocolScheme:(NSString *)scheme
 {
-  @synchronized (self) {
-    sCNRSProtocolScheme = scheme;
-  }
+    @synchronized (self) {
+        sCNRSProtocolScheme = scheme;
+    }
 }
 
 + (NSString *)cnrsProtocolScheme
 {
-  if (sCNRSProtocolScheme) {
-    return sCNRSProtocolScheme;
-  }
-  return DefaultCNRSScheme;
+    if (sCNRSProtocolScheme) {
+        return sCNRSProtocolScheme;
+    }
+    return DefaultCNRSScheme;
 }
 
 + (void)setCNRSProtocolHost:(NSString *)host
 {
-  @synchronized (self) {
-    sCNRSProtocolHost = host;
-  }
+    @synchronized (self) {
+        sCNRSProtocolHost = host;
+    }
 }
 
 + (NSString *)cnrsProtocolHost
 {
-  if (sCNRSProtocolHost) {
-    return sCNRSProtocolHost;
-  }
-  return DefaultCNRSHost;
+    if (sCNRSProtocolHost) {
+        return sCNRSProtocolHost;
+    }
+    return DefaultCNRSHost;
 }
 
 + (NSURL *)routesMapURL
 {
-  return sRoutesMapURL;
+    return sRoutesMapURL;
 }
 
 + (void)setRoutesCachePath:(NSString *)routesCachePath
 {
-  @synchronized (self) {
-    sRoutesCachePath = routesCachePath;
-  }
+    @synchronized (self) {
+        sRoutesCachePath = routesCachePath;
+    }
 }
 
 + (NSString *)routesCachePath
 {
-  return sRoutesCachePath;
+    return sRoutesCachePath;
 }
 
 + (void)setRoutesResourcePath:(NSString *)routesResourcePath
 {
-  @synchronized (self) {
-    sRoutesResourcePath = routesResourcePath;
-  }
+    @synchronized (self) {
+        sRoutesResourcePath = routesResourcePath;
+    }
 }
 
 + (NSString *)routesResourcePath
 {
-  return sRoutesResourcePath;
+    return sRoutesResourcePath;
 }
 
 + (void)setRoutesWhiteList:(NSArray *)whiteList
@@ -116,43 +116,43 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 
 + (void)setExternalUserAgent:(NSString *)externalUserAgent
 {
-  if ([sCNRSUserAgent isEqualToString:externalUserAgent]) {
-    return;
-  }
-
-  @synchronized (self) {
-    sCNRSUserAgent = externalUserAgent;
-
-    NSArray<NSString *> *externalUserAgents = [externalUserAgent componentsSeparatedByString:@" "];
-
-    NSMutableString *newUserAgent = [NSMutableString string];
-    NSString *oldUserAgent = [[UIWebView new] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    if (oldUserAgent) {
-      [newUserAgent appendString:oldUserAgent];
+    if ([sCNRSUserAgent isEqualToString:externalUserAgent]) {
+        return;
     }
-
-    for (NSString *item in externalUserAgents) {
-      if (![newUserAgent containsString:item]) {
-        [newUserAgent appendFormat:@" %@", item];
-      }
+    
+    @synchronized (self) {
+        sCNRSUserAgent = externalUserAgent;
+        
+        NSArray<NSString *> *externalUserAgents = [externalUserAgent componentsSeparatedByString:@" "];
+        
+        NSMutableString *newUserAgent = [NSMutableString string];
+        NSString *oldUserAgent = [[UIWebView new] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+        if (oldUserAgent) {
+            [newUserAgent appendString:oldUserAgent];
+        }
+        
+        for (NSString *item in externalUserAgents) {
+            if (![newUserAgent containsString:item]) {
+                [newUserAgent appendFormat:@" %@", item];
+            }
+        }
+        
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUserAgent}];
+        
     }
-
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"UserAgent": newUserAgent}];
-
-  }
 }
 
 + (NSString *)externalUserAgent
 {
-  return sCNRSUserAgent;
+    return sCNRSUserAgent;
 }
 
 + (void)updateConfig
 {
-  CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-  routeManager.routesMapURL = sRoutesMapURL;
-  [routeManager setCachePath:sRoutesCachePath];
-  [routeManager setResoucePath:sRoutesResourcePath];
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    [routeManager setRoutesMapURL:sRoutesMapURL];
+    [routeManager setCachePath:sRoutesCachePath];
+    [routeManager setResoucePath:sRoutesResourcePath];
 }
 
 + (void)setRemoteFolderUrl:(NSURL *)remoteFolderUrl

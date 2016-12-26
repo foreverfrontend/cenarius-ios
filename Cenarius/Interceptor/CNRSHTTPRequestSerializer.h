@@ -8,7 +8,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-extern NSString* const NSURLRequestParametersKey;
+static NSString *NSURLRequestParametersKey = @"cenarius_parameters";
 
 /**
  解决 HTTPBody 为 nil 的问题

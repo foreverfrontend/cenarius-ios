@@ -9,6 +9,9 @@
 #import "ViewController.h"
 #import "CNRSWebViewController.h"
 #import "CNRSLoginWidget.h"
+#import "CNRSHTTPSessionManager.h"
+#import "CNRSHTTPRequestSerializer.h"
+#import "CNRSJSONRequestSerializer.h"
 
 @interface ViewController ()
 
@@ -47,6 +50,26 @@
         
     }];
 }
+
+- (IBAction)aF:(id)sender {
+    CNRSHTTPSessionManager *manager = [CNRSHTTPSessionManager sharedInstance];
+    // 相对 AFHTTPRequestSerializer
+//    manager.requestSerializer = [CNRSHTTPRequestSerializer serializer];
+    // 相对 JSONRequestSerializer
+    manager.requestSerializer = [CNRSJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:@"OpenAPIRequest" forHTTPHeaderField:@"X-Requested-With"];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:@"http://10.86.21.66:6089/api/gbss/dealer/promotions/join" parameters:@{@"A":@"B"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        NSString* errResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",errResponse);
+            
+            
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

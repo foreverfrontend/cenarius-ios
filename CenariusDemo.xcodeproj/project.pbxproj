@@ -44,6 +44,8 @@
 		0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8621DB4C737003BFB38 /* CNRSWebWidget.m */; };
 		0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8651DB5B01B003BFB38 /* CNRSNavMenuWidget.m */; };
 		0C9EC8691DB5B4B2003BFB38 /* CNRSMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC8681DB5B4B2003BFB38 /* CNRSMenuItem.m */; };
+		0CA212901E0B7E8300F27F73 /* CNRSLightAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA2128E1E0B7E8300F27F73 /* CNRSLightAppController.m */; };
+		0CA212911E0B7E8300F27F73 /* CNRSLightAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CA2128F1E0B7E8300F27F73 /* CNRSLightAppController.xib */; };
 		0CAFF23A1DBC688000B09978 /* CDVJSON_private.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF1FF1DBC688000B09978 /* CDVJSON_private.m */; };
 		0CAFF23B1DBC688000B09978 /* CDVGestureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2041DBC688000B09978 /* CDVGestureHandler.m */; };
 		0CAFF23C1DBC688000B09978 /* CDVHandleOpenURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2071DBC688000B09978 /* CDVHandleOpenURL.m */; };
@@ -68,6 +70,7 @@
 		0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2371DBC688000B09978 /* NSDictionary+CordovaPreferences.m */; };
 		0CAFF2501DBC688000B09978 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */; };
 		0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */; };
+		0CC262611E10F4B3002D81A3 /* CNRSJSONRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC262601E10F4B3002D81A3 /* CNRSJSONRequestSerializer.m */; };
 		0CC2C9CB1DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9C01DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.m */; };
 		0CC2C9CC1DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9C21DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.m */; };
 		0CC2C9CD1DFBE4C300EDDCD8 /* CNRSHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CC2C9C41DFBE4C300EDDCD8 /* CNRSHTTPSessionManager.m */; };
@@ -150,6 +153,9 @@
 		0C9EC8651DB5B01B003BFB38 /* CNRSNavMenuWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNavMenuWidget.m; sourceTree = "<group>"; };
 		0C9EC8671DB5B4B2003BFB38 /* CNRSMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSMenuItem.h; sourceTree = "<group>"; };
 		0C9EC8681DB5B4B2003BFB38 /* CNRSMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSMenuItem.m; sourceTree = "<group>"; };
+		0CA2128D1E0B7E8300F27F73 /* CNRSLightAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSLightAppController.h; sourceTree = "<group>"; };
+		0CA2128E1E0B7E8300F27F73 /* CNRSLightAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSLightAppController.m; sourceTree = "<group>"; };
+		0CA2128F1E0B7E8300F27F73 /* CNRSLightAppController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNRSLightAppController.xib; sourceTree = "<group>"; };
 		0CAFF1FD1DBC688000B09978 /* CDVDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVDebug.h; sourceTree = "<group>"; };
 		0CAFF1FE1DBC688000B09978 /* CDVJSON_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDVJSON_private.h; sourceTree = "<group>"; };
 		0CAFF1FF1DBC688000B09978 /* CDVJSON_private.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDVJSON_private.m; sourceTree = "<group>"; };
@@ -206,6 +212,8 @@
 		0CAFF2391DBC688000B09978 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSProgressViewWidget.h; sourceTree = "<group>"; };
 		0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSProgressViewWidget.m; sourceTree = "<group>"; };
+		0CC2625F1E10F4B3002D81A3 /* CNRSJSONRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSJSONRequestSerializer.h; sourceTree = "<group>"; };
+		0CC262601E10F4B3002D81A3 /* CNRSJSONRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSJSONRequestSerializer.m; sourceTree = "<group>"; };
 		0CC2C9BF1DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSCacheFileInterceptor.h; sourceTree = "<group>"; };
 		0CC2C9C01DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSCacheFileInterceptor.m; sourceTree = "<group>"; };
 		0CC2C9C11DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSHTTPRequestSerializer.h; sourceTree = "<group>"; };
@@ -326,6 +334,9 @@
 				0C9EC66F1DAF98B2003BFB38 /* CNRSViewController.m */,
 				0C9EC69A1DB07DDE003BFB38 /* CNRSWebViewController.h */,
 				0C9EC69B1DB07DDE003BFB38 /* CNRSWebViewController.m */,
+				0CA2128D1E0B7E8300F27F73 /* CNRSLightAppController.h */,
+				0CA2128E1E0B7E8300F27F73 /* CNRSLightAppController.m */,
+				0CA2128F1E0B7E8300F27F73 /* CNRSLightAppController.xib */,
 				0C9EC6701DAF98B2003BFB38 /* CNRSWidget.h */,
 				0C2BD4DE1DD3509D007AF9A7 /* CNRSNavigationController.h */,
 				0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */,
@@ -531,6 +542,8 @@
 				0CC2C9C01DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.m */,
 				0CC2C9C11DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.h */,
 				0CC2C9C21DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.m */,
+				0CC2625F1E10F4B3002D81A3 /* CNRSJSONRequestSerializer.h */,
+				0CC262601E10F4B3002D81A3 /* CNRSJSONRequestSerializer.m */,
 				0CC2C9C31DFBE4C300EDDCD8 /* CNRSHTTPSessionManager.h */,
 				0CC2C9C41DFBE4C300EDDCD8 /* CNRSHTTPSessionManager.m */,
 				0CC2C9C51DFBE4C300EDDCD8 /* CNRSNSURLProtocol.h */,
@@ -624,6 +637,7 @@
 			files = (
 				0C4085461DC775CB00CE2CE3 /* www in Resources */,
 				0C9EC6461DAF97A4003BFB38 /* LaunchScreen.storyboard in Resources */,
+				0CA212911E0B7E8300F27F73 /* CNRSLightAppController.xib in Resources */,
 				0C9EC6A01DB0B20D003BFB38 /* common_btn_arrowback@3x.png in Resources */,
 				0C7416681DBB198B00D4F802 /* config.xml in Resources */,
 				0C9EC6431DAF97A4003BFB38 /* Assets.xcassets in Resources */,
@@ -722,6 +736,7 @@
 				0C9EC8631DB4C737003BFB38 /* CNRSWebWidget.m in Sources */,
 				0C9EC6CE1DB346D1003BFB38 /* CNRSCordovaWidget.m in Sources */,
 				0C9EC6891DAF98B2003BFB38 /* NSURL+Cenarius.m in Sources */,
+				0CA212901E0B7E8300F27F73 /* CNRSLightAppController.m in Sources */,
 				0CBC803F1DE2D581009610BC /* CNRSProgressViewWidget.m in Sources */,
 				0CC2C9CC1DFBE4C300EDDCD8 /* CNRSHTTPRequestSerializer.m in Sources */,
 				0CAFF2461DBC688000B09978 /* CDVInvokedUrlCommand.m in Sources */,
@@ -744,6 +759,7 @@
 				0C9EC6881DAF98B2003BFB38 /* NSString+Cenarius.m in Sources */,
 				0C9EC6871DAF98B2003BFB38 /* NSMutableDictionary+Cenarius.m in Sources */,
 				0C9EC6381DAF97A4003BFB38 /* main.m in Sources */,
+				0CC262611E10F4B3002D81A3 /* CNRSJSONRequestSerializer.m in Sources */,
 				0CAFF24A1DBC688000B09978 /* CDVTimer.m in Sources */,
 				0CAFF24D1DBC688000B09978 /* CDVViewController.m in Sources */,
 				0C9EC6991DAF98B2003BFB38 /* CNRSPullRefreshWidget.m in Sources */,

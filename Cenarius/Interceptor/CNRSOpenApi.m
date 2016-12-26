@@ -87,7 +87,17 @@
         }
         else if (bodyDic)
         {
-            bodyString = [bodyDic queryString];
+            // JSON 签名
+            if ([[request valueForHTTPHeaderField:@"Content-Type"] isEqualToString:@"application/json"])
+            {
+                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:bodyDic options:0 error:nil];
+                NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                bodyString = [[NSString alloc] initWithFormat:@"jsonBody=%@",jsonString];
+            }
+            else
+            {
+                bodyString = [bodyDic queryString];
+            }
         }
         // 原 body, 需要 decode
         bodyString = [bodyString decodingStringUsingURLEscape];
@@ -154,7 +164,7 @@
  */
 + (NSString *)getAnonymousToken
 {
-    NSString *token = [[NSString alloc] initWithFormat:@"ANONYMOUS##%@",[[NSUUID UUID] UUIDString]];
+    NSString *token = [[NSString alloc] initWithFormat:@"%@##ANONYMOUS",[[NSUUID UUID] UUIDString]];
     return [token base64EncodedString];
 }
 

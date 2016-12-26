@@ -10,10 +10,11 @@
         <script src="../jquery.js"></script>
         <script>
             $.ajax({
-                   url: 'https://gateway-dev.infinitus.com.cn/api/gbss-dealer/users?p=中文',
+                   url: 'https://gbss-dev.infinitus.com.cn/gbss-bupm/front/gbss-mobile-portal/newPortal/getLoginInfo',
                    type: 'POST',
                    headers: {
-                   "X-Requested-With": "OpenAPIRequest"
+                   "X-Requested-With": "OpenAPIRequest",
+                   "content-type":"application/json"
                    },
                    data: {
                    "D": "English"

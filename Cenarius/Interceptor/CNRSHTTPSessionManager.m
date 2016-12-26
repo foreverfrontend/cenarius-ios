@@ -22,8 +22,6 @@
         [protocolsArray insertObject:[CNRSOpenApiRequestInterceptor class] atIndex:0];
         sessionConfiguration.protocolClasses = protocolsArray;
         manager = [[CNRSHTTPSessionManager alloc] initWithSessionConfiguration:sessionConfiguration];
-        manager.requestSerializer = [CNRSHTTPRequestSerializer serializer];
-        
     });
     return manager;
 }

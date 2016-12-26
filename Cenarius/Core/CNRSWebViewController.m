@@ -12,6 +12,7 @@
 @interface CNRSWebViewController ()
 
 @property (nonatomic, strong) NSURL *requestURL;
+@property (strong, nonatomic) UINavigationItem *navItem;//导航栏
 @property (strong, nonatomic) CNRSProgressViewWidget *progressView;//进度条
 @property (strong, nonatomic) UIBarButtonItem *backButton;//返回按钮
 @property (strong, nonatomic) UIBarButtonItem *closeButton;//关闭按钮
@@ -81,8 +82,17 @@
     [self _initCloseButton];
     [self _initRefreshButton];
     
-    self.navigationItem.leftBarButtonItems = @[_backButton];
-    self.navigationItem.rightBarButtonItem = _refreshButton;
+    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
+    [self.view addSubview:navBar];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
+    
+    self.navItem = [[UINavigationItem alloc] init];
+    self.navItem.leftBarButtonItems = @[_backButton];
+    self.navItem.rightBarButtonItem = _refreshButton;
+    [navBar pushNavigationItem:self.navItem animated:YES];
 }
 
 - (void)_initBackButton

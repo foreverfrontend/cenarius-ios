@@ -29,8 +29,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[CNRSRouteManager alloc] init];
-        instance.routesMapURL = [CNRSConfig routesMapURL];
     });
+    
     return instance;
 }
 
@@ -48,9 +48,7 @@
 
 - (void)setRoutesMapURL:(NSURL *)routesMapURL
 {
-    if (_routesMapURL != routesMapURL) {
-        _routesMapURL = routesMapURL;
-    }
+    _routesMapURL = routesMapURL;
 }
 
 - (void)setCachePath:(NSString *)cachePath
