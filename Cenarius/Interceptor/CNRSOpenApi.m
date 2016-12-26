@@ -84,6 +84,7 @@
         {
             bodyData = [NSURLProtocol propertyForKey:NSURLRequestParametersKey inRequest:request]; // AF 的 body
         }
+        
         if (bodyData)
         {
             bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
@@ -94,15 +95,15 @@
             {
                 bodyString = [[NSString alloc] initWithFormat:@"jsonBody=%@",bodyString];
             }
-        }
-        // 把 body 的字符串加到 query 中
-        if (query.length > 0)
-        {
-            parameterString = [NSString stringWithFormat:@"%@&%@",query,bodyString];
-        }
-        else
-        {
-            parameterString = bodyString;
+            // 把 body 的字符串加到 query 中
+            if (query.length > 0)
+            {
+                parameterString = [NSString stringWithFormat:@"%@&%@",query,bodyString];
+            }
+            else
+            {
+                parameterString = bodyString;
+            }
         }
     }
     
