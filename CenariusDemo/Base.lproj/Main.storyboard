@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Gpy-GP-nTQ">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Gpy-GP-nTQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,56 +23,82 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5W-dA-jnm">
+                                <rect key="frame" x="149" y="135" width="77" height="30"/>
                                 <state key="normal" title="打开轻应用"/>
                                 <connections>
                                     <action selector="openLight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KAi-X7-5N6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i2X-Qe-jlE">
+                                <rect key="frame" x="142" y="195" width="92" height="30"/>
                                 <state key="normal" title="打开原生页面"/>
                                 <connections>
                                     <action selector="openNative:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N3q-p0-wHl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URX-ob-adX">
+                                <rect key="frame" x="132" y="258" width="112" height="30"/>
                                 <state key="normal" title="打开本地H5页面"/>
                                 <connections>
                                     <action selector="openWeb:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xfm-Zs-oLf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6k-YV-RIS">
+                                <rect key="frame" x="128" y="318" width="119" height="30"/>
                                 <state key="normal" title="打开Cordova页面"/>
                                 <connections>
                                     <action selector="openCordova:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xr7-eM-Oza"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KNR-r0-Rf3">
-                                <frame key="frameInset" minX="131" minY="376" width="119" height="30"/>
+                                <rect key="frame" x="131" y="419" width="119" height="30"/>
                                 <state key="normal" title="登录"/>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iYf-wM-pEe"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s3W-pG-MwT">
+                                <rect key="frame" x="45" y="370" width="88" height="41"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E4u-yY-2kg">
+                                <rect key="frame" x="159" y="375" width="146" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="146" id="nGR-26-T6V"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="E4u-yY-2kg" firstAttribute="centerY" secondItem="s3W-pG-MwT" secondAttribute="centerY" id="0b9-EL-Pve"/>
+                            <constraint firstItem="s3W-pG-MwT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="29" id="1Qt-00-SCE"/>
                             <constraint firstItem="l5W-dA-jnm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="71" id="91m-nh-gHA"/>
+                            <constraint firstItem="E4u-yY-2kg" firstAttribute="top" secondItem="k6k-YV-RIS" secondAttribute="bottom" constant="27" id="CJc-QM-pNs"/>
                             <constraint firstItem="i2X-Qe-jlE" firstAttribute="top" secondItem="l5W-dA-jnm" secondAttribute="bottom" constant="30" id="FkR-CR-B0D"/>
+                            <constraint firstItem="E4u-yY-2kg" firstAttribute="leading" secondItem="s3W-pG-MwT" secondAttribute="trailing" constant="26" id="I7p-0q-ov4"/>
                             <constraint firstItem="URX-ob-adX" firstAttribute="top" secondItem="i2X-Qe-jlE" secondAttribute="bottom" constant="33" id="JmY-VK-9CP"/>
                             <constraint firstItem="k6k-YV-RIS" firstAttribute="top" secondItem="URX-ob-adX" secondAttribute="bottom" constant="30" id="KDt-09-Fyy"/>
-                            <constraint firstItem="KNR-r0-Rf3" firstAttribute="top" secondItem="k6k-YV-RIS" secondAttribute="bottom" constant="28" id="L25-Qh-mQ5"/>
+                            <constraint firstItem="KNR-r0-Rf3" firstAttribute="top" secondItem="k6k-YV-RIS" secondAttribute="bottom" constant="71" id="L25-Qh-mQ5"/>
                             <constraint firstItem="URX-ob-adX" firstAttribute="centerX" secondItem="i2X-Qe-jlE" secondAttribute="centerX" id="NnS-3v-wTp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="E4u-yY-2kg" secondAttribute="trailing" constant="54" id="QZI-85-Ead"/>
                             <constraint firstItem="KNR-r0-Rf3" firstAttribute="centerX" secondItem="k6k-YV-RIS" secondAttribute="centerX" id="TSE-oi-6vP"/>
                             <constraint firstItem="l5W-dA-jnm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jGf-mq-abh"/>
+                            <constraint firstItem="s3W-pG-MwT" firstAttribute="top" secondItem="k6k-YV-RIS" secondAttribute="bottom" constant="22" id="jaI-SP-UpI"/>
                             <constraint firstItem="k6k-YV-RIS" firstAttribute="centerX" secondItem="URX-ob-adX" secondAttribute="centerX" id="ngw-3a-CFr"/>
                             <constraint firstItem="i2X-Qe-jlE" firstAttribute="centerX" secondItem="l5W-dA-jnm" secondAttribute="centerX" id="sCv-Lp-Cry"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8NE-50-k37"/>
+                    <connections>
+                        <outlet property="captchaImageView" destination="s3W-pG-MwT" id="ztC-9T-r5e"/>
+                        <outlet property="captchaTextField" destination="E4u-yY-2kg" id="j3z-Qd-q9a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="-546"/>
+            <point key="canvasLocation" x="901.60000000000002" y="-546.47676161919048"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="HOP-RV-dnD">

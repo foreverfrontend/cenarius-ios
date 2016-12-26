@@ -10,6 +10,8 @@
 
 @interface ViewController : CNRSViewController
 
+@property (nonatomic, weak) IBOutlet UIImageView *captchaImageView;
+@property (nonatomic, weak) IBOutlet UITextField *captchaTextField;
 
 @end
 
