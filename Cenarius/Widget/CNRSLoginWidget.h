@@ -20,9 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param username   用户名
  @param password   密码
+ @param captchaId  获取验证码提交的随机码
+ @param captcha    验证码
  @param completion 登录后将执行这个 block
  */
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(nullable void (^)(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage))completion;
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password captchaId:(NSString *)captchaId captcha:(NSString *)captcha  completion:(nullable void (^)(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage))completion;
 
 /**
  * 获取 AccessToken
