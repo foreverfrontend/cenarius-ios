@@ -10,15 +10,25 @@
 
 @implementation CNRSHTTPRequestSerializer
 
-- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
-                                 URLString:(NSString *)URLString
-                                parameters:(nullable id)parameters
-                                     error:(NSError * _Nullable __autoreleasing *)error
+//- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+//                                 URLString:(NSString *)URLString
+//                                parameters:(nullable id)parameters
+//                                     error:(NSError * _Nullable __autoreleasing *)error
+//{
+//    NSMutableURLRequest *request = [super requestWithMethod:method URLString:URLString parameters:parameters error:error];
+//    [NSURLProtocol setProperty:parameters forKey:NSURLRequestParametersKey inRequest:request];
+//    
+//    return request;
+//}
+
+- (NSURLRequest *)requestBySerializingRequest:(NSURLRequest *)request
+                               withParameters:(id)parameters
+                                        error:(NSError *__autoreleasing *)error
 {
-    NSMutableURLRequest *request = [super requestWithMethod:method URLString:URLString parameters:parameters error:error];
-    [NSURLProtocol setProperty:parameters forKey:NSURLRequestParametersKey inRequest:request];
+    NSMutableURLRequest *mutableRequest = [[super requestBySerializingRequest:request withParameters:parameters error:error] mutableCopy];
+    [NSURLProtocol setProperty:mutableRequest.HTTPBody forKey:NSURLRequestParametersKey inRequest:mutableRequest];
     
-    return request;
+    return mutableRequest;
 }
 
 @end

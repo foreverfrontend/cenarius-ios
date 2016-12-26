@@ -80,27 +80,21 @@
         // 参数会在 body 里
         NSString *bodyString = nil;
         NSData *bodyData = request.HTTPBody; // H5 的 body
-        NSDictionary *bodyDic = [NSURLProtocol propertyForKey:NSURLRequestParametersKey inRequest:request]; // AF 的 body
+        if (bodyData == nil)
+        {
+            bodyData = [NSURLProtocol propertyForKey:NSURLRequestParametersKey inRequest:request]; // AF 的 body
+        }
         if (bodyData)
         {
             bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
-        }
-        else if (bodyDic)
-        {
+            // 原 body, 需要 decode
+            bodyString = [bodyString decodingStringUsingURLEscape];
             // JSON 签名
-            if ([[request valueForHTTPHeaderField:@"Content-Type"] isEqualToString:@"application/json"])
+            if ([[request valueForHTTPHeaderField:@"Content-Type"] containsString:@"application/json"])
             {
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:bodyDic options:0 error:nil];
-                NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                bodyString = [[NSString alloc] initWithFormat:@"jsonBody=%@",jsonString];
-            }
-            else
-            {
-                bodyString = [bodyDic queryString];
+                bodyString = [[NSString alloc] initWithFormat:@"jsonBody=%@",bodyString];
             }
         }
-        // 原 body, 需要 decode
-        bodyString = [bodyString decodingStringUsingURLEscape];
         // 把 body 的字符串加到 query 中
         if (query.length > 0)
         {
@@ -145,7 +139,8 @@
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
-    
+    NSLog(@"p: %@",parameters);
+    NSLog(@"sing: %@",sign);
     // 把签名参数加到 query 中
     if (query.length > 0)
     {
