@@ -45,7 +45,7 @@
     
 }
 
-+ (void)loginWithUsername:(NSString *)username password:(NSString *)password completion:(void (^)(BOOL success, NSString *accessToken, NSString *errorMessage))completion
++ (void)loginWithUsername:(NSString *)username password:(NSString *)password captchaId:(NSString *)captchaId captcha:(NSString *)captcha  completion:(nullable void (^)(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage))completion
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -63,6 +63,8 @@
     parameters[@"password"] = password;
     parameters[@"terminalType"] = @"mobile";
     parameters[@"rememberMe"] = @"true";
+    parameters[@"captchaId"] = captchaId;
+    parameters[@"captcha"] = captcha;
     
     NSString *sign = [CNRSOpenApi md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;

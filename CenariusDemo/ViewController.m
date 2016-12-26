@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CNRSWebViewController.h"
 #import "CNRSLoginWidget.h"
+#import <AFNetworking/AFNetworking.h>
 
 @interface ViewController ()
 
@@ -21,6 +22,54 @@
 
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.93 green:0.29 blue:0.30 alpha:1];
     self.navigationController.navigationBar.translucent = NO;
+    
+    [self.captchaTextField addTarget:self action:@selector(clickDone:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [self getCaptchaId];
+}
+
+- (void)clickDone:(id)sender {
+    [_captchaTextField endEditing:YES];
+}
+
+/**
+ * 获取验证码id和验证码
+ */
+- (void)getCaptchaId {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager GET:@"https://uim-test.infinitus.com.cn/captchaid" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSString *captchaId = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        [[NSUserDefaults standardUserDefaults] setObject:captchaId forKey:@"randomCode"];
+        [self getCaptcha];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证码获取失败！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }];
+    
+}
+
+/**
+ * 获取验证码
+ * https://uim-dev.infinitus.com.cn/captcha
+ * https://uim-test.infinitus.com.cn/captcha 测试和准生产
+ * https://uim.infinitus.com.cn/captcha 生产
+ */
+- (void)getCaptcha {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager GET:[NSString stringWithFormat:@"%@?id=%@",@"https://uim-test.infinitus.com.cn/captcha", [[NSUserDefaults standardUserDefaults] valueForKey:@"randomCode"]] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        UIImage *captchaImage = [UIImage imageWithData:responseObject];
+        [_captchaImageView setImage:captchaImage];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"验证码获取失败！" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alert show];
+    }];
 }
 
 - (IBAction)openLight:(id)sender
@@ -43,7 +92,7 @@
 }
 
 - (IBAction)login:(id)sender {
-    [CNRSLoginWidget loginWithUsername:@"337304000"  password:@"123444" completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
+    [CNRSLoginWidget loginWithUsername:@"337304000"  password:@"123444" captchaId:[[NSUserDefaults standardUserDefaults] valueForKey:@"randomCode"] captcha:_captchaTextField.text  completion:^(BOOL success, NSString * _Nullable accessToken, NSString * _Nullable errorMessage) {
         
     }];
 }
