@@ -93,7 +93,7 @@
             // JSON 签名
             if ([[request valueForHTTPHeaderField:@"Content-Type"] containsString:@"application/json"])
             {
-                bodyString = [[NSString alloc] initWithFormat:@"jsonBody=%@",bodyString];
+                bodyString = [[NSString alloc] initWithFormat:@"openApiBodyString=%@",bodyString];
             }
             // 把 body 的字符串加到 query 中
             if (query.length > 0)

@@ -109,6 +109,8 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:@"http://10.86.21.66:6089/api/gbss/dealer/promotions/join?q=q" parameters:@{@"A":@"中文"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         NSString* errResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
