@@ -26,7 +26,10 @@
                                         error:(NSError *__autoreleasing *)error
 {
     NSMutableURLRequest *mutableRequest = [[super requestBySerializingRequest:request withParameters:parameters error:error] mutableCopy];
-    [NSURLProtocol setProperty:mutableRequest.HTTPBody forKey:NSURLRequestParametersKey inRequest:mutableRequest];
+    if (mutableRequest.HTTPBody)
+    {
+        [NSURLProtocol setProperty:mutableRequest.HTTPBody forKey:NSURLRequestParametersKey inRequest:mutableRequest];
+    }
     
     return mutableRequest;
 }
