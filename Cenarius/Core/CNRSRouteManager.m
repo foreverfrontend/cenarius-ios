@@ -191,9 +191,11 @@
 
 - (NSURL *)remoteHtmlURLForURI:(NSURL *)uri
 {
-    NSURL *baseUri = [NSURL URLWithString:uri.path];
-    CNRSRoute *route = [self routeForURI:baseUri];
-    return [self remoteHtmlURLForRoute:route uri:uri];
+//    NSURL *baseUri = [NSURL URLWithString:uri.path];
+//    CNRSRoute *route = [self routeForURI:baseUri];
+//    return [self remoteHtmlURLForRoute:route uri:uri];
+    NSURL *url = [[CNRSConfig remoteFolderUrl] URLByAppendingPathComponent:uri.absoluteString];
+    return url;
 }
 
 - (NSURL *)remoteHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri
