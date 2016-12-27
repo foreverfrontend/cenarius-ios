@@ -20,6 +20,7 @@
 #import "CNRSNSURLProtocol.h"
 #import "CNRSHTTPSessionManager.h"
 #import "CNRSHTTPRequestSerializer.h"
+#import "CNRSJSONRequestSerializer.h"
 #import "CNRSOpenApiRequestInterceptor.h"
 #import "CNRSCacheFileInterceptor.h"
 
