@@ -57,14 +57,15 @@
         completion(NO, nil, @"先设置 service appKey appSecret");
         return;
     }
-    parameters[@"app_key"] = appKey;
-    parameters[@"timestamp"] = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
-    parameters[@"username"] = username;
-    parameters[@"password"] = password;
+    parameters[@"app_key"]      = appKey;
+    parameters[@"timestamp"]    = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
+    parameters[@"username"]     = username;
+    parameters[@"password"]     = password;
     parameters[@"terminalType"] = @"mobile";
-    parameters[@"rememberMe"] = @"true";
-    parameters[@"captchaId"] = captchaId;
-    parameters[@"captcha"] = captcha;
+    parameters[@"rememberMe"]   = @"true";
+    parameters[@"captchaId"]    = captchaId;
+    parameters[@"captcha"]      = captcha;
+    parameters[@"locale"]       = @"zh_CN";
     
     NSString *sign = [CNRSOpenApi md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;
