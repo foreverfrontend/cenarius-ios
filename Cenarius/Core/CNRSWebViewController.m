@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSURL *requestURL;
 @property (strong, nonatomic) UINavigationItem *navItem;//导航栏
+@property (strong, nonatomic) UINavigationBar *navBar;//导航栏
 @property (strong, nonatomic) CNRSProgressViewWidget *progressView;//进度条
 @property (strong, nonatomic) UIBarButtonItem *backButton;//返回按钮
 @property (strong, nonatomic) UIBarButtonItem *closeButton;//关闭按钮
@@ -22,6 +23,12 @@
 
 
 @implementation CNRSWebViewController
+
+#pragma mark - Super methods
+- (void)setTitle:(NSString *)title{
+    if(self.navItem)self.navItem.title = title;
+    [super setTitle:title];
+}
 
 #pragma mark - LifeCycle
 
@@ -82,17 +89,23 @@
     [self _initCloseButton];
     [self _initRefreshButton];
     
-    UINavigationBar *navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
-    [self.view addSubview:navBar];
+    self.navBar              = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
+    self.navBar.barTintColor = [UIColor colorWithRed:0.93 green:0.29 blue:0.30 alpha:1];
+    self.navBar.translucent  = NO;
+    self.navBar.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.navBar];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:navBar attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.navBar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.navBar attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.navBar attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
+    [self.navBar addConstraint:[NSLayoutConstraint constraintWithItem:self.navBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeHeight multiplier:1 constant:65]];
     
     self.navItem = [[UINavigationItem alloc] init];
     self.navItem.leftBarButtonItems = @[_backButton];
     self.navItem.rightBarButtonItem = _refreshButton;
-    [navBar pushNavigationItem:self.navItem animated:YES];
+    self.navItem.title = self.title;
+    [self.navBar pushNavigationItem:self.navItem animated:YES];
 }
 
 - (void)_initBackButton
@@ -119,7 +132,7 @@
 
 - (void)_showCloseButton
 {
-    self.navigationItem.leftBarButtonItems = @[_backButton,_closeButton];
+    if(self.navItem)self.navItem.leftBarButtonItems = @[_backButton,_closeButton];
 }
 
 - (void)_initWebView
@@ -131,6 +144,14 @@
     _webView.scalesPageToFit = YES;
     _webView.delegate = self;
     [self.view addSubview:_webView];
+    
+    if (self.navBar) {
+        _webView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.bottomLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.navBar attribute:NSLayoutAttributeBottom multiplier:1 constant:0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
+    }
 }
 
 - (void)_initProgressView
