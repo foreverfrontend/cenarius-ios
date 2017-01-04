@@ -27,9 +27,16 @@
     return self;
 }
 
+- (void)dealloc {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+}
+
+#pragma mark - Public methods
+
 - (void)startLoad
 {
     _isFinishLoad = NO;
+    [_progressTimer invalidate];
     _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.01667 target:self selector:@selector(timerCallback) userInfo:nil repeats:YES];
     [self.superview bringSubviewToFront:self];
 }
@@ -52,6 +59,7 @@
         {
             self.hidden = YES;
             [_progressTimer invalidate];
+            _progressTimer = nil;
         }
         else
         {

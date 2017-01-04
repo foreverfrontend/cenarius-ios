@@ -381,6 +381,16 @@
     [self _initProgressView];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    CGRect frame = _progressView.frame;
+    frame.origin.y = self.webView.frame.origin.y - 4;
+    _progressView.frame = frame;
+}
+
+#pragma mark - Private methods
+
 - (void)_initBackButton
 {
     UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
