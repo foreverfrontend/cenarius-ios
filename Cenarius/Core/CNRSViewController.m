@@ -203,10 +203,11 @@
         }
         else
         {
-            htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
-            if (htmlFileURL == nil) {
-                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
-            }
+//            htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
+//            if (htmlFileURL == nil) {
+//                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+//            }
+            htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
         }
     }
     
