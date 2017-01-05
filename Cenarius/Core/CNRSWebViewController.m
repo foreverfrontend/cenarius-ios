@@ -55,6 +55,15 @@
     [self reloadWebView];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    // 控制进度条在webview顶部
+    CGRect frame = _progressView.frame;
+    frame.origin.y = self.webView.frame.origin.y - 2;
+    _progressView.frame = frame;
+}
+
 #pragma mark - Public methods
 
 - (void)reloadWebView
