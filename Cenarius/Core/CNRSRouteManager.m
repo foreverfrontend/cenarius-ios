@@ -194,7 +194,8 @@
 //    NSURL *baseUri = [NSURL URLWithString:uri.path];
 //    CNRSRoute *route = [self routeForURI:baseUri];
 //    return [self remoteHtmlURLForRoute:route uri:uri];
-    NSURL *url = [[CNRSConfig remoteFolderUrl] URLByAppendingPathComponent:uri.absoluteString];
+    
+    NSURL *url = [NSURL URLWithString:[[[CNRSConfig remoteFolderUrl].absoluteString stringByAppendingString:@"/"] stringByAppendingString:uri.absoluteString]];
     return url;
 }
 
@@ -258,29 +259,23 @@
     if ([url isHttpOrHttps])
     {
         uri = [self cnrs_deleteString:remoteFolderUrlString fromString:urlString];
-        if (uri)
-        {
-            return uri;
-        }
     }
     //FILE
-    if (url.isFileURL)
+    else if (url.isFileURL)
     {
         //cache
         uri = [self cnrs_deleteString:routeFileCache.cachePath fromString:urlString];
-        if (uri)
+        if (uri == nil)
         {
-            return uri;
-        }
-        //resource
-        else
-        {
+            //resource
             uri = [self cnrs_deleteString:routeFileCache.resourcePath fromString:urlString];
-            if (uri)
-            {
-                return uri;
-            }
         }
+    }
+    
+    if (uri)
+    {
+        uri = [NSURL URLWithString:[self cnrs_deleteSlash:uri.absoluteString]];
+        return uri;
     }
     
     return nil;
