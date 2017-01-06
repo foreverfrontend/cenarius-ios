@@ -9,6 +9,38 @@
 #import "CNRSWebViewController.h"
 #import "CNRSProgressViewWidget.h"
 
+#pragma mark - CNRSBackButton
+
+@interface CNRSBackButton : UIButton
+@end
+@implementation CNRSBackButton
+
+- (CGRect)imageRectForContentRect:(CGRect)contentRect
+{
+    CGFloat imageW = 9;
+    CGFloat imageH = 16;
+    CGFloat imageX = -10;
+    CGFloat imageY = (contentRect.size.height - imageH) * 0.5;
+    
+    return CGRectMake(imageX, imageY, imageW, imageH);
+}
+
+- (CGRect)titleRectForContentRect:(CGRect)contentRect
+{
+    
+    CGFloat titleW = contentRect.size.width - 10 - 9 - 5;
+    CGFloat titleH = contentRect.size.height ;
+    CGFloat titleX = -10 + 9 +5;
+    CGFloat titleY = 0;
+    
+    return CGRectMake(titleX, titleY, titleW, titleH);
+    
+}
+
+@end
+
+#pragma mark - CNRSWebViewController
+
 @interface CNRSWebViewController ()
 
 @property (nonatomic, strong) NSURL *requestURL;
@@ -55,15 +87,6 @@
     [self reloadWebView];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    // 控制进度条在webview顶部
-    CGRect frame = _progressView.frame;
-    frame.origin.y = self.webView.frame.origin.y - 2;
-    _progressView.frame = frame;
-}
-
 #pragma mark - Public methods
 
 - (void)reloadWebView
@@ -98,10 +121,11 @@
     [self _initCloseButton];
     [self _initRefreshButton];
     
-    self.navBar              = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
-    self.navBar.barTintColor = [UIColor colorWithRed:0.93 green:0.29 blue:0.30 alpha:1];
-    self.navBar.translucent  = NO;
-    self.navBar.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.navBar              = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
+//    self.navBar.barTintColor = [UIColor whiteColor];
+//    self.navBar.translucent  = NO;
+//    self.navBar.translatesAutoresizingMaskIntoConstraints = NO;
+    [self _createCustomNavigationBar];
     [self.view addSubview:self.navBar];
     
     
@@ -117,26 +141,55 @@
     [self.navBar pushNavigationItem:self.navItem animated:YES];
 }
 
+- (UIView *)_createCustomNavigationBar{
+    
+    if (!self.navBar) {
+        UINavigationBar *barView = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 0)];
+        barView.barTintColor     = [UIColor whiteColor];
+        barView.shadowImage      = [UIImage new];
+        barView.translucent      = YES;
+        
+        
+        [self setNavBar:barView];
+        [self.view addSubview:self.navBar];
+        [barView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    }
+    
+    // 分割线
+    UIView *line         = [[UIView alloc] initWithFrame:CGRectMake(0, 65-1, self.navBar.frame.size.width, 1.0)];
+    line.backgroundColor = [UIColor lightGrayColor];
+    
+    [self.navBar addSubview:line];
+    [line setTranslatesAutoresizingMaskIntoConstraints:NO];
+//     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:line attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.navBar attribute:NSLayoutAttributeBottom multiplier:1 constant:1.0 / [UIScreen mainScreen].scale]];
+    return self.navBar;
+}
+
 - (void)_initBackButton
 {
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
-    [backButton setImage:[CNRSConfig backButtonImage] forState:UIControlStateNormal];
-    [backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [backButton setImageEdgeInsets:[CNRSConfig backButtonImageEdgeInsets]];
-    [backButton addTarget:self action:@selector(_backClick:) forControlEvents:UIControlEventTouchUpInside];
-    _backButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    CNRSBackButton *back      = [[CNRSBackButton alloc] init];
+    back.frame            = (CGRect){CGPointZero, 70, 35};
+    back.titleLabel.font  =[UIFont systemFontOfSize:16];
+    [back setTitle:@"返回" forState:UIControlStateNormal];
+    [back setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [back setImage:[CNRSConfig backButtonImage] forState:UIControlStateNormal];
+    [back addTarget:self action:@selector(_backClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _backButton     = [[UIBarButtonItem alloc] initWithCustomView:back];
 }
 
 - (void)_initCloseButton
 {
     _closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(_closeClick:)];
-    [_closeButton setTintColor:[UIColor whiteColor]];
+    [_closeButton setTintColor:[UIColor colorWithRed:154/255.0 green:154/255.0 blue:154/255.0 alpha:1.0f]];
+    _closeButton.imageInsets = UIEdgeInsetsMake(3, 0, 3, 0);
 }
 
 - (void)_initRefreshButton
 {
     _refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadWebView)];
-    [_refreshButton setTintColor:[UIColor whiteColor]];
+    [_refreshButton setTintColor:[UIColor colorWithRed:154/255.0 green:154/255.0 blue:154/255.0 alpha:1.0f]];
+    _refreshButton.imageInsets = UIEdgeInsetsMake(3, 0, 3, 0);
 }
 
 - (void)_showCloseButton
