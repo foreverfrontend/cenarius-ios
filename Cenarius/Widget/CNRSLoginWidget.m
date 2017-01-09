@@ -61,7 +61,7 @@
     parameters[@"timestamp"]    = [NSString stringWithFormat:@"%.0f",[NSDate date].timeIntervalSince1970 * 1000];
     parameters[@"username"]     = username;
     parameters[@"password"]     = password;
-    parameters[@"terminalType"] = @"mobile";
+    parameters[@"terminalType"] = @"MOBILE";
     parameters[@"rememberMe"]   = @"true";
     parameters[@"captchaId"]    = captchaId;
     parameters[@"captcha"]      = captcha;
