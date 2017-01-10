@@ -22,6 +22,7 @@
 #import "CNRSNativeWidget.h"
 #import "CNRSWebWidget.h"
 #import "CNRSConfig.h"
+#import "CNRSRouteFileCache.h"
 
 @interface CNRSViewController ()
 
@@ -207,7 +208,9 @@
 //            if (htmlFileURL == nil) {
 //                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
 //            }
-            htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+//            htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
+            NSString *urlString = [@"file://" stringByAppendingString:[[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:uri]];
+            htmlFileURL = [NSURL URLWithString:urlString];
         }
     }
     
