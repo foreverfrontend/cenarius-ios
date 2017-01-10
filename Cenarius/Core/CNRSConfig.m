@@ -31,6 +31,8 @@ static NSString *sLoginAppSecret;
 static NSString * const DefaultCNRSScheme = @"cenarius";
 static NSString * const DefaultCNRSHost = @"cenarius-container";
 
+static NSInteger maxConcurrentOperationCount;
+
 + (void)setCNRSProtocolScheme:(NSString *)scheme
 {
     @synchronized (self) {
@@ -150,9 +152,11 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 + (void)updateConfig
 {
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    [routeManager setMaxConcurrentOperationCount:maxConcurrentOperationCount];
     [routeManager setRoutesMapURL:sRoutesMapURL];
     [routeManager setCachePath:sRoutesCachePath];
     [routeManager setResoucePath:sRoutesResourcePath];
+    [routeManager updateURLSession];
 }
 
 + (void)setRemoteFolderUrl:(NSURL *)remoteFolderUrl
@@ -222,4 +226,7 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
     return sLoginService;
 }
 
++ (void)setMaxConcurrentOperationCount:(NSInteger)OperationCount{
+    maxConcurrentOperationCount = OperationCount;
+}
 @end
