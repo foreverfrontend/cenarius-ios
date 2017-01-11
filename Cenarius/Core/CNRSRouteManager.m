@@ -13,7 +13,7 @@
 #import "CNRSLogging.h"
 #import "NSURL+Cenarius.h"
 
-@interface CNRSRouteManager ()
+@interface CNRSRouteManager ()<NSURLSessionDownloadDelegate>
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, assign) BOOL updatingRoutes;
@@ -58,7 +58,7 @@
     _operationQueue                             = [[NSOperationQueue alloc] init];
     _operationQueue.maxConcurrentOperationCount = self.maxConcurrentOperationCount;
     _session = [NSURLSession sessionWithConfiguration:sessionCfg
-                                             delegate:nil
+                                             delegate:self
                                         delegateQueue:_operationQueue];
 }
 
@@ -528,4 +528,30 @@
     return uri;
 }
 
+#pragma mark - NSURLSessionDelegate
+/*
+ 请求完毕
+ 如果有错误, 那么error有值
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    if (!error) {
+        NSLog(@"请求成功");
+    }else{
+        NSLog(@"请求失败");
+    }
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
+    
+}
+/*
+ 接收到服务器返回的数据
+ bytesWritten: 当前这一次写入的数据大小
+ totalBytesWritten: 已经写入到本地文件的总大小
+ totalBytesExpectedToWrite : 被下载文件的总大小
+ */
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
+    
+}
 @end
