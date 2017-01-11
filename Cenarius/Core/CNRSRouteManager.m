@@ -16,7 +16,7 @@
 
 #define kAppConfigVersionKey @"kAppConfigVersionKey"
 
-@interface CNRSRouteManager ()<NSURLSessionDownloadDelegate>
+@interface CNRSRouteManager ()
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, assign) BOOL updatingRoutes;
@@ -61,7 +61,7 @@
     _operationQueue                             = [[NSOperationQueue alloc] init];
     _operationQueue.maxConcurrentOperationCount = self.maxConcurrentOperationCount;
     _session = [NSURLSession sessionWithConfiguration:sessionCfg
-                                             delegate:self
+                                             delegate:nil
                                         delegateQueue:_operationQueue];
 }
 
@@ -178,61 +178,18 @@
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
               self.routes = [routeFileCache routesWithData:data];
               
-              //优先下载
-              NSArray *downloadFirstList = [CNRSConfig downloadFirstList];
-              NSMutableArray *downloadFirstRoutes = [[NSMutableArray alloc] init];
-              for (NSString *uri in downloadFirstList)
-              {
-                  CNRSRoute *route = [self routeForURI:[NSURL URLWithString:uri]];
-                  if (route)
-                  {
-                      [downloadFirstRoutes addObject:route];
-                  }
-                  else
-                  {
-                      //优先下载失败
-                      completion(NO);
-                      self.updatingRoutes = NO;
-                      return;
-                  }
-              }
-              
-              [self cnrs_downloadFilesWithinRoutes:downloadFirstRoutes shouldDownloadAll:YES completion:^(BOOL success) {
+              [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:NO completion:^(BOOL success) {
                   if (success)
                   {
-                      if (self.cacheRoutes == nil)
-                      {
-                          //优先下载成功，如果没有 cacheRoutes，立马保存
-                          self.cacheRoutes = self.routes;
-                          [routeFileCache saveRoutesMapFile:data];
-                      }
-                      else{
-                          //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
-                          self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
-                      }
-                      //                      completion(YES);
-                      
-                      //然后下载最新 routes 中的资源文件
-                      [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:NO completion:^(BOOL success) {
-                          if (success)
-                          {
-                              // 所有文件更新到最新，保存路由表
-                              self.cacheRoutes = self.routes;
-                              [routeFileCache saveRoutesMapFile:data];
-                              self.updatingRoutes = NO;
-                          }
-                          else{
-                              self.updatingRoutes = NO;
-                          }
-                          completion(success);
-                      }];
-                  }
-                  else
-                  {
-                      //优先下载失败
-                      completion(NO);
+                      // 所有文件更新到最新，保存路由表
+                      self.cacheRoutes = self.routes;
+                      [routeFileCache saveRoutesMapFile:data];
                       self.updatingRoutes = NO;
                   }
+                  else{
+                      self.updatingRoutes = NO;
+                  }
+                  completion(success);
               }];
           });
       }] resume];
@@ -372,29 +329,33 @@
 - (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion
 {
 //    [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:0];
-    dispatch_queue_t queue         = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t disgroup      = dispatch_group_create();
-    __weak __typeof(self) weakSelf = self;
-    __block BOOL isSuccess         = false;
+    dispatch_queue_t queue           = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t disgroup        = dispatch_group_create();
+    __weak __typeof(self) weakSelf   = self;
+    __block BOOL isSuccess           = false;
+    __block NSError *errorCompletion = nil;
     
     dispatch_group_enter(disgroup);
-    void (^downloadCompletion)(NSInteger index,BOOL success,BOOL stop) = ^(NSInteger index,BOOL success,BOOL stop){
+    void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error) = ^(NSInteger index,BOOL stop,NSError *error){
         if (index == routes.count - 1 || stop) {
             isSuccess = !stop;
+            errorCompletion = error;
             dispatch_group_leave(disgroup);
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
+                                                            object:@((index + 1)*0.f/routes.count)];
     };
 
     dispatch_group_async(disgroup, queue, ^{
         if(![routes count]){
-            downloadCompletion(0,false,true);
+            downloadCompletion(0,true,nil);
         }else{
             [routes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 @autoreleasepool {
                     CNRSRoute *route = obj;
                     
-                    // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
-                    if (![weakSelf localHtmlURLForURI:route.uri])
+                    // 如果哈希值比对不上，则下载。
+                    if (![[CNRSRouteFileCache sharedInstance] cnrs_resourceRouteFilePathForRoute:route])
                     {
                         // 文件不存在，下载下来
                         NSMutableURLRequest *request =
@@ -413,26 +374,26 @@
                                  if (shouldDownloadAll)
                                  {
                                      *stop = true;
-                                     downloadCompletion(idx,false,*stop);
+                                     downloadCompletion(idx,*stop,error);
                                  }
                                  else
                                  {
                                      // 下载失败，仅删除旧文件
                                      [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
-                                     downloadCompletion(idx,false,false);
+                                     downloadCompletion(idx,false,error);
                                  }
                              }else{
                                  // 下载成功，保存
                                  NSData *data = [NSData dataWithContentsOfURL:location];
                                  [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-                                 downloadCompletion(idx,true,false);
+                                 downloadCompletion(idx,false,error);
                              }
                          }];
                         
                         downloadTask.priority = NSURLSessionTaskPriorityLow;
                         [downloadTask resume];
                     }else{
-                        downloadCompletion(idx,true,false);
+                        downloadCompletion(idx,false,nil);
                     }
                 }
             }];
@@ -573,32 +534,5 @@
         uri = [uri substringFromIndex:1];
     }
     return uri;
-}
-
-#pragma mark - NSURLSessionDelegate
-/*
- 请求完毕
- 如果有错误, 那么error有值
- */
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-{
-    if (!error) {
-        NSLog(@"请求成功");
-    }else{
-        NSLog(@"请求失败");
-    }
-}
-
-- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
-    
-}
-/*
- 接收到服务器返回的数据
- bytesWritten: 当前这一次写入的数据大小
- totalBytesWritten: 已经写入到本地文件的总大小
- totalBytesExpectedToWrite : 被下载文件的总大小
- */
-- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
-    
 }
 @end
