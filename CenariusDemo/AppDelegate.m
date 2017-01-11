@@ -26,6 +26,7 @@
     [CNRSConfig setRoutesWhiteList:@[@"cordova",@"sign"]];
 //    [CNRSConfig setDownloadFirstList:@[@"activity/assets/fonts/e-webfont.eot"]];
     [CNRSConfig setCNRSProtocolScheme:@"cenarius"];
+    [CNRSConfig setMaxConcurrentOperationCount:2];
     [CNRSConfig setCNRSProtocolHost:@"cenarius-container"];
     [CNRSConfig setBackButtonImage:[UIImage imageNamed:@"common_btn_arrowback.png"] edgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     [CNRSConfig setLoginWithService:@"https://uim-test.infinitus.com.cn/oauth20/accessToken" appKey:@"gbss-bupm" appSecret:@"rfGd23Yhjd92JkpWe"];

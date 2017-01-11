@@ -168,6 +168,10 @@ static NSString * const RoutesMapFile = @"routes.json";
  */
 +(NSString *)loginService;
 
+/**
+ 设置下载的并行数，当值为1的时候，为串行。
+ */
++ (void)setMaxConcurrentOperationCount:(NSInteger)OperationCount;
 @end
 
 NS_ASSUME_NONNULL_END
