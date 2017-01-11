@@ -21,7 +21,7 @@
 //  Config Cenarius
 //    [CNRSConfig setDevelopModeEnable:YES];
 //    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"https://emcsdev.infinitus.com.cn/h5/www"]];
-    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"http://172.20.70.80/hybrid"]];
+    [CNRSConfig setRemoteFolderUrl:[NSURL URLWithString:@"http://172.20.70.80/www"]];
     [CNRSConfig setRoutesResourcePath:@"www"];
     [CNRSConfig setRoutesWhiteList:@[@"cordova",@"sign"]];
 //    [CNRSConfig setDownloadFirstList:@[@"activity/assets/fonts/e-webfont.eot"]];

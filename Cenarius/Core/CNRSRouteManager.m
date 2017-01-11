@@ -12,6 +12,9 @@
 #import "CNRSRoute.h"
 #import "CNRSLogging.h"
 #import "NSURL+Cenarius.h"
+#import "CenariusConfigEntity.h"
+
+#define kAppConfigVersionKey @"kAppConfigVersionKey"
 
 @interface CNRSRouteManager ()
 
@@ -90,6 +93,7 @@
     [[CNRSRouteManager sharedInstance] updateRoutesWithCompletion:completion];
 }
 
+// 判断版本和更新H5文件
 - (void)updateRoutesWithCompletion:(void (^)(BOOL success))completion
 {
     if ([CNRSConfig isDevelopModeEnable])
@@ -110,6 +114,49 @@
     }
     
     self.updatingRoutes = YES;
+    
+    
+    // 请求H5版本配置 API
+    NSMutableURLRequest *requestConfig = [NSMutableURLRequest requestWithURL:[CNRSConfig getConfigUrl]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+                                                       timeoutInterval:60];
+    [[self.session dataTaskWithRequest:requestConfig completionHandler:^(NSData * data, NSURLResponse * response, NSError * error)
+      {
+          // 获取配置失败
+          if (((NSHTTPURLResponse *)response).statusCode != 200) {
+              completion(NO);
+              self.updatingRoutes = NO;
+          } else {
+              CenariusConfigEntity *entity = [[CenariusConfigEntity alloc] initWithData:data];
+              NSString *AppVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+              // App小于最低版本支持
+              if ([AppVersion floatValue] < [entity.iosMinVersion floatValue]) {
+                  completion(YES);
+                  self.updatingRoutes = NO;
+              } else {
+                  NSString *appConfigVersion = [[NSUserDefaults standardUserDefaults] objectForKey:kAppConfigVersionKey];
+                  // 版本相同不用更新
+                  if ([entity.releaseVersion isEqualToString:appConfigVersion]) {
+                      completion(YES);
+                      self.updatingRoutes = NO;
+                  } else {
+                      [self _updateRouteAndHtmlWithCompletion:^(BOOL success) {
+                          // 更新成功后保存版本号
+                          if (success) {
+                              [[NSUserDefaults standardUserDefaults] setObject:entity.releaseVersion forKey:kAppConfigVersionKey];
+                          }
+                          completion(success);
+                      }];
+                  }
+              }
+          }
+    }] resume];
+    
+   
+}
+
+// 更新路由和H5文件
+- (void)_updateRouteAndHtmlWithCompletion:(void (^)(BOOL success))completion {
     
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
@@ -163,7 +210,7 @@
                           //优先下载成功，把下载成功的 routes 加入 cacheRoutes 的最前面
                           self.cacheRoutes = [NSMutableArray arrayWithArray:[downloadFirstRoutes arrayByAddingObjectsFromArray:self.cacheRoutes]];
                       }
-//                      completion(YES);
+                      //                      completion(YES);
                       
                       //然后下载最新 routes 中的资源文件
                       [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:NO completion:^(BOOL success) {

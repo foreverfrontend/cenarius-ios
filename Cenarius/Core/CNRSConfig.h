@@ -11,12 +11,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //路由表文件名
-static NSString * const RoutesMapFile = @"routes.json";
+static NSString * const RoutesMapFile = @"cenarius-routes.json";
+static NSString * const CenariusConfig = @"cenarius-config.json";
 
 /**
  * `CNRSConfig` 提供对 Cenarius 的全局配置接口。
  */
 @interface CNRSConfig : NSObject
+
+/**
+ * 获取版本更新信息URL
+ */
++ (NSURL *)getConfigUrl;
 
 /**
  * 设置 cnrsProtocolScheme。

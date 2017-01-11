@@ -33,6 +33,13 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 
 static NSInteger maxConcurrentOperationCount;
 
+
+#pragma mark - ClassMethods
+
++ (NSURL *)getConfigUrl{
+    return [sRemoteFolderUrl URLByAppendingPathComponent:CenariusConfig];
+}
+
 + (void)setCNRSProtocolScheme:(NSString *)scheme
 {
     @synchronized (self) {
