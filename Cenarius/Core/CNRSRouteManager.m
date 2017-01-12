@@ -329,21 +329,30 @@
 - (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion
 {
 //    [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:0];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
+                                                        object:@(0.0)];
+    
     dispatch_queue_t queue           = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t disgroup        = dispatch_group_create();
     __weak __typeof(self) weakSelf   = self;
     __block BOOL isSuccess           = false;
     __block NSError *errorCompletion = nil;
+    __block NSInteger idx            = 0;
     
     dispatch_group_enter(disgroup);
     void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error) = ^(NSInteger index,BOOL stop,NSError *error){
+        CGFloat progress = (idx++ + 1)*1.0f/routes.count;
         if (index == routes.count - 1 || stop) {
-            isSuccess = !stop;
+            isSuccess       = !stop;
             errorCompletion = error;
+            if (index == routes.count - 1) {
+                progress    = 1.0;
+            }
             dispatch_group_leave(disgroup);
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
-                                                            object:@((index + 1)*0.f/routes.count)];
+                                                            object:@(progress)];
     };
 
     dispatch_group_async(disgroup, queue, ^{
