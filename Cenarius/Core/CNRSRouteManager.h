@@ -38,9 +38,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSURL *routesMapURL;
 
 /**
+ *  设置当前下载的并行数，当值为1时，为串行下载。
+ */
+@property (nonatomic, assign) NSInteger maxConcurrentOperationCount;
+
+/**
  * 单例方法，获取一个 CNRSRouteManager 实例。
  */
 + (CNRSRouteManager *)sharedInstance;
+
+/**
+ * 删除旧的URLSession，并创建新的URLSession
+ */
+- (void)updateURLSession;
 
 /**
  * 设置缓存地址。如果是相对路径的话，则认为其是相对于应用缓存路径

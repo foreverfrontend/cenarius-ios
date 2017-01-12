@@ -114,6 +114,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)resourceFilePathForUri:(NSURL *)uri;
 
+
+/**
+ 哈希值比对，如果存在则返回地址，不存在则返回nil
+ */
+- (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route;
 @end
 
 NS_ASSUME_NONNULL_END
