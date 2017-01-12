@@ -35,6 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) NSURL *uri;
 
+
+/**
+ 更新路由表的Hash值
+ */
+- (void)updateRouteFileHash:(NSString *)hash;
 @end
 
 NS_ASSUME_NONNULL_END

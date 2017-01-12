@@ -178,7 +178,7 @@
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
               self.routes = [routeFileCache routesWithData:data];
               
-              [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:NO completion:^(BOOL success) {
+              [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
                   if (success)
                   {
                       // 所有文件更新到最新，保存路由表
@@ -187,6 +187,8 @@
                       self.updatingRoutes = NO;
                   }
                   else{
+                      NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
+                      if(data)[routeFileCache saveRoutesMapFile:data];
                       self.updatingRoutes = NO;
                   }
                   completion(success);
@@ -333,23 +335,30 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                         object:@(0.0)];
     
-    dispatch_queue_t queue           = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t disgroup        = dispatch_group_create();
-    __weak __typeof(self) weakSelf   = self;
-    __block BOOL isSuccess           = false;
-    __block NSError *errorCompletion = nil;
-    __block NSInteger idx            = 0;
+    dispatch_queue_t queue               = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t disgroup            = dispatch_group_create();
+    __weak __typeof(self) weakSelf       = self;
+    __block BOOL isSuccess               = false;
+    __block NSError *errorCompletion     = nil;
+    __block NSInteger countIdx           = 0;
+    __block NSMutableArray *updateRoutes = [NSMutableArray array];
+    __block void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error);
+    
+    if(self.cacheRoutes) [updateRoutes addObjectsFromArray:self.cacheRoutes];
     
     dispatch_group_enter(disgroup);
-    void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error) = ^(NSInteger index,BOOL stop,NSError *error){
-        CGFloat progress = (idx++ + 1)*1.0f/routes.count;
-        if (index == routes.count - 1 || stop) {
+    downloadCompletion = ^(NSInteger index,BOOL stop,NSError *error){
+        CGFloat progress = (index)*1.0f/routes.count;
+        NSLog(@"index:%d,count:%d",index,routes.count);
+        if (index == routes.count || stop) {
             isSuccess       = !stop;
             errorCompletion = error;
-            if (index == routes.count - 1) {
+            if (index == routes.count) {
                 progress    = 1.0;
             }
+            [weakSelf.session invalidateAndCancel];
             dispatch_group_leave(disgroup);
+            downloadCompletion = nil;
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                             object:@(progress)];
@@ -359,12 +368,17 @@
         if(![routes count]){
             downloadCompletion(0,true,nil);
         }else{
+            __block BOOL __Block_stop = false;
             [routes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 @autoreleasepool {
-                    CNRSRoute *route = obj;
+                    CNRSRoute *route               = obj;
+                    CNRSRoute *resourceRoute       = [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteForRoute:route];
+                    if(resourceRoute)resourceRoute = updateRoutes[[updateRoutes indexOfObject:resourceRoute]];
                     
                     // 如果哈希值比对不上，则下载。
-                    if (![[CNRSRouteFileCache sharedInstance] cnrs_resourceRouteFilePathForRoute:route])
+                    // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
+                    if (!resourceRoute || ![resourceRoute.fileHash isEqualToString:route.fileHash]
+                        || ![weakSelf localHtmlURLForURI:route.uri])
                     {
                         // 文件不存在，下载下来
                         NSMutableURLRequest *request =
@@ -375,34 +389,42 @@
                         NSURLSessionDownloadTask *downloadTask =
                         [weakSelf.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
                          {
+                             ++countIdx;
                              CNRSDebugLog(@"Download %@", response.URL);
+//                             NSLog(@"Download %@", response.URL);
                              
                              if (error || ((NSHTTPURLResponse *)response).statusCode != 200)
                              {
                                  CNRSDebugLog(@"Fail to download remote html: %@", error);
+//                                 NSLog(@"Fail to download remote html: %@", error);
                                  if (shouldDownloadAll)
                                  {
-                                     *stop = true;
-                                     downloadCompletion(idx,*stop,error);
+                                     if(downloadCompletion){
+                                         downloadCompletion(countIdx,true,error);
+                                     }
                                  }
                                  else
                                  {
                                      // 下载失败，仅删除旧文件
                                      [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
-                                     downloadCompletion(idx,false,error);
+                                     if(downloadCompletion)downloadCompletion(countIdx,false,error);
                                  }
                              }else{
                                  // 下载成功，保存
                                  NSData *data = [NSData dataWithContentsOfURL:location];
                                  [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-                                 downloadCompletion(idx,false,error);
+                                 
+                                 if(resourceRoute)[resourceRoute updateRouteFileHash:route.fileHash];
+                                 else[updateRoutes addObject:route];
+                                 
+                                 downloadCompletion(countIdx,false,error);
                              }
                          }];
                         
                         downloadTask.priority = NSURLSessionTaskPriorityLow;
                         [downloadTask resume];
                     }else{
-                        downloadCompletion(idx,false,nil);
+                        downloadCompletion(++countIdx,false,nil);
                     }
                 }
             }];
@@ -410,6 +432,7 @@
     });
     
     dispatch_group_notify(disgroup, queue, ^{
+        self.cacheRoutes = updateRoutes;
         if(completion)completion(isSuccess);
     });
 }
