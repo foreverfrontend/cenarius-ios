@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * `CNRSConfig` 下载进度通知，Object为float
+ */
 extern NSString* const CNRSDownloadProgressNotification;
 
 //路由表文件名

@@ -194,6 +194,25 @@
     return items;
 }
 
+- (NSData *)dataWithRoutes:(NSArray *)routes
+{
+    if (routes == nil || ![routes count]) {
+        return nil;
+    }
+    
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (CNRSRoute *item in routes)
+    {
+        @autoreleasepool {
+            if(item)[items addObject:@{@"hash":item.fileHash,@"file":item.uri.absoluteString}];
+        }
+    }
+
+    NSError *error;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:items options:NSJSONWritingPrettyPrinted error:&error];
+    return data;
+}
+
 - (NSURL *)routeFileURLForRoute:(CNRSRoute *)route
 {
     if (route == nil)
@@ -285,13 +304,30 @@
 - (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route
 {
     CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
-    for (CNRSRoute *resourceRoute in routeManager.resourceRoutes)
+    
+    for (CNRSRoute *cacheRoute in routeManager.cacheRoutes)
     {
         @autoreleasepool
         {
-            if ([resourceRoute.fileHash isEqualToString:route.fileHash])
+            if ([cacheRoute.fileHash isEqualToString:route.fileHash])
             {
-                return [self resourceFilePathForUri:resourceRoute.uri];
+                return [self cacheFilePathForUri:cacheRoute.uri];
+            }
+        }
+    }
+    
+    return nil;
+}
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route
+{
+    CNRSRouteManager *routeManager = [CNRSRouteManager sharedInstance];
+    for (CNRSRoute *resourceRoute in routeManager.cacheRoutes)
+    {
+        @autoreleasepool
+        {
+            if ([resourceRoute.uri.absoluteString isEqualToString:route.uri.absoluteString])
+            {
+                return resourceRoute;
             }
         }
     }

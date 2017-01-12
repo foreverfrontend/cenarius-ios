@@ -119,6 +119,17 @@ NS_ASSUME_NONNULL_BEGIN
  哈希值比对，如果存在则返回地址，不存在则返回nil
  */
 - (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route;
+
+/**
+ 缓存的路由表和在线路由表比对数据，拿取相同的uri,CNRSRoute对象
+ */
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route;
+
+
+/**
+ 将路由表数组转换成Data
+ */
+- (NSData *)dataWithRoutes:(NSArray *)routes;
 @end
 
 NS_ASSUME_NONNULL_END
