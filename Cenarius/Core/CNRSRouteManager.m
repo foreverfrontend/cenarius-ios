@@ -349,7 +349,6 @@
     dispatch_group_enter(disgroup);
     downloadCompletion = ^(NSInteger index,BOOL stop,NSError *error){
         CGFloat progress = (index)*1.0f/routes.count;
-        NSLog(@"index:%d,count:%d",index,routes.count);
         if (index == routes.count || stop) {
             isSuccess       = !stop;
             errorCompletion = error;
@@ -368,7 +367,6 @@
         if(![routes count]){
             downloadCompletion(0,true,nil);
         }else{
-            __block BOOL __Block_stop = false;
             [routes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 @autoreleasepool {
                     CNRSRoute *route               = obj;
