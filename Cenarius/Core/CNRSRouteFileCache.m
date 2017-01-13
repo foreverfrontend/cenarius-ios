@@ -336,8 +336,7 @@
     
     return nil;
 }
-- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route cacheRoutes:(NSMutableArray <CNRSRoute *> **)routes
-{
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route cacheRoutes:(NSMutableArray<CNRSRoute *> *__autoreleasing  _Nonnull *)routes{
     NSArray *array = [NSArray arrayWithArray:*routes];
     for (CNRSRoute *resourceRoute in array)
     {
