@@ -203,7 +203,8 @@
     }
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    for (CNRSRoute *item in [NSArray arrayWithArray:routes])
+    NSArray *routeItems = [routes copy];
+    for (CNRSRoute *item in routeItems)
     {
         @autoreleasepool {
             if(item)[items addObject:@{@"hash":item.fileHash,@"file":item.uri.absoluteString}];
@@ -337,7 +338,7 @@
     return nil;
 }
 - (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route cacheRoutes:(NSMutableArray<CNRSRoute *> *__autoreleasing  _Nonnull *)routes{
-    NSArray *array = [NSArray arrayWithArray:*routes];
+    NSArray *array = [[NSArray alloc] initWithArray:*routes];
     for (CNRSRoute *resourceRoute in array)
     {
         @autoreleasepool
