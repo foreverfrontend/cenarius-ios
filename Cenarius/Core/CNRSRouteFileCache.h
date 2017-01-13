@@ -120,12 +120,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route;
 
+
+/**
+ 从缓存文件夹找相应的文件
+ */
+- (NSURL *)cnrs_cacheRouteFileURLForRoute:(CNRSRoute *)route;
+
 /**
  缓存的路由表和在线路由表比对数据，拿取相同的uri,CNRSRoute对象
  */
 - (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route;
 
 
+/**
+ 缓存的路由表和在线路由表比对数据，拿取相同的uri,CNRSRoute对象
+
+ @param route 被比对的路由
+ @param routes 缓存路由数组，每比对一次，会自减，请注意。
+ */
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route cacheRoutes:(NSMutableArray <CNRSRoute *> **)routes;
 /**
  将路由表数组转换成Data
  */

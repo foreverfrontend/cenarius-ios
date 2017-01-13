@@ -105,7 +105,9 @@
 //            [self cnrs_deleteOldFilesWithNewRoutes:routes oldRoutes:cacheRoutes];
 //        }
         //保存新routes
-        [routesData writeToFile:filePath atomically:YES];
+        if(![routesData writeToFile:filePath atomically:YES]){
+            CNRSDebugLog(@"保存路由表失败。");
+        }
     }
 }
 
@@ -201,7 +203,7 @@
     }
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
-    for (CNRSRoute *item in routes)
+    for (CNRSRoute *item in [NSArray arrayWithArray:routes])
     {
         @autoreleasepool {
             if(item)[items addObject:@{@"hash":item.fileHash,@"file":item.uri.absoluteString}];
@@ -327,6 +329,23 @@
         {
             if ([resourceRoute.uri.absoluteString isEqualToString:route.uri.absoluteString])
             {
+                return resourceRoute;
+            }
+        }
+    }
+    
+    return nil;
+}
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route cacheRoutes:(NSMutableArray <CNRSRoute *> **)routes
+{
+    NSArray *array = [NSArray arrayWithArray:*routes];
+    for (CNRSRoute *resourceRoute in array)
+    {
+        @autoreleasepool
+        {
+            if ([resourceRoute.uri.absoluteString isEqualToString:route.uri.absoluteString])
+            {
+                [*routes removeObject:resourceRoute];
                 return resourceRoute;
             }
         }
