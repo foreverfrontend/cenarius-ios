@@ -81,7 +81,7 @@
     routeFileCache.cachePath = cachePath;
     NSArray *item = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.cacheRoutes = [NSMutableArray arrayWithArray:item];
+        self.cacheRoutes = [[NSMutableArray alloc] initWithArray:item];
     });
 }
 
@@ -190,6 +190,9 @@
                   [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                                       object:@(progress)];
               } finishAll:^{
+                  //拷贝完成才读取缓存路由
+                  [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
+                  
                   [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
                       if (success)
                       {
@@ -392,10 +395,10 @@
                     // 如果哈希值比对不上，则下载。
                     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
                     
-                    CNRSDebugLog(@"resourceRoute: %@ , hash : %@ , location: %@", resourceRoute?@"true":@"false",[resourceRoute.fileHash isEqualToString:route.fileHash]?@"true":@"false", [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteFileURLForRoute:route]?@"true":@"false");
+                    CNRSDebugLog(@"resourceRoute: %@ , hash : %@ , location: %@", resourceRoute?@"true":@"false",[resourceRoute.fileHash isEqualToString:route.fileHash]?@"true":@"false", [[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:route.uri]?@"true":@"false");
                     
                     if (!resourceRoute || ![resourceRoute.fileHash isEqualToString:route.fileHash]
-                        || ![[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteFileURLForRoute:route])
+                        || ![[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:route.uri])
                     {
                         // 文件不存在，下载下来
                         NSMutableURLRequest *request =
