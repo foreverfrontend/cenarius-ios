@@ -138,7 +138,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param route 被比对的路由
  @param routes 缓存路由数组，每比对一次，会自减，请注意。
  */
-- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute * _Nonnull )route cacheRoutes:( NSMutableArray <CNRSRoute *> * _Nonnull *)routes;
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute * _Nonnull )route cacheRoutes:( NSMutableArray <CNRSRoute * > * _Nonnull * _Nonnull)routes;
+
 /**
  将路由表数组转换成Data
  */
