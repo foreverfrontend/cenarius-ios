@@ -140,8 +140,6 @@
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
-    NSLog(@"p: %@",parameters);
-    NSLog(@"sing: %@",sign);
     // 把签名参数加到 query 中
     if (query.length > 0)
     {
