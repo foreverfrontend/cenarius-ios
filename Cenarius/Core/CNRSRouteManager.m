@@ -13,6 +13,7 @@
 #import "CNRSLogging.h"
 #import "NSURL+Cenarius.h"
 #import "CenariusConfigEntity.h"
+#import "CNRSFileCopy.h"
 
 #define kAppConfigVersionKey @"kAppConfigVersionKey"
 
@@ -78,8 +79,12 @@
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.cachePath = cachePath;
-    self.cacheRoutes = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
+    NSArray *item = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.cacheRoutes = [NSMutableArray arrayWithArray:item];
+    });
 }
+
 
 - (void)setResoucePath:(NSString *)resourcePath
 {
@@ -178,21 +183,29 @@
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
               self.routes = [routeFileCache routesWithData:data];
               
-              [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
-                  if (success)
-                  {
-                      // 所有文件更新到最新，保存路由表
-                      self.cacheRoutes = self.routes;
-                      [routeFileCache saveRoutesMapFile:data];
-                      self.updatingRoutes = NO;
-                  }
-                  else{
-                      NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
-                      if(data)[routeFileCache saveRoutesMapFile:data];
-                      self.updatingRoutes = NO;
-                  }
-                  completion(success);
-              }];
+              __block NSInteger count = 0;
+              
+              [CNRSFileCopy resourceMoveToLibraryFinish:^(int d) {
+                  float progress = d * 1.0f /count * 0.2;
+                  [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
+                                                                      object:@(progress)];
+              } finishAll:^{
+                  [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
+                      if (success)
+                      {
+                          // 所有文件更新到最新，保存路由表
+                          self.cacheRoutes = self.routes;
+                          [routeFileCache saveRoutesMapFile:data];
+                          self.updatingRoutes = NO;
+                      }
+                      else{
+                          NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
+                          if(data)[routeFileCache saveRoutesMapFile:data];
+                          self.updatingRoutes = NO;
+                      }
+                      completion(success);
+                  }];
+              } count:&count];
           });
       }] resume];
 }
@@ -332,9 +345,6 @@
 {
 //    [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:0];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
-                                                        object:@(0.0)];
-    
     dispatch_queue_t queue               = dispatch_queue_create("CNRS-Download-Routes", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t disgroup            = dispatch_group_create();
     __weak __typeof(self) weakSelf       = self;
@@ -342,13 +352,17 @@
     __block NSError *errorCompletion     = nil;
     __block NSInteger countIdx           = 0;
     __block NSMutableArray *updateRoutes = [NSMutableArray array];
+    __block NSMutableArray *cacheRoutes  = [NSMutableArray array];
     __block void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error);
     
-    if(self.cacheRoutes) [updateRoutes addObjectsFromArray:self.cacheRoutes];
+    if(self.cacheRoutes) {
+        [updateRoutes addObjectsFromArray:self.cacheRoutes];
+        [cacheRoutes addObjectsFromArray:self.cacheRoutes];
+    }
     
     dispatch_group_enter(disgroup);
     downloadCompletion = ^(NSInteger index,BOOL stop,NSError *error){
-        CGFloat progress = (index)*1.0f/routes.count;
+        CGFloat progress = (index)*1.0f/routes.count * 0.8;
         if (index == routes.count || stop) {
             isSuccess       = !stop;
             errorCompletion = error;
@@ -357,6 +371,7 @@
             }
             [weakSelf.session invalidateAndCancel];
             dispatch_group_leave(disgroup);
+            
             downloadCompletion = nil;
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
@@ -370,13 +385,17 @@
             [routes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 @autoreleasepool {
                     CNRSRoute *route               = obj;
-                    CNRSRoute *resourceRoute       = [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteForRoute:route];
+                    
+                    CNRSRoute *resourceRoute       = [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteForRoute:route cacheRoutes:&cacheRoutes];
                     if(resourceRoute)resourceRoute = updateRoutes[[updateRoutes indexOfObject:resourceRoute]];
                     
                     // 如果哈希值比对不上，则下载。
                     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
+                    
+                    CNRSDebugLog(@"resourceRoute: %@ , hash : %@ , location: %@", resourceRoute?@"true":@"false",[resourceRoute.fileHash isEqualToString:route.fileHash]?@"true":@"false", [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteFileURLForRoute:route]?@"true":@"false");
+                    
                     if (!resourceRoute || ![resourceRoute.fileHash isEqualToString:route.fileHash]
-                        || ![weakSelf localHtmlURLForURI:route.uri])
+                        || ![[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteFileURLForRoute:route])
                     {
                         // 文件不存在，下载下来
                         NSMutableURLRequest *request =
@@ -389,16 +408,14 @@
                          {
                              ++countIdx;
                              CNRSDebugLog(@"Download %@", response.URL);
-//                             NSLog(@"Download %@", response.URL);
                              
                              if (error || ((NSHTTPURLResponse *)response).statusCode != 200)
                              {
                                  CNRSDebugLog(@"Fail to download remote html: %@", error);
-//                                 NSLog(@"Fail to download remote html: %@", error);
                                  if (shouldDownloadAll)
                                  {
                                      if(downloadCompletion){
-                                         downloadCompletion(countIdx,true,error);
+                                         if(downloadCompletion)downloadCompletion(countIdx,true,error);
                                      }
                                  }
                                  else
@@ -415,14 +432,14 @@
                                  if(resourceRoute)[resourceRoute updateRouteFileHash:route.fileHash];
                                  else[updateRoutes addObject:route];
                                  
-                                 downloadCompletion(countIdx,false,error);
+                                 if(downloadCompletion)downloadCompletion(countIdx,false,error);
                              }
                          }];
                         
                         downloadTask.priority = NSURLSessionTaskPriorityLow;
                         [downloadTask resume];
                     }else{
-                        downloadCompletion(++countIdx,false,nil);
+                        if(downloadCompletion)downloadCompletion(++countIdx,false,nil);
                     }
                 }
             }];
@@ -432,6 +449,8 @@
     dispatch_group_notify(disgroup, queue, ^{
         self.cacheRoutes = updateRoutes;
         if(completion)completion(isSuccess);
+        
+        updateRoutes = nil;
     });
 }
 
