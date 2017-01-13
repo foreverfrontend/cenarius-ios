@@ -359,8 +359,8 @@
     __block void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error);
     
     if(self.cacheRoutes) {
-        [updateRoutes addObjectsFromArray:self.cacheRoutes];
-        [cacheRoutes addObjectsFromArray:self.cacheRoutes];
+        [updateRoutes addObjectsFromArray:self.cacheRoutes.copy];
+        [cacheRoutes addObjectsFromArray:self.cacheRoutes.copy];
     }
     
     dispatch_group_enter(disgroup);
@@ -390,7 +390,6 @@
                     CNRSRoute *route               = obj;
                     
                     CNRSRoute *resourceRoute       = [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteForRoute:route cacheRoutes:&cacheRoutes];
-                    if(resourceRoute)resourceRoute = updateRoutes[[updateRoutes indexOfObject:resourceRoute]];
                     
                     // 如果哈希值比对不上，则下载。
                     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做
