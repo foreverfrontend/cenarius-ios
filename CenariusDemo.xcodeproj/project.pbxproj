@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01ECC8391E261E280091B750 /* CenariusConfigEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECC8381E261E280091B750 /* CenariusConfigEntity.m */; };
+		0C29F14A1E28AEFF00EF94E9 /* CNRSFileCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C29F1491E28AEFF00EF94E9 /* CNRSFileCopy.m */; };
 		0C2BD4E01DD3509D007AF9A7 /* CNRSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */; };
 		0C40501E1DC841E900652492 /* CNRSLoginWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C40501D1DC841E900652492 /* CNRSLoginWidget.m */; };
 		0C4085461DC775CB00CE2CE3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C4085451DC775CB00CE2CE3 /* www */; };
@@ -84,6 +85,8 @@
 /* Begin PBXFileReference section */
 		01ECC8371E261E280091B750 /* CenariusConfigEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenariusConfigEntity.h; sourceTree = "<group>"; };
 		01ECC8381E261E280091B750 /* CenariusConfigEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenariusConfigEntity.m; sourceTree = "<group>"; };
+		0C29F1481E28AEFF00EF94E9 /* CNRSFileCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSFileCopy.h; sourceTree = "<group>"; };
+		0C29F1491E28AEFF00EF94E9 /* CNRSFileCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSFileCopy.m; sourceTree = "<group>"; };
 		0C2BD4DE1DD3509D007AF9A7 /* CNRSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSNavigationController.h; sourceTree = "<group>"; };
 		0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSNavigationController.m; sourceTree = "<group>"; };
 		0C40501C1DC841E900652492 /* CNRSLoginWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSLoginWidget.h; sourceTree = "<group>"; };
@@ -324,6 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				0C9EC6531DAF98B2003BFB38 /* Extension */,
+				0C29F1481E28AEFF00EF94E9 /* CNRSFileCopy.h */,
+				0C29F1491E28AEFF00EF94E9 /* CNRSFileCopy.m */,
 				0C9EC6621DAF98B2003BFB38 /* CNRSConfig.h */,
 				0C9EC6631DAF98B2003BFB38 /* CNRSConfig.m */,
 				0C9EC6641DAF98B2003BFB38 /* CNRSLogging.h */,
@@ -751,6 +756,7 @@
 				0C9EC8661DB5B01B003BFB38 /* CNRSNavMenuWidget.m in Sources */,
 				0CC2C9CE1DFBE4C300EDDCD8 /* CNRSNSURLProtocol.m in Sources */,
 				0CC2C9CF1DFBE4C300EDDCD8 /* CNRSOpenApi.m in Sources */,
+				0C29F14A1E28AEFF00EF94E9 /* CNRSFileCopy.m in Sources */,
 				0CC2C9CB1DFBE4C300EDDCD8 /* CNRSCacheFileInterceptor.m in Sources */,
 				0CC2C9CD1DFBE4C300EDDCD8 /* CNRSHTTPSessionManager.m in Sources */,
 				0CAFF23D1DBC688000B09978 /* CDVIntentAndNavigationFilter.m in Sources */,
