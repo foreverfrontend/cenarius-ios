@@ -11,6 +11,7 @@
 #import "CNRSLoginWidget.h"
 #import "CNRSHTTPSessionManager.h"
 #import "CNRSJSONRequestSerializer.h"
+#import "NSString+Cenarius.h"
 
 @interface ViewController ()
 
@@ -107,7 +108,9 @@
     [manager.requestSerializer setValue:@"OpenAPIRequest" forHTTPHeaderField:@"X-Requested-With"];
 //    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:@"http://10.86.21.66:6089/api/gbss/dealer/promotions/join?q=q" parameters:@{@"A":@"中文"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *encodeString = [@"v&a==l&ue" encodingStringUsingURLEscape];
+    NSString *url = [[NSString alloc] initWithFormat:@"http://10.86.21.66:6089/api/gbss/dealer/promotions/join?q=q&key=%@",encodeString];
+    [manager POST:url parameters:@{@"A":@"中文",@"B":@"v&a==l&ue"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         
         
