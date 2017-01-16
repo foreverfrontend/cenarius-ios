@@ -17,7 +17,7 @@
 
  @param fileNames     格式{key,value} value == 1 强制覆盖 ， value == 0 已存在不覆盖
  */
-+ (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy count:(NSInteger *)count{
++ (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy countBlock:(void(^)(NSInteger))countBlock{
     CNRSFileCopy *moduleCopy           = [[CNRSFileCopy alloc] init];
     moduleCopy.finishCopy              = finishCopy;
     moduleCopy.finishAllCopy           = finishAllCopy;

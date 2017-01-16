@@ -174,7 +174,7 @@
     }
 }
 
-- (NSMutableArray *)routesWithData:(NSData *)data
+- (NSMutableDictionary *)routesWithData:(NSData *)data
 {
     if (data == nil) {
         return nil;
@@ -185,11 +185,12 @@
         return nil;
     }
     
-    NSMutableArray *items = [[NSMutableArray alloc] init];
+    NSMutableDictionary *items = [[NSMutableDictionary alloc] init];
     for (NSDictionary *item in JSON)
     {
         @autoreleasepool {
-            [items addObject:[[CNRSRoute alloc] initWithDictionary:item]];
+            CNRSRoute *route = [[CNRSRoute alloc] initWithDictionary:item];
+            [items setObject:route forKey:[[route uri] absoluteString]];
         }
     }
     
