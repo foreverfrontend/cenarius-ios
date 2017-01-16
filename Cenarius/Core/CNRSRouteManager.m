@@ -79,10 +79,9 @@
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.cachePath = cachePath;
-    NSArray *item = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.cacheRoutes = [[NSMutableArray alloc] initWithArray:item];
-    });
+    NSMutableDictionary *item = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
+    self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:item];
+    self.cacheRoutes = [[NSMutableArray alloc] initWithArray:item.allValues];
 }
 
 
@@ -162,7 +161,6 @@
 
 // 更新路由和H5文件
 - (void)_updateRouteAndHtmlWithCompletion:(void (^)(BOOL success))completion {
-    
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
@@ -181,34 +179,40 @@
               
               //先更新内存中的 routes
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-              self.routes = [routeFileCache routesWithData:data];
+              self.routes = [[NSMutableArray alloc] initWithArray:[[routeFileCache routesWithData:data] allValues]];
               
-              __block NSInteger count = 0;
+              __block float progressReta = 1.0;
               
-              [CNRSFileCopy resourceMoveToLibraryFinish:^(int d) {
-                  float progress = d * 1.0f /count * 0.2;
+              [CNRSFileCopy resourceUnzipToLibraeyWithProgress:^(long entryNumber, long total) {
+                  progressReta = 0.5;
+                  float progress = entryNumber * 1.0f / total * 0.5;
                   [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                                       object:@(progress)];
-              } finishAll:^{
-                  //拷贝完成才读取缓存路由
-                  [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
-                  
-                  [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
-                      if (success)
-                      {
-                          // 所有文件更新到最新，保存路由表
-                          self.cacheRoutes = self.routes;
-                          [routeFileCache saveRoutesMapFile:data];
-                          self.updatingRoutes = NO;
-                      }
-                      else{
-                          NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
-                          if(data)[routeFileCache saveRoutesMapFile:data];
-                          self.updatingRoutes = NO;
-                      }
-                      completion(success);
-                  }];
-              } count:&count];
+              } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
+                  if (succeeded) {
+                      //拷贝完成才读取缓存路由
+                      [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
+                      
+                      [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
+                          if (success)
+                          {
+                              // 所有文件更新到最新，保存路由表
+                              self.cacheRoutes = self.routes;
+                              [routeFileCache saveRoutesMapFile:data];
+                              self.updatingRoutes = NO;
+                          }
+                          else{
+                              NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
+                              if(data)[routeFileCache saveRoutesMapFile:data];
+                              self.updatingRoutes = NO;
+                          }
+                          completion(success);
+                      } progressReta:progressReta];
+                  }else{
+                      CNRSDebugLog(@"解压缩：%@",error);
+                      completion(succeeded);
+                  }
+              }];
           });
       }] resume];
 }
@@ -344,7 +348,7 @@
 /**
  *  下载 `routes` 中的资源文件。
  */
-- (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion
+- (void)cnrs_downloadFilesWithinRoutes:(NSArray *)routes shouldDownloadAll:(BOOL)shouldDownloadAll completion:(void (^)(BOOL success))completion progressReta:(float)progressReta
 {
 //    [self cnrs_downloadFilesWithinRoutes:routes shouldDownloadAll:shouldDownloadAll completion:completion index:0];
     
@@ -355,17 +359,16 @@
     __block NSError *errorCompletion     = nil;
     __block NSInteger countIdx           = 0;
     __block NSMutableArray *updateRoutes = [NSMutableArray array];
-    __block NSMutableArray *cacheRoutes  = [NSMutableArray array];
     __block void (^downloadCompletion)(NSInteger index,BOOL stop,NSError *error);
     
     if(self.cacheRoutes) {
-        [updateRoutes addObjectsFromArray:self.cacheRoutes.copy];
-        [cacheRoutes addObjectsFromArray:self.cacheRoutes.copy];
+        [updateRoutes addObjectsFromArray:self.cacheRoutes.mutableCopy];
     }
     
     dispatch_group_enter(disgroup);
+    progressReta = MIN(MAX(progressReta, 0.5), 1.0);
     downloadCompletion = ^(NSInteger index,BOOL stop,NSError *error){
-        CGFloat progress = (index)*1.0f/routes.count * 0.8;
+        CGFloat progress = (index)*1.0f/routes.count * progressReta + (progressReta==1.0?0.0:0.5);
         if (index == routes.count || stop) {
             isSuccess       = !stop;
             errorCompletion = error;
@@ -388,8 +391,7 @@
             [routes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 @autoreleasepool {
                     CNRSRoute *route               = obj;
-                    
-                    CNRSRoute *resourceRoute       = [[CNRSRouteFileCache sharedInstance] cnrs_cacheRouteForRoute:route cacheRoutes:&cacheRoutes];
+                    CNRSRoute *resourceRoute       = self.cacheUriRoutes[[route.uri absoluteString]];
                     
                     // 如果哈希值比对不上，则下载。
                     // 如果文件在本地文件存在（要么在缓存，要么在资源文件夹），什么都不需要做

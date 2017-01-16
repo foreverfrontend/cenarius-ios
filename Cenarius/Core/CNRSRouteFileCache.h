@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return routes
  */
-- (nullable NSMutableArray *)routesWithData:(NSData *)data;
+- (NSMutableDictionary *)routesWithData:(NSData *)data;
 
 /**
  获取 uri 对应的缓存文件夹地址

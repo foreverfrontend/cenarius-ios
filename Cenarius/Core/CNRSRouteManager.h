@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) NSMutableArray<CNRSRoute *> *routes;
 @property (nonatomic, strong) NSMutableArray<CNRSRoute *> *cacheRoutes;
+@property (nonatomic, strong) NSMutableDictionary<NSString *,CNRSRoute *> *cacheUriRoutes;
 @property (nonatomic, strong) NSMutableArray<CNRSRoute *> *resourceRoutes;
 
 /**
