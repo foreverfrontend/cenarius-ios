@@ -29,4 +29,9 @@ typedef void (^finishAllCopy)();
  @param count www目录下的文件数
  */
 + (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy countBlock:(void(^)(NSInteger))countBlock;
+
+/**
+ 解压Resrouse/www目录下的zip到Library目录
+ */
++ (void)resourceUnzipToLibraeyWithProgress:(void(^)(long entryNumber, long total))progresshandler completionHandler:(void(^)(NSString *  path, BOOL succeeded, NSError * error))completionHandler;
 @end
