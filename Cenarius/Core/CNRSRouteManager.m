@@ -161,7 +161,6 @@
 
 // 更新路由和H5文件
 - (void)_updateRouteAndHtmlWithCompletion:(void (^)(BOOL success))completion {
-    
     // 请求路由表 API
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.routesMapURL
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
@@ -182,33 +181,37 @@
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
               self.routes = [[NSMutableArray alloc] initWithArray:[[routeFileCache routesWithData:data] allValues]];
               
-              __block NSInteger count = 0;
+              __block float progressReta = 1.0;
               
-              [CNRSFileCopy resourceMoveToLibraryFinish:^(int d) {
-                  float progress = d * 1.0f / count * 0.5;
+              [CNRSFileCopy resourceUnzipToLibraeyWithProgress:^(long entryNumber, long total) {
+                  progressReta = 0.5;
+                  float progress = entryNumber * 1.0f / total * 0.5;
                   [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                                       object:@(progress)];
-              } finishAll:^{
-                  //拷贝完成才读取缓存路由
-                  [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
-                  
-                  [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
-                      if (success)
-                      {
-                          // 所有文件更新到最新，保存路由表
-                          self.cacheRoutes = self.routes;
-                          [routeFileCache saveRoutesMapFile:data];
-                          self.updatingRoutes = NO;
-                      }
-                      else{
-                          NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
-                          if(data)[routeFileCache saveRoutesMapFile:data];
-                          self.updatingRoutes = NO;
-                      }
-                      completion(success);
-                  } progressReta:count == 0 ? 1.0 : 0.5];
-              } countBlock:^(NSInteger sum) {
-                  count = sum;
+              } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
+                  if (succeeded) {
+                      //拷贝完成才读取缓存路由
+                      [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
+                      
+                      [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
+                          if (success)
+                          {
+                              // 所有文件更新到最新，保存路由表
+                              self.cacheRoutes = self.routes;
+                              [routeFileCache saveRoutesMapFile:data];
+                              self.updatingRoutes = NO;
+                          }
+                          else{
+                              NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
+                              if(data)[routeFileCache saveRoutesMapFile:data];
+                              self.updatingRoutes = NO;
+                          }
+                          completion(success);
+                      } progressReta:progressReta];
+                  }else{
+                      CNRSDebugLog(@"解压缩：%@",error);
+                      completion(succeeded);
+                  }
               }];
           });
       }] resume];
@@ -365,7 +368,7 @@
     dispatch_group_enter(disgroup);
     progressReta = MIN(MAX(progressReta, 0.5), 1.0);
     downloadCompletion = ^(NSInteger index,BOOL stop,NSError *error){
-        CGFloat progress = (index)*1.0f/routes.count * progressReta;
+        CGFloat progress = (index)*1.0f/routes.count * progressReta + (progressReta==1.0?0.0:0.5);
         if (index == routes.count || stop) {
             isSuccess       = !stop;
             errorCompletion = error;

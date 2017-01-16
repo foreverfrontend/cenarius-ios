@@ -117,6 +117,13 @@
 + (void)logout
 {
     [self deleteAccessToken];
+    //删除Cookie
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *cookieStorages  = [NSArray arrayWithArray:[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]];
+        for (NSHTTPCookie *hc in cookieStorages) {
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:hc];
+        }
+    });
 }
 
 + (NSString *)getAccessToken
