@@ -17,7 +17,7 @@
 
 + (void)resourceUnzipToLibraeyWithProgress:(void(^)(long entryNumber, long total))progresshandler completionHandler:(void(^)(NSString * path, BOOL succeeded, NSError * error))completionHandler{
     NSFileManager *fm                  = [NSFileManager defaultManager];
-    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
+//    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
     NSDictionary *infoDictionary       = [[NSBundle mainBundle] infoDictionary];
     NSString *currentVersion           = [infoDictionary objectForKey:@"CFBundleVersion"];
     
