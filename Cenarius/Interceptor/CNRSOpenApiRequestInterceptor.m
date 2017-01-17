@@ -45,10 +45,16 @@
 
     NSString *query = [CNRSOpenApi openApiQuery:request];
     if (query) {
-        NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
-        urlComps.query = query;
-        request.URL = urlComps.URL;
+//        NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
+//        urlComps.query = query;
+//        request.URL = urlComps.URL;
 //        request.URL = [NSURL URLWithString:query];
+        NSRange range = [request.URL.absoluteString  rangeOfString:@"?"];
+        if (range.location != NSNotFound) {
+            request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",[request.URL.absoluteString substringToIndex:range.location],query]];
+        }else{
+            request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?%@",request.URL.absoluteString,query]];
+        }
     }
     
     [[self class] markRequestAsIgnored:request];
