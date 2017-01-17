@@ -79,7 +79,7 @@
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
     routeFileCache.cachePath = cachePath;
-    NSMutableDictionary *item = [routeFileCache routesWithData:[routeFileCache cacheRoutesMapFile]];
+    NSMutableDictionary *item = [routeFileCache routeDictsWithData:[routeFileCache cacheRoutesMapFile]];
     self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:item];
     self.cacheRoutes = [[NSMutableArray alloc] initWithArray:item.allValues];
 }
@@ -179,7 +179,7 @@
               
               //先更新内存中的 routes
               CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-              self.routes = [[NSMutableArray alloc] initWithArray:[[routeFileCache routesWithData:data] allValues]];
+              self.routes = [routeFileCache routesWithData:data];
               
               __block float progressReta = 1.0;
               

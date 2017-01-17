@@ -174,7 +174,10 @@
     }
 }
 
-- (NSMutableDictionary *)routesWithData:(NSData *)data
+- (NSMutableArray *)routesWithData:(NSData *)data{
+    return [[[self routeDictsWithData:data] allValues] mutableCopy];
+}
+- (NSMutableDictionary *)routeDictsWithData:(NSData *)data
 {
     if (data == nil) {
         return nil;
