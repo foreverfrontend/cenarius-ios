@@ -46,6 +46,13 @@
              {
                  if(progresshandler)progresshandler(entryNumber,total);
              } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
+                 if (succeeded) {
+                     //拷贝完成，写入版本号
+                     NSDictionary *infoDictionary =[[NSBundle mainBundle] infoDictionary];
+                     NSString *currentVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+                     [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:LAST_VERSION];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                 }
                  if(completionHandler)completionHandler(path,succeeded,error);
              }];
         });

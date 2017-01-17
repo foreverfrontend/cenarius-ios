@@ -45,10 +45,10 @@
 
     NSString *query = [CNRSOpenApi openApiQuery:request];
     if (query) {
-//        NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
-//        urlComps.query = query;
-//        request.URL = urlComps.URL;
-        request.URL = [NSURL URLWithString:query];
+        NSURLComponents *urlComps = [NSURLComponents componentsWithURL:request.URL resolvingAgainstBaseURL:YES];
+        urlComps.query = query;
+        request.URL = urlComps.URL;
+//        request.URL = [NSURL URLWithString:query];
     }
     
     [[self class] markRequestAsIgnored:request];
