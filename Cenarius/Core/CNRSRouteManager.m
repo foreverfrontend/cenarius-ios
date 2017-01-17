@@ -191,32 +191,27 @@
                   [[NSNotificationCenter defaultCenter] postNotificationName:CNRSDownloadProgressNotification
                                                                       object:@(progress)];
               } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
-                  if (succeeded) {
-                      //当值为0.5的时候，说明是从资源文件夹拷贝过来的。
-                      if (progressReta == 0.5f) {
-                          self.cacheRoutes    = [[NSMutableArray alloc] initWithArray:self.resourceRoutes];
-                          self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:self.resourceUriRoutes];
-                      }
-                      
-                      [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
-                          if (success)
-                          {
-                              // 所有文件更新到最新，保存路由表
-                              self.cacheRoutes = self.routes;
-                              [routeFileCache saveRoutesMapFile:data];
-                              self.updatingRoutes = NO;
-                          }
-                          else{
-                              NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
-                              if(data)[routeFileCache saveRoutesMapFile:data];
-                              self.updatingRoutes = NO;
-                          }
-                          completion(success);
-                      } progressReta:progressReta];
-                  }else{
-                      CNRSDebugLog(@"解压缩：%@",error);
-                      completion(succeeded);
+                  //当值为0.5的时候，说明是从资源文件夹拷贝过来的。
+                  if (progressReta == 0.5f) {
+                      self.cacheRoutes    = [[NSMutableArray alloc] initWithArray:self.resourceRoutes];
+                      self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:self.resourceUriRoutes];
                   }
+                  
+                  [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
+                      if (success)
+                      {
+                          // 所有文件更新到最新，保存路由表
+                          self.cacheRoutes = self.routes;
+                          [routeFileCache saveRoutesMapFile:data];
+                          self.updatingRoutes = NO;
+                      }
+                      else{
+                          NSData *data = [routeFileCache dataWithRoutes:[self cacheRoutes]];
+                          if(data)[routeFileCache saveRoutesMapFile:data];
+                          self.updatingRoutes = NO;
+                      }
+                      completion(success);
+                  } progressReta:progressReta];
               }];
           });
       }] resume];
