@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray<CNRSRoute *> *cacheRoutes;
 @property (nonatomic, strong) NSMutableDictionary<NSString *,CNRSRoute *> *cacheUriRoutes;
 @property (nonatomic, strong) NSMutableArray<CNRSRoute *> *resourceRoutes;
-
+@property (nonatomic, strong) NSMutableDictionary<NSString *,CNRSRoute *> *resourceUriRoutes;
 /**
  * 读取 Routes Map 信息的 URL 地址。路由表应该由服务器提供。
  */

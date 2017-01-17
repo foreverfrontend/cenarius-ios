@@ -78,18 +78,20 @@
 - (void)setCachePath:(NSString *)cachePath
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-    routeFileCache.cachePath = cachePath;
-    NSMutableDictionary *item = [routeFileCache routeDictsWithData:[routeFileCache cacheRoutesMapFile]];
-    self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:item];
-    self.cacheRoutes = [[NSMutableArray alloc] initWithArray:item.allValues];
+    routeFileCache.cachePath           = cachePath;
+    NSMutableDictionary *item          = [routeFileCache routeDictsWithData:[routeFileCache cacheRoutesMapFile]];
+    self.cacheUriRoutes                = [[NSMutableDictionary alloc] initWithDictionary:item];
+    self.cacheRoutes                   = [[NSMutableArray alloc] initWithArray:item.allValues];
 }
 
 
 - (void)setResoucePath:(NSString *)resourcePath
 {
     CNRSRouteFileCache *routeFileCache = [CNRSRouteFileCache sharedInstance];
-    routeFileCache.resourcePath = resourcePath;
-    self.resourceRoutes = [routeFileCache routesWithData:[routeFileCache resourceRoutesMapFile]];
+    routeFileCache.resourcePath        = resourcePath;
+    NSMutableDictionary *item          = [routeFileCache routeDictsWithData:[routeFileCache resourceRoutesMapFile]];
+    self.resourceUriRoutes             = [[NSMutableDictionary alloc] initWithDictionary:item];
+    self.resourceRoutes                = [[NSMutableArray alloc] initWithArray:item.allValues];
 }
 
 + (void)updateRouteFilesWithCompletion:(void (^)(BOOL success))completion
@@ -190,8 +192,11 @@
                                                                       object:@(progress)];
               } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
                   if (succeeded) {
-                      //拷贝完成才读取缓存路由
-                      [self setCachePath:[CNRSRouteFileCache sharedInstance].cachePath];
+                      //当值为0.5的时候，说明是从资源文件夹拷贝过来的。
+                      if (progressReta == 0.5f) {
+                          self.cacheRoutes    = [[NSMutableArray alloc] initWithArray:self.resourceRoutes];
+                          self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:self.resourceUriRoutes];
+                      }
                       
                       [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
                           if (success)
