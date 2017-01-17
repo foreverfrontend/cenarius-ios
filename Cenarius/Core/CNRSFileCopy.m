@@ -17,7 +17,7 @@
 
 + (void)resourceUnzipToLibraeyWithProgress:(void(^)(long entryNumber, long total))progresshandler completionHandler:(void(^)(NSString * path, BOOL succeeded, NSError * error))completionHandler{
     NSFileManager *fm                  = [NSFileManager defaultManager];
-//    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
+    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
     NSDictionary *infoDictionary       = [[NSBundle mainBundle] infoDictionary];
     NSString *currentVersion           = [infoDictionary objectForKey:@"CFBundleVersion"];
     
@@ -46,6 +46,13 @@
              {
                  if(progresshandler)progresshandler(entryNumber,total);
              } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
+                 if (succeeded) {
+                     //拷贝完成，写入版本号
+                     NSDictionary *infoDictionary =[[NSBundle mainBundle] infoDictionary];
+                     NSString *currentVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+                     [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:LAST_VERSION];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                 }
                  if(completionHandler)completionHandler(path,succeeded,error);
              }];
         });
