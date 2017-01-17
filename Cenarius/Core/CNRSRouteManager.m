@@ -219,15 +219,18 @@
 
 - (NSURL *)localHtmlURLForURI:(NSURL *)uri
 {
-    //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
+//    //先在缓存文件夹中寻找，再在资源文件夹中寻找。如果在缓存文件和资源文件中都找不到对应的本地文件，返回 nil
     if (uri == nil)
     {
         return nil;
     }
-    NSURL *baseUri = [NSURL URLWithString:uri.path];
-    //最新的在内存中的 route
-    CNRSRoute *route = [self routeForURI:baseUri];
-    return [self localHtmlURLForRoute:route uri:uri];
+//    NSURL *baseUri = [NSURL URLWithString:uri.path];
+//    //最新的在内存中的 route
+//    CNRSRoute *route = [self routeForURI:baseUri];
+//    return [self localHtmlURLForRoute:route uri:uri];
+    NSString *urlString = [@"file://" stringByAppendingString:[[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:uri]];
+    NSURL *htmlFileURL = [NSURL URLWithString:urlString];
+    return htmlFileURL;
 }
 
 - (NSURL *)localHtmlURLForRoute:(CNRSRoute *)route uri:(NSURL *)uri
