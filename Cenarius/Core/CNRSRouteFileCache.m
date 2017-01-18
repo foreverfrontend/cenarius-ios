@@ -193,7 +193,7 @@
     {
         @autoreleasepool {
             CNRSRoute *route = [[CNRSRoute alloc] initWithDictionary:item];
-            [items setObject:route forKey:[[route uri] absoluteString]];
+            if([route uri])[items setObject:route forKey:[[route uri] absoluteString]];
         }
     }
     

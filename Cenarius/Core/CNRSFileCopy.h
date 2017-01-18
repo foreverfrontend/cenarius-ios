@@ -26,7 +26,7 @@ typedef void (^finishAllCopy)();
 
  @param finishCopy    拷贝完成一个就回调一次
  @param finishAllCopy 拷贝所有流程都完成才回调
- @param count www目录下的文件数
+ @param countBlock www目录下的文件数
  */
 + (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy countBlock:(void(^)(NSInteger))countBlock;
 
