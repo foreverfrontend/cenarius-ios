@@ -313,7 +313,9 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     [_progressView finishLoad];
     [self cnrs_resetControllerAppearance];
 }
-
+- (void)webViewDidReceiveTitle:(NSString *)title{
+    self.navItem = title;
+}
 #pragma mark - Private Methods
 
 - (void)cnrs_resetControllerAppearance
@@ -344,5 +346,21 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 //
 //    return YES;
 //}
+
+@end
+
+@interface UIWebView (title)
+
+@end
+
+@implementation UIWebView (title)
+
+//收到标题，把标题展示到窗口上面
+- (void)webView:(id)sender didReceiveTitle:(NSString *)title forFrame:(void *)frame
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(webViewDidReceiveTitle:)]) {
+        [self.delegate performSelector:@selector(webViewDidReceiveTitle:) withObject:title];
+    }
+}
 
 @end
