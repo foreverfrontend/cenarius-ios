@@ -204,13 +204,11 @@
         }
         else
         {
-//            htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
+            htmlFileURL = [[CNRSRouteManager sharedInstance] localHtmlURLForURI:uri];
 //            if (htmlFileURL == nil) {
 //                htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
 //            }
 //            htmlFileURL = [[CNRSRouteManager sharedInstance] remoteHtmlURLForURI:uri];
-            NSString *urlString = [@"file://" stringByAppendingString:[[CNRSRouteFileCache sharedInstance] cacheFilePathForUri:uri]];
-            htmlFileURL = [NSURL URLWithString:urlString];
         }
     }
     

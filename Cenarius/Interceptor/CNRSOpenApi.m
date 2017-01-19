@@ -68,9 +68,9 @@
 
 + (NSString *)openApiQuery:(NSMutableURLRequest *)request
 {
-    // 原 query, 需要 decode
+    // 原 query, 不需要 decode
     NSString *query = request.URL.query ? request.URL.query : @"";
-    query = [query decodingStringUsingURLEscape];
+//    query = [query decodingStringUsingURLEscape];
     
     // 用来签名的 string
     NSString *parameterString = [[NSString alloc] initWithString:query];
@@ -88,8 +88,8 @@
         if (bodyData)
         {
             bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
-            // 原 body, 需要 decode
-            bodyString = [bodyString decodingStringUsingURLEscape];
+            // 原 body, 不需要 decode
+//            bodyString = [bodyString decodingStringUsingURLEscape];
             // JSON 签名
             if ([[request valueForHTTPHeaderField:@"Content-Type"] containsString:@"application/json"])
             {
@@ -140,19 +140,15 @@
     
     // 签名
     NSString *sign = [self md5Signature:parameters secret:appSecret];
-    NSLog(@"p: %@",parameters);
-    NSLog(@"sing: %@",sign);
     // 把签名参数加到 query 中
+    NSString *querySigned = @"";
     if (query.length > 0)
     {
-        query = [[NSString alloc] initWithFormat:@"%@&app_key=%@&timestamp=%@&sign=%@&access_token=%@",query,appKey,timestamp,sign,token];
+        querySigned = [[NSString alloc] initWithFormat:@"%@&",query];
     }
-    else
-    {
-        query = [[NSString alloc] initWithFormat:@"app_key=%@&timestamp=%@&sign=%@&access_token=%@",appKey,timestamp,sign,token];
-    }
+    querySigned = [[NSString alloc] initWithFormat:@"%@app_key=%@&timestamp=%@&sign=%@&access_token=%@",querySigned,[appKey encodingStringUsingURLEscape],[timestamp encodingStringUsingURLEscape],[sign encodingStringUsingURLEscape],[token encodingStringUsingURLEscape]];
     
-    return query;
+    return querySigned;
 }
 
 /**

@@ -102,7 +102,16 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return routes
  */
-- (nullable NSMutableArray *)routesWithData:(NSData *)data;
+- (NSMutableArray *)routesWithData:(NSData *)data;
+
+/**
+ 读取 routes
+ 
+ @param data routes data
+ 
+ @return routes
+ */
+- (NSMutableDictionary *)routeDictsWithData:(NSData *)data;
 
 /**
  获取 uri 对应的缓存文件夹地址
@@ -114,6 +123,36 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)resourceFilePathForUri:(NSURL *)uri;
 
+
+/**
+ 哈希值比对，如果存在则返回地址，不存在则返回nil
+ */
+- (NSString *)cnrs_resourceRouteFilePathForRoute:(CNRSRoute *)route;
+
+
+/**
+ 从缓存文件夹找相应的文件
+ */
+- (NSURL *)cnrs_cacheRouteFileURLForRoute:(CNRSRoute *)route;
+
+/**
+ 缓存的路由表和在线路由表比对数据，拿取相同的uri,CNRSRoute对象
+ */
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute *)route;
+
+
+/**
+ 缓存的路由表和在线路由表比对数据，拿取相同的uri,CNRSRoute对象
+
+ @param route 被比对的路由
+ @param routes 缓存路由数组，每比对一次，会自减，请注意。
+ */
+- (CNRSRoute *)cnrs_cacheRouteForRoute:(CNRSRoute * _Nonnull )route cacheRoutes:( NSMutableArray <CNRSRoute * > * _Nonnull * _Nonnull)routes;
+
+/**
+ 将路由表数组转换成Data
+ */
+- (NSData *)dataWithRoutes:(NSArray *)routes;
 @end
 
 NS_ASSUME_NONNULL_END

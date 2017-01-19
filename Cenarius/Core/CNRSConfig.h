@@ -10,13 +10,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * `CNRSConfig` 下载进度通知，Object为float
+ */
+extern NSString* const CNRSDownloadProgressNotification;
+
 //路由表文件名
-static NSString * const RoutesMapFile = @"routes.json";
+static NSString * const RoutesMapFile = @"cenarius-routes.json";
+static NSString * const CenariusConfig = @"cenarius-config.json";
 
 /**
  * `CNRSConfig` 提供对 Cenarius 的全局配置接口。
  */
 @interface CNRSConfig : NSObject
+
+/**
+ * 获取版本更新信息URL
+ */
++ (NSURL *)getConfigUrl;
 
 /**
  * 设置 cnrsProtocolScheme。
@@ -168,6 +179,10 @@ static NSString * const RoutesMapFile = @"routes.json";
  */
 +(NSString *)loginService;
 
+/**
+ 设置下载的并行数，当值为1的时候，为串行。
+ */
++ (void)setMaxConcurrentOperationCount:(NSInteger)OperationCount;
 @end
 
 NS_ASSUME_NONNULL_END

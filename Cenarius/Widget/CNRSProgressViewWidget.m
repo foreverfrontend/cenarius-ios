@@ -43,7 +43,7 @@
 
 - (void)finishLoad
 {
-    [self performSelector:@selector(setFinish) withObject:nil afterDelay:2];
+    [self performSelector:@selector(setFinish) withObject:nil afterDelay:0];
 }
 
 - (void)setFinish
@@ -68,7 +68,7 @@
     }
     else
     {
-        self.progress += 0.005;
+        self.progress += 0.05;
         if (self.progress >= 0.95)
         {
             self.progress = 0.95;

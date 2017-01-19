@@ -29,5 +29,7 @@
     }
     return self;
 }
-
+- (void)updateRouteFileHash:(NSString *)hash{
+    _fileHash = hash;
+}
 @end
