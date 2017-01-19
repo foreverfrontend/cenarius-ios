@@ -349,11 +349,11 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 
 @end
 
-@interface UIWebView (title)
+@interface UIWebView (CNRS_TITLE)
 
 @end
 
-@implementation UIWebView (title)
+@implementation UIWebView (CNRS_TITLE)
 
 //收到标题，把标题展示到窗口上面
 - (void)webView:(id)sender didReceiveTitle:(NSString *)title forFrame:(void *)frame
@@ -361,6 +361,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     if (self.delegate && [self.delegate respondsToSelector:@selector(webViewDidReceiveTitle:)]) {
         [self.delegate performSelector:@selector(webViewDidReceiveTitle:) withObject:title];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:CNRSWebViewDidReceiveTitle object:self userInfo:@{@"title":title}];
 }
 
 @end
