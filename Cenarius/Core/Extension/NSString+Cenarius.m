@@ -51,8 +51,6 @@
         [scanner scanUpToCharactersFromSet:delimiterSet intoString:&pairString];
         [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
         NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
-//        NSString *key = [kvPair firstObject];
-//        NSRange range = [pairString rangeOfString:[key stringByAppendingString:@"="]];
         NSString *value = [kvPair lastObject];
         value = [value stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
         NSString *key = [(NSString *)[kvPair firstObject] decodingStringUsingURLEscape];
