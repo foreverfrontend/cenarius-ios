@@ -34,6 +34,7 @@ static NSString * const DefaultCNRSHost = @"cenarius-container";
 static NSInteger maxConcurrentOperationCount;
 
 NSString* const CNRSDownloadProgressNotification = @"_CNRSDownloadProgressNotification";
+NSString* const CNRSWebViewDidReceiveTitle       = @"_CNRSWebViewDidReceiveTitle";
 
 #pragma mark - ClassMethods
 

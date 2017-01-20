@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 extern NSString* const CNRSDownloadProgressNotification;
 
+/**
+ * `CNRSConfig` webView设置title通知，Object为UIWebView对象，UserInfo[@"title"] 为标题
+ */
+extern NSString* const CNRSWebViewDidReceiveTitle;
+
 //路由表文件名
 static NSString * const RoutesMapFile = @"cenarius-routes.json";
 static NSString * const CenariusConfig = @"cenarius-config.json";
