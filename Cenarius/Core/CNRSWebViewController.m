@@ -314,7 +314,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     [self cnrs_resetControllerAppearance];
 }
 - (void)webViewDidReceiveTitle:(NSString *)title{
-    self.navItem = title;
+    self.navItem.title = title;
 }
 #pragma mark - Private Methods
 
