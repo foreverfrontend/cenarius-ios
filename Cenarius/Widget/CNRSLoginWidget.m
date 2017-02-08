@@ -69,50 +69,40 @@
     
     NSString *sign = [CNRSOpenApi md5Signature:parameters secret:appSecret];
     parameters[@"sign"] = sign;
+    CNRSLog(@"登录参数：%@",parameters);
     [manager POST:service parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        CNRSLog(@"登录结果：%@",responseObject);
         NSString *token = responseObject[@"access_token"];
         if (token.length > 0) {
             [self saveAccessToken:token];
             completion(YES, token, nil);
-//            [self gw];
-//            [self getProfile];
         }
         else{
             completion(NO, nil, responseObject[@"error_msg"]);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        CNRSLog(@"登录结果：%@",error);
         completion(NO, nil, @"系统错误");
     }];
 }
 
-+ (void)gw
-{
-    CNRSHTTPSessionManager *manager = [CNRSHTTPSessionManager sharedInstance];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    [manager GET:@"https://gateway-dev.infinitus.com.cn/api/gbss/dealer/dealers/161891690/sponsor" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-}
-
-+ (void)getProfile
-{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    NSString *url = [NSString stringWithFormat:@"%@/%@",@"https://uim-test.infinitus.com.cn/oauth20/profile",[self getAccessToken]];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
-    NSString *appKey = [CNRSConfig loginAppKey];
-    parameters[@"app_key"] = appKey;
-    
-    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-}
+//+ (void)getProfile
+//{
+//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    
+//    NSString *url = [NSString stringWithFormat:@"%@/%@",@"https://uim-test.infinitus.com.cn/oauth20/profile",[self getAccessToken]];
+//    
+//    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+//    NSString *appKey = [CNRSConfig loginAppKey];
+//    parameters[@"app_key"] = appKey;
+//    
+//    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//    }];
+//}
 
 + (void)logout
 {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Cenarius"
-  s.version      = "2.1.7"
+  s.version      = "2.1.8"
   s.summary      = "Mobile Hybrid Framework Cenarius iOS Container."
   s.homepage     = "https://github.com/macula-projects/cenarius-ios"
   s.license      = "MIT"

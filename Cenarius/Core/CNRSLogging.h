@@ -6,7 +6,7 @@
 //  Copyright © 2016年 M. All rights reserved.
 //
 
-#ifdef CNRSLogEnable
+#ifdef DEBUG
 #define CNRSLog(format, ...) do {                                                                           \
                                 fprintf(stderr, "<%s : %d> %s\n",                                           \
                                 [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],  \

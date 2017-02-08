@@ -36,10 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)logout;
 
-/**
- * 获取个人信息
- */
-+ (void)getProfile;
+///**
+// * 获取个人信息
+// */
+//+ (void)getProfile;
 
 NS_ASSUME_NONNULL_END
 
