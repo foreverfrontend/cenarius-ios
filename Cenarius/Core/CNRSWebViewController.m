@@ -358,10 +358,12 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
 //收到标题，把标题展示到窗口上面
 - (void)webView:(id)sender didReceiveTitle:(NSString *)title forFrame:(void *)frame
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(webViewDidReceiveTitle:)]) {
-        [self.delegate performSelector:@selector(webViewDidReceiveTitle:) withObject:title];
+    if (frame == (__bridge void *)([sender performSelector:@selector(mainFrame)])){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(webViewDidReceiveTitle:)]) {
+            [self.delegate performSelector:@selector(webViewDidReceiveTitle:) withObject:title];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:CNRSWebViewDidReceiveTitle object:self userInfo:@{@"title":title}];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:CNRSWebViewDidReceiveTitle object:self userInfo:@{@"title":title}];
 }
 
 @end
