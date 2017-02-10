@@ -11,5 +11,6 @@ Pod::Spec.new do |s|
   s.frameworks  = "Foundation","UIKit","CFNetwork"
   s.dependency "AFNetworking"
   s.dependency "SSZipArchive"
+  s.dependency 'MBProgressHUD'
   s.requires_arc = true
 end

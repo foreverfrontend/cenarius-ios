@@ -4,4 +4,5 @@ platform :ios, '8.0'
 target 'CenariusDemo' do
 pod 'AFNetworking'
 pod 'SSZipArchive'
+pod 'MBProgressHUD'
 end
