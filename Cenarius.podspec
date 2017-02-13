@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Cenarius"
-  s.version      = "2.1.9"
+  s.version      = "2.2.0"
   s.summary      = "Mobile Hybrid Framework Cenarius iOS Container."
   s.homepage     = "https://github.com/macula-projects/cenarius-ios"
   s.license      = "MIT"
@@ -11,5 +11,6 @@ Pod::Spec.new do |s|
   s.frameworks  = "Foundation","UIKit","CFNetwork"
   s.dependency "AFNetworking"
   s.dependency "SSZipArchive"
+  s.dependency 'MBProgressHUD'
   s.requires_arc = true
 end
