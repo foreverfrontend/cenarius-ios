@@ -12,6 +12,7 @@
 		0C2BD4E01DD3509D007AF9A7 /* CNRSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2BD4DF1DD3509D007AF9A7 /* CNRSNavigationController.m */; };
 		0C40501E1DC841E900652492 /* CNRSLoginWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C40501D1DC841E900652492 /* CNRSLoginWidget.m */; };
 		0C4085461DC775CB00CE2CE3 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C4085451DC775CB00CE2CE3 /* www */; };
+		0C62201A1E51A29200807A58 /* CNRSToastWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6220191E51A29200807A58 /* CNRSToastWidget.m */; };
 		0C7416681DBB198B00D4F802 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0C7416671DBB198B00D4F802 /* config.xml */; };
 		0C9EC6381DAF97A4003BFB38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC6371DAF97A4003BFB38 /* main.m */; };
 		0C9EC63B1DAF97A4003BFB38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EC63A1DAF97A4003BFB38 /* AppDelegate.m */; };
@@ -93,6 +94,8 @@
 		0C40501D1DC841E900652492 /* CNRSLoginWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSLoginWidget.m; sourceTree = "<group>"; };
 		0C4050261DC8BCB600652492 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0C4085451DC775CB00CE2CE3 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		0C6220181E51A29200807A58 /* CNRSToastWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNRSToastWidget.h; sourceTree = "<group>"; };
+		0C6220191E51A29200807A58 /* CNRSToastWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNRSToastWidget.m; sourceTree = "<group>"; };
 		0C7416671DBB198B00D4F802 /* config.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		0C9EC6331DAF97A4003BFB38 /* CenariusDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CenariusDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9EC6371DAF97A4003BFB38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 				0C40501D1DC841E900652492 /* CNRSLoginWidget.m */,
 				0CBC803D1DE2D581009610BC /* CNRSProgressViewWidget.h */,
 				0CBC803E1DE2D581009610BC /* CNRSProgressViewWidget.m */,
+				0C6220181E51A29200807A58 /* CNRSToastWidget.h */,
+				0C6220191E51A29200807A58 /* CNRSToastWidget.m */,
 				0C9EC6791DAF98B2003BFB38 /* Model */,
 			);
 			path = Widget;
@@ -729,6 +734,7 @@
 				0CAFF23E1DBC688000B09978 /* CDVLocalStorage.m in Sources */,
 				0C9EC6981DAF98B2003BFB38 /* CNRSNavTitleWidget.m in Sources */,
 				0C9EC8601DB4B728003BFB38 /* CNRSNativeWidget.m in Sources */,
+				0C62201A1E51A29200807A58 /* CNRSToastWidget.m in Sources */,
 				0CAFF23F1DBC688000B09978 /* CDVUIWebViewDelegate.m in Sources */,
 				0CAFF23C1DBC688000B09978 /* CDVHandleOpenURL.m in Sources */,
 				0CAFF24F1DBC688000B09978 /* NSDictionary+CordovaPreferences.m in Sources */,
