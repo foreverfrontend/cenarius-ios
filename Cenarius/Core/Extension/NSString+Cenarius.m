@@ -50,12 +50,15 @@
         NSString *pairString = nil;
         [scanner scanUpToCharactersFromSet:delimiterSet intoString:&pairString];
         [scanner scanCharactersFromSet:delimiterSet intoString:NULL];
-        NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
-        NSString *key = [(NSString *)[kvPair firstObject] decodingStringUsingURLEscape];
         
+        pairString = [pairString stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
+        pairString = [pairString decodingStringUsingURLEscape];
+        
+        NSArray *kvPair = [pairString componentsSeparatedByString:@"="];
+        
+        NSString *key = (NSString *)[kvPair firstObject];
         NSString *value = [pairString substringFromIndex:key.length + 1];
-        value = [value stringByReplacingOccurrencesOfString:@"+" withString:@"%20"];
-        value = [value decodingStringUsingURLEscape];
+        
         [pairs addItem:value forKey:key];
     }
     
