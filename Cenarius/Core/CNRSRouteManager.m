@@ -59,10 +59,11 @@
     if(_operationQueue) _operationQueue = nil;
     
     NSURLSessionConfiguration *sessionCfg       = [NSURLSessionConfiguration defaultSessionConfiguration];
+    sessionCfg.sharedContainerIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     _operationQueue                             = [[NSOperationQueue alloc] init];
     _operationQueue.maxConcurrentOperationCount = self.maxConcurrentOperationCount;
     _session = [NSURLSession sessionWithConfiguration:sessionCfg
-                                             delegate:nil
+                                             delegate:self
                                         delegateQueue:_operationQueue];
 }
 
@@ -330,6 +331,14 @@
     
     return nil;
 }
+#pragma mark - NSURLSessionDelegate
+// 当系统错误或者已经被销毁的时候，error 为nil
+- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(nullable NSError *)error{
+    if (!error) {
+        [self.session invalidateAndCancel];
+        self.session = nil;
+    }
+}
 
 #pragma mark - Private Methods
 
@@ -385,6 +394,7 @@
                 [weakSelf.session invalidateAndCancel];
                 dispatch_group_leave(disgroup);
                 
+                weakSelf.session = nil;
                 progress = 1.1;
             }
         }
@@ -429,38 +439,34 @@
                                         cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                     timeoutInterval:60];
                 
-                NSURLSessionDownloadTask *downloadTask =
-                [weakSelf.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
-                 {
-                     ++countIdx;
-                     CNRSDebugLog(@"Download %@", response.URL);
-                     
-                     if (error || ((NSHTTPURLResponse *)response).statusCode != 200)
+                if (weakSelf.session) {
+                    NSURLSessionDownloadTask *downloadTask =
+                    [weakSelf.session downloadTaskWithRequest:request completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error)
                      {
-                         CNRSDebugLog(@"Fail to download remote html: %@", error);
-                         if (shouldDownloadAll){
-                             
-                             if(completion)completion(countIdx,true,error);
-                         }
-                         else{
+                         ++countIdx;
+                         CNRSDebugLog(@"Download %@", response.URL);
+                         
+                         if (error || ((NSHTTPURLResponse *)response).statusCode != 200)
+                         {
+                             CNRSDebugLog(@"Fail to download remote html: %@", error);
                              // 下载失败，仅删除旧文件
-                             [[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
+                             if (!shouldDownloadAll)[[CNRSRouteFileCache sharedInstance] saveRouteFileData:nil withRoute:route];
+                             if(completion)completion(countIdx,shouldDownloadAll,error);
+                         }else{
+                             // 下载成功，保存
+                             NSData *data = [NSData dataWithContentsOfURL:location];
+                             [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
+                             
+                             if(resourceRoute)[resourceRoute updateRouteFileHash:route.fileHash];
+                             else resultBlock(route);
+                             
                              if(completion)completion(countIdx,false,error);
                          }
-                     }else{
-                         // 下载成功，保存
-                         NSData *data = [NSData dataWithContentsOfURL:location];
-                         [[CNRSRouteFileCache sharedInstance] saveRouteFileData:data withRoute:route];
-                         
-                         if(resourceRoute)[resourceRoute updateRouteFileHash:route.fileHash];
-                         else resultBlock(route);
-                         
-                         if(completion)completion(countIdx,false,error);
-                     }
-                 }];
-                
-                downloadTask.priority = NSURLSessionTaskPriorityLow;
-                [downloadTask resume];
+                     }];
+                    
+                    downloadTask.priority = NSURLSessionTaskPriorityLow;
+                    [downloadTask resume];
+                }else if(completion)completion(countIdx,shouldDownloadAll,nil);
             }else{
                 if(completion)completion(++countIdx,false,nil);
             }
