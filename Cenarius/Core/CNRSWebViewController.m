@@ -8,7 +8,7 @@
 
 #import "CNRSWebViewController.h"
 #import "CNRSProgressViewWidget.h"
-#import "MBProgressHUD.h"
+#import "CNRSToastWidget.h"
 
 #pragma mark - CNRSBackButton
 
@@ -262,17 +262,7 @@
     }
 }
 
-- (void)showToast:(NSString *)text {
-    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
-    hud.removeFromSuperViewOnHide = YES;
-    hud.mode = MBProgressHUDModeText;
-    hud.bezelView.color = [UIColor blackColor];
-    hud.label.textColor = [UIColor whiteColor];
-    hud.label.text = text;
-    [self.view addSubview:hud];
-    [hud showAnimated:YES];
-    [hud hideAnimated:YES afterDelay:3];
-}
+
 
 #pragma mark - UIWebViewDelegate's method
 
@@ -327,7 +317,7 @@ shouldStartLoadWithRequest:(NSURLRequest *)request
     [self cnrs_resetControllerAppearance];
     if (error.code == -1009)
     {
-        [self showToast:@"网络请求失败，请检查您的网络"];
+        [CNRSToastWidget showToast:@"网络请求失败，请检查您的网络" withView:self.view];
     }
 }
 - (void)webViewDidReceiveTitle:(NSString *)title{
