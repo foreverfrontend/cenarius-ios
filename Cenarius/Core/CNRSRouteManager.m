@@ -210,14 +210,17 @@
                                                                       object:@(progress)];
               } completionHandler:^(NSString *path, BOOL succeeded, NSError *error) {
                   //当值为0.5的时候，说明是从资源文件夹拷贝过来的。
+                  [self setResoucePath:@"www"];
+                  self.cacheRoutes    = [[NSMutableArray alloc] initWithArray:self.resourceRoutes];
+                  self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:self.resourceUriRoutes];
                   if (progressReta == 0.5f) {
-                      self.cacheRoutes    = [[NSMutableArray alloc] initWithArray:self.resourceRoutes];
-                      self.cacheUriRoutes = [[NSMutableDictionary alloc] initWithDictionary:self.resourceUriRoutes];
+                      
                   }
                   
 //                  completion(YES);
 //                  self.updatingRoutes = NO;
 //                  return;
+                  
                   
                   [self cnrs_downloadFilesWithinRoutes:self.routes shouldDownloadAll:YES completion:^(BOOL success) {
                       if (success)
