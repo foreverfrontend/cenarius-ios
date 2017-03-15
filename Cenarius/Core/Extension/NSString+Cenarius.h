@@ -35,4 +35,11 @@
  */
 - (NSString *)base64DecodedString;
 
+
+/**
+ 版本号比较
+
+ @param version 当String > version 则为true
+ */
+- (int)compareVersion:(NSString *)version;
 @end
