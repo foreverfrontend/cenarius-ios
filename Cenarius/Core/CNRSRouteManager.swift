@@ -19,13 +19,21 @@ class CNRSRouteManager {
         sharedInstance.wwwUrl = url
     }
     
+    class func setDevelopMode(_ mode: Bool) {
+        sharedInstance.developMode = mode
+    }
+    
+    /// 更新
+    ///
+    /// - Parameter completionHandler: 回调
     class func update(completionHandler: Completion)  {
        
     }
     
     private static let sharedInstance = CNRSRouteManager()
     /// www文件夹的url
-    private var wwwUrl: URL?
+    private var wwwUrl: URL!
+    private var developMode = false
     typealias Completion = (State, Int) -> Void
     private var completion: Completion!
     
