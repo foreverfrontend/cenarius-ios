@@ -71,6 +71,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WXLog.setLogLevel(.warning)
     }
 
+    func initCenarius() {
+        let url = URL(string: "")!
+        CNRSRouteManager.setWwwUrl(url)
+        CNRSRouteManager.update { (<#CNRSRouteManager.State#>, <#Int#>) in
+            <#code#>
+        }
+    }
 
 }
 
