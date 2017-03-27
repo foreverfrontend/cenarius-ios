@@ -36,4 +36,9 @@ pod 'PermissionScope'
 # Intelligent iOS permissions UI and unified API
 # https://github.com/nickoneill/PermissionScope
 
+pod 'WeexSDK'
+# A framework for building Mobile cross-platform UI.
+# https://github.com/apache/incubator-weex
+
+
 end

@@ -7,7 +7,10 @@ PODS:
   - Kingfisher (3.5.2)
   - NVActivityIndicatorView (3.5.1)
   - PermissionScope (1.1.1)
+  - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
+  - WeexSDK (0.10.3):
+    - SocketRocket
   - XCGLogger (4.0.0):
     - XCGLogger/Core (= 4.0.0)
   - XCGLogger/Core (4.0.0)
@@ -20,6 +23,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - PermissionScope
   - SwiftyJSON
+  - WeexSDK
   - XCGLogger
 
 SPEC CHECKSUMS:
@@ -29,9 +33,11 @@ SPEC CHECKSUMS:
   Kingfisher: 9950e382c500b6834ce004c7c4131c444e90c3a1
   NVActivityIndicatorView: 075563b3547445ebcff840e3297ce9dd4a23731f
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  WeexSDK: ba8a6c443885afc16d9b0a8eb23220d792ad5b27
   XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: 682be75a6009e987fd060572ccf9d63098544a20
+PODFILE CHECKSUM: 422522ce2068c932882824ad6c88a113f4083ffa
 
 COCOAPODS: 1.2.0.beta.1
