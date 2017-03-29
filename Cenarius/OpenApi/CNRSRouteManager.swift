@@ -52,7 +52,10 @@ class CNRSRouteManager {
     private var developMode = false
     typealias Completion = (State, Int) -> Void
     private var completion: Completion!
-    private var routes: Array<>
+    private var routes: Array<Any>?
+    private var config: String?
+    private var progress: Int = 0
+    
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler

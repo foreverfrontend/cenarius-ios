@@ -40,8 +40,5 @@ pod 'WeexSDK'
 # A framework for building Mobile cross-platform UI.
 # https://github.com/apache/incubator-weex
 
-pod 'RealmSwift'
-# Realm is a mobile database: a replacement for Core Data & SQLite
-# https://github.com/realm/realm-cocoa
 
 end
