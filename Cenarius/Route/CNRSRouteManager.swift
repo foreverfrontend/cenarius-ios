@@ -8,16 +8,10 @@
 
 import Foundation
 import Alamofire
+import Async
 
 /// `CNRSRouteManager` 提供了对路由信息的管理和使用接口。
 class CNRSRouteManager {
-    
-    private static let sharedInstance = CNRSRouteManager()
-    /// www文件夹的url
-    private var wwwUrl: URL!
-    private var developMode = true
-    typealias Completion = (State, Int) -> Void
-    private var completion: Completion!
     
     enum State {
         case UNZIP_WWW//解压www
@@ -49,12 +43,36 @@ class CNRSRouteManager {
         sharedInstance.update(completionHandler: completionHandler)
     }
     
-    func update(completionHandler: @escaping Completion)  {
+    
+    // MARK: - Private
+    
+    private static let sharedInstance = CNRSRouteManager()
+    /// www文件夹的url
+    private var wwwUrl: URL!
+    private var developMode = false
+    typealias Completion = (State, Int) -> Void
+    private var completion: Completion!
+    private var routes: Array<>
+    
+    private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
         // 开发模式，直接成功
         if developMode {
-            completion(.UPDATE_SUCCESS, 100)
+            complete(state: .UPDATE_SUCCESS, progress: 100)
+            return
+        }
+        
+        // 重置变量
+        routes = nil;
+        config = nil;
+        progress = 0;
+    }
+    
+    private func complete(state: State, progress: Int) {
+        Async.main { [weak self] in
+            self?.completion(state, progress)
         }
     }
+    
     
 }

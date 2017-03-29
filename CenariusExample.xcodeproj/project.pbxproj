@@ -12,7 +12,7 @@
 		0CBECEFC1E88A958008F0630 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CBECEFA1E88A958008F0630 /* Main.storyboard */; };
 		0CBECEFE1E88A958008F0630 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CBECEFD1E88A958008F0630 /* Assets.xcassets */; };
 		0CBECF011E88A958008F0630 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CBECEFF1E88A958008F0630 /* LaunchScreen.storyboard */; };
-		0CEA75001E88ED990099DDC2 /* CNRSRouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA74FF1E88ED990099DDC2 /* CNRSRouteManager.swift */; };
+		0CEA75041E8B4D210099DDC2 /* CNRSRouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA75031E8B4D210099DDC2 /* CNRSRouteManager.swift */; };
 		55D07A2245BE3DFA263F9819 /* Pods_CenariusExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F86AA890C54271E3CF8D9E /* Pods_CenariusExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 		0CBECEFD1E88A958008F0630 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0CBECF001E88A958008F0630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0CBECF021E88A958008F0630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CEA74FF1E88ED990099DDC2 /* CNRSRouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNRSRouteManager.swift; sourceTree = "<group>"; };
+		0CEA75031E8B4D210099DDC2 /* CNRSRouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CNRSRouteManager.swift; sourceTree = "<group>"; };
 		71D05C3FC40D79713F464E6A /* Pods-CenariusExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.release.xcconfig"; sourceTree = "<group>"; };
 		D3F86AA890C54271E3CF8D9E /* Pods_CenariusExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CenariusExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FFFCBD54FA2894C9D4AE53 /* Pods-CenariusExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,9 +85,10 @@
 		0CEA74F81E88EB130099DDC2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0CEA75011E8B4CFF0099DDC2 /* OpenApi */,
+				0CEA75021E8B4CFF0099DDC2 /* Route */,
 				0CEA74F91E88EB130099DDC2 /* ContainerAPI */,
 				0CEA74FA1E88EB130099DDC2 /* Cordova */,
-				0CEA74FB1E88EB130099DDC2 /* Core */,
 				0CEA74FC1E88EB130099DDC2 /* Extension */,
 				0CEA74FD1E88EB130099DDC2 /* Interceptor */,
 				0CEA74FE1E88EB130099DDC2 /* Widget */,
@@ -109,14 +110,6 @@
 			path = Cordova;
 			sourceTree = "<group>";
 		};
-		0CEA74FB1E88EB130099DDC2 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				0CEA74FF1E88ED990099DDC2 /* CNRSRouteManager.swift */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		0CEA74FC1E88EB130099DDC2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +129,21 @@
 			children = (
 			);
 			path = Widget;
+			sourceTree = "<group>";
+		};
+		0CEA75011E8B4CFF0099DDC2 /* OpenApi */ = {
+			isa = PBXGroup;
+			children = (
+				0CEA75031E8B4D210099DDC2 /* CNRSRouteManager.swift */,
+			);
+			path = OpenApi;
+			sourceTree = "<group>";
+		};
+		0CEA75021E8B4CFF0099DDC2 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Route;
 			sourceTree = "<group>";
 		};
 		E199715EC8B8CE1C3095131B /* Pods */ = {
@@ -271,7 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CBECEF91E88A958008F0630 /* ViewController.swift in Sources */,
-				0CEA75001E88ED990099DDC2 /* CNRSRouteManager.swift in Sources */,
+				0CEA75041E8B4D210099DDC2 /* CNRSRouteManager.swift in Sources */,
 				0CBECEF71E88A958008F0630 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
