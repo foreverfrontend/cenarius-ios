@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initXCGLogger()
         initWeexSDK()
         initCenarius()
-        CNRSRouteManager.update { (state, progress) in
+        RouteManager.update { (state, progress) in
             XCGLogger.default.debug(state)
             XCGLogger.default.debug(progress)
         }
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func initCenarius() {
         let url = URL(string: "http://172.20.70.80/www")!
-        CNRSRouteManager.setWwwUrl(url)
+        RouteManager.setWwwUrl(url)
     }
 
 }

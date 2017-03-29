@@ -9,9 +9,11 @@
 import Foundation
 import Alamofire
 import Async
+import RealmSwift
+import SwiftyJSON
 
-/// `CNRSRouteManager` 提供了对路由信息的管理和使用接口。
-class CNRSRouteManager {
+/// `RouteManager` 提供了对路由信息的管理和使用接口。
+class RouteManager {
     
     enum State {
         case UNZIP_WWW//解压www
@@ -46,16 +48,30 @@ class CNRSRouteManager {
     
     // MARK: - Private
     
-    private static let sharedInstance = CNRSRouteManager()
+    private static let sharedInstance = RouteManager()
     /// www文件夹的url
     private var wwwUrl: URL!
     private var developMode = false
     typealias Completion = (State, Int) -> Void
     private var completion: Completion!
-    private var routes: Array<Any>?
-    private var config: String?
     private var progress: Int = 0
+    private var realm: Realm!
+    private var cacheRoutes: Results<Route>?
+    private var resourceRoutes: Array<Route>?
+    private var routes: Array<Route>?
+    private var cacheConfig: Config?
+    private var resourceConfig: Config?
+    private var config: Config?
+    private var cacheUrl: URL!
     
+    private let dbName = "cenarius-routes.realm"
+    private let cacheName = "www"
+    
+    
+    private init() {
+        setCache(name: cacheName)
+        initRealm()
+    }
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
@@ -69,6 +85,16 @@ class CNRSRouteManager {
         routes = nil;
         config = nil;
         progress = 0;
+        
+        
+    }
+    
+    
+    /// 加载本地的config
+    private func loadLocalConfig() {
+        cacheConfig = nil
+        resourceConfig = nil
+        
     }
     
     private func complete(state: State, progress: Int) {
@@ -77,5 +103,17 @@ class CNRSRouteManager {
         }
     }
     
-    
+    private func setCache(name: String) {
+        cacheUrl = URL(string: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!)!.appendingPathComponent(name)
+        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
+        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
+        var resourceValues = URLResourceValues()
+        resourceValues.isExcludedFromBackup = true
+        try! cacheFileUrl.setResourceValues(resourceValues)
+    }
+    private func initRealm() {
+        var realmConfig = Realm.Configuration()
+        realmConfig.fileURL = realmConfig.fileURL!.deletingLastPathComponent().appendingPathComponent(dbName)
+        realm = try! Realm(configuration: realmConfig)
+    }
 }
