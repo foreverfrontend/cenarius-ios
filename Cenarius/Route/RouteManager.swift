@@ -149,13 +149,14 @@ class RouteManager {
     /// 加载本地的config
     private func loadLocalConfig() {
         do {
-            let cacheData = try Data(contentsOf: cacheConfigUrl)
+            let cacheData = try Data(contentsOf: URL(fileURLWithPath: cacheConfigUrl.absoluteString))
             let cacheString = String(data: cacheData, encoding: .utf8)
             cacheConfig = Config.deserialize(from: cacheString)
         } catch {
             cacheConfig = nil
         }
-        let resourceData = try! Data(contentsOf: resourceConfigUrl)
+        
+        let resourceData = try! Data(contentsOf: URL(fileURLWithPath: resourceConfigUrl.absoluteString))
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceConfig = Config.deserialize(from: resourceString)
     }
