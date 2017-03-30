@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import XCGLogger
-import WeexSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,12 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        initXCGLogger()
-        initWeexSDK()
         initCenarius()
         RouteManager.update { (state, progress) in
-            XCGLogger.default.debug(state)
-            XCGLogger.default.debug(progress)
+            logger.debug(state)
+            logger.debug(progress)
         }
         
         return true
@@ -51,33 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // MARK: - XCGLogger
-    func initXCGLogger() {
-        let log = XCGLogger.default
-        log.setup(level: .debug, showLogIdentifier: false, showFunctionName: true, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: nil, fileLevel: nil)
-    }
     
-    // MARK: - Weex
-    func initWeexSDK() {
-        //business configuration
-        WXAppConfiguration.setAppGroup("Cenarius")
-        WXAppConfiguration.setAppName("CenariusExample")
-        WXAppConfiguration.setAppVersion("0.0.1")
-        
-        //init sdk enviroment
-        WXSDKEngine.initSDKEnvironment()
-        
-        //register custom module and component，optional
-        
-        //register the implementation of protocol, optional
-        
-        //set the log level
-        WXLog.setLogLevel(.warning)
-    }
-
     func initCenarius() {
+        Cenarius()
         let url = URL(string: "http://172.20.70.80/www")!
-        RouteManager.setWwwUrl(url)
+        RouteManager.setServerUrl(url)
     }
 
 }

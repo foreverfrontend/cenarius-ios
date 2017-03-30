@@ -11,7 +11,7 @@ import RealmSwift
 class Route: Object {
     
     dynamic var file = ""
-    dynamic var md = ""
+    dynamic var md5 = ""
 }
 
 class RouteList: Object {

@@ -14,6 +14,8 @@
 		0CBECF011E88A958008F0630 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0CBECEFF1E88A958008F0630 /* LaunchScreen.storyboard */; };
 		0CBFD8751E8B5FCF00876396 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBFD8741E8B5FCF00876396 /* Route.swift */; };
 		0CBFD8771E8B960600876396 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBFD8761E8B960600876396 /* Config.swift */; };
+		0CBFD87A1E8BBBD400876396 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0CBFD8791E8BBBD400876396 /* www */; };
+		0CBFD87D1E8CE52A00876396 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBFD87C1E8CE52A00876396 /* Cenarius.swift */; };
 		0CEA750A1E8B5C840099DDC2 /* RouteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEA75091E8B5C840099DDC2 /* RouteManager.swift */; };
 		55D07A2245BE3DFA263F9819 /* Pods_CenariusExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F86AA890C54271E3CF8D9E /* Pods_CenariusExample.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +30,8 @@
 		0CBECF021E88A958008F0630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CBFD8741E8B5FCF00876396 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		0CBFD8761E8B960600876396 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		0CBFD8791E8BBBD400876396 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
+		0CBFD87C1E8CE52A00876396 /* Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cenarius.swift; sourceTree = "<group>"; };
 		0CEA75091E8B5C840099DDC2 /* RouteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteManager.swift; sourceTree = "<group>"; };
 		71D05C3FC40D79713F464E6A /* Pods-CenariusExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.release.xcconfig"; sourceTree = "<group>"; };
 		D3F86AA890C54271E3CF8D9E /* Pods_CenariusExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CenariusExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,13 +86,31 @@
 				0CBECEFD1E88A958008F0630 /* Assets.xcassets */,
 				0CBECEFF1E88A958008F0630 /* LaunchScreen.storyboard */,
 				0CBECF021E88A958008F0630 /* Info.plist */,
+				0CBFD8781E8BBBC100876396 /* Resource */,
 			);
 			path = CenariusExample;
+			sourceTree = "<group>";
+		};
+		0CBFD8781E8BBBC100876396 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				0CBFD8791E8BBBD400876396 /* www */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		0CBFD87B1E8CE50F00876396 /* Init */ = {
+			isa = PBXGroup;
+			children = (
+				0CBFD87C1E8CE52A00876396 /* Cenarius.swift */,
+			);
+			path = Init;
 			sourceTree = "<group>";
 		};
 		0CEA74F81E88EB130099DDC2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0CBFD87B1E8CE50F00876396 /* Init */,
 				0CEA75011E8B4CFF0099DDC2 /* OpenApi */,
 				0CEA75021E8B4CFF0099DDC2 /* Route */,
 				0CEA74F91E88EB130099DDC2 /* ContainerAPI */,
@@ -223,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CBFD87A1E8BBBD400876396 /* www in Resources */,
 				0CBECF011E88A958008F0630 /* LaunchScreen.storyboard in Resources */,
 				0CBECEFE1E88A958008F0630 /* Assets.xcassets in Resources */,
 				0CBECEFC1E88A958008F0630 /* Main.storyboard in Resources */,
@@ -285,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CBECEF91E88A958008F0630 /* ViewController.swift in Sources */,
+				0CBFD87D1E8CE52A00876396 /* Cenarius.swift in Sources */,
 				0CBFD8751E8B5FCF00876396 /* Route.swift in Sources */,
 				0CEA750A1E8B5C840099DDC2 /* RouteManager.swift in Sources */,
 				0CBFD8771E8B960600876396 /* Config.swift in Sources */,

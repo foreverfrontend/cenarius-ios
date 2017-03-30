@@ -16,6 +16,10 @@ pod 'SwiftyJSON'
 # The better way to deal with JSON data in Swift
 # https://github.com/SwiftyJSON/SwiftyJSON
 
+pod 'HandyJSON'
+# A handy swift json-object serialization/deserialization library
+# https://github.com/alibaba/HandyJSON
+
 pod 'NVActivityIndicatorView'
 # Collection of awesome loading animations
 # https://github.com/ninjaprox/NVActivityIndicatorView
@@ -44,6 +48,8 @@ pod 'RealmSwift'
 # Realm is a mobile database: a replacement for Core Data & SQLite
 # https://github.com/realm/realm-cocoa
 
-
+pod 'SwiftyVersion'
+# A simpler way to manage Versions in Swift
+# https://github.com/dcordero/SwiftyVersion
 
 end

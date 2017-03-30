@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import HandyJSON
 
-class Config {
+struct Config: HandyJSON {
     
-    var name: String?
-    var ios_min_version: String?
-    var android_min_version: String?
-    var release: String?
+    var name: String!
+    var ios_min_version: String!
+    var android_min_version: String!
+    var release: String!
 }
