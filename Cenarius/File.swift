@@ -1,6 +1,6 @@
 //
-//  Route.swift
-//  CenariusExample
+//  File.swift
+//  Cenarius
 //
 //  Created by M on 2017/3/29.
 //  Copyright © 2017年 M. All rights reserved.
@@ -8,13 +8,13 @@
 
 import RealmSwift
 
-class Route: Object {
+class File: Object {
     
-    dynamic var file = ""
+    dynamic var path = ""
     dynamic var md5 = ""
 }
 
 class RouteList: Object {
     
-    let routes = List<Route>()
+    let files = List<File>()
 }

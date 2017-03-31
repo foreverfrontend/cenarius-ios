@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_CenariusExampleVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CenariusExampleVersionString[];
+FOUNDATION_EXPORT double Pods_CenariusVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_CenariusVersionString[];
 

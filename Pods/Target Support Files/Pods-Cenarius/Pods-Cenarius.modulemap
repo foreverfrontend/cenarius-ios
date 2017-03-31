@@ -1,0 +1,6 @@
+framework module Pods_Cenarius {
+  umbrella header "Pods-Cenarius-umbrella.h"
+
+  export *
+  module * { export * }
+}

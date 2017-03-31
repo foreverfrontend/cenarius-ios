@@ -1,6 +1,0 @@
-framework module Pods_CenariusExample {
-  umbrella header "Pods-CenariusExample-umbrella.h"
-
-  export *
-  module * { export * }
-}

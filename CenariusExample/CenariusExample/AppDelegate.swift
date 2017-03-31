@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CenariusExample
 //
-//  Created by M on 2017/3/27.
+//  Created by M on 2017/3/31.
 //  Copyright © 2017年 M. All rights reserved.
 //
 
@@ -15,13 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        initCenarius()
-        RouteManager.update { (state, progress) in
-            Cenarius.logger.debug(state)
-            Cenarius.logger.debug(progress)
-        }
-        
+        // Override point for customization after application launch.
         return true
     }
 
@@ -46,13 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    
-    func initCenarius() {
-        Cenarius()
-        let url = URL(string: "http://172.20.70.80/www")!
-        RouteManager.setServerUrl(url)
-    }
+
 
 }
 

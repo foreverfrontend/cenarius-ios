@@ -1,6 +1,6 @@
 //
 //  Cenarius.swift
-//  CenariusExample
+//  Cenarius
 //
 //  Created by M on 2017/3/30.
 //  Copyright © 2017年 M. All rights reserved.

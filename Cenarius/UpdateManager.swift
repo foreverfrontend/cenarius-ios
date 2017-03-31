@@ -1,6 +1,6 @@
 //
-//  CNRSRouteManager.swift
-//  CenariusExample
+//  UpdateManager.swift
+//  Cenarius
 //
 //  Created by M on 2017/3/27.
 //  Copyright © 2017年 M. All rights reserved.
@@ -15,8 +15,8 @@ import HandyJSON
 import SwiftyJSON
 import SwiftyVersion
 
-/// `RouteManager` 提供了对路由信息的管理和使用接口。
-class RouteManager {
+/// `UpdateManager` 提供更新能力。
+class UpdateManager {
     
     enum State {
         case UNZIP_WWW//解压www
@@ -51,11 +51,11 @@ class RouteManager {
     
     // MARK: - Private
     
-    private static let sharedInstance = RouteManager()
+    private static let sharedInstance = UpdateManager()
     private static let wwwName = "www"
-    private static let routesName = "cenarius-routes.json"
+    private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
-    private static let dbName = "cenarius-routes.realm"
+    private static let dbName = "cenarius-files.realm"
     
     
     /// www文件夹的url
@@ -67,22 +67,22 @@ class RouteManager {
     
     private lazy var realm: Realm = {
         var realmConfig = Realm.Configuration()
-        realmConfig.fileURL = realmConfig.fileURL!.deletingLastPathComponent().appendingPathComponent(RouteManager.dbName)
+        realmConfig.fileURL = realmConfig.fileURL!.deletingLastPathComponent().appendingPathComponent(UpdateManager.dbName)
         return try! Realm(configuration: realmConfig)
     }()
     
-    private let resourceUrl = URL(string: Bundle.main.bundlePath)!.appendingPathComponent(RouteManager.wwwName)
+    private let resourceUrl = URL(string: Bundle.main.bundlePath)!.appendingPathComponent(UpdateManager.wwwName)
     private var resourceConfigUrl:URL {
-        return resourceUrl.appendingPathComponent(RouteManager.configName)
+        return resourceUrl.appendingPathComponent(UpdateManager.configName)
     }
-    private var resourceRoutesUrl: URL {
-        return resourceUrl.appendingPathComponent(RouteManager.routesName)
+    private var resourceFilesUrl: URL {
+        return resourceUrl.appendingPathComponent(UpdateManager.filesName)
     }
     
     
 
     private lazy var cacheUrl: URL = {
-        let cacheUrl = URL(string: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!)!.appendingPathComponent(RouteManager.wwwName)
+        let cacheUrl = URL(string: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!)!.appendingPathComponent(UpdateManager.wwwName)
         var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
         try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
         var resourceValues = URLResourceValues()
@@ -91,26 +91,26 @@ class RouteManager {
         return cacheUrl
     }()
     private var cacheConfigUrl: URL {
-        return cacheUrl.appendingPathComponent(RouteManager.configName)
+        return cacheUrl.appendingPathComponent(UpdateManager.configName)
     }
     
     private var serverConfigUrl: URL {
-        return serverUrl.appendingPathComponent(RouteManager.configName)
+        return serverUrl.appendingPathComponent(UpdateManager.configName)
     }
-    private var serverRoutesUrl: URL {
-        return serverUrl.appendingPathComponent(RouteManager.routesName)
+    private var serverFilesUrl: URL {
+        return serverUrl.appendingPathComponent(UpdateManager.filesName)
     }
     private var serverConfig: Config!
     
     private var config: Config?
-    private var routes: Array<Route>?
+    private var files: Array<File>?
     
     
     
     
     
-    private var resourceRoutes: Array<Route>?
-    private var cacheRoutes: Results<Route>?
+    private var resourceFiles: Array<File>?
+    private var cacheFiles: Results<File>?
     private var cacheConfig: Config?
     private var resourceConfig: Config!
     
@@ -137,7 +137,7 @@ class RouteManager {
         }
         
         // 重置变量
-        routes = nil;
+        files = nil;
         config = nil;
         progress = 0;
         

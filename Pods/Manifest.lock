@@ -5,14 +5,14 @@ PODS:
     - Charts/Core (= 3.0.1)
   - Charts/Core (3.0.1)
   - HandyJSON (1.6.1)
-  - Kingfisher (3.5.2)
-  - NVActivityIndicatorView (3.5.1)
+  - Kingfisher (3.6.0)
+  - NVActivityIndicatorView (3.5.2)
   - PermissionScope (1.1.1)
-  - Realm (2.4.4):
-    - Realm/Headers (= 2.4.4)
-  - Realm/Headers (2.4.4)
-  - RealmSwift (2.4.4):
-    - Realm (= 2.4.4)
+  - Realm (2.5.0):
+    - Realm/Headers (= 2.5.0)
+  - Realm/Headers (2.5.0)
+  - RealmSwift (2.5.0):
+    - Realm (= 2.5.0)
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
@@ -41,17 +41,17 @@ SPEC CHECKSUMS:
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   HandyJSON: dcc98115467462a4749db81bc8a9052607600bdf
-  Kingfisher: 9950e382c500b6834ce004c7c4131c444e90c3a1
-  NVActivityIndicatorView: 075563b3547445ebcff840e3297ce9dd4a23731f
+  Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
+  NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
-  Realm: 5a280a1f5a9a3c267bebf4f41ee47911137703d7
-  RealmSwift: 0c02b9f2d4be4301c497ed10e53a0580584eb1dd
+  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
   WeexSDK: ba8a6c443885afc16d9b0a8eb23220d792ad5b27
   XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
 
-PODFILE CHECKSUM: baffa508b1cd39c53eaf050ad9d6b5c731ef1ab7
+PODFILE CHECKSUM: 10301edd1f8b04ff2019f838a1abe2e804d35f18
 
 COCOAPODS: 1.2.0
