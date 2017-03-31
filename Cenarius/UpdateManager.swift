@@ -85,12 +85,12 @@ public class UpdateManager {
     }
     
     private let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
-//        let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
-//        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
-//        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
-//        var resourceValues = URLResourceValues()
-//        resourceValues.isExcludedFromBackup = true
-//        try! cacheFileUrl.setResourceValues(resourceValues)
+    //        let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
+    //        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
+    //        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
+    //        var resourceValues = URLResourceValues()
+    //        resourceValues.isExcludedFromBackup = true
+    //        try! cacheFileUrl.setResourceValues(resourceValues)
     private var cacheConfigUrl: URL {
         return cacheUrl.appendingPathComponent(UpdateManager.configName)
     }
@@ -225,5 +225,5 @@ public class UpdateManager {
             self!.completion(state, progress)
         }
     }
-
+    
 }
