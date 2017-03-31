@@ -163,7 +163,7 @@ class RouteManager {
     
     private func downloadConfig() {
         complete(state: .DOWNLOAD_CONFIG, progress: 0)
-        Alamofire.request(serverConfigUrl).validate().responseString { [weak self] response in
+        Cenarius.alamofire.request(serverConfigUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
                 if let config = Config.deserialize(from: value) {
@@ -181,7 +181,7 @@ class RouteManager {
                 }
                 
             case .failure(let error):
-                logger.error(error)
+                Cenarius.logger.error(error)
                 self!.complete(state: .DOWNLOAD_CONFIG_ERROR, progress: 0)
             }
         }

@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         initCenarius()
         RouteManager.update { (state, progress) in
-            logger.debug(state)
-            logger.debug(progress)
+            Cenarius.logger.debug(state)
+            Cenarius.logger.debug(progress)
         }
         
         return true
