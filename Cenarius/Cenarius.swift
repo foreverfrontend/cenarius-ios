@@ -11,15 +11,15 @@ import XCGLogger
 import WeexSDK
 import Alamofire
 
-class Cenarius {
+public class Cenarius {
     
-    static var logger: XCGLogger = {
+    public static var logger: XCGLogger = {
         let logger = XCGLogger.default
         logger.setup(level: .debug, showLogIdentifier: false, showFunctionName: true, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: nil, fileLevel: nil)
         return logger
     }()
     
-    static var alamofire: SessionManager = {
+    public static var alamofire: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 5
         configuration.timeoutIntervalForResource = 60

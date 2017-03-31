@@ -17,8 +17,12 @@ Pod::Spec.new do |s|
   s.dependency 'XCGLogger'
   s.dependency 'AsyncSwift'
   s.dependency 'PermissionScope'
-  s.dependency 'WeexSDK'
   s.dependency 'RealmSwift'
   s.dependency 'SwiftyVersion'
+  s.dependency 'WeexSDK'
   s.requires_arc = true
+  s.pod_target_xcconfig = {
+        'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/WeexSDK',
+        'OTHER_LDFLAGS'          => '$(inherited) -undefined dynamic_lookup'
+    }
 end

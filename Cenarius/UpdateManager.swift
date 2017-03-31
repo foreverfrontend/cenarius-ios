@@ -16,9 +16,9 @@ import SwiftyJSON
 import SwiftyVersion
 
 /// `UpdateManager` 提供更新能力。
-class UpdateManager {
+public class UpdateManager {
     
-    enum State {
+    public enum State {
         case UNZIP_WWW//解压www
         case UNZIP_WWW_ERROR//解压www出错
         case DOWNLOAD_CONFIG//下载配置文件
@@ -29,22 +29,23 @@ class UpdateManager {
         case DOWNLOAD_FILES_ERROR//下载文件出错
         case UPDATE_SUCCESS//更新文件成功
     }
+    public typealias Completion = (State, Int) -> Void
     
     /// 设置远程资源地址。
     ///
     /// - Parameter url: www文件夹的url
-    class func setServerUrl(_ url:URL) {
+    public class func setServerUrl(_ url:URL) {
         sharedInstance.serverUrl = url
     }
     
-    class func setDevelopMode(_ mode: Bool) {
+    public class func setDevelopMode(_ mode: Bool) {
         sharedInstance.developMode = mode
     }
     
     /// 更新
     ///
     /// - Parameter completionHandler: 回调
-    class func update(completionHandler: @escaping Completion)  {
+    public class func update(completionHandler: @escaping Completion)  {
         sharedInstance.update(completionHandler: completionHandler)
     }
     
@@ -61,7 +62,6 @@ class UpdateManager {
     /// www文件夹的url
     private var serverUrl: URL!
     private var developMode = false
-    typealias Completion = (State, Int) -> Void
     private var completion: Completion!
     private var progress: Int = 0
     
