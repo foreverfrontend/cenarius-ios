@@ -110,8 +110,8 @@ public class UpdateManager {
     
     
     
-    private var resourceFiles: Array<File>?
-    private var cacheFiles: Results<File>?
+    private var resourceFiles: [File?]!
+    private var cacheFiles: Results<FileRealm>!
     private var cacheConfig: Config?
     private var resourceConfig: Config!
     
@@ -130,6 +130,7 @@ public class UpdateManager {
         progress = 0;
         
         loadLocalConfig()
+        loadLocalFiles()
         downloadConfig()
     }
     
@@ -146,7 +147,15 @@ public class UpdateManager {
         
         let resourceData = try! Data(contentsOf: resourceConfigUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
-        resourceConfig = Config.deserialize(from: resourceString)
+        resourceConfig = Config.deserialize(from: resourceString)!
+    }
+    
+    /// 加载本地的路由表
+    private func loadLocalFiles() {
+        cacheFiles = realm.objects(FileRealm)
+        let resourceData = try! Data(contentsOf: resourceFilesUrl)
+        let resourceString = String(data: resourceData, encoding: .utf8)
+        resourceFiles = [File].deserialize(from: resourceString)!
     }
     
     private func downloadConfig() {
@@ -213,11 +222,18 @@ public class UpdateManager {
                     }
                     self!.complete(state: .UNZIP_WWW, progress: progress)
                 })
+                self!.unzipSuccess()
             } catch {
                 Cenarius.logger.error(error)
                 self!.complete(state: .UNZIP_WWW_ERROR, progress: 0)
             }
         }
+    }
+    
+    private func unzipSuccess() {
+        // 解压www成功
+        // 保存路由表到数据库中
+        
     }
     
     private func complete(state: State, progress: Int) {

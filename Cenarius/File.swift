@@ -7,14 +7,15 @@
 //
 
 import RealmSwift
+import HandyJSON
 
-class File: Object {
+class FileRealm: Object {
     
     dynamic var path = ""
     dynamic var md5 = ""
 }
 
-class RouteList: Object {
-    
-    let files = List<File>()
+struct File: HandyJSON {
+    var path: String!
+    var md5: String!
 }
