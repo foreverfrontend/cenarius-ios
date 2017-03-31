@@ -12,8 +12,9 @@ import Alamofire
 import Async
 import RealmSwift
 import HandyJSON
-import SwiftyJSON
+//import SwiftyJSON
 import SwiftyVersion
+import Zip
 
 /// `UpdateManager` 提供更新能力。
 public class UpdateManager {
@@ -54,6 +55,7 @@ public class UpdateManager {
     
     private static let sharedInstance = UpdateManager()
     private static let wwwName = "www"
+    private static let zipName = "www.zip"
     private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
@@ -71,25 +73,24 @@ public class UpdateManager {
         return try! Realm(configuration: realmConfig)
     }()
     
-    private let resourceUrl = URL(string: Bundle.main.bundlePath)!.appendingPathComponent(UpdateManager.wwwName)
+    private let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(UpdateManager.wwwName)
     private var resourceConfigUrl:URL {
         return resourceUrl.appendingPathComponent(UpdateManager.configName)
     }
     private var resourceFilesUrl: URL {
         return resourceUrl.appendingPathComponent(UpdateManager.filesName)
     }
+    private var resourceZipUrl: URL {
+        return resourceUrl.appendingPathComponent(UpdateManager.zipName)
+    }
     
-    
-
-    private lazy var cacheUrl: URL = {
-        let cacheUrl = URL(string: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!)!.appendingPathComponent(UpdateManager.wwwName)
-        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
-        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
-        var resourceValues = URLResourceValues()
-        resourceValues.isExcludedFromBackup = true
-        try! cacheFileUrl.setResourceValues(resourceValues)
-        return cacheUrl
-    }()
+    private let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
+//        let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
+//        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
+//        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
+//        var resourceValues = URLResourceValues()
+//        resourceValues.isExcludedFromBackup = true
+//        try! cacheFileUrl.setResourceValues(resourceValues)
     private var cacheConfigUrl: URL {
         return cacheUrl.appendingPathComponent(UpdateManager.configName)
     }
@@ -114,19 +115,6 @@ public class UpdateManager {
     private var cacheConfig: Config?
     private var resourceConfig: Config!
     
-    private var shouldDownloadWww: Bool {
-        if (hasMinVersion(serverConfig: serverConfig)) {
-            // 满足最小版本要求
-            if (isWwwFolderNeedsToBeInstalled()) {
-                return Version(serverConfig.release) > Version(resourceConfig.release)
-            } else {
-                return Version(serverConfig.release) > Version(cacheConfig!.release)
-            }
-        }
-        return false;
-    }
-    
-    
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
@@ -149,14 +137,14 @@ public class UpdateManager {
     /// 加载本地的config
     private func loadLocalConfig() {
         do {
-            let cacheData = try Data(contentsOf: URL(fileURLWithPath: cacheConfigUrl.absoluteString))
+            let cacheData = try Data(contentsOf: cacheConfigUrl)
             let cacheString = String(data: cacheData, encoding: .utf8)
             cacheConfig = Config.deserialize(from: cacheString)
         } catch {
             cacheConfig = nil
         }
         
-        let resourceData = try! Data(contentsOf: URL(fileURLWithPath: resourceConfigUrl.absoluteString))
+        let resourceData = try! Data(contentsOf: resourceConfigUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceConfig = Config.deserialize(from: resourceString)
     }
@@ -170,7 +158,7 @@ public class UpdateManager {
                     self!.serverConfig = config
                     if self!.isWwwFolderNeedsToBeInstalled() {
                         // 需要解压www
-                        
+                        self!.unzipWww()
                     } else if self!.shouldDownloadWww {
                         // 下载路由表
                     }
@@ -187,6 +175,18 @@ public class UpdateManager {
         }
     }
     
+    private var shouldDownloadWww: Bool {
+        if (hasMinVersion(serverConfig: serverConfig)) {
+            // 满足最小版本要求
+            if (isWwwFolderNeedsToBeInstalled()) {
+                return Version(serverConfig.release) > Version(resourceConfig.release)
+            } else {
+                return Version(serverConfig.release) > Version(cacheConfig!.release)
+            }
+        }
+        return false;
+    }
+    
     private func hasMinVersion(serverConfig: Config) -> Bool {
         let appBuild = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
         if Version(appBuild) >= Version(serverConfig.ios_min_version) {
@@ -200,6 +200,24 @@ public class UpdateManager {
             return true
         }
         return false
+    }
+    
+    private func unzipWww() {
+        Async.background { [weak self] in
+            try? FileManager.default.removeItem(at: self!.cacheUrl)
+            do {
+                try Zip.unzipFile(self!.resourceZipUrl, destination: self!.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
+                    var progress = Int(unzipProgress * 100)
+                    if self!.shouldDownloadWww {
+                        progress /= 2
+                    }
+                    self!.complete(state: .UNZIP_WWW, progress: progress)
+                })
+            } catch {
+                Cenarius.logger.error(error)
+                self!.complete(state: .UNZIP_WWW_ERROR, progress: 0)
+            }
+        }
     }
     
     private func complete(state: State, progress: Int) {
