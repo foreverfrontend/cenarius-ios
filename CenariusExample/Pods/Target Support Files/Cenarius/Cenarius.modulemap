@@ -1,0 +1,6 @@
+framework module Cenarius {
+  umbrella header "Cenarius-umbrella.h"
+
+  export *
+  module * { export * }
+}

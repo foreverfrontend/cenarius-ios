@@ -12,6 +12,7 @@
 		0C445BE91E8DFEFA00EC30D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BE71E8DFEFA00EC30D5 /* Main.storyboard */; };
 		0C445BEB1E8DFEFA00EC30D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BEA1E8DFEFA00EC30D5 /* Assets.xcassets */; };
 		0C445BEE1E8DFEFA00EC30D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BEC1E8DFEFA00EC30D5 /* LaunchScreen.storyboard */; };
+		BCD37BC71DBAFC7E21CDC80C /* Pods_CenariusExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E045E4A8074F3054194A83 /* Pods_CenariusExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		0C445BEA1E8DFEFA00EC30D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C445BED1E8DFEFA00EC30D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C445BEF1E8DFEFA00EC30D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1CCD0D5F16973D24EFDF1723 /* Pods-CenariusExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.debug.xcconfig"; sourceTree = "<group>"; };
+		3D55837FA7B1BE5547CD17CD /* Pods-CenariusExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.release.xcconfig"; sourceTree = "<group>"; };
+		74E045E4A8074F3054194A83 /* Pods_CenariusExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CenariusExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCD37BC71DBAFC7E21CDC80C /* Pods_CenariusExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				0C445BE21E8DFEFA00EC30D5 /* CenariusExample */,
 				0C445BE11E8DFEFA00EC30D5 /* Products */,
+				5E501B0753C30B177CC030D5 /* Pods */,
+				A7EC9FE46EBE9AD5502BE254 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = CenariusExample;
 			sourceTree = "<group>";
 		};
+		5E501B0753C30B177CC030D5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1CCD0D5F16973D24EFDF1723 /* Pods-CenariusExample.debug.xcconfig */,
+				3D55837FA7B1BE5547CD17CD /* Pods-CenariusExample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A7EC9FE46EBE9AD5502BE254 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74E045E4A8074F3054194A83 /* Pods_CenariusExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C445BF21E8DFEFA00EC30D5 /* Build configuration list for PBXNativeTarget "CenariusExample" */;
 			buildPhases = (
+				813DF4EA8893DD683E662A65 /* [CP] Check Pods Manifest.lock */,
 				0C445BDC1E8DFEFA00EC30D5 /* Sources */,
 				0C445BDD1E8DFEFA00EC30D5 /* Frameworks */,
 				0C445BDE1E8DFEFA00EC30D5 /* Resources */,
+				837B58899D9B69158E6B3A04 /* [CP] Embed Pods Frameworks */,
+				8D5ACCDA3AD5D79CF205703B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		813DF4EA8893DD683E662A65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		837B58899D9B69158E6B3A04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D5ACCDA3AD5D79CF205703B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0C445BDC1E8DFEFA00EC30D5 /* Sources */ = {
@@ -258,6 +333,7 @@
 		};
 		0C445BF31E8DFEFA00EC30D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CCD0D5F16973D24EFDF1723 /* Pods-CenariusExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CenariusExample/Info.plist;
@@ -270,6 +346,7 @@
 		};
 		0C445BF41E8DFEFA00EC30D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D55837FA7B1BE5547CD17CD /* Pods-CenariusExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CenariusExample/Info.plist;

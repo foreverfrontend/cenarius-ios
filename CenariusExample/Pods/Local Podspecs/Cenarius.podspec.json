@@ -1,0 +1,57 @@
+{
+  "name": "Cenarius",
+  "version": "3.0.0",
+  "summary": "Mobile Hybrid Framework Cenarius iOS Container.",
+  "homepage": "https://github.com/macula-projects/cenarius-ios",
+  "license": "MIT",
+  "authors": {
+    "M": "myeveryheart@qq.com"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/macula-projects/cenarius-ios.git",
+    "tag": "3.0.0"
+  },
+  "source_files": "Cenarius/**/*.{swift,h,m}",
+  "dependencies": {
+    "Alamofire": [
+
+    ],
+    "Kingfisher": [
+
+    ],
+    "SwiftyJSON": [
+
+    ],
+    "HandyJSON": [
+
+    ],
+    "NVActivityIndicatorView": [
+
+    ],
+    "Charts": [
+
+    ],
+    "XCGLogger": [
+
+    ],
+    "AsyncSwift": [
+
+    ],
+    "PermissionScope": [
+
+    ],
+    "WeexSDK": [
+
+    ],
+    "RealmSwift": [
+
+    ],
+    "SwiftyVersion": [
+
+    ]
+  },
+  "requires_arc": true
+}
