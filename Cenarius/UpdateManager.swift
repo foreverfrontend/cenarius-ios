@@ -36,7 +36,7 @@ public class UpdateManager {
     ///
     /// - Parameter url: www文件夹的url
     public class func setServerUrl(_ url:URL) {
-        sharedInstance.serverUrl = url
+        UpdateManager.serverUrl = url
     }
     
     public class func setDevelopMode(_ mode: Bool) {
@@ -54,15 +54,23 @@ public class UpdateManager {
     // MARK: - Private
     
     private static let sharedInstance = UpdateManager()
+    
     private static let wwwName = "www"
     private static let zipName = "www.zip"
     private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
     
-    
-    /// www文件夹的url
-    private var serverUrl: URL!
+    private static let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(wwwName)
+    private static let resourceConfigUrl = resourceUrl.appendingPathComponent(configName)
+    private static let resourceFilesUrl = resourceUrl.appendingPathComponent(filesName)
+    private static let resourceZipUrl = resourceUrl.appendingPathComponent(zipName)
+    private static let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(wwwName)
+    private static let cacheConfigUrl = cacheUrl.appendingPathComponent(configName)
+    private static var serverUrl: URL!
+    private static let serverConfigUrl = serverUrl.appendingPathComponent(configName)
+    private static let serverFilesUrl = serverUrl.appendingPathComponent(filesName)
+
     private var developMode = false
     private var completion: Completion!
     private var progress: Int = 0
@@ -73,34 +81,10 @@ public class UpdateManager {
         return try! Realm(configuration: realmConfig)
     }()
     
-    private let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(UpdateManager.wwwName)
-    private var resourceConfigUrl:URL {
-        return resourceUrl.appendingPathComponent(UpdateManager.configName)
-    }
-    private var resourceFilesUrl: URL {
-        return resourceUrl.appendingPathComponent(UpdateManager.filesName)
-    }
-    private var resourceZipUrl: URL {
-        return resourceUrl.appendingPathComponent(UpdateManager.zipName)
-    }
     
-    private let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
-    //        let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(UpdateManager.wwwName)
-    //        var cacheFileUrl = URL.init(fileURLWithPath: cacheUrl.absoluteString)
-    //        try! FileManager.default.createDirectory(at: cacheFileUrl, withIntermediateDirectories: true, attributes: nil)
-    //        var resourceValues = URLResourceValues()
-    //        resourceValues.isExcludedFromBackup = true
-    //        try! cacheFileUrl.setResourceValues(resourceValues)
-    private var cacheConfigUrl: URL {
-        return cacheUrl.appendingPathComponent(UpdateManager.configName)
-    }
     
-    private var serverConfigUrl: URL {
-        return serverUrl.appendingPathComponent(UpdateManager.configName)
-    }
-    private var serverFilesUrl: URL {
-        return serverUrl.appendingPathComponent(UpdateManager.filesName)
-    }
+    
+    
     private var serverConfig: Config!
     
     private var config: Config?
@@ -138,14 +122,14 @@ public class UpdateManager {
     /// 加载本地的config
     private func loadLocalConfig() {
         do {
-            let cacheData = try Data(contentsOf: cacheConfigUrl)
+            let cacheData = try Data(contentsOf: UpdateManager.cacheConfigUrl)
             let cacheString = String(data: cacheData, encoding: .utf8)
             cacheConfig = Config.deserialize(from: cacheString)
         } catch {
             cacheConfig = nil
         }
         
-        let resourceData = try! Data(contentsOf: resourceConfigUrl)
+        let resourceData = try! Data(contentsOf: UpdateManager.resourceConfigUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceConfig = Config.deserialize(from: resourceString)!
     }
@@ -153,14 +137,14 @@ public class UpdateManager {
     /// 加载本地的路由表
     private func loadLocalFiles() {
         cacheFiles = realm.objects(FileRealm)
-        let resourceData = try! Data(contentsOf: resourceFilesUrl)
+        let resourceData = try! Data(contentsOf: UpdateManager.resourceFilesUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceFiles = [File].deserialize(from: resourceString)!
     }
     
     private func downloadConfig() {
         complete(state: .DOWNLOAD_CONFIG, progress: 0)
-        Cenarius.alamofire.request(serverConfigUrl).validate().responseString { [weak self] response in
+        Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
                 if let config = Config.deserialize(from: value) {
@@ -213,9 +197,9 @@ public class UpdateManager {
     
     private func unzipWww() {
         Async.background { [weak self] in
-            try? FileManager.default.removeItem(at: self!.cacheUrl)
+            try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
             do {
-                try Zip.unzipFile(self!.resourceZipUrl, destination: self!.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
+                try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
                     var progress = Int(unzipProgress * 100)
                     if self!.shouldDownloadWww {
                         progress /= 2
