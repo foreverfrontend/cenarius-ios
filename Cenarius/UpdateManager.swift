@@ -85,6 +85,7 @@ public class UpdateManager {
     private var cacheConfig: Config?
     private var cacheFiles: Results<FileRealm>!
     private var serverConfig: Config!
+    private var serverConfigData: Data!
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
@@ -131,10 +132,10 @@ public class UpdateManager {
     
     private func downloadConfig() {
         complete(state: .DOWNLOAD_CONFIG_FILE, progress: 0)
-        Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseString { [weak self] response in
+        Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseData { [weak self] response in
             switch response.result {
             case .success(let value):
-                self!.serverConfig = Config.deserialize(from: value)
+                self!.serverConfig = Config.deserialize(from: String(data: value, encoding: .utf8))
                 if self!.isWwwFolderNeedsToBeInstalled() {
                     // 需要解压www
                     self!.unzipWww()
@@ -225,7 +226,13 @@ public class UpdateManager {
             switch response.result {
             case .success(let value):
                 let serverFiles = [File].deserialize(from: value)!
-                self!.downloadFiles(serverFiles)
+                let downloadFiles = self!.getDownloadFiles(serverFiles)
+                if downloadFiles.count > 0 {
+                    self!.downloadFiles(downloadFiles)
+                } else {
+                    self!.saveConfig()
+                    self!.complete(state: .UPDATE_SUCCESS, progress: 100)
+                }
             case .failure(let error):
                 Cenarius.logger.error(error)
                 self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR, progress: 0)
@@ -233,34 +240,32 @@ public class UpdateManager {
         }
     }
     
-//    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
-//        let downloadFiles = List<FileRealm>()
-//        for file in serverFiles {
-//            let fileRealm = FileRealm()
-//            fileRealm.path = file!.path
-//            fileRealm.md5 = file!.md5
-//            if shouldDownload(serverFile: fileRealm) {
-//                downloadFiles.append(fileRealm)
-//            }
-//        }
-//        return downloadFiles
-//    }
-//    
-//    private func shouldDownload(serverFile: FileRealm) -> Bool {
-//        for cacheFile in cacheFiles {
-//            if cacheFile.isEqual(serverFile) {
-//                return false
-//            }
-//        }
-//        return true
-//    }
+    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
+        let downloadFiles = List<FileRealm>()
+        for file in serverFiles {
+            let fileRealm = file!.toRealm()
+            if shouldDownload(serverFile: fileRealm) {
+                downloadFiles.append(fileRealm)
+            }
+        }
+        return downloadFiles
+    }
     
-    private func downloadFiles(_ serverFiles: [File?]) {
+    private func shouldDownload(serverFile: FileRealm) -> Bool {
+        for cacheFile in cacheFiles {
+            if cacheFile.isEqual(serverFile) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func downloadFiles(_ files: List<FileRealm>) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 2
-        for file in serverFiles {
+        for file in files {
             queue.addOperation { [weak self] in
-                self!.downloadFile(file!.toRealm(), retry: 5)
+                self!.downloadFile(file, retry: 5)
             }
         }
     }
@@ -275,6 +280,10 @@ public class UpdateManager {
         Async.main { [weak self] in
             self!.completion(state, progress)
         }
+    }
+    
+    private func saveConfig() {
+        try! serverConfigData.write(to: UpdateManager.cacheConfigUrl, options: .atomic)
     }
     
 }
