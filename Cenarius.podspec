@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/macula-projects/cenarius-ios.git", :tag => "#{s.version}" }
   s.source_files = 'Cenarius/**/*.{swift,h,m}'
   s.dependency "Alamofire"
+  s.dependency "Alamofire-Synchronous"
   s.dependency "Kingfisher"
   s.dependency 'SwiftyJSON'
   s.dependency 'HandyJSON'

@@ -8,6 +8,10 @@ pod 'Alamofire'
 # Elegant HTTP Networking in Swift
 # https://github.com/Alamofire/Alamofire
 
+pod 'Alamofire-Synchronous'
+# Synchronous requests for Alamofire
+# https://github.com/Dalodd/Alamofire-Synchronous
+
 pod 'Kingfisher'
 # A lightweight, pure-Swift library for downloading and caching images from the web.
 # https://github.com/onevcat/Kingfisher
