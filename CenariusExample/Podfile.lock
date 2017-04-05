@@ -1,8 +1,11 @@
 PODS:
   - Alamofire (4.4.0)
+  - Alamofire-Synchronous (4.0.0):
+    - Alamofire (~> 4.0)
   - AsyncSwift (2.0.1)
   - Cenarius (3.0.0):
     - Alamofire
+    - Alamofire-Synchronous
     - AsyncSwift
     - Charts
     - HandyJSON
@@ -46,8 +49,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
-  Cenarius: e017fac396de3a8f0fa1adafc2e69286f5da925d
+  Cenarius: 3d526a39cdb905c9c4854eebb18315189f0ecc10
   Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
   HandyJSON: dcc98115467462a4749db81bc8a9052607600bdf
   Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
