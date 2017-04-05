@@ -125,10 +125,7 @@ public class UpdateManager {
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceFiles = List<FileRealm>()
         for file in [File].deserialize(from: resourceString)! {
-            let fileRealm = FileRealm()
-            fileRealm.path = file!.path
-            fileRealm.md5 = file!.md5
-            resourceFiles.append(fileRealm)
+            resourceFiles.append(file!.toRealm())
         }
     }
     
@@ -228,8 +225,7 @@ public class UpdateManager {
             switch response.result {
             case .success(let value):
                 let serverFiles = [File].deserialize(from: value)!
-                let downloadFiles = self!.getDownloadFiles(serverFiles)
-                self!.downloadFiles(downloadFiles)
+                self!.downloadFiles(serverFiles)
             case .failure(let error):
                 Cenarius.logger.error(error)
                 self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR, progress: 0)
@@ -237,34 +233,34 @@ public class UpdateManager {
         }
     }
     
-    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
-        let downloadFiles = List<FileRealm>()
-        for file in serverFiles {
-            let fileRealm = FileRealm()
-            fileRealm.path = file!.path
-            fileRealm.md5 = file!.md5
-            if shouldDownload(serverFile: fileRealm) {
-                downloadFiles.append(fileRealm)
-            }
-        }
-        return downloadFiles
-    }
+//    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
+//        let downloadFiles = List<FileRealm>()
+//        for file in serverFiles {
+//            let fileRealm = FileRealm()
+//            fileRealm.path = file!.path
+//            fileRealm.md5 = file!.md5
+//            if shouldDownload(serverFile: fileRealm) {
+//                downloadFiles.append(fileRealm)
+//            }
+//        }
+//        return downloadFiles
+//    }
+//    
+//    private func shouldDownload(serverFile: FileRealm) -> Bool {
+//        for cacheFile in cacheFiles {
+//            if cacheFile.isEqual(serverFile) {
+//                return false
+//            }
+//        }
+//        return true
+//    }
     
-    private func shouldDownload(serverFile: FileRealm) -> Bool {
-        for cacheFile in cacheFiles {
-            if cacheFile.isEqual(serverFile) {
-                return false
-            }
-        }
-        return true
-    }
-    
-    private func downloadFiles(_ serverFiles: List<FileRealm>) {
+    private func downloadFiles(_ serverFiles: [File?]) {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 2
         for file in serverFiles {
             queue.addOperation { [weak self] in
-                self!.downloadFile(file, retry: 5)
+                self!.downloadFile(file!.toRealm(), retry: 5)
             }
         }
     }
