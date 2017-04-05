@@ -12,7 +12,6 @@ import Alamofire
 import Async
 import RealmSwift
 import HandyJSON
-//import SwiftyJSON
 import SwiftyVersion
 import Zip
 
@@ -22,10 +21,10 @@ public class UpdateManager {
     public enum State {
         case UNZIP_WWW//解压www
         case UNZIP_WWW_ERROR//解压www出错
-        case DOWNLOAD_CONFIG//下载配置文件
-        case DOWNLOAD_CONFIG_ERROR//下载配置文件出错
-        case DOWNLOAD_ROUTES//下载路由表
-        case DOWNLOAD_ROUTES_ERROR//下载路由表出错
+        case DOWNLOAD_CONFIG_FILE//下载配置文件
+        case DOWNLOAD_CONFIG_FILE_ERROR//下载配置文件出错
+        case DOWNLOAD_FILES_FILE//下载路由表
+        case DOWNLOAD_FILES_FILE_ERROR//下载路由表出错
         case DOWNLOAD_FILES//下载文件
         case DOWNLOAD_FILES_ERROR//下载文件出错
         case UPDATE_SUCCESS//更新文件成功
@@ -149,27 +148,25 @@ public class UpdateManager {
     }
     
     private func downloadConfig() {
-        complete(state: .DOWNLOAD_CONFIG, progress: 0)
+        complete(state: .DOWNLOAD_CONFIG_FILE, progress: 0)
         Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
-                if let config = Config.deserialize(from: value) {
-                    self!.serverConfig = config
-                    if self!.isWwwFolderNeedsToBeInstalled() {
-                        // 需要解压www
-                        self!.unzipWww()
-                    } else if self!.shouldDownloadWww {
-                        // 下载路由表
-                    }
-                    else {
-                        // 不需要更新www
-                        self!.complete(state: .UPDATE_SUCCESS, progress: 100)
-                    }
+                self!.serverConfig = Config.deserialize(from: value)
+                if self!.isWwwFolderNeedsToBeInstalled() {
+                    // 需要解压www
+                    self!.unzipWww()
+                } else if self!.shouldDownloadWww {
+                    // 下载路由表
+                    self!.downloadFilesFile()
                 }
-                
+                else {
+                    // 不需要更新www
+                    self!.complete(state: .UPDATE_SUCCESS, progress: 100)
+                }
             case .failure(let error):
                 Cenarius.logger.error(error)
-                self!.complete(state: .DOWNLOAD_CONFIG_ERROR, progress: 0)
+                self!.complete(state: .DOWNLOAD_CONFIG_FILE_ERROR, progress: 0)
             }
         }
     }
@@ -231,6 +228,31 @@ public class UpdateManager {
         try! realm.write {
             realm.add(resourceFiles)
         }
+        if shouldDownloadWww {
+            downloadFilesFile()
+        } else {
+            complete(state: .UPDATE_SUCCESS, progress: 100)
+        }
+    }
+    
+    private func downloadFilesFile() {
+        complete(state: .DOWNLOAD_FILES_FILE, progress: 0)
+        loadLocalConfig()
+        loadLocalFiles()
+        Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
+            switch response.result {
+            case .success(let value):
+                let serverFiles = [File].deserialize(from: value)
+                self!.downloadFiles(serverFiles!)
+            case .failure(let error):
+                Cenarius.logger.error(error)
+                self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR, progress: 0)
+            }
+        }
+    }
+    
+    private func downloadFiles(_ serverFiles: [File?]) {
+        
     }
     
     private func complete(state: State, progress: Int) {
