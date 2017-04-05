@@ -80,24 +80,11 @@ public class UpdateManager {
         return try! Realm(configuration: realmConfig)
     }()
     
-    
-    
-    
-    
-    private var serverConfig: Config!
-    
-    private var config: Config?
-    private var files: Array<File>?
-    
-    
-    
-    
-    
-    private var resourceFiles: List<FileRealm>!
-    private var cacheFiles: Results<FileRealm>!
-    private var cacheConfig: Config?
     private var resourceConfig: Config!
-    
+    private var resourceFiles: List<FileRealm>!
+    private var cacheConfig: Config?
+    private var cacheFiles: Results<FileRealm>!
+    private var serverConfig: Config!
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
@@ -108,8 +95,6 @@ public class UpdateManager {
         }
         
         // 重置变量
-        files = nil;
-        config = nil;
         progress = 0;
         
         loadLocalConfig()
@@ -242,8 +227,9 @@ public class UpdateManager {
         Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
-                let serverFiles = [File].deserialize(from: value)
-                self!.downloadFiles(serverFiles!)
+                let serverFiles = [File].deserialize(from: value)!
+                let downloadFiles = self!.getDownloadFiles(serverFiles)
+                self!.downloadFiles(downloadFiles)
             case .failure(let error):
                 Cenarius.logger.error(error)
                 self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR, progress: 0)
@@ -251,9 +237,43 @@ public class UpdateManager {
         }
     }
     
-    private func downloadFiles(_ serverFiles: [File?]) {
+    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
+        let downloadFiles = List<FileRealm>()
+        for file in serverFiles {
+            let fileRealm = FileRealm()
+            fileRealm.path = file!.path
+            fileRealm.md5 = file!.md5
+            if shouldDownload(serverFile: fileRealm) {
+                downloadFiles.append(fileRealm)
+            }
+        }
+        return downloadFiles
+    }
+    
+    private func shouldDownload(serverFile: FileRealm) -> Bool {
+        for cacheFile in cacheFiles {
+            if cacheFile.isEqual(serverFile) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    private func downloadFiles(_ serverFiles: List<FileRealm>) {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 2
+        for file in serverFiles {
+            queue.addOperation { [weak self] in
+                self!.downloadFile(file, retry: 5)
+            }
+        }
+    }
+    
+    private func downloadFile(_ file: FileRealm, retry: Int) {
         
     }
+    
+    
     
     private func complete(state: State, progress: Int) {
         Async.main { [weak self] in
