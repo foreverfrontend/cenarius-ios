@@ -59,6 +59,7 @@ public class UpdateManager {
     private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
+    private static let retry = 5
     
     private static let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(wwwName)
     private static let resourceConfigUrl = resourceUrl.appendingPathComponent(configName)
@@ -265,13 +266,14 @@ public class UpdateManager {
         queue.maxConcurrentOperationCount = 2
         for file in files {
             queue.addOperation { [weak self] in
-                self!.downloadFile(file, retry: 5)
+                self!.downloadFile(file, retry: UpdateManager.retry)
             }
         }
+
     }
     
-    private func downloadFile(_ file: FileRealm, retry: Int) {
-        
+    private func downloadFile(_ file: FileRealm, retry: Int) -> Bool{
+        Cenarius.alamofire.request(UpdateManager.serverUrl.appendingPathComponent(file.path)).validate().responseString(queue: <#T##DispatchQueue?#>, encoding: <#T##String.Encoding?#>, completionHandler: <#T##(DataResponse<String>) -> Void#>)
     }
     
     
