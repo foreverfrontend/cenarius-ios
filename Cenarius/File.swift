@@ -13,6 +13,10 @@ class FileRealm: Object {
     
     dynamic var path = ""
     dynamic var md5 = ""
+    
+    override static func primaryKey() -> String? {
+        return "path"
+    }
 }
 
 struct File: HandyJSON {

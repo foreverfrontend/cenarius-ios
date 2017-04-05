@@ -94,7 +94,7 @@ public class UpdateManager {
     
     
     
-    private var resourceFiles: [File?]!
+    private var resourceFiles: List<FileRealm>!
     private var cacheFiles: Results<FileRealm>!
     private var cacheConfig: Config?
     private var resourceConfig: Config!
@@ -139,7 +139,13 @@ public class UpdateManager {
         cacheFiles = realm.objects(FileRealm)
         let resourceData = try! Data(contentsOf: UpdateManager.resourceFilesUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
-        resourceFiles = [File].deserialize(from: resourceString)!
+        resourceFiles = List<FileRealm>()
+        for file in [File].deserialize(from: resourceString)! {
+            let fileRealm = FileRealm()
+            fileRealm.path = file!.path
+            fileRealm.md5 = file!.md5
+            resourceFiles.append(fileRealm)
+        }
     }
     
     private func downloadConfig() {
@@ -198,6 +204,10 @@ public class UpdateManager {
     private func unzipWww() {
         Async.background { [weak self] in
             try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
+            try! self!.realm.write {
+                self!.realm.deleteAll()
+            }
+
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
                     var progress = Int(unzipProgress * 100)
@@ -216,8 +226,11 @@ public class UpdateManager {
     
     private func unzipSuccess() {
         // 解压www成功
+        try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
         // 保存路由表到数据库中
-        
+        try! realm.write {
+            realm.add(resourceFiles)
+        }
     }
     
     private func complete(state: State, progress: Int) {
