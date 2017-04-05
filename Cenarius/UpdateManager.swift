@@ -9,6 +9,7 @@
 import Foundation
 import XCGLogger
 import Alamofire
+import Alamofire_Synchronous
 import Async
 import RealmSwift
 import HandyJSON
@@ -19,6 +20,7 @@ import Zip
 public class UpdateManager {
     
     public enum State {
+        case UNSTART//
         case UNZIP_WWW//解压www
         case UNZIP_WWW_ERROR//解压www出错
         case DOWNLOAD_CONFIG_FILE//下载配置文件
@@ -269,14 +271,40 @@ public class UpdateManager {
                 self!.downloadFile(file, retry: UpdateManager.retry)
             }
         }
+    }
+    
+    private func downloadFile(_ file: FileRealm, retry: Int) -> Bool {
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let fileURL = UpdateManager.cacheUrl.appendingPathComponent(file.path)
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
 
+        let response = Cenarius.alamofire.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
+        if let error = response.error {
+            Cenarius.logger.debug(error)
+            return downloadFileRetry(file, retry: retry)
+        } else {
+            
+        }
+        
     }
     
-    private func downloadFile(_ file: FileRealm, retry: Int) -> Bool{
-        Cenarius.alamofire.request(UpdateManager.serverUrl.appendingPathComponent(file.path)).validate().responseString(queue: <#T##DispatchQueue?#>, encoding: <#T##String.Encoding?#>, completionHandler: <#T##(DataResponse<String>) -> Void#>)
+    private func downloadFileRetry(_ file: FileRealm, retry: Int) -> Bool {
+        if retry > 0 {
+            return downloadFile(file, retry: retry - 1)
+        } else {
+            downloadFileError()
+            return false
+        }
     }
     
+    private func downloadFileError() {
+        complete(state: .DOWNLOAD_FILES_ERROR, progress: 0)
+    }
     
+    private func downloadFileSuccess(_ file: FileRealm) {
+        
+    }
     
     private func complete(state: State, progress: Int) {
         Async.main { [weak self] in
