@@ -20,7 +20,6 @@ import Zip
 public class UpdateManager {
     
     public enum State {
-        case UNSTART//
         case UNZIP_WWW//解压www
         case UNZIP_WWW_ERROR//解压www出错
         case DOWNLOAD_CONFIG_FILE//下载配置文件
@@ -62,6 +61,7 @@ public class UpdateManager {
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
     private static let retry = 5
+    private static let maxConcurrentOperationCount = 2
     
     private static let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(wwwName)
     private static let resourceConfigUrl = resourceUrl.appendingPathComponent(configName)
@@ -72,10 +72,12 @@ public class UpdateManager {
     private static var serverUrl: URL!
     private static let serverConfigUrl = serverUrl.appendingPathComponent(configName)
     private static let serverFilesUrl = serverUrl.appendingPathComponent(filesName)
-
+    
     private var developMode = false
     private var completion: Completion!
     private var progress: Int = 0
+    private var isDownloadFileError = false
+    private var downloadFilesCount = 0
     
     private lazy var realm: Realm = {
         var realmConfig = Realm.Configuration()
@@ -89,12 +91,13 @@ public class UpdateManager {
     private var cacheFiles: Results<FileRealm>!
     private var serverConfig: Config!
     private var serverConfigData: Data!
+    private var downloadFiles: List<FileRealm>!
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
         // 开发模式，直接成功
         if developMode {
-            complete(state: .UPDATE_SUCCESS, progress: 100)
+            complete(state: .UPDATE_SUCCESS)
             return
         }
         
@@ -134,7 +137,7 @@ public class UpdateManager {
     }
     
     private func downloadConfig() {
-        complete(state: .DOWNLOAD_CONFIG_FILE, progress: 0)
+        complete(state: .DOWNLOAD_CONFIG_FILE)
         Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseData { [weak self] response in
             switch response.result {
             case .success(let value):
@@ -148,11 +151,11 @@ public class UpdateManager {
                 }
                 else {
                     // 不需要更新www
-                    self!.complete(state: .UPDATE_SUCCESS, progress: 100)
+                    self!.complete(state: .UPDATE_SUCCESS)
                 }
             case .failure(let error):
                 Cenarius.logger.error(error)
-                self!.complete(state: .DOWNLOAD_CONFIG_FILE_ERROR, progress: 0)
+                self!.complete(state: .DOWNLOAD_CONFIG_FILE_ERROR)
             }
         }
     }
@@ -190,19 +193,19 @@ public class UpdateManager {
             try! self!.realm.write {
                 self!.realm.deleteAll()
             }
-
+            
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
-                    var progress = Int(unzipProgress * 100)
+                    self!.progress = Int(unzipProgress * 100)
                     if self!.shouldDownloadWww {
-                        progress /= 2
+                        self!.progress /= 2
                     }
-                    self!.complete(state: .UNZIP_WWW, progress: progress)
+                    self!.complete(state: .UNZIP_WWW)
                 })
                 self!.unzipSuccess()
             } catch {
                 Cenarius.logger.error(error)
-                self!.complete(state: .UNZIP_WWW_ERROR, progress: 0)
+                self!.complete(state: .UNZIP_WWW_ERROR)
             }
         }
     }
@@ -217,28 +220,28 @@ public class UpdateManager {
         if shouldDownloadWww {
             downloadFilesFile()
         } else {
-            complete(state: .UPDATE_SUCCESS, progress: 100)
+            complete(state: .UPDATE_SUCCESS)
         }
     }
     
     private func downloadFilesFile() {
-        complete(state: .DOWNLOAD_FILES_FILE, progress: 0)
+        complete(state: .DOWNLOAD_FILES_FILE)
         loadLocalConfig()
         loadLocalFiles()
         Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
                 let serverFiles = [File].deserialize(from: value)!
-                let downloadFiles = self!.getDownloadFiles(serverFiles)
-                if downloadFiles.count > 0 {
-                    self!.downloadFiles(downloadFiles)
+                self!.downloadFiles = self!.getDownloadFiles(serverFiles)
+                if self!.downloadFiles.count > 0 {
+                    self!.downloadFiles(self!.downloadFiles)
                 } else {
                     self!.saveConfig()
-                    self!.complete(state: .UPDATE_SUCCESS, progress: 100)
+                    self!.complete(state: .UPDATE_SUCCESS)
                 }
             case .failure(let error):
                 Cenarius.logger.error(error)
-                self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR, progress: 0)
+                self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR)
             }
         }
     }
@@ -264,11 +267,15 @@ public class UpdateManager {
     }
     
     private func downloadFiles(_ files: List<FileRealm>) {
+        downloadFilesCount = 0
+        isDownloadFileError = false
         let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 2
+        queue.maxConcurrentOperationCount = UpdateManager.maxConcurrentOperationCount
         for file in files {
             queue.addOperation { [weak self] in
-                self!.downloadFile(file, retry: UpdateManager.retry)
+                if self!.downloadFile(file, retry: UpdateManager.retry) == false {
+                    queue.cancelAllOperations()
+                }
             }
         }
     }
@@ -278,15 +285,14 @@ public class UpdateManager {
             let fileURL = UpdateManager.cacheUrl.appendingPathComponent(file.path)
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-
         let response = Cenarius.alamofire.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
         if let error = response.error {
             Cenarius.logger.debug(error)
             return downloadFileRetry(file, retry: retry)
         } else {
-            
+            downloadFileSuccess(file)
+            return true
         }
-        
     }
     
     private func downloadFileRetry(_ file: FileRealm, retry: Int) -> Bool {
@@ -299,21 +305,52 @@ public class UpdateManager {
     }
     
     private func downloadFileError() {
-        complete(state: .DOWNLOAD_FILES_ERROR, progress: 0)
+        Async.main { [weak self] in
+            if self!.isDownloadFileError == false {
+                self!.isDownloadFileError == true
+                self!.complete(state: .DOWNLOAD_FILES_ERROR)
+            }
+        }
     }
     
     private func downloadFileSuccess(_ file: FileRealm) {
-        
+        Async.main { [weak self] in
+            if self!.isDownloadFileError {
+                return
+            }
+            try! self!.realm.write {
+                self!.realm.add(file, update: true)
+            }
+            self!.downloadFilesCount += 1
+            if self!.downloadFilesCount == self!.downloadFiles.count {
+                // 所有下载成功
+                self!.saveConfig()
+                self!.saveFiles()
+                self!.complete(state: .UPDATE_SUCCESS)
+            } else {
+                let unzipProgress = self!.progress
+                let downloadProgress = self!.downloadFilesCount * (100 - unzipProgress) / self!.downloadFiles.count
+                self!.progress = unzipProgress + downloadProgress
+                if self!.progress > 99 {
+                    self!.progress = 99
+                }
+                self!.complete(state: .DOWNLOAD_FILES)
+            }
+        }
     }
     
-    private func complete(state: State, progress: Int) {
+    private func complete(state: State) {
         Async.main { [weak self] in
-            self!.completion(state, progress)
+            self!.completion(state, self!.progress)
         }
     }
     
     private func saveConfig() {
         try! serverConfigData.write(to: UpdateManager.cacheConfigUrl, options: .atomic)
+    }
+    
+    private func saveFiles() {
+        
     }
     
 }
