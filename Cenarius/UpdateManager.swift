@@ -79,7 +79,7 @@ public class UpdateManager {
     private var isDownloadFileError = false
     private var downloadFilesCount = 0
     
-    private lazy var realm: Realm = {
+    private lazy var mainRealm: Realm = {
         var realmConfig = Realm.Configuration()
         realmConfig.fileURL = realmConfig.fileURL!.deletingLastPathComponent().appendingPathComponent(UpdateManager.dbName)
         return try! Realm(configuration: realmConfig)
@@ -110,7 +110,6 @@ public class UpdateManager {
         downloadConfig()
     }
     
-    
     /// 加载本地的config
     private func loadLocalConfig() {
         do {
@@ -128,7 +127,7 @@ public class UpdateManager {
     
     /// 加载本地的路由表
     private func loadLocalFiles() {
-        cacheFiles = realm.objects(FileRealm)
+        cacheFiles = mainRealm.objects(FileRealm)
         let resourceData = try! Data(contentsOf: UpdateManager.resourceFilesUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceFiles = List<FileRealm>()
@@ -142,7 +141,8 @@ public class UpdateManager {
         Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseData { [weak self] response in
             switch response.result {
             case .success(let value):
-                self!.serverConfig = Config.deserialize(from: String(data: value, encoding: .utf8))
+                self!.serverConfigData = value
+                self!.serverConfig = Config.deserialize(from: String(data: self!.serverConfigData, encoding: .utf8))
                 if self!.isWwwFolderNeedsToBeInstalled() {
                     // 需要解压www
                     self!.unzipWww()
@@ -189,11 +189,11 @@ public class UpdateManager {
     }
     
     private func unzipWww() {
-        Async.background { [weak self] in
-            try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
-            try! self!.realm.write {
-                self!.realm.deleteAll()
-            }
+        try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
+        try! mainRealm.write {
+            mainRealm.deleteAll()
+        }
+        Async.utility { [weak self] in
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
                     self!.progress = Int(unzipProgress * 100)
@@ -211,14 +211,16 @@ public class UpdateManager {
     }
     
     private func unzipSuccess() {
-        // 解压www成功
-        try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
-        // 保存路由表到数据库中
-        saveFiles(resourceFiles)
-        if shouldDownloadWww {
-            downloadFilesFile()
-        } else {
-            complete(state: .UPDATE_SUCCESS)
+        Async.main { [weak self] in
+            // 解压www成功
+            try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
+            // 保存路由表到数据库中
+            self!.saveFiles(self!.resourceFiles)
+            if self!.shouldDownloadWww {
+                self!.downloadFilesFile()
+            } else {
+                self!.complete(state: .UPDATE_SUCCESS)
+            }
         }
     }
     
@@ -317,8 +319,8 @@ public class UpdateManager {
             if self!.isDownloadFileError {
                 return
             }
-            try! self!.realm.write {
-                self!.realm.add(file, update: true)
+            try! self!.mainRealm.write {
+                self!.mainRealm.add(file, update: true)
             }
             self!.downloadFilesCount += 1
             if self!.downloadFilesCount == self!.downloadFiles.count {
@@ -349,9 +351,9 @@ public class UpdateManager {
     }
     
     private func saveFiles(_ files: List<FileRealm>) {
-        try! realm.write {
-            realm.deleteAll()
-            realm.add(files)
+        try! mainRealm.write {
+            mainRealm.deleteAll()
+            mainRealm.add(files)
         }
     }
     

@@ -7,18 +7,25 @@
 //
 
 import UIKit
+import Cenarius
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func update(_ sender: UIButton) {
+        let url = URL(string: "http://172.20.70.80/www")!
+        UpdateManager.setServerUrl(url)
+        UpdateManager.update { (state, progress) in
+            Cenarius.logger.debug(state)
+            Cenarius.logger.debug(progress)
+        }
     }
+    
 
 
 }

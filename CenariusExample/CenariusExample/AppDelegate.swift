@@ -17,11 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        initCenarius()
-        UpdateManager.update { (state, progress) in
-            Cenarius.logger.debug(state)
-            Cenarius.logger.debug(progress)
-        }
+
         
         return true
     }
@@ -47,11 +43,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    func initCenarius() {
-        let url = URL(string: "http://172.20.70.80/www")!
-        UpdateManager.setServerUrl(url)
-    }
-
 }
 
