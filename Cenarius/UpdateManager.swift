@@ -91,6 +91,7 @@ public class UpdateManager {
     private var cacheFiles: Results<FileRealm>!
     private var serverConfig: Config!
     private var serverConfigData: Data!
+    private var serverFiles: List<FileRealm>!
     private var downloadFiles: List<FileRealm>!
     
     private func update(completionHandler: @escaping Completion)  {
@@ -193,7 +194,6 @@ public class UpdateManager {
             try! self!.realm.write {
                 self!.realm.deleteAll()
             }
-            
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
                     self!.progress = Int(unzipProgress * 100)
@@ -214,9 +214,7 @@ public class UpdateManager {
         // 解压www成功
         try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
         // 保存路由表到数据库中
-        try! realm.write {
-            realm.add(resourceFiles)
-        }
+        saveFiles(resourceFiles)
         if shouldDownloadWww {
             downloadFilesFile()
         } else {
@@ -231,8 +229,8 @@ public class UpdateManager {
         Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
-                let serverFiles = [File].deserialize(from: value)!
-                self!.downloadFiles = self!.getDownloadFiles(serverFiles)
+                self!.serverFiles = List<FileRealm>()
+                self!.downloadFiles = self!.getDownloadFiles([File].deserialize(from: value)!)
                 if self!.downloadFiles.count > 0 {
                     self!.downloadFiles(self!.downloadFiles)
                 } else {
@@ -246,10 +244,11 @@ public class UpdateManager {
         }
     }
     
-    private func getDownloadFiles(_ serverFiles: [File?]) -> List<FileRealm> {
+    private func getDownloadFiles(_ files: [File?]) -> List<FileRealm> {
         let downloadFiles = List<FileRealm>()
-        for file in serverFiles {
+        for file in files {
             let fileRealm = file!.toRealm()
+            serverFiles.append(fileRealm)
             if shouldDownload(serverFile: fileRealm) {
                 downloadFiles.append(fileRealm)
             }
@@ -325,7 +324,7 @@ public class UpdateManager {
             if self!.downloadFilesCount == self!.downloadFiles.count {
                 // 所有下载成功
                 self!.saveConfig()
-                self!.saveFiles()
+                self!.saveFiles(self!.serverFiles)
                 self!.complete(state: .UPDATE_SUCCESS)
             } else {
                 let unzipProgress = self!.progress
@@ -349,8 +348,11 @@ public class UpdateManager {
         try! serverConfigData.write(to: UpdateManager.cacheConfigUrl, options: .atomic)
     }
     
-    private func saveFiles() {
-        
+    private func saveFiles(_ files: List<FileRealm>) {
+        try! realm.write {
+            realm.deleteAll()
+            realm.add(files)
+        }
     }
     
 }
