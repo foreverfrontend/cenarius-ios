@@ -86,13 +86,13 @@ public class UpdateManager {
     }()
     
     private var resourceConfig: Config!
-    private var resourceFiles: List<FileRealm>!
+    private var resourceFiles: [File?]!
     private var cacheConfig: Config?
     private var cacheFiles: Results<FileRealm>!
     private var serverConfig: Config!
     private var serverConfigData: Data!
-    private var serverFiles: List<FileRealm>!
-    private var downloadFiles: List<FileRealm>!
+    private var serverFiles: [File?]!
+    private var downloadFiles: [File?]!
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
@@ -130,10 +130,7 @@ public class UpdateManager {
         cacheFiles = mainRealm.objects(FileRealm)
         let resourceData = try! Data(contentsOf: UpdateManager.resourceFilesUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
-        resourceFiles = List<FileRealm>()
-        for file in [File].deserialize(from: resourceString)! {
-            resourceFiles.append(file!.toRealm())
-        }
+        resourceFiles = [File].deserialize(from: resourceString)!
     }
     
     private func downloadConfig() {
@@ -196,11 +193,14 @@ public class UpdateManager {
         Async.utility { [weak self] in
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
-                    self!.progress = Int(unzipProgress * 100)
+                    var progress = Int(unzipProgress * 100)
                     if self!.shouldDownloadWww {
-                        self!.progress /= 2
+                        progress /= 2
                     }
-                    self!.complete(state: .UNZIP_WWW)
+                    if self!.progress != progress {
+                        self!.progress = progress
+                        self!.complete(state: .UNZIP_WWW)
+                    }
                 })
                 self!.unzipSuccess()
             } catch {
@@ -231,8 +231,8 @@ public class UpdateManager {
         Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
-                self!.serverFiles = List<FileRealm>()
-                self!.downloadFiles = self!.getDownloadFiles([File].deserialize(from: value)!)
+                self!.serverFiles = [File].deserialize(from: value)!
+                self!.downloadFiles = self!.getDownloadFiles(self!.serverFiles)
                 if self!.downloadFiles.count > 0 {
                     self!.downloadFiles(self!.downloadFiles)
                 } else {
@@ -246,42 +246,40 @@ public class UpdateManager {
         }
     }
     
-    private func getDownloadFiles(_ files: [File?]) -> List<FileRealm> {
-        let downloadFiles = List<FileRealm>()
-        for file in files {
-            let fileRealm = file!.toRealm()
-            serverFiles.append(fileRealm)
-            if shouldDownload(serverFile: fileRealm) {
-                downloadFiles.append(fileRealm)
+    private func getDownloadFiles(_ serverFiles: [File?]) -> [File?] {
+        var downloadFiles = [File?]()
+        for file in serverFiles {
+            if shouldDownload(serverFile: file) {
+                downloadFiles.append(file)
             }
         }
         return downloadFiles
     }
     
-    private func shouldDownload(serverFile: FileRealm) -> Bool {
+    private func shouldDownload(serverFile: File?) -> Bool {
         for cacheFile in cacheFiles {
-            if cacheFile.isEqual(serverFile) {
+            if cacheFile.path == serverFile!.path && cacheFile.md5 == serverFile!.md5 {
                 return false
             }
         }
         return true
     }
     
-    private func downloadFiles(_ files: List<FileRealm>) {
+    private func downloadFiles(_ files: [File?]) {
         downloadFilesCount = 0
         isDownloadFileError = false
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = UpdateManager.maxConcurrentOperationCount
         for file in files {
-            queue.addOperation { [weak self] in
-                if self!.downloadFile(file, retry: UpdateManager.retry) == false {
-                    queue.cancelAllOperations()
+            queue.addOperation { [weak self, weak queue] in
+                if self!.downloadFile(file!, retry: UpdateManager.retry) == false {
+                    queue?.cancelAllOperations()
                 }
             }
         }
     }
     
-    private func downloadFile(_ file: FileRealm, retry: Int) -> Bool {
+    private func downloadFile(_ file: File, retry: Int) -> Bool {
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let fileURL = UpdateManager.cacheUrl.appendingPathComponent(file.path)
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
@@ -296,7 +294,7 @@ public class UpdateManager {
         }
     }
     
-    private func downloadFileRetry(_ file: FileRealm, retry: Int) -> Bool {
+    private func downloadFileRetry(_ file: File, retry: Int) -> Bool {
         if retry > 0 {
             return downloadFile(file, retry: retry - 1)
         } else {
@@ -314,28 +312,27 @@ public class UpdateManager {
         }
     }
     
-    private func downloadFileSuccess(_ file: FileRealm) {
+    private func downloadFileSuccess(_ file: File) {
         Async.main { [weak self] in
             if self!.isDownloadFileError {
                 return
             }
             try! self!.mainRealm.write {
-                self!.mainRealm.add(file, update: true)
+                self!.mainRealm.add(file.toRealm(), update: true)
             }
             self!.downloadFilesCount += 1
+            let unzipProgress = self!.progress
+            let downloadProgress = self!.downloadFilesCount * (100 - unzipProgress) / self!.downloadFiles.count
+            let progress = unzipProgress + downloadProgress
+            if self!.progress != progress {
+                self!.progress = progress
+                self!.complete(state: .DOWNLOAD_FILES)
+            }
             if self!.downloadFilesCount == self!.downloadFiles.count {
                 // 所有下载成功
                 self!.saveConfig()
                 self!.saveFiles(self!.serverFiles)
                 self!.complete(state: .UPDATE_SUCCESS)
-            } else {
-                let unzipProgress = self!.progress
-                let downloadProgress = self!.downloadFilesCount * (100 - unzipProgress) / self!.downloadFiles.count
-                self!.progress = unzipProgress + downloadProgress
-                if self!.progress > 99 {
-                    self!.progress = 99
-                }
-                self!.complete(state: .DOWNLOAD_FILES)
             }
         }
     }
@@ -350,10 +347,12 @@ public class UpdateManager {
         try! serverConfigData.write(to: UpdateManager.cacheConfigUrl, options: .atomic)
     }
     
-    private func saveFiles(_ files: List<FileRealm>) {
+    private func saveFiles(_ files: [File?]) {
         try! mainRealm.write {
             mainRealm.deleteAll()
-            mainRealm.add(files)
+            for file in files {
+                mainRealm.add(file!.toRealm())
+            }
         }
     }
     
