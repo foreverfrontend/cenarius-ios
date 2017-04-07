@@ -271,9 +271,11 @@ public class UpdateManager {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = UpdateManager.maxConcurrentOperationCount
         for file in files {
-            queue.addOperation { [weak self, weak queue] in
-                if self!.downloadFile(file!, retry: UpdateManager.retry) == false {
-                    queue?.cancelAllOperations()
+            autoreleasepool {
+                queue.addOperation { [weak self, weak queue] in
+                    if self!.downloadFile(file!, retry: UpdateManager.retry) == false {
+                        queue?.cancelAllOperations()
+                    }
                 }
             }
         }
