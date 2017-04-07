@@ -3,26 +3,30 @@ PODS:
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
   - AsyncSwift (2.0.1)
-  - Charts (3.0.1):
-    - Charts/Core (= 3.0.1)
-  - Charts/Core (3.0.1)
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
   - HandyJSON (1.6.1)
-  - Kingfisher (3.6.0)
-  - NVActivityIndicatorView (3.5.2)
+  - Kingfisher (3.6.1)
+  - NVActivityIndicatorView (3.6.0)
+  - ObjcExceptionBridging (1.0.1):
+    - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
+  - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
   - PermissionScope (1.1.1)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
-  - RealmSwift (2.5.0):
-    - Realm (= 2.5.0)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
+  - RealmSwift (2.5.1):
+    - Realm (= 2.5.1)
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
-  - WeexSDK (0.10.3):
+  - WeexSDK (0.11.0):
     - SocketRocket
-  - XCGLogger (4.0.0):
-    - XCGLogger/Core (= 4.0.0)
-  - XCGLogger/Core (4.0.0)
+  - XCGLogger (5.0.1):
+    - XCGLogger/Core (= 5.0.1)
+  - XCGLogger/Core (5.0.1):
+    - ObjcExceptionBridging
   - Zip (0.7.0)
 
 DEPENDENCIES:
@@ -45,18 +49,19 @@ SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
-  Charts: 0e84f4418e87dad6a9edde221fba37ebb51d3ba7
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   HandyJSON: dcc98115467462a4749db81bc8a9052607600bdf
-  Kingfisher: 300035f9a40634dc9b452d946c9f22250688fecd
-  NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
+  Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
+  ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
-  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
+  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
-  WeexSDK: ba8a6c443885afc16d9b0a8eb23220d792ad5b27
-  XCGLogger: 38063ea89b4c8b23232d18efd2e12eb0005f3ea4
+  WeexSDK: f9cfe6adc91fba3ca5e36bc9808bf1b6e8be2106
+  XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
 PODFILE CHECKSUM: 2fa8d13eaf9fbc9423231f59cd10ac95b633edcb

@@ -127,7 +127,7 @@ public class UpdateManager {
     
     /// 加载本地的路由表
     private func loadLocalFiles() {
-        cacheFiles = mainRealm.objects(FileRealm)
+        cacheFiles = mainRealm.objects(FileRealm.self)
         let resourceData = try! Data(contentsOf: UpdateManager.resourceFilesUrl)
         let resourceString = String(data: resourceData, encoding: .utf8)
         resourceFiles = [File].deserialize(from: resourceString)!
@@ -288,7 +288,7 @@ public class UpdateManager {
         }
         let response = Cenarius.alamofire.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
         if let error = response.error {
-            Cenarius.logger.debug(error)
+            Cenarius.logger.error(error)
             return downloadFileRetry(file, retry: retry)
         } else {
             downloadFileSuccess(file)
@@ -308,7 +308,7 @@ public class UpdateManager {
     private func downloadFileError() {
         Async.main { [weak self] in
             if self!.isDownloadFileError == false {
-                self!.isDownloadFileError == true
+                self!.isDownloadFileError = true
                 self!.complete(state: .DOWNLOAD_FILES_ERROR)
             }
         }
