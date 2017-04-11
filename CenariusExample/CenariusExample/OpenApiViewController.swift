@@ -13,15 +13,18 @@ class OpenApiViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        OpenApi.setAppKey("APPKEY")
+        OpenApi.setAppSecret("APPSECRET")
 
-//        let url = "y.com?a=中文&b=+ +&c=%26"
-        let url = "y.com?q=c&q=a&q=z"
+        let url = "y.com?a=中文&b=+ +&c=%26&p=z"
+//        let url = "y.com?q=c&q=a&q=z"
 
         Cenarius.logger.debug(url)
         
         let headers = ["X-Requested-With": "OpenAPIRequest"]
 //        let headers = ["X-Requested-With": "OpenAPIRequest", "Content-Type": "application/json"]
-        let urlSign = OpenApi.sign(url: url, method: .get, parameters: ["q":"b"], headers: headers)
+        let urlSign = OpenApi.sign(url: url, method: .get, parameters: ["p":"b"], headers: headers)
         Cenarius.logger.debug(urlSign)
     }
 

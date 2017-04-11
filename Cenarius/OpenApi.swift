@@ -87,7 +87,7 @@ public class OpenApi {
         var bodySting: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
-                bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+                bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.encodeURIComponent()
             } else {
                 bodySting = queryFromParameters(parameters!)
             }
@@ -111,12 +111,10 @@ public class OpenApi {
         if querySigned.isEmpty == false {
             querySigned += "&"
         }
-        URLEncoding.default.escape(token)
-        token.removingPercentEncoding
-        querySigned += "access_token=" + token.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        querySigned += "timestamp=" + timestamp
+        querySigned += "access_token=" + token.encodeURIComponent()
+        querySigned += "&timestamp=" + timestamp
         if appKey != nil {
-            querySigned += "app_key=" + appKey!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            querySigned += "&app_key=" + appKey!.encodeURIComponent()
             
         }
         
@@ -125,7 +123,7 @@ public class OpenApi {
         parametersSigned["app_key"] = appKey
         if appSecret != nil {
             let sign = md5Signature(parameters: parametersSigned, secret: appSecret!)
-            querySigned += "sign" + sign.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            querySigned += "&sign=" + sign.encodeURIComponent()
         }
         return querySigned
     }
@@ -147,8 +145,8 @@ public class OpenApi {
         for pair in pairs {
             let keyValue = pair.components(separatedBy: "=")
             if(keyValue.count > 1) {
-                let key = keyValue[0].removingPercentEncoding!
-                let value = keyValue[1].removingPercentEncoding!
+                let key = keyValue[0].decodeURIComponent()
+                let value = keyValue[1].decodeURIComponent()
                 if parametersCombined[key] != nil {
                     parametersCombined[key]!.append(value)
                 } else {
@@ -173,7 +171,7 @@ public class OpenApi {
     private class func queryFromParameters(_ parameters: Parameters) -> String {
         var pairs = [String]()
         for parameter in parameters {
-            pairs.append(parameter.key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! + "=" + parameter.value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+            pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
         }
         let query = pairs.joined(separator: "&")
         return query

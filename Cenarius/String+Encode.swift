@@ -7,7 +7,14 @@
 //
 
 import Foundation
+import Alamofire
 
-extension String {
+public extension String {
+    func encodeURIComponent() -> String {
+        return URLEncoding.default.escape(self)
+    }
     
+    func decodeURIComponent() -> String {
+        return self.removingPercentEncoding!
+    }
 }
