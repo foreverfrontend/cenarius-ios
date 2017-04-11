@@ -60,4 +60,8 @@ pod 'Zip'
 # Swift framework for zipping and unzipping files.
 # https://github.com/marmelroy/Zip
 
+pod 'CryptoSwift'
+# CryptoSwift is a growing collection of standard and secure cryptographic algorithms implemented in Swift
+# https://github.com/krzyzanowskim/CryptoSwift
+
 end

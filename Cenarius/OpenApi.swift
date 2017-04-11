@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import CryptoSwift
 
 /// class for Signature
 public class OpenApi {
@@ -20,13 +21,46 @@ public class OpenApi {
     public typealias HTTPHeaders = [String: String]
     typealias ParametersCombined = [String: [String]]
     
+    private static let sharedInstance = OpenApi()
+    private var accessToken: String? = UserDefaults.standard.string(forKey: accessTokenKey)
+    private var appKey: String?
+    private var appSecret: String?
+    
+    private static let accessTokenKey = "CenariusAccessToken"
+    
+    /// Set the accessToken for request
+    ///
+    /// - Parameter token: accessToken
+    public class func setAccessToken(_ token: String?) {
+        sharedInstance.accessToken = token
+        UserDefaults.standard.setValue(token, forKey: accessTokenKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    public class func getAccessToken() -> String? {
+        return sharedInstance.accessToken
+    }
+    
+    /// Set the appKey for request
+    ///
+    /// - Parameter key: appKey
+    public class func setAppKey(_ key: String?) {
+        sharedInstance.appKey = key
+    }
+    
+    /// Set the appSecret for request
+    ///
+    /// - Parameter secret: appSecret
+    public class func setAppSecret(_ secret: String?) {
+        sharedInstance.appSecret = secret
+    }
     
     /// Sign for url
     ///
     /// - Parameters:
     ///   - url: The URL.
     ///   - method: The HTTP method.
-    ///   - parameters: e parameters.
+    ///   - parameters: The HTTP parameters.
     ///   - headers: The HTTP headers.
     /// - Returns: The URL after signed
     public class func sign(url: String, method: HTTPMethod, parameters: Parameters?, headers: HTTPHeaders?) -> String {
@@ -57,22 +91,40 @@ public class OpenApi {
                 bodySting = queryFromParameters(parameters!)
             }
             if queryCombined != nil {
-                queryCombined = queryCombined! + "&" + bodySting!
+                queryCombined! += "&" + bodySting!
             } else {
                 queryCombined = bodySting!
             }
         }
         
-        var parametersSorted = Parameters()
+        var parametersSigned = Parameters()
         if queryCombined != nil {
-            parametersSorted = parametersFromQuery(queryCombined!)
+            parametersSigned = parametersFromQuery(queryCombined!)
+        }
+        let token = sharedInstance.accessToken ?? getAnonymousToken()
+        let appKey = sharedInstance.appKey
+        let appSecret = sharedInstance.appSecret
+        let timestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
+        
+        var querySigned = query ?? ""
+        if querySigned.isEmpty == false {
+            querySigned += "&"
+        }
+        querySigned += "access_token=" + token.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        querySigned += "timestamp=" + timestamp
+        if appKey != nil {
+            querySigned += "app_key=" + appKey!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            
         }
         
-        
-        
-        
-        
-        return queryCombined!
+        parametersSigned["access_token"] = token
+        parametersSigned["timestamp"] = timestamp
+        parametersSigned["app_key"] = appKey
+        if appSecret != nil {
+            let sign = md5Signature(parameters: parametersSigned, secret: appSecret!)
+            querySigned += "sign" + sign.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        }
+        return querySigned
     }
     
     private class func queryFromUrl(_ url: String) -> String? {
@@ -108,7 +160,7 @@ public class OpenApi {
             let sortedValues = values.sorted()
             var valueString = sortedValues[0]
             for index in 1..<sortedValues.count {
-                valueString = valueString + key + sortedValues[index]
+                valueString += key + sortedValues[index]
             }
             results[key] = valueString
         }
@@ -123,5 +175,23 @@ public class OpenApi {
         let query = pairs.joined(separator: "&")
         return query
     }
+    
+    private class func getAnonymousToken() -> String {
+        var token = UUID.init().uuidString + "##ANONYMOUS"
+        token = token.data(using: .utf8)!.base64EncodedString()
+        return token
+    }
+    
+    private class func md5Signature(parameters: Parameters, secret: String) -> String {
+        var result = secret
+        let keys = parameters.keys.sorted()
+        for key in keys {
+            result += key + parameters[key]!
+        }
+        result += secret
+        result = result.md5()
+        return result
+    }
+    
     
 }

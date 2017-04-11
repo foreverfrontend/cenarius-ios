@@ -6,8 +6,9 @@ PODS:
   - Charts (3.0.2):
     - Charts/Core (= 3.0.2)
   - Charts/Core (3.0.2)
+  - CryptoSwift (0.6.8)
   - HandyJSON (1.6.1)
-  - Kingfisher (3.6.1)
+  - Kingfisher (3.6.2)
   - NVActivityIndicatorView (3.6.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Alamofire-Synchronous
   - AsyncSwift
   - Charts
+  - CryptoSwift
   - HandyJSON
   - Kingfisher
   - NVActivityIndicatorView
@@ -50,8 +52,9 @@ SPEC CHECKSUMS:
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
+  CryptoSwift: f21ea03ed3a94e79d241648ce26652cd4810508a
   HandyJSON: dcc98115467462a4749db81bc8a9052607600bdf
-  Kingfisher: 2f31cb75f3e98d3d4c406cbdcd9b263e956cfa67
+  Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
   NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
@@ -64,6 +67,6 @@ SPEC CHECKSUMS:
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 2fa8d13eaf9fbc9423231f59cd10ac95b633edcb
+PODFILE CHECKSUM: 9ec8ffbf9f9ac45b03359cd39ee6c7878d937e5d
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1.rc.1
