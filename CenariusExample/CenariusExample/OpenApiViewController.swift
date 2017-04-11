@@ -14,20 +14,14 @@ class OpenApiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let url = "y.com?a=中文&b=+ +&c=%26"
+//        let url = "y.com?a=中文&b=+ +&c=%26"
+        let url = "y.com?q=c&q=a&q=z"
+
         Cenarius.logger.debug(url)
-//
-//        let urlEncode = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-//        Cenarius.logger.debug(urlEncode)
-//        
-//        let u = URL(string: urlEncode)!
-//        Cenarius.logger.debug("u: \(u)")
-//        
-//        let u2 =  url.removingPercentEncoding
-//        Cenarius.logger.debug("u2: \(u2)")
         
-        let headers = ["X-Requested-With": "OpenAPIRequest", "Content-Type": "application/json"]
-        let urlSign = OpenApi.sign(url: url, method: .get, parameters: ["p":"&"], headers: headers)
+        let headers = ["X-Requested-With": "OpenAPIRequest"]
+//        let headers = ["X-Requested-With": "OpenAPIRequest", "Content-Type": "application/json"]
+        let urlSign = OpenApi.sign(url: url, method: .get, parameters: ["q":"b"], headers: headers)
         Cenarius.logger.debug(urlSign)
     }
 

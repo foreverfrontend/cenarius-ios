@@ -18,7 +18,7 @@ public class OpenApi {
     }
     public typealias Parameters = [String: String]
     public typealias HTTPHeaders = [String: String]
-    typealias CombinedParameters = [String: [String]]
+    typealias ParametersCombined = [String: [String]]
     
     
     /// Sign for url
@@ -48,53 +48,72 @@ public class OpenApi {
         }
         
         let query = queryFromUrl(url)
-        
-        if query != nil {
-            Cenarius.logger.debug("query: \(query!)")
-//            let queryParameters = parametersFromQuery(query!)
-//            Cenarius.logger.debug("queryParameters: \(queryParameters)")
-//            for parameter in queryParameters {
-//                if parameter.key == "sign" {
-//                    return url
-//                }
-//            }
-//            if parameters != nil {
-//                let combinedParameters = combineParameters(parameters, queryParameters)
-//            }
-        }
-        var bodySting: String
-        if parameters != nil {
+        var queryCombined = query
+        var bodySting: String?
+        if parameters != nil, parameters!.count > 0 {
             if isJson {
                 bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             } else {
                 bodySting = queryFromParameters(parameters!)
             }
+            if queryCombined != nil {
+                queryCombined = queryCombined! + "&" + bodySting!
+            } else {
+                queryCombined = bodySting!
+            }
+        }
+        
+        var parametersSorted = Parameters()
+        if queryCombined != nil {
+            parametersSorted = parametersFromQuery(queryCombined!)
         }
         
         
-        return query!
+        
+        
+        
+        return queryCombined!
     }
     
     private class func queryFromUrl(_ url: String) -> String? {
         let range = url.range(of: "?")
         if range != nil {
             let query = url.substring(from: range!.upperBound)
-            return query
+            if query.isEmpty == false {
+                return query
+            }
         }
         return nil
     }
     
-//    private class func parametersFromQuery(_ query: String) -> Parameters {
-//        var results = Parameters()
-//        let pairs = query.components(separatedBy: "&")
-//        for pair in pairs {
-//            let keyValue = pair.components(separatedBy: "=")
-//            if(keyValue.count > 1) {
-//                results.updateValue(keyValue[1].removingPercentEncoding!, forKey: keyValue[0].removingPercentEncoding!)
-//            }
-//        }
-//        return results
-//    }
+    private class func parametersFromQuery(_ query: String) -> Parameters {
+        var parametersCombined = ParametersCombined()
+        let pairs = query.components(separatedBy: "&")
+        for pair in pairs {
+            let keyValue = pair.components(separatedBy: "=")
+            if(keyValue.count > 1) {
+                let key = keyValue[0].removingPercentEncoding!
+                let value = keyValue[1].removingPercentEncoding!
+                if parametersCombined[key] != nil {
+                    parametersCombined[key]!.append(value)
+                } else {
+                    parametersCombined[key] = [value]
+                }
+            }
+        }
+        var results = Parameters()
+        for parametersCombined in parametersCombined {
+            let key = parametersCombined.key
+            let values = parametersCombined.value
+            let sortedValues = values.sorted()
+            var valueString = sortedValues[0]
+            for index in 1..<sortedValues.count {
+                valueString = valueString + key + sortedValues[index]
+            }
+            results[key] = valueString
+        }
+        return results
+    }
     
     private class func queryFromParameters(_ parameters: Parameters) -> String {
         var pairs = [String]()
@@ -104,4 +123,5 @@ public class OpenApi {
         let query = pairs.joined(separator: "&")
         return query
     }
+    
 }
