@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
@@ -42,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C4C68391E9CD9C000C52FB5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +73,7 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0C4C68391E9CD9C000C52FB5 /* Extension */,
 				0CBCCD961E8DF59900A2D1A2 /* Init */,
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
 				0CBCCDB61E8DFBCD00A2D1A2 /* Widget */,
@@ -278,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,

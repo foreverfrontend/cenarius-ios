@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import CryptoSwift
+import Alamofire
 
 /// class for Signature
 public class OpenApi {
@@ -110,6 +111,8 @@ public class OpenApi {
         if querySigned.isEmpty == false {
             querySigned += "&"
         }
+        URLEncoding.default.escape(token)
+        token.removingPercentEncoding
         querySigned += "access_token=" + token.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         querySigned += "timestamp=" + timestamp
         if appKey != nil {
