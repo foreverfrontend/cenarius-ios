@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -63,12 +64,71 @@
                     <view key="view" contentMode="scaleToFill" id="n28-HB-cQY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="y.com?a=中文&amp;b=+ +&amp;c=%26&amp;p=z" translatesAutoresizingMaskIntoConstraints="NO" id="uKM-fZ-oC8">
+                                <rect key="frame" x="16" y="72" width="343" height="111"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="111" id="MFL-La-IMF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Oua-h8-xBW">
+                                <rect key="frame" x="99" y="191" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="isJson" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dET-Cv-Kyv">
+                                <rect key="frame" x="16" y="196" width="75" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="8mE-Df-uym"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mNV-IH-b3t">
+                                <rect key="frame" x="16" y="354" width="343" height="123"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Z-XA-OHR">
+                                <rect key="frame" x="164" y="262" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="rAQ-pq-AR4"/>
+                                </constraints>
+                                <state key="normal" title="sign"/>
+                                <connections>
+                                    <action selector="sign:" destination="OBm-dZ-0yY" eventType="touchUpInside" id="3aN-ln-Wbm"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uKM-fZ-oC8" firstAttribute="trailing" secondItem="n28-HB-cQY" secondAttribute="trailingMargin" id="2xH-eN-eZw"/>
+                            <constraint firstItem="dET-Cv-Kyv" firstAttribute="leading" secondItem="mNV-IH-b3t" secondAttribute="leading" id="Alx-zH-jIa"/>
+                            <constraint firstItem="mNV-IH-b3t" firstAttribute="top" secondItem="Y1Z-XA-OHR" secondAttribute="bottom" constant="62" id="BFI-de-Pll"/>
+                            <constraint firstItem="Y1Z-XA-OHR" firstAttribute="top" secondItem="uKM-fZ-oC8" secondAttribute="bottom" constant="79" id="Cgv-02-bAS"/>
+                            <constraint firstItem="uKM-fZ-oC8" firstAttribute="top" secondItem="VZX-Np-rCO" secondAttribute="bottom" constant="8" symbolic="YES" id="Igx-1F-n0i"/>
+                            <constraint firstItem="Oua-h8-xBW" firstAttribute="top" secondItem="uKM-fZ-oC8" secondAttribute="bottom" constant="8" symbolic="YES" id="K9X-lo-fm6"/>
+                            <constraint firstItem="nFd-12-rtM" firstAttribute="top" secondItem="mNV-IH-b3t" secondAttribute="bottom" constant="190" id="NeY-dH-dqP"/>
+                            <constraint firstItem="uKM-fZ-oC8" firstAttribute="leading" secondItem="dET-Cv-Kyv" secondAttribute="leading" id="QSk-U7-uVx"/>
+                            <constraint firstItem="Oua-h8-xBW" firstAttribute="leading" secondItem="dET-Cv-Kyv" secondAttribute="trailing" constant="8" symbolic="YES" id="Urd-tP-pgf"/>
+                            <constraint firstItem="Y1Z-XA-OHR" firstAttribute="centerX" secondItem="mNV-IH-b3t" secondAttribute="centerX" id="ZPQ-FR-KR5"/>
+                            <constraint firstItem="dET-Cv-Kyv" firstAttribute="centerY" secondItem="Oua-h8-xBW" secondAttribute="centerY" id="hTk-hM-90V"/>
+                            <constraint firstItem="uKM-fZ-oC8" firstAttribute="leading" secondItem="n28-HB-cQY" secondAttribute="leadingMargin" id="kKf-LG-Vqh"/>
+                            <constraint firstItem="uKM-fZ-oC8" firstAttribute="trailing" secondItem="mNV-IH-b3t" secondAttribute="trailing" id="xfD-uP-KLT"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="jsonSwitch" destination="Oua-h8-xBW" id="Mid-45-wWQ"/>
+                        <outlet property="signTextView" destination="mNV-IH-b3t" id="9tt-dW-ooI"/>
+                        <outlet property="urlTextView" destination="uKM-fZ-oC8" id="q3k-JB-8Mn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A2k-Vj-3Cx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="820" y="243"/>
+            <point key="canvasLocation" x="820" y="242.42878560719643"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EUv-d3-csc">

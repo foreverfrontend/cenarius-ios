@@ -14,10 +14,6 @@ import Alamofire
 /// class for Signature
 public class OpenApi {
     
-    public enum HTTPMethod: String {
-        case get     = "GET"
-        case post    = "POST"
-    }
     public typealias Parameters = [String: String]
     public typealias HTTPHeaders = [String: String]
     typealias ParametersCombined = [String: [String]]
@@ -64,7 +60,7 @@ public class OpenApi {
     ///   - parameters: The HTTP parameters.
     ///   - headers: The HTTP headers.
     /// - Returns: The URL after signed
-    public class func sign(url: String, method: HTTPMethod, parameters: Parameters?, headers: HTTPHeaders?) -> String {
+    public class func sign(url: String, parameters: Parameters?, headers: HTTPHeaders?) -> String {
         var isOpenApi = false
         var isJson = false
         if headers != nil {
@@ -107,14 +103,16 @@ public class OpenApi {
         let appSecret = sharedInstance.appSecret
         let timestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
         
-        var querySigned = query ?? ""
-        if querySigned.isEmpty == false {
-            querySigned += "&"
+        var urlSigned = url
+        if urlSigned.contains("?") == false {
+            urlSigned += "?"
+        } else if query != nil {
+            urlSigned += "&"
         }
-        querySigned += "access_token=" + token.encodeURIComponent()
-        querySigned += "&timestamp=" + timestamp
+        urlSigned += "access_token=" + token.encodeURIComponent()
+        urlSigned += "&timestamp=" + timestamp
         if appKey != nil {
-            querySigned += "&app_key=" + appKey!.encodeURIComponent()
+            urlSigned += "&app_key=" + appKey!.encodeURIComponent()
             
         }
         
@@ -123,9 +121,9 @@ public class OpenApi {
         parametersSigned["app_key"] = appKey
         if appSecret != nil {
             let sign = md5Signature(parameters: parametersSigned, secret: appSecret!)
-            querySigned += "&sign=" + sign.encodeURIComponent()
+            urlSigned += "&sign=" + sign.encodeURIComponent()
         }
-        return querySigned
+        return urlSigned
     }
     
     private class func queryFromUrl(_ url: String) -> String? {
