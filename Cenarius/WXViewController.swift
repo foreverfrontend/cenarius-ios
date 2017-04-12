@@ -9,7 +9,7 @@
 import UIKit
 import WeexSDK
 
-public class WeexViewController: UIViewController {
+public class WXViewController: UIViewController {
     
     public var url: URL?
     private var instance: WXSDKInstance!

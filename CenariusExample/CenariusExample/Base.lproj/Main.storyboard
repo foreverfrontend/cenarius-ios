@@ -38,13 +38,24 @@
                                     <segue destination="OBm-dZ-0yY" kind="show" id="InJ-m0-0uE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccz-2N-YSv">
+                                <rect key="frame" x="150" y="400" width="75" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="weex"/>
+                                <connections>
+                                    <action selector="weex:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u2A-di-LcE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VN7-77-2NF"/>
-                            <constraint firstItem="R7a-ES-mbn" firstAttribute="top" secondItem="gCI-v6-3SN" secondAttribute="bottom" constant="5" id="VOG-6S-dBn"/>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Xh9-F2-HPa"/>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="R7a-ES-mbn" secondAttribute="centerX" id="wOx-Tu-QsI"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ATA-Vg-OmR"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="trailing" secondItem="ccz-2N-YSv" secondAttribute="trailing" id="HR4-xT-ssZ"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="R7a-ES-mbn" secondAttribute="centerX" id="KpS-P7-X81"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="top" secondItem="gCI-v6-3SN" secondAttribute="bottom" constant="5" id="LOK-hq-9O2"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uws-2G-1wv"/>
+                            <constraint firstItem="ccz-2N-YSv" firstAttribute="top" secondItem="R7a-ES-mbn" secondAttribute="bottom" constant="8" symbolic="YES" id="wjO-xu-ypA"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="leading" secondItem="ccz-2N-YSv" secondAttribute="leading" id="ybI-IF-Q2H"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="g1w-mj-CsF"/>

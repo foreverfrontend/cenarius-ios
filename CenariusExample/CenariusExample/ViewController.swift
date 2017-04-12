@@ -8,6 +8,7 @@
 
 import UIKit
 import Cenarius
+import WeexSDK
 
 class ViewController: UIViewController {
 
@@ -26,6 +27,13 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func weex(_ sender: UIButton) {
+        let wxvc = WXViewController()
+        wxvc.url = URL(string:"")
+//        let wxrcvc = WXRootViewController(rootViewController: wxvc)
+//        UIApplication.shared.keyWindow?.rootViewController = wxrcvc
+        self.navigationController?.pushViewController(wxvc, animated: true)
+    }
 
 
 }
