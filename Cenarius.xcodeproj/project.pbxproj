@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */; };
+		0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */; };
+		0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */; };
+		0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
@@ -19,6 +22,9 @@
 
 /* Begin PBXFileReference section */
 		0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
+		0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeexViewController.swift; sourceTree = "<group>"; };
+		0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImgLoaderDefaultImpl.swift; sourceTree = "<group>"; };
+		0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXSelectComponent.swift; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
@@ -52,6 +58,30 @@
 			name = Extension;
 			sourceTree = "<group>";
 		};
+		0C4C683C1E9DC67A00C52FB5 /* Weex */ = {
+			isa = PBXGroup;
+			children = (
+				0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */,
+			);
+			name = Weex;
+			sourceTree = "<group>";
+		};
+		0C4C683F1E9DCA1600C52FB5 /* Handle */ = {
+			isa = PBXGroup;
+			children = (
+				0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */,
+			);
+			name = Handle;
+			sourceTree = "<group>";
+		};
+		0C4C68421E9DF71400C52FB5 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */,
+			);
+			name = Component;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +103,9 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0C4C683C1E9DC67A00C52FB5 /* Weex */,
+				0C4C683F1E9DCA1600C52FB5 /* Handle */,
+				0C4C68421E9DF71400C52FB5 /* Component */,
 				0C4C68391E9CD9C000C52FB5 /* Extension */,
 				0CBCCD961E8DF59900A2D1A2 /* Init */,
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
@@ -290,6 +323,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */,
+				0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */,
+				0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */,
+				0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,

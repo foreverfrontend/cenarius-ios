@@ -8,7 +8,6 @@
 
 import Foundation
 import XCGLogger
-import WeexSDK
 import Alamofire
 
 public class Cenarius {
@@ -26,27 +25,4 @@ public class Cenarius {
         let sessionManager = Alamofire.SessionManager(configuration: configuration)
         return sessionManager
     }()
-    
-    init() {
-        initWeexSDK()
-    }
-    
-    // MARK: - Weex
-    func initWeexSDK() {
-        //business configuration
-        WXAppConfiguration.setAppGroup("Cenarius")
-        WXAppConfiguration.setAppName("CenariusExample")
-        WXAppConfiguration.setAppVersion("0.0.1")
-        
-        //init sdk enviroment
-        WXSDKEngine.initSDKEnvironment()
-        
-        //register custom module and component，optional
-        
-        //register the implementation of protocol, optional
-        
-        //set the log level
-        WXLog.setLogLevel(.warning)
-    }
-
 }
