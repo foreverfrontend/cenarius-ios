@@ -43,6 +43,10 @@ public class UpdateManager {
         sharedInstance.developMode = mode
     }
     
+    public class func getCacheUrl() -> URL {
+        return UpdateManager.cacheUrl
+    }
+    
     /// 更新
     ///
     /// - Parameter completionHandler: 回调

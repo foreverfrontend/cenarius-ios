@@ -17,7 +17,7 @@ public class WXViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         render()
     }
     
@@ -30,9 +30,9 @@ public class WXViewController: UIViewController {
         print("创建")
         instance = WXSDKInstance.init()
         instance.viewController = self
-        instance.frame = self.view.frame
+        instance.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y + 64, width: view.frame.size.width, height: view.frame.size.height - 64)
       
-        instance.onCreate = {[weak self](view) in
+        instance.onCreate = { [weak self] (view) in
             self?.weexView?.removeFromSuperview()
             self?.weexView = view
             self?.view.addSubview((self?.weexView)!)

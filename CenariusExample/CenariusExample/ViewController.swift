@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     @IBAction func weex(_ sender: UIButton) {
         let wxvc = WXViewController()
-        wxvc.url = URL(string:"")
+        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("showcase/calculator.js")
 //        let wxrcvc = WXRootViewController(rootViewController: wxvc)
 //        UIApplication.shared.keyWindow?.rootViewController = wxrcvc
         self.navigationController?.pushViewController(wxvc, animated: true)

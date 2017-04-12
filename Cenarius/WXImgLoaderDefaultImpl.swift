@@ -17,7 +17,7 @@ public class WXImgLoaderDefaultImpl: NSObject, WXImgLoaderProtocol, WXModuleProt
             if completedBlock != nil {
                 completedBlock(image, error, error == nil)
             }
-        }) as! WXImageOperationProtocol
+        }) as? WXImageOperationProtocol
     }
 
     
