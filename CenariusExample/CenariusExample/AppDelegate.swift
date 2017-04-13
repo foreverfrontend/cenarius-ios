@@ -25,16 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Weex
     func initWeexSDK() {
+        //not necessary
         WXAppConfiguration.setAppGroup("Cenarius")
         WXAppConfiguration.setAppName("CenariusExample")
         WXAppConfiguration.setExternalUserAgent("ExternalUA")
         
+        //init SDK environment
         WXSDKEngine.initSDKEnvironment()
         
         WXSDKEngine.registerHandler(WXImgLoaderDefaultImpl(), with: WXImgLoaderProtocol.self)
-        
         WXSDKEngine.registerComponent("select", with: WXSelectComponent.self)
-        WXLog.setLogLevel(.warning)
+        
+        //set log
+        WXLog.setLogLevel(.log)
     }
 
 
