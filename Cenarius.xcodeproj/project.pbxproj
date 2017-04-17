@@ -68,6 +68,9 @@
 			isa = PBXGroup;
 			children = (
 				0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */,
+				0C4C68421E9DF71400C52FB5 /* Component */,
+				0C4C683F1E9DCA1600C52FB5 /* Handle */,
+				0C5B26D81EA4A25700CA692D /* Module */,
 			);
 			name = Weex;
 			sourceTree = "<group>";
@@ -98,6 +101,24 @@
 			name = Module;
 			sourceTree = "<group>";
 		};
+		0C5B26F01EA4D08200CA692D /* Native */ = {
+			isa = PBXGroup;
+			children = (
+				0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */,
+			);
+			name = Native;
+			sourceTree = "<group>";
+		};
+		0C5B26F11EA4D09F00CA692D /* H5 */ = {
+			isa = PBXGroup;
+			children = (
+				0CBCCDB21E8DFBB100A2D1A2 /* ContainerAPI */,
+				0CBCCDB51E8DFBC500A2D1A2 /* Interceptor */,
+				0CBCCDB61E8DFBCD00A2D1A2 /* Widget */,
+			);
+			name = H5;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -119,30 +140,15 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0C5B26F11EA4D09F00CA692D /* H5 */,
+				0C5B26F01EA4D08200CA692D /* Native */,
 				0C4C683C1E9DC67A00C52FB5 /* Weex */,
-				0C5B26D81EA4A25700CA692D /* Module */,
-				0C4C683F1E9DCA1600C52FB5 /* Handle */,
-				0C4C68421E9DF71400C52FB5 /* Component */,
 				0C4C68391E9CD9C000C52FB5 /* Extension */,
-				0CBCCD961E8DF59900A2D1A2 /* Init */,
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
-				0CBCCDB61E8DFBCD00A2D1A2 /* Widget */,
-				0CBCCDB51E8DFBC500A2D1A2 /* Interceptor */,
-				0CBCCDB41E8DFBBE00A2D1A2 /* Extension */,
-				0CBCCDB31E8DFBB800A2D1A2 /* Cordova */,
-				0CBCCDB21E8DFBB100A2D1A2 /* ContainerAPI */,
 				0CBCCDAA1E8DFB0D00A2D1A2 /* OpenApi */,
 				0CBCCD991E8DF67100A2D1A2 /* Supporting Files */,
 			);
 			path = Cenarius;
-			sourceTree = "<group>";
-		};
-		0CBCCD961E8DF59900A2D1A2 /* Init */ = {
-			isa = PBXGroup;
-			children = (
-				0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */,
-			);
-			name = Init;
 			sourceTree = "<group>";
 		};
 		0CBCCD991E8DF67100A2D1A2 /* Supporting Files */ = {
@@ -177,20 +183,6 @@
 			children = (
 			);
 			name = ContainerAPI;
-			sourceTree = "<group>";
-		};
-		0CBCCDB31E8DFBB800A2D1A2 /* Cordova */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cordova;
-			sourceTree = "<group>";
-		};
-		0CBCCDB41E8DFBBE00A2D1A2 /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extension;
 			sourceTree = "<group>";
 		};
 		0CBCCDB51E8DFBC500A2D1A2 /* Interceptor */ = {
