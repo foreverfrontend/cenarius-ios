@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //init SDK environment
         WXSDKEngine.initSDKEnvironment()
         
+        WXSDKEngine.registerModule("event", with: WXEventModule.self)
         WXSDKEngine.registerHandler(WXImgLoaderDefaultImpl(), with: WXImgLoaderProtocol.self)
         WXSDKEngine.registerComponent("select", with: WXSelectComponent.self)
         

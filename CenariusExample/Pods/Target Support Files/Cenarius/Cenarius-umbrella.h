@@ -11,6 +11,7 @@
 #endif
 
 #import "Cenarius.h"
+#import "WXEventModule.h"
 
 FOUNDATION_EXPORT double CenariusVersionNumber;
 FOUNDATION_EXPORT const unsigned char CenariusVersionString[];
