@@ -14,8 +14,8 @@ public class Route {
     private static let sharedInstance = Route()
     private var routes = [String: RouteProtocol.Type]()
     
-    public static func register() {
-        
+    public static func register(path: String, controller: RouteProtocol.Type) {
+        sharedInstance.routes[path] = controller
     }
     
     public static func open(url: URL) {

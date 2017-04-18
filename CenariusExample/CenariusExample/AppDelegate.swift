@@ -18,9 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        registerInterceptor()
         initWeexSDK()
         
         return true
+    }
+    
+    func registerRoute() {
+        Route.register(path: "/user", controller: UserViewController.self)
+    }
+    
+    func registerInterceptor() {
+        Interceptor.register(RouteInterceptor.self)
     }
     
     // MARK: - Weex

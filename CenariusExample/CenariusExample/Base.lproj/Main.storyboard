@@ -31,7 +31,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7a-ES-mbn">
-                                <rect key="frame" x="150" y="356" width="75" height="36"/>
+                                <rect key="frame" x="147" y="356" width="81" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="openApi"/>
                                 <connections>
@@ -39,23 +39,34 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccz-2N-YSv">
-                                <rect key="frame" x="150" y="400" width="75" height="36"/>
+                                <rect key="frame" x="147" y="400" width="81" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="weex"/>
                                 <connections>
                                     <action selector="weex:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u2A-di-LcE"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUD-ua-bAP">
+                                <rect key="frame" x="147" y="444" width="81" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="webView"/>
+                                <connections>
+                                    <segue destination="fMT-gh-lLK" kind="show" id="bsG-de-fBF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ATA-Vg-OmR"/>
-                            <constraint firstItem="R7a-ES-mbn" firstAttribute="trailing" secondItem="ccz-2N-YSv" secondAttribute="trailing" id="HR4-xT-ssZ"/>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="R7a-ES-mbn" secondAttribute="centerX" id="KpS-P7-X81"/>
-                            <constraint firstItem="R7a-ES-mbn" firstAttribute="top" secondItem="gCI-v6-3SN" secondAttribute="bottom" constant="5" id="LOK-hq-9O2"/>
-                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Uws-2G-1wv"/>
-                            <constraint firstItem="ccz-2N-YSv" firstAttribute="top" secondItem="R7a-ES-mbn" secondAttribute="bottom" constant="8" symbolic="YES" id="wjO-xu-ypA"/>
-                            <constraint firstItem="R7a-ES-mbn" firstAttribute="leading" secondItem="ccz-2N-YSv" secondAttribute="leading" id="ybI-IF-Q2H"/>
+                            <constraint firstItem="ccz-2N-YSv" firstAttribute="trailing" secondItem="nUD-ua-bAP" secondAttribute="trailing" id="Hi5-52-Eot"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="leading" secondItem="ccz-2N-YSv" secondAttribute="leading" id="Lqv-9s-Ia3"/>
+                            <constraint firstItem="nUD-ua-bAP" firstAttribute="top" secondItem="ccz-2N-YSv" secondAttribute="bottom" constant="8" symbolic="YES" id="RfZ-Xq-sRx"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="trailing" secondItem="ccz-2N-YSv" secondAttribute="trailing" id="U9T-H1-zGT"/>
+                            <constraint firstItem="ccz-2N-YSv" firstAttribute="leading" secondItem="nUD-ua-bAP" secondAttribute="leading" id="W7V-dE-blX"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="R7a-ES-mbn" secondAttribute="centerX" id="YQh-GH-ctc"/>
+                            <constraint firstItem="R7a-ES-mbn" firstAttribute="top" secondItem="gCI-v6-3SN" secondAttribute="bottom" constant="5" id="Z5U-u6-67e"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mYD-RQ-gUC"/>
+                            <constraint firstItem="gCI-v6-3SN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sy3-6d-yBc"/>
+                            <constraint firstItem="ccz-2N-YSv" firstAttribute="top" secondItem="R7a-ES-mbn" secondAttribute="bottom" constant="8" symbolic="YES" id="xhM-rZ-WWD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="g1w-mj-CsF"/>
@@ -63,6 +74,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="68" y="244"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="iw3-o1-atp">
+            <objects>
+                <viewController id="fMT-gh-lLK" customClass="WebViewController" customModule="CenariusExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HrB-HZ-VXv"/>
+                        <viewControllerLayoutGuide type="bottom" id="iWv-du-9u8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wiy-Mi-qIr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXS-Nj-hXl">
+                                <rect key="frame" x="67" y="129" width="240" height="84"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JUe-Ao-u6Z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JUe-Ao-u6Z" secondAttribute="trailing" id="6NV-Ms-azg"/>
+                            <constraint firstItem="JUe-Ao-u6Z" firstAttribute="bottom" secondItem="iWv-du-9u8" secondAttribute="top" id="6W9-LF-GJe"/>
+                            <constraint firstItem="JUe-Ao-u6Z" firstAttribute="centerX" secondItem="NXS-Nj-hXl" secondAttribute="centerX" id="N2E-DX-sPM"/>
+                            <constraint firstItem="JUe-Ao-u6Z" firstAttribute="leading" secondItem="wiy-Mi-qIr" secondAttribute="leading" id="PBd-hS-iVE"/>
+                            <constraint firstItem="NXS-Nj-hXl" firstAttribute="top" secondItem="HrB-HZ-VXv" secondAttribute="bottom" constant="65" id="WSz-2c-Emf"/>
+                            <constraint firstItem="NXS-Nj-hXl" firstAttribute="leading" secondItem="wiy-Mi-qIr" secondAttribute="leadingMargin" constant="51" id="l0J-9P-Mrp"/>
+                            <constraint firstItem="iWv-du-9u8" firstAttribute="top" secondItem="NXS-Nj-hXl" secondAttribute="bottom" constant="454" id="qxc-eI-I6A"/>
+                            <constraint firstItem="JUe-Ao-u6Z" firstAttribute="top" secondItem="wiy-Mi-qIr" secondAttribute="top" id="ygv-xr-iVc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="JUe-Ao-u6Z" id="Zw6-iY-sEL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R9e-LA-GQF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="940.47976011994012"/>
         </scene>
         <!--Open Api View Controller-->
         <scene sceneID="MrJ-tc-don">

@@ -10,12 +10,21 @@ import Foundation
 
 public class Interceptor {
     
-    private var interceptors = [InterceptorProtocol]()
+    private var interceptors = [InterceptorProtocol.Type]()
     
     public static let sharedInstance = Interceptor()
     
-    public static func register(_ interceptor: InterceptorProtocol) {
+    public static func register(_ interceptor: InterceptorProtocol.Type) {
         sharedInstance.interceptors.append(interceptor)
+    }
+    
+    public static func perform(url: URL, controller: UIViewController) -> Bool {
+        for interceptor in sharedInstance.interceptors {
+            if interceptor.perform(url: url, controller: controller) {
+                return true
+            }
+        }
+        return false
     }
 }
 

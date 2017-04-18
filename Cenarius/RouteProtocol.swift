@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol RouteProtocol {
+public protocol RouteProtocol {
     
     init(params: [String: Any]?)
 }
