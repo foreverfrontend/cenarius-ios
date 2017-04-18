@@ -14,6 +14,8 @@
 		0C5B26E91EA4A96800CA692D /* WXEventModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5B26E71EA4A96800CA692D /* WXEventModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26E81EA4A96800CA692D /* WXEventModule.m */; };
 		0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */; };
+		0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F31EA5B11000CA692D /* Interceptor.swift */; };
+		0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
@@ -31,6 +33,8 @@
 		0C5B26E71EA4A96800CA692D /* WXEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEventModule.h; sourceTree = "<group>"; };
 		0C5B26E81EA4A96800CA692D /* WXEventModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEventModule.m; sourceTree = "<group>"; };
 		0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXEventModule.swift; sourceTree = "<group>"; };
+		0C5B26F31EA5B11000CA692D /* Interceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInterceptor.swift; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
@@ -112,9 +116,7 @@
 		0C5B26F11EA4D09F00CA692D /* H5 */ = {
 			isa = PBXGroup;
 			children = (
-				0CBCCDB21E8DFBB100A2D1A2 /* ContainerAPI */,
 				0CBCCDB51E8DFBC500A2D1A2 /* Interceptor */,
-				0CBCCDB61E8DFBCD00A2D1A2 /* Widget */,
 			);
 			name = H5;
 			sourceTree = "<group>";
@@ -178,25 +180,13 @@
 			name = Update;
 			sourceTree = "<group>";
 		};
-		0CBCCDB21E8DFBB100A2D1A2 /* ContainerAPI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ContainerAPI;
-			sourceTree = "<group>";
-		};
 		0CBCCDB51E8DFBC500A2D1A2 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
+				0C5B26F31EA5B11000CA692D /* Interceptor.swift */,
+				0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */,
 			);
 			name = Interceptor;
-			sourceTree = "<group>";
-		};
-		0CBCCDB61E8DFBCD00A2D1A2 /* Widget */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Widget;
 			sourceTree = "<group>";
 		};
 		75DE8C8098C5FB9F686740B5 /* Frameworks */ = {
@@ -339,9 +329,11 @@
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
 				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
+				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,
 				0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */,
+				0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */,
 				0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
