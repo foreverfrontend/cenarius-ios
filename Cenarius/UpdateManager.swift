@@ -35,22 +35,22 @@ public class UpdateManager {
     /// 设置远程资源地址。
     ///
     /// - Parameter url: www文件夹的url
-    public class func setServerUrl(_ url:URL) {
+    public static func setServerUrl(_ url:URL) {
         UpdateManager.serverUrl = url
     }
     
-    public class func setDevelopMode(_ mode: Bool) {
+    public static func setDevelopMode(_ mode: Bool) {
         sharedInstance.developMode = mode
     }
     
-    public class func getCacheUrl() -> URL {
+    public static func getCacheUrl() -> URL {
         return UpdateManager.cacheUrl
     }
     
     /// 更新
     ///
     /// - Parameter completionHandler: 回调
-    public class func update(completionHandler: @escaping Completion)  {
+    public static func update(completionHandler: @escaping Completion)  {
         sharedInstance.update(completionHandler: completionHandler)
     }
     

@@ -28,27 +28,27 @@ public class OpenApi {
     /// Set the accessToken for request
     ///
     /// - Parameter token: accessToken
-    public class func setAccessToken(_ token: String?) {
+    public static func setAccessToken(_ token: String?) {
         sharedInstance.accessToken = token
         UserDefaults.standard.setValue(token, forKey: accessTokenKey)
         UserDefaults.standard.synchronize()
     }
     
-    public class func getAccessToken() -> String? {
+    public static func getAccessToken() -> String? {
         return sharedInstance.accessToken
     }
     
     /// Set the appKey for request
     ///
     /// - Parameter key: appKey
-    public class func setAppKey(_ key: String?) {
+    public static func setAppKey(_ key: String?) {
         sharedInstance.appKey = key
     }
     
     /// Set the appSecret for request
     ///
     /// - Parameter secret: appSecret
-    public class func setAppSecret(_ secret: String?) {
+    public static func setAppSecret(_ secret: String?) {
         sharedInstance.appSecret = secret
     }
     
@@ -60,7 +60,7 @@ public class OpenApi {
     ///   - parameters: The HTTP parameters.
     ///   - headers: The HTTP headers.
     /// - Returns: The URL after signed
-    public class func sign(url: String, parameters: Parameters?, headers: HTTPHeaders?) -> String {
+    public static func sign(url: String, parameters: Parameters?, headers: HTTPHeaders?) -> String {
         var isOpenApi = false
         var isJson = false
         if headers != nil {
@@ -96,7 +96,7 @@ public class OpenApi {
         
         var parametersSigned = Parameters()
         if queryCombined != nil {
-            parametersSigned = parametersFromQuery(queryCombined!)
+            parametersSigned = queryCombined!.parameters()
         }
         let token = sharedInstance.accessToken ?? getAnonymousToken()
         let appKey = sharedInstance.appKey
@@ -126,7 +126,7 @@ public class OpenApi {
         return urlSigned
     }
     
-    private class func queryFromUrl(_ url: String) -> String? {
+    private static func queryFromUrl(_ url: String) -> String? {
         let range = url.range(of: "?")
         if range != nil {
             let query = url.substring(from: range!.upperBound)
@@ -137,36 +137,7 @@ public class OpenApi {
         return nil
     }
     
-    private class func parametersFromQuery(_ query: String) -> Parameters {
-        var parametersCombined = ParametersCombined()
-        let pairs = query.components(separatedBy: "&")
-        for pair in pairs {
-            let keyValue = pair.components(separatedBy: "=")
-            if(keyValue.count > 1) {
-                let key = keyValue[0].decodeURIComponent()
-                let value = keyValue[1].decodeURIComponent()
-                if parametersCombined[key] != nil {
-                    parametersCombined[key]!.append(value)
-                } else {
-                    parametersCombined[key] = [value]
-                }
-            }
-        }
-        var results = Parameters()
-        for parametersCombined in parametersCombined {
-            let key = parametersCombined.key
-            let values = parametersCombined.value
-            let sortedValues = values.sorted()
-            var valueString = sortedValues[0]
-            for index in 1..<sortedValues.count {
-                valueString += key + sortedValues[index]
-            }
-            results[key] = valueString
-        }
-        return results
-    }
-    
-    private class func queryFromParameters(_ parameters: Parameters) -> String {
+    private static func queryFromParameters(_ parameters: Parameters) -> String {
         var pairs = [String]()
         for parameter in parameters {
             pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
@@ -175,13 +146,13 @@ public class OpenApi {
         return query
     }
     
-    private class func getAnonymousToken() -> String {
+    private static func getAnonymousToken() -> String {
         var token = UUID.init().uuidString + "##ANONYMOUS"
         token = token.data(using: .utf8)!.base64EncodedString()
         return token
     }
     
-    private class func md5Signature(parameters: Parameters, secret: String) -> String {
+    private static func md5Signature(parameters: Parameters, secret: String) -> String {
         var result = secret
         let keys = parameters.keys.sorted()
         for key in keys {

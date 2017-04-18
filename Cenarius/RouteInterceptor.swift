@@ -10,12 +10,11 @@ import Foundation
 
 class RouteInterceptor: InterceptorProtocol {
     
-    func canPerform(url: URL) -> Bool {
-        return true
-    }
-
-    
-    func perform(controller: UIViewController) {
-        
+    static func perform(url: URL, controller: UIViewController) -> Bool {
+        if url.scheme == "cenarius", url.host == "route" {
+            Route.open(url: url, from: controller)
+            return true
+        }
+        return false
     }
 }

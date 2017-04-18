@@ -1,0 +1,41 @@
+//
+//  Route.swift
+//  Cenarius
+//
+//  Created by M on 2017/4/18.
+//  Copyright © 2017年 M. All rights reserved.
+//
+
+import Foundation
+import SwiftyJSON
+
+public class Route {
+    
+    private static let sharedInstance = Route()
+    private var routes = [String: RouteProtocol.Type]()
+    
+    public static func register() {
+        
+    }
+    
+    public static func open(url: URL) {
+        open(url: url, from: nil)
+    }
+    
+    public static func open(url: URL, from: UIViewController?) {
+        if let toControllerType = sharedInstance.routes[url.path] {
+            let queryParameters = url.parameters()
+            var params: [String: Any]?
+            if let paramsString = queryParameters["params"] {
+                params = JSON(paramsString).dictionaryObject
+            }
+            let toController = toControllerType.init(params: params)
+            let fromViewController = from ?? UIApplication.topViewController()
+            if let navigationController = fromViewController?.navigationController, queryParameters["present"] != "true" {
+                navigationController.pushViewController(toController as! UIViewController, animated: true)
+            } else {
+                fromViewController?.present(toController as! UIViewController, animated: true, completion: nil)
+            }
+        }
+    }
+}

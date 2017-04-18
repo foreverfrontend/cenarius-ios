@@ -19,8 +19,3 @@ public class Interceptor {
     }
 }
 
-public protocol InterceptorProtocol {
-    
-    func canPerform(url: URL) -> Bool
-    func perform(controller: UIViewController)
-}

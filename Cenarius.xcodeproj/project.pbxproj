@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */; };
+		0C4C683B1E9CDB3500C52FB5 /* String+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */; };
 		0C4C683E1E9DC69200C52FB5 /* WXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */; };
 		0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */; };
 		0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */; };
@@ -16,6 +16,11 @@
 		0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */; };
 		0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F31EA5B11000CA692D /* Interceptor.swift */; };
 		0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */; };
+		0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F81EA5B9B100CA692D /* Route.swift */; };
+		0C5B26FB1EA5E51400CA692D /* RouteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FA1EA5E51400CA692D /* RouteProtocol.swift */; };
+		0C5B26FD1EA5E52900CA692D /* InterceptorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FC1EA5E52900CA692D /* InterceptorProtocol.swift */; };
+		0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */; };
+		0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
@@ -26,7 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
+		0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cenarius.swift"; sourceTree = "<group>"; };
 		0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXViewController.swift; sourceTree = "<group>"; };
 		0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImgLoaderDefaultImpl.swift; sourceTree = "<group>"; };
 		0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXSelectComponent.swift; sourceTree = "<group>"; };
@@ -35,6 +40,11 @@
 		0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXEventModule.swift; sourceTree = "<group>"; };
 		0C5B26F31EA5B11000CA692D /* Interceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInterceptor.swift; sourceTree = "<group>"; };
+		0C5B26F81EA5B9B100CA692D /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		0C5B26FA1EA5E51400CA692D /* RouteProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProtocol.swift; sourceTree = "<group>"; };
+		0C5B26FC1EA5E52900CA692D /* InterceptorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterceptorProtocol.swift; sourceTree = "<group>"; };
+		0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cenarius.swift"; sourceTree = "<group>"; };
+		0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Cenarius.swift"; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
@@ -63,7 +73,9 @@
 		0C4C68391E9CD9C000C52FB5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				0C4C683A1E9CDB3500C52FB5 /* String+Encode.swift */,
+				0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */,
+				0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */,
+				0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -121,6 +133,15 @@
 			name = H5;
 			sourceTree = "<group>";
 		};
+		0C5B26F71EA5B99D00CA692D /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				0C5B26F81EA5B9B100CA692D /* Route.swift */,
+				0C5B26FA1EA5E51400CA692D /* RouteProtocol.swift */,
+			);
+			name = Route;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +163,7 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0C5B26F71EA5B99D00CA692D /* Route */,
 				0C5B26F11EA4D09F00CA692D /* H5 */,
 				0C5B26F01EA4D08200CA692D /* Native */,
 				0C4C683C1E9DC67A00C52FB5 /* Weex */,
@@ -184,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				0C5B26F31EA5B11000CA692D /* Interceptor.swift */,
+				0C5B26FC1EA5E52900CA692D /* InterceptorProtocol.swift */,
 				0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */,
 			);
 			name = Interceptor;
@@ -322,13 +345,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C4C683B1E9CDB3500C52FB5 /* String+Encode.swift in Sources */,
+				0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */,
+				0C4C683B1E9CDB3500C52FB5 /* String+Cenarius.swift in Sources */,
+				0C5B26FB1EA5E51400CA692D /* RouteProtocol.swift in Sources */,
 				0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */,
 				0C4C683E1E9DC69200C52FB5 /* WXViewController.swift in Sources */,
 				0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */,
+				0C5B26FD1EA5E52900CA692D /* InterceptorProtocol.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
+				0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */,
 				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
+				0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,
