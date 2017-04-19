@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  NetworkManager.swift
 //  Cenarius
 //
 //  Created by M on 2017/4/19.
@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-public class Network {
+public class NetworkManager: SessionManager {
     
-    static let `default`: SessionManager = {
+    static let defaultManager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = 5
@@ -21,8 +21,8 @@ public class Network {
     
     // MARK: - Data Request
     
-    /// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of the specified `url`,
-    /// `method`, `parameters`, `encoding` and `headers`.
+    /// Creates a `DataRequest` to retrieve the contents of the specified `url`, `method`, `parameters`, `encoding`
+    /// and `headers`.
     ///
     /// - parameter url:        The URL.
     /// - parameter method:     The HTTP method. `.get` by default.
@@ -32,7 +32,7 @@ public class Network {
     ///
     /// - returns: The created `DataRequest`.
     @discardableResult
-    public static func request(
+    public override func request(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -40,29 +40,31 @@ public class Network {
         headers: HTTPHeaders? = nil)
         -> DataRequest
     {
-        return NetworkManager.defaultManager.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
+        return super.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
     }
     
-    /// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of a URL based on the
-    /// specified `urlRequest`.
+    /// Creates a `DataRequest` to retrieve the contents of a URL based on the specified `urlRequest`.
     ///
-    /// - parameter urlRequest: The URL request
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
+    ///
+    /// - parameter urlRequest: The URL request.
     ///
     /// - returns: The created `DataRequest`.
-    @discardableResult
-    public static func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
-        return NetworkManager.defaultManager.request(urlRequest)
+    public override func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
+        return super.request(urlRequest)
     }
     
     // MARK: - Download Request
     
     // MARK: URL Request
     
-    /// Creates a `DownloadRequest` using the default `SessionManager` to retrieve the contents of the specified `url`,
-    /// `method`, `parameters`, `encoding`, `headers` and save them to the `destination`.
+    /// Creates a `DownloadRequest` to retrieve the contents the specified `url`, `method`, `parameters`, `encoding`,
+    /// `headers` and save them to the `destination`.
     ///
     /// If `destination` is not specified, the contents will remain in the temporary location determined by the
     /// underlying URL session.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter url:         The URL.
     /// - parameter method:      The HTTP method. `.get` by default.
@@ -73,7 +75,7 @@ public class Network {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    public override func download(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -82,35 +84,39 @@ public class Network {
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
     {
-        return NetworkManager.defaultManager.download(url, method: method, parameters: parameters, encoding: encoding, headers: headers, to: destination)
+        return super.download(url, method: method, parameters: parameters, encoding: encoding, headers: headers, to: destination)
     }
     
-    /// Creates a `DownloadRequest` using the default `SessionManager` to retrieve the contents of a URL based on the
-    /// specified `urlRequest` and save them to the `destination`.
+    /// Creates a `DownloadRequest` to retrieve the contents of a URL based on the specified `urlRequest` and save
+    /// them to the `destination`.
     ///
     /// If `destination` is not specified, the contents will remain in the temporary location determined by the
     /// underlying URL session.
     ///
-    /// - parameter urlRequest:  The URL request.
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
+    ///
+    /// - parameter urlRequest:  The URL request
     /// - parameter destination: The closure used to determine the destination of the downloaded file. `nil` by default.
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    public override func download(
         _ urlRequest: URLRequestConvertible,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
     {
-        return NetworkManager.defaultManager.download(urlRequest, to: destination)
+        return super.download(urlRequest, to: destination)
     }
     
     // MARK: Resume Data
     
-    /// Creates a `DownloadRequest` using the default `SessionManager` from the `resumeData` produced from a
-    /// previous request cancellation to retrieve the contents of the original request and save them to the `destination`.
+    /// Creates a `DownloadRequest` from the `resumeData` produced from a previous request cancellation to retrieve
+    /// the contents of the original request and save them to the `destination`.
     ///
     /// If `destination` is not specified, the contents will remain in the temporary location determined by the
     /// underlying URL session.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// On the latest release of all the Apple platforms (iOS 10, macOS 10.12, tvOS 10, watchOS 3), `resumeData` is broken
     /// on background URL session configurations. There's an underlying bug in the `resumeData` generation logic where the
@@ -120,26 +126,27 @@ public class Network {
     ///    - http://stackoverflow.com/a/39347461/1342462
     ///
     /// - parameter resumeData:  The resume data. This is an opaque data blob produced by `URLSessionDownloadTask`
-    ///                          when a task is cancelled. See `URLSession -downloadTask(withResumeData:)` for additional
-    ///                          information.
+    ///                          when a task is cancelled. See `URLSession -downloadTask(withResumeData:)` for
+    ///                          additional information.
     /// - parameter destination: The closure used to determine the destination of the downloaded file. `nil` by default.
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    public override func download(
         resumingWith resumeData: Data,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
     {
-        return NetworkManager.defaultManager.download(resumingWith: resumeData, to: destination)
+        return super.download(resumingWith: resumeData, to: destination)
     }
     
     // MARK: - Upload Request
     
     // MARK: File
     
-    /// Creates an `UploadRequest` using the default `SessionManager` from the specified `url`, `method` and `headers`
-    /// for uploading the `file`.
+    /// Creates an `UploadRequest` from the specified `url`, `method` and `headers` for uploading the `file`.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter file:    The file to upload.
     /// - parameter url:     The URL.
@@ -148,32 +155,34 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    public override func upload(
         _ fileURL: URL,
         to url: URLConvertible,
         method: HTTPMethod = .post,
         headers: HTTPHeaders? = nil)
         -> UploadRequest
     {
-        return NetworkManager.defaultManager.upload(fileURL, to: url, method: method, headers: headers)
+        return super.upload(fileURL, to: url, method: method, headers: headers)
     }
     
-    /// Creates a `UploadRequest` using the default `SessionManager` from the specified `urlRequest` for
-    /// uploading the `file`.
+    /// Creates a `UploadRequest` from the specified `urlRequest` for uploading the `file`.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter file:       The file to upload.
     /// - parameter urlRequest: The URL request.
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
-        return NetworkManager.defaultManager.upload(fileURL, with: urlRequest)
+    public override func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
+        return super.upload(fileURL, with: urlRequest)
     }
     
     // MARK: Data
     
-    /// Creates an `UploadRequest` using the default `SessionManager` from the specified `url`, `method` and `headers`
-    /// for uploading the `data`.
+    /// Creates an `UploadRequest` from the specified `url`, `method` and `headers` for uploading the `data`.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter data:    The data to upload.
     /// - parameter url:     The URL.
@@ -182,32 +191,34 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    public override func upload(
         _ data: Data,
         to url: URLConvertible,
         method: HTTPMethod = .post,
         headers: HTTPHeaders? = nil)
         -> UploadRequest
     {
-        return NetworkManager.defaultManager.upload(data, to: url, method: method, headers: headers)
+        return super.upload(data, to: url, method: method, headers: headers)
     }
     
-    /// Creates an `UploadRequest` using the default `SessionManager` from the specified `urlRequest` for
-    /// uploading the `data`.
+    /// Creates an `UploadRequest` from the specified `urlRequest` for uploading the `data`.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter data:       The data to upload.
     /// - parameter urlRequest: The URL request.
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
-        return NetworkManager.defaultManager.upload(data, with: urlRequest)
+    public override func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
+        return super.upload(data, with: urlRequest)
     }
     
     // MARK: InputStream
     
-    /// Creates an `UploadRequest` using the default `SessionManager` from the specified `url`, `method` and `headers`
-    /// for uploading the `stream`.
+    /// Creates an `UploadRequest` from the specified `url`, `method` and `headers` for uploading the `stream`.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter stream:  The stream to upload.
     /// - parameter url:     The URL.
@@ -216,32 +227,33 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    public override func upload(
         _ stream: InputStream,
         to url: URLConvertible,
         method: HTTPMethod = .post,
         headers: HTTPHeaders? = nil)
         -> UploadRequest
     {
-        return NetworkManager.defaultManager.upload(stream, to: url, method: method, headers: headers)
+        return super.upload(stream, to: url, method: method, headers: headers)
     }
     
-    /// Creates an `UploadRequest` using the default `SessionManager` from the specified `urlRequest` for
-    /// uploading the `stream`.
+    /// Creates an `UploadRequest` from the specified `urlRequest` for uploading the `stream`.
     ///
-    /// - parameter urlRequest: The URL request.
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
+    ///
     /// - parameter stream:     The stream to upload.
+    /// - parameter urlRequest: The URL request.
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
-        return NetworkManager.defaultManager.upload(stream, with: urlRequest)
+    public override func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
+        return super.upload(stream, with: urlRequest)
     }
     
     // MARK: MultipartFormData
     
-    /// Encodes `multipartFormData` using `encodingMemoryThreshold` with the default `SessionManager` and calls
-    /// `encodingCompletion` with new `UploadRequest` using the `url`, `method` and `headers`.
+    /// Encodes `multipartFormData` using `encodingMemoryThreshold` and calls `encodingCompletion` with new
+    /// `UploadRequest` using the `url`, `method` and `headers`.
     ///
     /// It is important to understand the memory implications of uploading `MultipartFormData`. If the cummulative
     /// payload is small, encoding the data in-memory and directly uploading to a server is the by far the most
@@ -250,11 +262,13 @@ public class Network {
     /// footprint low, then the data can be uploaded as a stream from the resulting file. Streaming from disk MUST be
     /// used for larger payloads such as video content.
     ///
-    /// The `encodingMemoryThreshold` parameter allows NetworkManager.defaultManager to automatically determine whether to encode in-memory
+    /// The `encodingMemoryThreshold` parameter allows Alamofire to automatically determine whether to encode in-memory
     /// or stream from disk. If the content length of the `MultipartFormData` is below the `encodingMemoryThreshold`,
     /// encoding takes place in-memory. If the content length exceeds the threshold, the data is streamed to disk
     /// during the encoding process. Then the result is uploaded as data or as a stream depending on which encoding
     /// technique was used.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter multipartFormData:       The closure used to append body parts to the `MultipartFormData`.
     /// - parameter encodingMemoryThreshold: The encoding memory threshold in bytes.
@@ -263,26 +277,19 @@ public class Network {
     /// - parameter method:                  The HTTP method. `.post` by default.
     /// - parameter headers:                 The HTTP headers. `nil` by default.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public static func upload(
+    public override func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         to url: URLConvertible,
         method: HTTPMethod = .post,
         headers: HTTPHeaders? = nil,
-        encodingCompletion: ((SessionManager.MultipartFormDataEncodingResult) -> Void)?)
+        encodingCompletion: ((MultipartFormDataEncodingResult) -> Void)?)
     {
-        return NetworkManager.defaultManager.upload(
-            multipartFormData: multipartFormData,
-            usingThreshold: encodingMemoryThreshold,
-            to: url,
-            method: method,
-            headers: headers,
-            encodingCompletion: encodingCompletion
-        )
+        return super.upload(multipartFormData: multipartFormData, usingThreshold: encodingMemoryThreshold, to: url, method: method, headers: headers, encodingCompletion: encodingCompletion)
     }
     
-    /// Encodes `multipartFormData` using `encodingMemoryThreshold` and the default `SessionManager` and
-    /// calls `encodingCompletion` with new `UploadRequest` using the `urlRequest`.
+    /// Encodes `multipartFormData` using `encodingMemoryThreshold` and calls `encodingCompletion` with new
+    /// `UploadRequest` using the `urlRequest`.
     ///
     /// It is important to understand the memory implications of uploading `MultipartFormData`. If the cummulative
     /// payload is small, encoding the data in-memory and directly uploading to a server is the by far the most
@@ -291,31 +298,26 @@ public class Network {
     /// footprint low, then the data can be uploaded as a stream from the resulting file. Streaming from disk MUST be
     /// used for larger payloads such as video content.
     ///
-    /// The `encodingMemoryThreshold` parameter allows NetworkManager.defaultManager to automatically determine whether to encode in-memory
+    /// The `encodingMemoryThreshold` parameter allows Alamofire to automatically determine whether to encode in-memory
     /// or stream from disk. If the content length of the `MultipartFormData` is below the `encodingMemoryThreshold`,
     /// encoding takes place in-memory. If the content length exceeds the threshold, the data is streamed to disk
     /// during the encoding process. Then the result is uploaded as data or as a stream depending on which encoding
     /// technique was used.
+    ///
+    /// If `startRequestsImmediately` is `true`, the request will have `resume()` called before being returned.
     ///
     /// - parameter multipartFormData:       The closure used to append body parts to the `MultipartFormData`.
     /// - parameter encodingMemoryThreshold: The encoding memory threshold in bytes.
     ///                                      `multipartFormDataEncodingMemoryThreshold` by default.
     /// - parameter urlRequest:              The URL request.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public static func upload(
+    public override func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         with urlRequest: URLRequestConvertible,
-        encodingCompletion: ((SessionManager.MultipartFormDataEncodingResult) -> Void)?)
+        encodingCompletion: ((MultipartFormDataEncodingResult) -> Void)?)
     {
-        return NetworkManager.defaultManager.upload(
-            multipartFormData: multipartFormData,
-            usingThreshold: encodingMemoryThreshold,
-            with: urlRequest,
-            encodingCompletion: encodingCompletion
-        )
+        return super.upload(multipartFormData: multipartFormData, usingThreshold: encodingMemoryThreshold, with: urlRequest, encodingCompletion: encodingCompletion)
     }
-
     
 }
-

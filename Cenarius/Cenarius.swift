@@ -18,11 +18,4 @@ public class Cenarius {
         return logger
     }()
     
-    public static var alamofire: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 60
-        let sessionManager = Alamofire.SessionManager(configuration: configuration)
-        return sessionManager
-    }()
 }

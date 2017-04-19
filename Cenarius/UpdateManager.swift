@@ -139,7 +139,7 @@ public class UpdateManager {
     
     private func downloadConfig() {
         complete(state: .DOWNLOAD_CONFIG_FILE)
-        Cenarius.alamofire.request(UpdateManager.serverConfigUrl).validate().responseData { [weak self] response in
+        Network.request(UpdateManager.serverConfigUrl).validate().responseData { [weak self] response in
             switch response.result {
             case .success(let value):
                 self!.serverConfigData = value
@@ -232,7 +232,7 @@ public class UpdateManager {
         complete(state: .DOWNLOAD_FILES_FILE)
         loadLocalConfig()
         loadLocalFiles()
-        Cenarius.alamofire.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
+        Network.request(UpdateManager.serverFilesUrl).validate().responseString { [weak self] response in
             switch response.result {
             case .success(let value):
                 self!.serverFiles = [File].deserialize(from: value)!
@@ -290,7 +290,7 @@ public class UpdateManager {
             let fileURL = UpdateManager.cacheUrl.appendingPathComponent(file.path)
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
-        let response = Cenarius.alamofire.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
+        let response = Network.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
         if let error = response.error {
             Cenarius.logger.error(error)
             return downloadFileRetry(file, retry: retry)
