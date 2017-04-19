@@ -77,7 +77,7 @@ public class OpenApi {
         if isOpenApi == false {
             return url
         }
-        
+
         let query = queryFromUrl(url)
         var queryCombined = query
         var bodySting: String?

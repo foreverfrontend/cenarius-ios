@@ -22,6 +22,7 @@
 		0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */; };
 		0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
+		0C9CD0561EA7472800BE40BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0551EA7472800BE40BB /* Network.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
 		0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAC1E8DFBAA00A2D1A2 /* UpdateManager.swift */; };
@@ -46,6 +47,7 @@
 		0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cenarius.swift"; sourceTree = "<group>"; };
 		0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Cenarius.swift"; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
+		0C9CD0551EA7472800BE40BB /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
 		0CBCCD8F1E8DF44500A2D1A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,6 +144,15 @@
 			name = Route;
 			sourceTree = "<group>";
 		};
+		0C9CD0541EA7450D00BE40BB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0C9CD0551EA7472800BE40BB /* Network.swift */,
+				0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -163,13 +174,13 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
-				0C5B26F71EA5B99D00CA692D /* Route */,
 				0C5B26F11EA4D09F00CA692D /* H5 */,
 				0C5B26F01EA4D08200CA692D /* Native */,
 				0C4C683C1E9DC67A00C52FB5 /* Weex */,
 				0C4C68391E9CD9C000C52FB5 /* Extension */,
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
-				0CBCCDAA1E8DFB0D00A2D1A2 /* OpenApi */,
+				0C9CD0541EA7450D00BE40BB /* Network */,
+				0C5B26F71EA5B99D00CA692D /* Route */,
 				0CBCCD991E8DF67100A2D1A2 /* Supporting Files */,
 			);
 			path = Cenarius;
@@ -182,14 +193,6 @@
 				0CBCCD8F1E8DF44500A2D1A2 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		0CBCCDAA1E8DFB0D00A2D1A2 /* OpenApi */ = {
-			isa = PBXGroup;
-			children = (
-				0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */,
-			);
-			name = OpenApi;
 			sourceTree = "<group>";
 		};
 		0CBCCDAB1E8DFB1900A2D1A2 /* Update */ = {
@@ -357,6 +360,7 @@
 				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
 				0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */,
+				0C9CD0561EA7472800BE40BB /* Network.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,

@@ -18,8 +18,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
 
         webView.delegate = self
         
-        let params = "{\"id\":123,\"name\":\"二哈\"}".encodeURIComponent()
-        let url = URL(string: "cenarius://route/user?params=" + params)!
+        let url = URL(string: "http://10.86.21.64/vux/index.html")!
         let request = URLRequest(url: url)
         webView.loadRequest(request)
     }
