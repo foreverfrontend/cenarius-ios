@@ -13,11 +13,8 @@ Pod::Spec.new do |s|
   s.dependency "Kingfisher"
   s.dependency 'SwiftyJSON'
   s.dependency 'HandyJSON'
-  s.dependency 'NVActivityIndicatorView'
-  s.dependency 'Charts'
   s.dependency 'XCGLogger'
   s.dependency 'AsyncSwift'
-  s.dependency 'PermissionScope'
   s.dependency 'RealmSwift'
   s.dependency 'SwiftyVersion'
   s.dependency 'Zip'

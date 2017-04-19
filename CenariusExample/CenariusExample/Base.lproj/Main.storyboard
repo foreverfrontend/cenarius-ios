@@ -116,6 +116,44 @@
             </objects>
             <point key="canvasLocation" x="68" y="940.47976011994012"/>
         </scene>
+        <!--User View Controller-->
+        <scene sceneID="TeK-Mv-4dN">
+            <objects>
+                <viewController storyboardIdentifier="UserViewController" id="lQc-zA-M5L" customClass="UserViewController" customModule="CenariusExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7h7-QZ-DCt"/>
+                        <viewControllerLayoutGuide type="bottom" id="aDt-PE-hWf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vGt-zN-N28">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDB-UJ-dAG">
+                                <rect key="frame" x="166" y="99" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgO-sq-9Ho">
+                                <rect key="frame" x="166" y="141" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="userIdLabel" destination="jDB-UJ-dAG" id="QwE-VE-d2f"/>
+                        <outlet property="userNameLabel" destination="vgO-sq-9Ho" id="0Zn-tZ-c1l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gal-FC-Q6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="783" y="940"/>
+        </scene>
         <!--Open Api View Controller-->
         <scene sceneID="MrJ-tc-don">
             <objects>

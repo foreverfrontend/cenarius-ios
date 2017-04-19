@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public protocol RouteProtocol {
-    
-    init(params: [String: Any]?)
+        
+    static func instantiate(params: JSON?) -> UIViewController
 }

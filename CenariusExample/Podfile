@@ -9,5 +9,6 @@ end
 
 target 'CenariusExample' do
   pod 'Cenarius', :path => '..'
+  pod 'NVActivityIndicatorView'
 end
 
