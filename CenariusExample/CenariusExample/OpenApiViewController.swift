@@ -26,11 +26,11 @@ class OpenApiViewController: UIViewController {
 
     @IBAction func sign(_ sender: UIButton) {
         let url = urlTextView.text!
-        Cenarius.logger.debug("url: \(url)")
+        Log.debug("url: \(url)")
         
         let headers = jsonSwitch.isOn ? ["X-Requested-With": "OpenAPIRequest", "Content-Type": "application/json"] : ["X-Requested-With": "OpenAPIRequest"]
         let urlSign = OpenApi.sign(url: url, parameters: nil, headers: headers)
-        Cenarius.logger.debug(urlSign)
+        Log.debug(urlSign)
         signTextView.text = urlSign
     }
     

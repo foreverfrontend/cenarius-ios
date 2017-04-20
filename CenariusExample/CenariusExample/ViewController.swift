@@ -26,8 +26,8 @@ class ViewController: UIViewController {
         let url = URL(string: "http://172.20.70.80/www")!
         UpdateManager.setServerUrl(url)
         UpdateManager.update { (state, progress) in
-            Cenarius.logger.debug(state)
-            Cenarius.logger.debug(progress)
+            Log.debug(state)
+            Log.debug(progress)
             switch state {
             case .UNZIP_WWW:
                 NVActivityIndicatorPresenter.sharedInstance.setMessage("unzip \(progress)")
