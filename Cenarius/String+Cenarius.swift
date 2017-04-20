@@ -19,8 +19,8 @@ public extension String {
         return self.removingPercentEncoding!
     }
     
-    func parameters() -> OpenApi.Parameters {
-        var parametersCombined = OpenApi.ParametersCombined()
+    func parameters() -> [String: String] {
+        var parametersCombined = [String: [String]]()
         let pairs = self.components(separatedBy: "&")
         for pair in pairs {
             let keyValue = pair.components(separatedBy: "=")
@@ -34,7 +34,7 @@ public extension String {
                 }
             }
         }
-        var results = OpenApi.Parameters()
+        var results = [String: String]()
         for parametersCombined in parametersCombined {
             let key = parametersCombined.key
             let values = parametersCombined.value

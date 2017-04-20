@@ -10,10 +10,10 @@ import Foundation
 
 extension URL {
     
-    func parameters() -> OpenApi.Parameters {
+    func parameters() -> [String: String] {
         if let query = self.query {
             return query.parameters()
         }
-        return OpenApi.Parameters()
+        return [String: String]()
     }
 }

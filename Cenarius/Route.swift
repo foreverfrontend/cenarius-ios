@@ -18,11 +18,7 @@ public class Route {
         sharedInstance.routes[path] = controller
     }
     
-    public static func open(url: URL) {
-        open(url: url, from: nil)
-    }
-    
-    public static func open(url: URL, from: UIViewController?) {
+    public static func open(_ url: URL, from: UIViewController? = nil) {
         if let toControllerType = sharedInstance.routes[url.path] {
             let queryParameters = url.parameters()
             var params: JSON?

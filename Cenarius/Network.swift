@@ -11,14 +11,6 @@ import Alamofire
 
 public class Network {
     
-    static let `default`: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
-        configuration.timeoutIntervalForRequest = 5
-        configuration.timeoutIntervalForResource = 60
-        return SessionManager(configuration: configuration)
-    }()
-    
     // MARK: - Data Request
     
     /// Creates a `DataRequest` using the default `SessionManager` to retrieve the contents of the specified `url`,
