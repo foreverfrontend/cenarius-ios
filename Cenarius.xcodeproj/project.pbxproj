@@ -24,8 +24,8 @@
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
 		0C9CD0561EA7472800BE40BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0551EA7472800BE40BB /* Network.swift */; };
 		0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */; };
+		0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD05A1EA83F9900BE40BB /* Log.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */; };
 		0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAC1E8DFBAA00A2D1A2 /* UpdateManager.swift */; };
 		0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */; };
 		0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAE1E8DFBAA00A2D1A2 /* Config.swift */; };
@@ -50,10 +50,10 @@
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
 		0C9CD0551EA7472800BE40BB /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		0C9CD05A1EA83F9900BE40BB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
 		0CBCCD8F1E8DF44500A2D1A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cenarius.swift; sourceTree = "<group>"; };
 		0CBCCDAC1E8DFBAA00A2D1A2 /* UpdateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
 		0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		0CBCCDAE1E8DFBAA00A2D1A2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -124,7 +124,6 @@
 		0C5B26F01EA4D08200CA692D /* Native */ = {
 			isa = PBXGroup;
 			children = (
-				0CBCCDA81E8DFB0600A2D1A2 /* Cenarius.swift */,
 			);
 			name = Native;
 			sourceTree = "<group>";
@@ -156,6 +155,14 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
+		0C9CD0591EA83F8800BE40BB /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				0C9CD05A1EA83F9900BE40BB /* Log.swift */,
+			);
+			name = Log;
+			sourceTree = "<group>";
+		};
 		0CBCCD811E8DF44500A2D1A2 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +184,7 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
+				0C9CD0591EA83F8800BE40BB /* Log */,
 				0C5B26F11EA4D09F00CA692D /* H5 */,
 				0C5B26F01EA4D08200CA692D /* Native */,
 				0C4C683C1E9DC67A00C52FB5 /* Weex */,
@@ -359,6 +367,7 @@
 				0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */,
 				0C5B26FD1EA5E52900CA692D /* InterceptorProtocol.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
+				0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */,
 				0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */,
 				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
@@ -368,7 +377,6 @@
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,
-				0CBCCDA91E8DFB0600A2D1A2 /* Cenarius.swift in Sources */,
 				0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */,
 				0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */,
 			);

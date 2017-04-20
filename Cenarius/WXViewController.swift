@@ -43,7 +43,7 @@ public class WXViewController: UIViewController {
         }
         
         instance.onFailed = { (error) in
-            Cenarius.logger.error(error)
+            Log.error(error)
         }
         
         instance.renderFinish = { (view) in
@@ -57,7 +57,7 @@ public class WXViewController: UIViewController {
         if url != nil {
             instance.render(with: url!, options: ["bundleUrl": url!.absoluteString], data: nil)
         } else {
-            Cenarius.logger.error("render url is nil")
+            Log.error("render url is nil")
         }
     }
     

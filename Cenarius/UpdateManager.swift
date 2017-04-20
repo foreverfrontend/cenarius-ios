@@ -156,7 +156,7 @@ public class UpdateManager {
                     self!.complete(state: .UPDATE_SUCCESS)
                 }
             case .failure(let error):
-                Cenarius.logger.error(error)
+                Log.error(error)
                 self!.complete(state: .DOWNLOAD_CONFIG_FILE_ERROR)
             }
         }
@@ -208,7 +208,7 @@ public class UpdateManager {
                 })
                 self!.unzipSuccess()
             } catch {
-                Cenarius.logger.error(error)
+                Log.error(error)
                 self!.complete(state: .UNZIP_WWW_ERROR)
             }
         }
@@ -244,7 +244,7 @@ public class UpdateManager {
                     self!.complete(state: .UPDATE_SUCCESS)
                 }
             case .failure(let error):
-                Cenarius.logger.error(error)
+                Log.error(error)
                 self!.complete(state: .DOWNLOAD_FILES_FILE_ERROR)
             }
         }
@@ -292,7 +292,7 @@ public class UpdateManager {
         }
         let response = Network.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
         if let error = response.error {
-            Cenarius.logger.error(error)
+            Log.error(error)
             return downloadFileRetry(file, retry: retry)
         } else {
             downloadFileSuccess(file)
