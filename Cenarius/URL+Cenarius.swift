@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 extension URL {
     
@@ -15,5 +16,14 @@ extension URL {
             return query.parameters()
         }
         return [String: String]()
+    }
+    
+    func getParams() -> JSON? {
+        let queryParameters = parameters()
+        var params: JSON?
+        if let paramsString = queryParameters["params"] {
+            params = JSON(data: paramsString.data(using: .utf8)!)
+        }
+        return params
     }
 }

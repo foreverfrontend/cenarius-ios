@@ -30,6 +30,7 @@
 		0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */; };
 		0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAE1E8DFBAA00A2D1A2 /* Config.swift */; };
 		0CC7FC471EA9D6590051F05A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7FC461EA9D6590051F05A /* WebViewController.swift */; };
+		0CC7FC491EAA07250051F05A /* ToastInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CC7FC481EAA07250051F05A /* ToastInterceptor.swift */; };
 		9792FD6945A2030FE578299F /* Pods_Cenarius.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED503D440784B6F7CE7F2973 /* Pods_Cenarius.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 		0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		0CBCCDAE1E8DFBAA00A2D1A2 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		0CC7FC461EA9D6590051F05A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		0CC7FC481EAA07250051F05A /* ToastInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastInterceptor.swift; sourceTree = "<group>"; };
 		62A234A14EA6BB1D011259CC /* Pods-Cenarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cenarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cenarius/Pods-Cenarius.release.xcconfig"; sourceTree = "<group>"; };
 		B2E3037E452FCB6ECF11FF7C /* Pods-Cenarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cenarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cenarius/Pods-Cenarius.debug.xcconfig"; sourceTree = "<group>"; };
 		ED503D440784B6F7CE7F2973 /* Pods_Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,6 +227,7 @@
 				0C5B26F31EA5B11000CA692D /* Interceptor.swift */,
 				0C5B26FC1EA5E52900CA692D /* InterceptorProtocol.swift */,
 				0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */,
+				0CC7FC481EAA07250051F05A /* ToastInterceptor.swift */,
 			);
 			name = Interceptor;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
 				0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */,
 				0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */,
+				0CC7FC491EAA07250051F05A /* ToastInterceptor.swift in Sources */,
 				0C9CD0561EA7472800BE40BB /* Network.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,

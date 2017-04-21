@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func registerInterceptor() {
         Interceptor.register(RouteInterceptor.self)
+        Interceptor.register(ToastInterceptor.self)
     }
     
     // MARK: - Weex
