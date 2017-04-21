@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.dependency 'Zip'
   s.dependency 'CryptoSwift'
   s.dependency 'SnapKit'
+  s.dependency 'Toaster'
   s.dependency 'WeexSDK'
   s.requires_arc = true
   s.pod_target_xcconfig = {

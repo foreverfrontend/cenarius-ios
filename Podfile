@@ -56,4 +56,8 @@ pod 'SnapKit'
 # A Swift Autolayout DSL for iOS & OS X
 # https://github.com/SnapKit/SnapKit
 
+pod 'Toaster'
+# 🍞 Toast for Swift
+# https://github.com/devxoul/Toaster
+
 end

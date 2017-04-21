@@ -18,6 +18,7 @@ PODS:
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
+  - Toaster (2.0.3)
   - WeexSDK (0.11.0):
     - SocketRocket
   - XCGLogger (5.0.1):
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - SnapKit
   - SwiftyJSON
   - SwiftyVersion
+  - Toaster
   - WeexSDK
   - XCGLogger
   - Zip
@@ -55,10 +57,11 @@ SPEC CHECKSUMS:
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
+  Toaster: 77c0b03d78e680bbbab0071c9c7ee392b0034010
   WeexSDK: f9cfe6adc91fba3ca5e36bc9808bf1b6e8be2106
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 2ab5ecbf293892113b4f4a99ca31995b6537459b
+PODFILE CHECKSUM: 0715e4a27e315d84c5a4a2d3d348b072b39519ed
 
 COCOAPODS: 1.2.1
