@@ -11,12 +11,12 @@ import Alamofire
 
 public class NetworkManager: SessionManager {
     
-    static let defaultManager: SessionManager = {
+    public static let defaultManager: NetworkManager = {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        configuration.httpAdditionalHeaders = NetworkManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = 5
         configuration.timeoutIntervalForResource = 60
-        return SessionManager(configuration: configuration)
+        return NetworkManager(configuration: configuration)
     }()
     
     // MARK: - Data Request
@@ -40,7 +40,14 @@ public class NetworkManager: SessionManager {
         headers: HTTPHeaders? = nil)
         -> DataRequest
     {
-        return super.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers)
+        var urlString = url
+        do {
+            urlString = try url.asURL().absoluteString
+            urlString = OpenApi.sign(url: urlString as! String, parameters: parameters, headers: headers)
+        } catch {
+            
+        }
+        return super.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
     }
     
     /// Creates a `DataRequest` to retrieve the contents of a URL based on the specified `urlRequest`.

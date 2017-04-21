@@ -14,9 +14,9 @@ import Alamofire
 /// class for Signature
 public class OpenApi {
     
-    public typealias Parameters = [String: String]
-    public typealias HTTPHeaders = [String: String]
-    typealias ParametersCombined = [String: [String]]
+//    private typealias Parameters = [String: String]
+//    private typealias HTTPHeaders = [String: String]
+    private typealias ParametersCombined = [String: [String]]
     
     private static let sharedInstance = OpenApi()
     private var accessToken: String? = UserDefaults.standard.string(forKey: accessTokenKey)
@@ -78,14 +78,15 @@ public class OpenApi {
             return url
         }
 
-        let query = queryFromUrl(url)
-        var queryCombined = query
+        let querySting = queryFromUrl(url)
+        var queryCombined = querySting
         var bodySting: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
                 bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.encodeURIComponent()
             } else {
-                bodySting = queryFromParameters(parameters!)
+//                bodySting = queryFromParameters(parameters!)
+                bodySting = query(parameters!)
             }
             if queryCombined != nil {
                 queryCombined! += "&" + bodySting!
@@ -94,7 +95,7 @@ public class OpenApi {
             }
         }
         
-        var parametersSigned = Parameters()
+        var parametersSigned = [String: String]()
         if queryCombined != nil {
             parametersSigned = queryCombined!.parameters()
         }
@@ -106,7 +107,7 @@ public class OpenApi {
         var urlSigned = url
         if urlSigned.contains("?") == false {
             urlSigned += "?"
-        } else if query != nil {
+        } else if querySting != nil {
             urlSigned += "&"
         }
         urlSigned += "access_token=" + token.encodeURIComponent()
@@ -137,7 +138,7 @@ public class OpenApi {
         return nil
     }
     
-    private static func queryFromParameters(_ parameters: Parameters) -> String {
+    private static func queryFromParameters(_ parameters: [String: String]) -> String {
         var pairs = [String]()
         for parameter in parameters {
             pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
@@ -146,13 +147,24 @@ public class OpenApi {
         return query
     }
     
+    private static func query(_ parameters: [String: Any]) -> String {
+        var components: [(String, String)] = []
+        
+        for key in parameters.keys.sorted(by: <) {
+            let value = parameters[key]!
+            components += URLEncoding.default.queryComponents(fromKey: key, value: value)
+        }
+        
+        return components.map { "\($0)=\($1)" }.joined(separator: "&")
+    }
+    
     private static func getAnonymousToken() -> String {
         var token = UUID.init().uuidString + "##ANONYMOUS"
         token = token.data(using: .utf8)!.base64EncodedString()
         return token
     }
     
-    private static func md5Signature(parameters: Parameters, secret: String) -> String {
+    private static func md5Signature(parameters: [String: String], secret: String) -> String {
         var result = secret
         let keys = parameters.keys.sorted()
         for key in keys {

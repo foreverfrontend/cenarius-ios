@@ -166,7 +166,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="y.com?a=中文&amp;b=+ +&amp;c=%26&amp;p=z" translatesAutoresizingMaskIntoConstraints="NO" id="uKM-fZ-oC8">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="https://y.com?a=a&amp;b=b" translatesAutoresizingMaskIntoConstraints="NO" id="uKM-fZ-oC8">
                                 <rect key="frame" x="16" y="72" width="343" height="111"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

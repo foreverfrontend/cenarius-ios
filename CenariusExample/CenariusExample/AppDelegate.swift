@@ -8,6 +8,7 @@
 
 import UIKit
 import Cenarius
+import Alamofire
 import WeexSDK
 
 @UIApplicationMain
@@ -17,12 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Log.setDefaultLog()
+        
+        initLog()
         registerRoute()
         registerInterceptor()
         initWeexSDK()
+        listenNetwork()
         
         return true
+    }
+    
+    func initLog() {
+        Log.setDefaultLog()
     }
     
     func registerRoute() {
@@ -49,6 +56,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //set log
         WXLog.setLogLevel(.log)
+    }
+    
+    func listenNetwork() {
+        let manager = NetworkReachabilityManager(host: "www.apple.com")
+        manager?.listener = { status in
+            Log.info("Network Status Changed: \(status)")
+        }
+        manager?.startListening()
     }
 
 

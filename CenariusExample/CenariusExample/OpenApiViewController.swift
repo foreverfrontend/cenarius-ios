@@ -29,7 +29,13 @@ class OpenApiViewController: UIViewController {
         Log.debug("url: \(url)")
         
         let headers = jsonSwitch.isOn ? ["X-Requested-With": "OpenAPIRequest", "Content-Type": "application/json"] : ["X-Requested-With": "OpenAPIRequest"]
-        let urlSign = OpenApi.sign(url: url, parameters: nil, headers: headers)
+        let parameters = ["pa": "A&A", "c": 0] as [String : Any]
+        
+        Network.request(url, parameters: parameters, headers: headers)
+        
+        
+        
+        let urlSign = OpenApi.sign(url: url, parameters: parameters, headers: headers)
         Log.debug(urlSign)
         signTextView.text = urlSign
     }
