@@ -14,6 +14,7 @@ PODS:
   - Realm/Headers (2.6.1)
   - RealmSwift (2.6.1):
     - Realm (= 2.6.1)
+  - SnapKit (3.2.0)
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - HandyJSON
   - Kingfisher
   - RealmSwift
+  - SnapKit
   - SwiftyJSON
   - SwiftyVersion
   - WeexSDK
@@ -49,6 +51,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Realm: 9abfd4f87519376daa5ae3a4603155de408bf8b3
   RealmSwift: a54d3e8931cf7d3afa5a1fac9c8f88109d7f02b3
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
@@ -56,6 +59,6 @@ SPEC CHECKSUMS:
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 804e66b1e7fb10a4ed3993a5ad440debbf8d75f6
+PODFILE CHECKSUM: 2ab5ecbf293892113b4f4a99ca31995b6537459b
 
 COCOAPODS: 1.2.1

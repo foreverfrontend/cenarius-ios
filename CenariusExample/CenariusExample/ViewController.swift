@@ -30,9 +30,9 @@ class ViewController: UIViewController {
             Log.debug(progress)
             switch state {
             case .UNZIP_WWW:
-                NVActivityIndicatorPresenter.sharedInstance.setMessage("unzip \(progress)")
+                NVActivityIndicatorPresenter.sharedInstance.setMessage("unzip \(progress)%")
             case .DOWNLOAD_FILES:
-                NVActivityIndicatorPresenter.sharedInstance.setMessage("download \(progress)")
+                NVActivityIndicatorPresenter.sharedInstance.setMessage("download \(progress)%")
             case .UPDATE_SUCCESS:
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
             case .DOWNLOAD_CONFIG_FILE_ERROR, .DOWNLOAD_FILES_ERROR, .DOWNLOAD_FILES_FILE_ERROR, .UNZIP_WWW_ERROR:
@@ -45,10 +45,16 @@ class ViewController: UIViewController {
     
     @IBAction func weex(_ sender: UIButton) {
         let wxvc = WXViewController()
-        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("index.js")
+        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/index.js")
 //        let wxrcvc = WXRootViewController(rootViewController: wxvc)
 //        UIApplication.shared.keyWindow?.rootViewController = wxrcvc
         self.navigationController?.pushViewController(wxvc, animated: true)
+    }
+
+    @IBAction func webView(_ sender: UIButton) {
+        let webViewController = WebViewController()
+        webViewController.url = UpdateManager.getCacheUrl().appendingPathComponent("vux/index.html")
+        self.navigationController?.pushViewController(webViewController, animated: true)
     }
 
 

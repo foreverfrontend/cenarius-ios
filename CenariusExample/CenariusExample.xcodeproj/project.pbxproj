@@ -13,9 +13,7 @@
 		0C445BEB1E8DFEFA00EC30D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BEA1E8DFEFA00EC30D5 /* Assets.xcassets */; };
 		0C445BEE1E8DFEFA00EC30D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BEC1E8DFEFA00EC30D5 /* LaunchScreen.storyboard */; };
 		0C445BFF1E8E2F7500EC30D5 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BFE1E8E2F7500EC30D5 /* www */; };
-		0C4C68461E9E135000C52FB5 /* WXDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68451E9E135000C52FB5 /* WXDemoViewController.swift */; };
 		0C6CA9CC1E9B5C2800F94C7C /* OpenApiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9CB1E9B5C2800F94C7C /* OpenApiViewController.swift */; };
-		0C9CD0511EA613DB00BE40BB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0501EA613DB00BE40BB /* WebViewController.swift */; };
 		0C9CD0531EA61C3300BE40BB /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0521EA61C3300BE40BB /* UserViewController.swift */; };
 		BCD37BC71DBAFC7E21CDC80C /* Pods_CenariusExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E045E4A8074F3054194A83 /* Pods_CenariusExample.framework */; };
 /* End PBXBuildFile section */
@@ -29,9 +27,7 @@
 		0C445BED1E8DFEFA00EC30D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C445BEF1E8DFEFA00EC30D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C445BFE1E8E2F7500EC30D5 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
-		0C4C68451E9E135000C52FB5 /* WXDemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXDemoViewController.swift; sourceTree = "<group>"; };
 		0C6CA9CB1E9B5C2800F94C7C /* OpenApiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApiViewController.swift; sourceTree = "<group>"; };
-		0C9CD0501EA613DB00BE40BB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0C9CD0521EA61C3300BE40BB /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		1CCD0D5F16973D24EFDF1723 /* Pods-CenariusExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.debug.xcconfig"; sourceTree = "<group>"; };
 		3D55837FA7B1BE5547CD17CD /* Pods-CenariusExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CenariusExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CenariusExample/Pods-CenariusExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,8 +70,6 @@
 				0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */,
 				0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */,
 				0C6CA9CB1E9B5C2800F94C7C /* OpenApiViewController.swift */,
-				0C4C68451E9E135000C52FB5 /* WXDemoViewController.swift */,
-				0C9CD0501EA613DB00BE40BB /* WebViewController.swift */,
 				0C9CD0521EA61C3300BE40BB /* UserViewController.swift */,
 				0C445BE71E8DFEFA00EC30D5 /* Main.storyboard */,
 				0C445BEA1E8DFEFA00EC30D5 /* Assets.xcassets */,
@@ -235,11 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C4C68461E9E135000C52FB5 /* WXDemoViewController.swift in Sources */,
 				0C9CD0531EA61C3300BE40BB /* UserViewController.swift in Sources */,
 				0C445BE61E8DFEFA00EC30D5 /* ViewController.swift in Sources */,
 				0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */,
-				0C9CD0511EA613DB00BE40BB /* WebViewController.swift in Sources */,
 				0C6CA9CC1E9B5C2800F94C7C /* OpenApiViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
