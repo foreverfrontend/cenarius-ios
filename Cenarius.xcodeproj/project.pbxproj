@@ -184,7 +184,6 @@
 		0CBCCD8D1E8DF44500A2D1A2 /* Cenarius */ = {
 			isa = PBXGroup;
 			children = (
-				0C9CD0591EA83F8800BE40BB /* Log */,
 				0C5B26F11EA4D09F00CA692D /* H5 */,
 				0C5B26F01EA4D08200CA692D /* Native */,
 				0C4C683C1E9DC67A00C52FB5 /* Weex */,
@@ -192,6 +191,7 @@
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
 				0C9CD0541EA7450D00BE40BB /* Network */,
 				0C5B26F71EA5B99D00CA692D /* Route */,
+				0C9CD0591EA83F8800BE40BB /* Log */,
 				0CBCCD991E8DF67100A2D1A2 /* Supporting Files */,
 			);
 			path = Cenarius;
