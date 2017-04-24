@@ -217,6 +217,7 @@ public class UpdateManager {
     private func unzipSuccess() {
         Async.main { [weak self] in
             // 解压www成功
+            try? FileManager.default.removeItem(at: UpdateManager.cacheConfigUrl)
             try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
             // 保存路由表到数据库中
             self!.saveFiles(self!.resourceFiles)
