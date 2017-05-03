@@ -30,7 +30,8 @@ public class UpdateManager {
         case DOWNLOAD_FILES_ERROR//下载文件出错
         case UPDATE_SUCCESS//更新文件成功
     }
-    public typealias Completion = (State, Int) -> Void
+    public typealias Progress = Int
+    public typealias Completion = (State, Progress) -> Void
     
     /// 设置远程资源地址。
     ///
@@ -79,7 +80,7 @@ public class UpdateManager {
     
     private var developMode = false
     private var completion: Completion!
-    private var progress: Int = 0
+    private var progress: Progress = 0
     private var isDownloadFileError = false
     private var downloadFilesCount = 0
     
@@ -147,7 +148,7 @@ public class UpdateManager {
                 if self!.isWwwFolderNeedsToBeInstalled() {
                     // 需要解压www
                     self!.unzipWww()
-                } else if self!.shouldDownloadWww {
+                } else if self!.shouldDownloadWww() {
                     // 下载路由表
                     self!.downloadFilesFile()
                 }
@@ -162,7 +163,7 @@ public class UpdateManager {
         }
     }
     
-    private var shouldDownloadWww: Bool {
+    private func shouldDownloadWww() -> Bool {
         if (hasMinVersion(serverConfig: serverConfig)) {
             // 满足最小版本要求
             if (isWwwFolderNeedsToBeInstalled()) {
@@ -190,15 +191,15 @@ public class UpdateManager {
     }
     
     private func unzipWww() {
-        try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
         try! mainRealm.write {
             mainRealm.deleteAll()
         }
         Async.utility { [weak self] in
+            try? FileManager.default.removeItem(at: UpdateManager.cacheUrl)
             do {
                 try Zip.unzipFile(UpdateManager.resourceZipUrl, destination: UpdateManager.cacheUrl, overwrite: true, password: nil, progress: { (unzipProgress) in
-                    var progress = Int(unzipProgress * 100)
-                    if self!.shouldDownloadWww {
+                    var progress = Progress(unzipProgress * 100)
+                    if self!.shouldDownloadWww() {
                         progress /= 2
                     }
                     if self!.progress != progress {
@@ -221,7 +222,7 @@ public class UpdateManager {
             try! FileManager.default.copyItem(at: UpdateManager.resourceConfigUrl, to: UpdateManager.cacheConfigUrl)
             // 保存路由表到数据库中
             self!.saveFiles(self!.resourceFiles)
-            if self!.shouldDownloadWww {
+            if self!.shouldDownloadWww() {
                 self!.downloadFilesFile()
             } else {
                 self!.complete(state: .UPDATE_SUCCESS)
