@@ -65,19 +65,25 @@ public class UpdateManager {
     private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
-    private static let retry = 5
+    private static let retryConut = 5
     private static let maxConcurrentOperationCount = 2
-    
     private static let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(wwwName)
     private static let resourceConfigUrl = resourceUrl.appendingPathComponent(configName)
     private static let resourceFilesUrl = resourceUrl.appendingPathComponent(filesName)
     private static let resourceZipUrl = resourceUrl.appendingPathComponent(zipName)
     private static let cacheUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true).first!).appendingPathComponent(wwwName)
     private static let cacheConfigUrl = cacheUrl.appendingPathComponent(configName)
-    private static var serverUrl: URL!
-    private static let serverConfigUrl = serverUrl.appendingPathComponent(configName)
-    private static let serverFilesUrl = serverUrl.appendingPathComponent(filesName)
     
+    private static var serverConfigUrl: URL!
+    private static var serverFilesUrl: URL!
+    private static var serverUrl: URL! {
+        didSet {
+            serverConfigUrl = serverUrl.appendingPathComponent(configName)
+            serverFilesUrl = serverUrl.appendingPathComponent(filesName)
+        }
+    }
+    
+
     private var developMode = false
     private var completion: Completion!
     private var progress: Progress = 0
@@ -279,7 +285,7 @@ public class UpdateManager {
         for file in files {
             autoreleasepool {
                 queue.addOperation { [weak self, weak queue] in
-                    if self!.downloadFile(file!, retry: UpdateManager.retry) == false {
+                    if self!.downloadFile(file!, retryConut: UpdateManager.retryConut) == false {
                         queue?.cancelAllOperations()
                     }
                 }
@@ -287,7 +293,7 @@ public class UpdateManager {
         }
     }
     
-    private func downloadFile(_ file: File, retry: Int) -> Bool {
+    private func downloadFile(_ file: File, retryConut: Int) -> Bool {
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let fileURL = UpdateManager.cacheUrl.appendingPathComponent(file.path)
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
@@ -295,16 +301,16 @@ public class UpdateManager {
         let response = Network.download(UpdateManager.serverUrl.appendingPathComponent(file.path), to: destination).response()
         if let error = response.error {
             Log.error(error)
-            return downloadFileRetry(file, retry: retry)
+            return downloadFileRetry(file, retryConut: retryConut)
         } else {
             downloadFileSuccess(file)
             return true
         }
     }
     
-    private func downloadFileRetry(_ file: File, retry: Int) -> Bool {
-        if retry > 0 {
-            return downloadFile(file, retry: retry - 1)
+    private func downloadFileRetry(_ file: File, retryConut: Int) -> Bool {
+        if retryConut > 0 {
+            return downloadFile(file, retryConut: retryConut - 1)
         } else {
             downloadFileError()
             return false

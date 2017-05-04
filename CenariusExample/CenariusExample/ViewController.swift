@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         
         let url = URL(string: "http://172.20.70.80/www")!
         UpdateManager.setServerUrl(url)
+        UpdateManager.setDevelopMode(false)
         UpdateManager.update { (state, progress) in
             Log.debug(state)
             Log.debug(progress)
