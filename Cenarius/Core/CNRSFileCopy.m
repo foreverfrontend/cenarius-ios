@@ -9,190 +9,102 @@
 #import "CNRSFileCopy.h"
 #import "CNRSRouteFileCache.h"
 #import "Cenarius.h"
+#import "CenariusConfigEntity.h"
 
 #import <SSZipArchive/SSZipArchive.h>
 
+
 @implementation CNRSFileCopy
-#define LAST_VERSION @"__LAST_VERSION"
 
 + (void)resourceUnzipToLibraeyWithProgress:(void(^)(long entryNumber, long total))progresshandler completionHandler:(void(^)(NSString * path, BOOL succeeded, NSError * error))completionHandler{
-    NSFileManager *fm                  = [NSFileManager defaultManager];
-//    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
-    NSDictionary *infoDictionary       = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion           = [infoDictionary objectForKey:@"CFBundleVersion"];
+    NSFileManager *fm      = [NSFileManager defaultManager];
+    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:@"www/www.zip" ofType:nil];
+    NSString *dstPath      = [[CNRSRouteFileCache sharedInstance] cachePath];
     
-    NSString *resourcePath = [[NSBundle mainBundle] pathForResource:@"www" ofType:nil];
-    NSArray *contents      = [fm contentsOfDirectoryAtPath:resourcePath error:nil];
-    NSString *lastVersion  = [[NSUserDefaults standardUserDefaults] stringForKey:LAST_VERSION];
-    
-    for (NSString *fileName in contents) {
-        if ([[fileName pathExtension] isEqualToString:@"zip"]) {
-            resourcePath = [resourcePath stringByAppendingPathComponent:fileName];
-        }
-    }
-    
-    if ((lastVersion && [currentVersion isEqualToString:lastVersion])) {
-        if(completionHandler)completionHandler(nil,true,nil);
-    }else{
-        NSString *dstPath = [[CNRSRouteFileCache sharedInstance] cachePath];
+    if ([fm fileExistsAtPath:resourcePath]) {
         BOOL isDirectory = NO;
         [fm fileExistsAtPath:dstPath isDirectory:&isDirectory];
         if (isDirectory) {
             [fm removeItemAtPath:dstPath error:nil];
         }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [SSZipArchive unzipFileAtPath:resourcePath toDestination:dstPath
-                          progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total)
-             {
-                 if(progresshandler)progresshandler(entryNumber,total);
-             } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
-                 if (succeeded) {
-                     //拷贝完成，写入版本号
-                     NSDictionary *infoDictionary =[[NSBundle mainBundle] infoDictionary];
-                     NSString *currentVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
-                     [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:LAST_VERSION];
-                     [[NSUserDefaults standardUserDefaults] synchronize];
-                 }
-                 if(completionHandler)completionHandler(path,succeeded,error);
-             }];
-        });
     }
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [SSZipArchive unzipFileAtPath:resourcePath toDestination:dstPath
+                      progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total)
+         {
+             if(progresshandler)progresshandler(entryNumber,total);
+         } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nonnull error) {
+             if(completionHandler)completionHandler(path,succeeded,error);
+         }];
+    });
 }
+
+
 /**
- 将www目录下的文件拷贝至Documents www 目录
- 格式{key,value} value == 1 强制覆盖 ， value == 0 已存在不覆盖
- */
-+ (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy countBlock:(void(^)(NSInteger))countBlock{
-    CNRSFileCopy *moduleCopy           = [[CNRSFileCopy alloc] init];
-    moduleCopy.finishCopy              = finishCopy;
-    moduleCopy.finishAllCopy           = finishAllCopy;
-    
-    NSFileManager *fm                  = [NSFileManager defaultManager];
-    NSMutableDictionary *copyFileNames = [NSMutableDictionary dictionary];
-    NSDictionary *infoDictionary       = [[NSBundle mainBundle] infoDictionary];
-    NSString *currentVersion           = [infoDictionary objectForKey:@"CFBundleVersion"];
-    
-    NSArray *contents     = [fm contentsOfDirectoryAtPath:[[NSBundle mainBundle] pathForResource:@"www" ofType:nil] error:nil];
-    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] stringForKey:LAST_VERSION];
-    
-    if ((lastVersion && [currentVersion isEqualToString:lastVersion])) {
-        if(countBlock) countBlock(0);
-        if(finishAllCopy)finishAllCopy();
-    }else{
-        if(countBlock) countBlock([contents count]);
-        NSNumber *number      = (lastVersion && [currentVersion isEqualToString:lastVersion]) ? @(0) : @(1);
-        for (NSString *fileName in contents) {
-            copyFileNames[fileName] = number;
-        }
-        [moduleCopy moveFileToDocumentPath:copyFileNames];
-    }
-}
-/**
- 将www目录下的文件拷贝至Documents www 目录
+ 是否需要下载更新
  
- @param fileNames     格式{key,value} value == 1 强制覆盖 ， value == 0 已存在不覆盖
+ @return true 下载，false 跳过
  */
-- (void)moveFileToDocumentPath:(NSDictionary *)fileNames{
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_group_t group = dispatch_group_create();
-    
-    NSArray *copyIendx = [fileNames allKeys];
-    
-    dispatch_group_async(group, queue, ^{
-        for (int d=0;d<copyIendx.count;d++) {
-            NSString *identify = copyIendx[d];
-            [self copyIdentifyFile:identify  index:d isCover:[fileNames[identify] intValue] == 1];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.finishCopy) {
-                    self.finishCopy(d);
-                }
-            });
-        }
-    });
-    
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        
-        //拷贝完成，写入版本号
-        NSDictionary *infoDictionary =[[NSBundle mainBundle] infoDictionary];
-        NSString *currentVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
-        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:LAST_VERSION];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        if (self.finishAllCopy) {
-           self.finishAllCopy();
-        }
-    });
++ (BOOL)isCompareReleaseVersion:(NSData *)serverData{
+    NSString *cenarius_config = @"cenarius-config.json";
+    NSString *cachePath       = [[CNRSRouteFileCache sharedInstance] cachePath];
+    NSData *cacheData         = [NSData dataWithContentsOfFile:[cachePath stringByAppendingPathComponent:cenarius_config]];
+    if(cacheData == nil) return true;
+    return [self releaseVersion:serverData compare:cacheData];
 }
-
 
 
 /**
-
- @param Identify www目录的包名
- @param index    index description
- @param isCover  是否强制覆盖
+ 当左边操作对象 > 右边操作对象 返回true
  */
--(void)copyIdentifyFile:(NSString *)Identify  index:(NSInteger)index isCover:(BOOL)isCover{
++ (BOOL)releaseVersion:(NSData *)leftData compare:(NSData *)rightData{
+    CenariusConfigEntity *serverEntity = [[CenariusConfigEntity alloc] initWithData:leftData];
+    CenariusConfigEntity *cacheEntity  = [[CenariusConfigEntity alloc] initWithData:rightData];
     
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
-    NSString *srcPath = [[NSBundle mainBundle] pathForResource:[@"www" stringByAppendingPathComponent:Identify] ofType:nil];
-    NSString *dstPath = [[CNRSRouteFileCache sharedInstance] cachePath];
-    
-    //目标源文件没有
-    if (srcPath == nil) {
-        return;
+    if ([serverEntity.releaseVersion compare:cacheEntity.releaseVersion] == NSOrderedDescending) {
+        return true;
     }
-    
-    NSArray *contents = nil;
-    BOOL isDirectory = NO;
-    [fm fileExistsAtPath:srcPath isDirectory:&isDirectory];
-    if (isDirectory) {
-        contents = [fm contentsOfDirectoryAtPath:srcPath error:&error];
+    return false;
+}
+/**
+ H5是否支持最小版本
+
+ @param serverData server cenarius-config.json
+ @return true 不支持最小版本 ， false 可更新
+ */
++ (BOOL)isCompareIosMinVersion:(NSData *)serverData{
+    CenariusConfigEntity *serverEntity = [[CenariusConfigEntity alloc] initWithData:serverData];
+    NSString *AppVersion               = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    int compareResult                  = [AppVersion compareVersion:serverEntity.iosMinVersion];
+    // App小于最低版本支持  左边的对象 < 右边的对象  == NSOrderedAscending
+    if (compareResult < 0) {
+        return true;
     }else{
-        Identify = @"";
-        contents = @[[srcPath lastPathComponent]];
-        srcPath = [srcPath stringByDeletingLastPathComponent];
-    }
-    
-    void (^copyItem)(NSString *path,NSString *toPath,BOOL isCover,NSError *error) =
-    ^(NSString *path,NSString *toPath,BOOL isCover,NSError *error){
-       BOOL isExist =  [fm fileExistsAtPath:toPath];
-        if (!(isExist && !isCover)) {
-            BOOL result = [fm copyItemAtPath:path toPath:toPath error:&error];
-            if (!result) {
-                CNRSDebugLog(@"复制文件失败,%@,[%@]", error, path);
-            }
-        }
-    };
-    
-    for (NSString *subfile in contents) {
-        NSString *fullSrc = [srcPath stringByAppendingPathComponent:subfile];
-        NSString *fullDst = [dstPath stringByAppendingPathComponent:[Identify stringByAppendingPathComponent:subfile]];//目标目录
-        
-        BOOL srcItem_isDirectory = NO;
-        [fm fileExistsAtPath:fullDst isDirectory:&srcItem_isDirectory];
-        if (srcItem_isDirectory) {
-            //srcItem_exists == YES 文件存在，且属于目录
-            //srcItem_exists == NO 文件不存在，且属于目录
-            if(isCover)[fm removeItemAtPath:fullDst error:nil];
-            copyItem(fullSrc,fullDst,isCover,error);
-        }else {
-            //属于文件，查看上一级是否创建
-            NSString *superFilePath = fullDst.stringByDeletingLastPathComponent;
-            if ([fm fileExistsAtPath:superFilePath]) {
-                copyItem(fullSrc,fullDst,isCover,error);
-            }else{
-                if ([fm createDirectoryAtPath:superFilePath withIntermediateDirectories:YES attributes:nil error:&error]) {
-                    copyItem(fullSrc,fullDst,isCover,error);
-                }
-            }
-            if (error != nil) {
-                break;
-            }
-        }
+        return false;
     }
 }
 
+/**
+ 是否需要解压拷贝
+ @return true  需要解压拷贝， false 不拷贝
+ */
++ (BOOL)isUnzipFileAtPath{
+    NSString *cenarius_config = @"cenarius-config.json";
+    NSString *resourcePath    = [[NSBundle mainBundle] pathForResource:@"www" ofType:nil];
+    NSString *cachePath       = [[CNRSRouteFileCache sharedInstance] cachePath];
+    
+    NSData *resourceData = [NSData dataWithContentsOfFile:[resourcePath stringByAppendingPathComponent:cenarius_config]];
+    NSData *cacheData    = [NSData dataWithContentsOfFile:[cachePath stringByAppendingPathComponent:cenarius_config]];
+    
+    //缓存没有，必需Copy
+    if (cacheData == nil) {
+        return true;
+    }else if(resourceData == nil){
+        return false;
+    }else{
+        return [self releaseVersion:resourceData compare:cacheData];
+    }
+    return false;
+}
 @end

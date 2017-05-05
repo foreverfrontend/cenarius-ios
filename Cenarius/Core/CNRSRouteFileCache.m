@@ -151,6 +151,7 @@
 
 - (void)saveRouteFileData:(NSData *)data withRoute:(CNRSRoute *)route
 {
+    NSParameterAssert(route);
     NSString *filePath = [self cacheFilePathForUri:route.uri];
     if (data == nil)
     {
@@ -158,10 +159,16 @@
     }
     else
     {
+        NSError *error = nil;
+        
         NSFileManager *fileManager = [NSFileManager defaultManager];
         // 删除旧文件
         if ([fileManager fileExistsAtPath:filePath]) {
-            [fileManager removeItemAtURL:[NSURL URLWithString:filePath] error:nil];
+            if ([filePath hasPrefix:@"file:"]) {
+                [fileManager removeItemAtURL:[NSURL URLWithString:filePath] error:&error];
+            }else{
+                [fileManager removeItemAtPath:filePath error:&error];
+            }
         }
         
         // 创建目录
@@ -169,8 +176,14 @@
                withIntermediateDirectories:YES
                                 attributes:nil
                                      error:nil];
+    
         // 写数据
-        [data writeToFile:filePath atomically:YES];
+        if ([filePath hasPrefix:@"file:"]) {
+            [data writeToURL:[NSURL URLWithString:filePath] atomically:true];
+        }else{
+            [data writeToFile:filePath atomically:YES];
+        }
+//        CNRSLog(@"saveRouteFileData-writeToFile:%@",error);
     }
 }
 
@@ -211,12 +224,16 @@
     for (CNRSRoute *item in routeItems)
     {
         @autoreleasepool {
-            if(item)[items addObject:@{@"hash":item.fileHash,@"file":item.uri.absoluteString}];
+            if(item && item.fileHash && item.uri.absoluteString)
+                [items addObject:@{@"hash":item.fileHash,@"file":item.uri.absoluteString}];
         }
     }
 
     NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:items options:NSJSONWritingPrettyPrinted error:&error];
+    NSData *data = nil;
+    if([items count]){
+        data = [NSJSONSerialization dataWithJSONObject:items options:NSJSONWritingPrettyPrinted error:&error];
+    }
     return data;
 }
 
