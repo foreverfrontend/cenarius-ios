@@ -14,14 +14,14 @@ public class WXViewController: UIViewController {
     public var url: URL?
     private var instance: WXSDKInstance!
     private var weexView: UIView?
-    private var weexHeight: CGFloat!
+//    private var weexHeight: CGFloat!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        weexHeight = view.frame.size.height - 20
-        navigationController?.navigationBar.isHidden = true
+//        weexHeight = view.frame.size.height - 64
+//        navigationController?.navigationBar.isHidden = true
         
         render()
     }
@@ -33,7 +33,13 @@ public class WXViewController: UIViewController {
     private func render() {
         instance = WXSDKInstance.init()
         instance.viewController = self
-        instance.frame = CGRect(x: 0, y: 20, width: view.frame.size.width, height: weexHeight)
+        var navBarHeight: CGFloat = 0
+        if let nav = navigationController {
+            if nav.navigationBar.isHidden == false && nav.isNavigationBarHidden == false {
+                navBarHeight = nav.navigationBar.frame.origin.y + nav.navigationBar.frame.size.height
+            }
+        }
+        instance.frame = CGRect(x: 0, y: navBarHeight, width: view.frame.size.width, height: view.frame.size.height - navBarHeight)
       
         instance.onCreate = { [weak self] (view) in
             self?.weexView?.removeFromSuperview()
