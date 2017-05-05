@@ -7,31 +7,40 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#define LAST_VERSION @"__LAST_VERSION"
+
 typedef void(^finishCoy)(int d);
 typedef void (^finishAllCopy)();
 
 @interface CNRSFileCopy : NSObject
 @property (nonatomic,copy) finishCoy finishCopy;
 @property (nonatomic,copy) finishAllCopy finishAllCopy;
-
-/**
- 将www目录下的文件拷贝至Documents www 目录
- 
- @param fileNames     格式{key,value} value == 1 强制覆盖 ， value == 0 已存在不覆盖
- */
-- (void)moveFileToDocumentPath:(NSDictionary *)fileNames;
-
-/**
- 拷贝文件Resrouse/www到Library/www目录下
-
- @param finishCopy    拷贝完成一个就回调一次
- @param finishAllCopy 拷贝所有流程都完成才回调
- @param countBlock www目录下的文件数
- */
-+ (void)resourceMoveToLibraryFinish:(void(^)(int d))finishCopy finishAll:(void(^)())finishAllCopy countBlock:(void(^)(NSInteger))countBlock;
-
 /**
  解压Resrouse/www目录下的zip到Library目录
  */
 + (void)resourceUnzipToLibraeyWithProgress:(void(^)(long entryNumber, long total))progresshandler completionHandler:(void(^)(NSString *  path, BOOL succeeded, NSError * error))completionHandler;
+
+/**
+ 是否需要下载更新
+ 
+ @return true 下载，false 跳过
+ */
++ (BOOL)isCompareReleaseVersion:(NSData *)serverData;
+/**
+ H5是否支持最小版本
+ 
+ @param serverData server cenarius-config.json
+ @return true 不支持最小版本 ， false 可更新
+ */
++ (BOOL)isCompareIosMinVersion:(NSData *)serverData;
+/**
+ 是否需要解压拷贝
+ @return true  需要解压拷贝， false 不拷贝
+ */
++ (BOOL)isUnzipFileAtPath;
+/**
+ 当左边操作对象 > 右边操作对象 返回true
+ */
++ (BOOL)releaseVersion:(NSData *)leftData compare:(NSData *)rightData;
 @end
