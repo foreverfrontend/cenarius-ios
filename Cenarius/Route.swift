@@ -20,7 +20,7 @@ public class Route {
     
     public static func open(_ url: URL, from: UIViewController? = nil) {
         if let toControllerType = sharedInstance.routes[url.path] {
-            let queryParameters = url.parameters()
+            let queryParameters = url.parametersFromUrl()
             let params = url.getParams()
             let toController = toControllerType.instantiate(params: params)
             let fromViewController = from ?? UIApplication.topViewController()

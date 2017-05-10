@@ -12,7 +12,7 @@ public class Interceptor {
     
     private var interceptors = [InterceptorProtocol.Type]()
     
-    public static let sharedInstance = Interceptor()
+    private static let sharedInstance = Interceptor()
     
     public static func register(_ interceptor: InterceptorProtocol.Type) {
         sharedInstance.interceptors.append(interceptor)

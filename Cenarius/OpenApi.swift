@@ -78,14 +78,13 @@ public class OpenApi {
             return url
         }
 
-        let querySting = queryFromUrl(url)
+        let querySting = url.queryFromUrl()
         var queryCombined = querySting
         var bodySting: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
                 bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.encodeURIComponent()
             } else {
-//                bodySting = queryFromParameters(parameters!)
                 bodySting = query(parameters!)
             }
             if queryCombined != nil {
@@ -97,7 +96,7 @@ public class OpenApi {
         
         var parametersSigned = [String: String]()
         if queryCombined != nil {
-            parametersSigned = queryCombined!.parameters()
+            parametersSigned = queryCombined!.parametersFromQuery()
         }
         let token = sharedInstance.accessToken ?? getAnonymousToken()
         let appKey = sharedInstance.appKey
@@ -125,17 +124,6 @@ public class OpenApi {
             urlSigned += "&sign=" + sign.encodeURIComponent()
         }
         return urlSigned
-    }
-    
-    private static func queryFromUrl(_ url: String) -> String? {
-        let range = url.range(of: "?")
-        if range != nil {
-            let query = url.substring(from: range!.upperBound)
-            if query.isEmpty == false {
-                return query
-            }
-        }
-        return nil
     }
     
     private static func queryFromParameters(_ parameters: [String: String]) -> String {
