@@ -11,7 +11,7 @@ import Foundation
 public class RouteInterceptor: InterceptorProtocol {
     
     public static func perform(url: URL, controller: UIViewController) -> Bool {
-        if url.scheme == "cenarius", url.host == "route" {
+        if url.scheme == Interceptor.scheme, url.host == "route" {
             Route.open(url, from: controller)
             return true
         }

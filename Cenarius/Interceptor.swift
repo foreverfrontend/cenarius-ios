@@ -10,6 +10,7 @@ import Foundation
 
 public class Interceptor {
     
+    public static let scheme = "cenarius"
     private var interceptors = [InterceptorProtocol.Type]()
     
     private static let sharedInstance = Interceptor()

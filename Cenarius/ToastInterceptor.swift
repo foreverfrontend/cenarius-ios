@@ -12,7 +12,7 @@ import Toaster
 public class ToastInterceptor: InterceptorProtocol {
     
     public static func perform(url: URL, controller: UIViewController) -> Bool {
-        if url.scheme == "cenarius", url.host == "toast" {
+        if url.scheme == Interceptor.scheme, url.host == "toast" {
             Toast(text: url.getParams()?["text"].stringValue).show()
             return true
         }

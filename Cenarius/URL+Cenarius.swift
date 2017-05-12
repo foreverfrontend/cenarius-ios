@@ -11,15 +11,15 @@ import SwiftyJSON
 
 extension URL {
     
-    func parametersFromUrl() -> [String: String] {
+    func getParameters() -> [String: String] {
         if let query = self.query {
-            return query.parametersFromQuery()
+            return query.queryToParameters()
         }
         return [String: String]()
     }
     
     func getParams() -> JSON? {
-        let queryParameters = parametersFromUrl()
+        let queryParameters = getParameters()
         var params: JSON?
         if let paramsString = queryParameters["params"] {
             params = JSON(data: paramsString.data(using: .utf8)!)

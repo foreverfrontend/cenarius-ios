@@ -21,7 +21,7 @@ public class WebViewController: UIViewController, UIWebViewDelegate, RouteProtoc
         view.backgroundColor = .white
         view.addSubview(webView)
         webView.snp.makeConstraints { (make) in
-            make.edges.equalTo(view)
+            make.edges.equalToSuperview()
         }
         webView.delegate = self
         if url != nil {

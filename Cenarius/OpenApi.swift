@@ -14,16 +14,18 @@ import Alamofire
 /// class for Signature
 public class OpenApi {
     
-//    private typealias Parameters = [String: String]
-//    private typealias HTTPHeaders = [String: String]
+    public static let xRequestKey = "X-Requested-With"
+    public static let xRequestValue = "OpenAPIRequest"
+    public static let contentTypeKey = "Content-Type"
+    public static let contentTypeValue = "application/json"
+    
+    private static let accessTokenKey = "CenariusAccessToken"
     private typealias ParametersCombined = [String: [String]]
     
     private static let sharedInstance = OpenApi()
     private var accessToken: String? = UserDefaults.standard.string(forKey: accessTokenKey)
-    private var appKey: String?
-    private var appSecret: String?
-    
-    private static let accessTokenKey = "CenariusAccessToken"
+    private var appKey: String!
+    private var appSecret: String!
     
     /// Set the accessToken for request
     ///
@@ -41,14 +43,14 @@ public class OpenApi {
     /// Set the appKey for request
     ///
     /// - Parameter key: appKey
-    public static func setAppKey(_ key: String?) {
+    public static func setAppKey(_ key: String) {
         sharedInstance.appKey = key
     }
     
     /// Set the appSecret for request
     ///
     /// - Parameter secret: appSecret
-    public static func setAppSecret(_ secret: String?) {
+    public static func setAppSecret(_ secret: String) {
         sharedInstance.appSecret = secret
     }
     
@@ -65,10 +67,10 @@ public class OpenApi {
         var isJson = false
         if headers != nil {
             for header in headers! {
-                if header.key == "X-Requested-With" && header.value == "OpenAPIRequest" {
+                if header.key == xRequestKey && header.value == xRequestValue {
                     isOpenApi = true
                 }
-                if header.key == "Content-Type" && header.value.contains("application/json") {
+                if header.key == contentTypeKey && header.value.contains(contentTypeValue) {
                     isJson = true
                 }
             }
@@ -78,14 +80,14 @@ public class OpenApi {
             return url
         }
 
-        let querySting = url.queryFromUrl()
+        let querySting = url.getQuery()
         var queryCombined = querySting
         var bodySting: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
                 bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.encodeURIComponent()
             } else {
-                bodySting = query(parameters!)
+                bodySting = parametersToQuery(parameters!)
             }
             if queryCombined != nil {
                 queryCombined! += "&" + bodySting!
@@ -96,11 +98,11 @@ public class OpenApi {
         
         var parametersSigned = [String: String]()
         if queryCombined != nil {
-            parametersSigned = queryCombined!.parametersFromQuery()
+            parametersSigned = queryCombined!.queryToParameters()
         }
         let token = sharedInstance.accessToken ?? getAnonymousToken()
-        let appKey = sharedInstance.appKey
-        let appSecret = sharedInstance.appSecret
+        let appKey = sharedInstance.appKey!
+        let appSecret = sharedInstance.appSecret!
         let timestamp = String(format: "%.0f", Date().timeIntervalSince1970 * 1000)
         
         var urlSigned = url
@@ -111,31 +113,26 @@ public class OpenApi {
         }
         urlSigned += "access_token=" + token.encodeURIComponent()
         urlSigned += "&timestamp=" + timestamp
-        if appKey != nil {
-            urlSigned += "&app_key=" + appKey!.encodeURIComponent()
-            
-        }
+        urlSigned += "&app_key=" + appKey.encodeURIComponent()
         
         parametersSigned["access_token"] = token
         parametersSigned["timestamp"] = timestamp
         parametersSigned["app_key"] = appKey
-        if appSecret != nil {
-            let sign = md5Signature(parameters: parametersSigned, secret: appSecret!)
-            urlSigned += "&sign=" + sign.encodeURIComponent()
-        }
+        let sign = md5Signature(parameters: parametersSigned, secret: appSecret)
+        urlSigned += "&sign=" + sign.encodeURIComponent()
         return urlSigned
     }
     
-    private static func queryFromParameters(_ parameters: [String: String]) -> String {
-        var pairs = [String]()
-        for parameter in parameters {
-            pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
-        }
-        let query = pairs.joined(separator: "&")
-        return query
-    }
+//    public static func parametersToQuery(_ parameters: [String: String]) -> String {
+//        var pairs = [String]()
+//        for parameter in parameters {
+//            pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
+//        }
+//        let query = pairs.joined(separator: "&")
+//        return query
+//    }
     
-    private static func query(_ parameters: [String: Any]) -> String {
+    public static func parametersToQuery(_ parameters: Parameters) -> String {
         var components: [(String, String)] = []
         
         for key in parameters.keys.sorted(by: <) {

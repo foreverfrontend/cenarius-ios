@@ -19,7 +19,7 @@ public extension String {
         return self.removingPercentEncoding!
     }
     
-    func parametersFromQuery() -> [String: String] {
+    func queryToParameters() -> [String: String] {
         var parametersCombined = [String: [String]]()
         let pairs = self.components(separatedBy: "&")
         for pair in pairs {
@@ -48,15 +48,15 @@ public extension String {
         return results
     }
     
-    func parametersFromUrl() -> [String: String] {
-        let query = self.queryFromUrl()
+    func getParameters() -> [String: String] {
+        let query = self.getQuery()
         if query != nil {
-            return query!.parametersFromQuery()
+            return query!.queryToParameters()
         }
         return [String: String]()
     }
     
-    func queryFromUrl() -> String? {
+    func getQuery() -> String? {
         let range = self.range(of: "?")
         if range != nil {
             let query = self.substring(from: range!.upperBound)
