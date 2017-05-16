@@ -40,18 +40,18 @@ public class OpenApi {
         return sharedInstance.accessToken
     }
     
-    /// Set the appKey for request
-    ///
-    /// - Parameter key: appKey
-    public static func setAppKey(_ key: String) {
-        sharedInstance.appKey = key
+    public static func getAppKey() -> String {
+        return sharedInstance.appKey
+    }
+
+    public static func getAppSecret() -> String {
+        return sharedInstance.appSecret
     }
     
-    /// Set the appSecret for request
-    ///
-    /// - Parameter secret: appSecret
-    public static func setAppSecret(_ secret: String) {
-        sharedInstance.appSecret = secret
+    /// Set the appKey appSecret for request
+    public static func set(appKey: String, appSecret: String) {
+        sharedInstance.appKey = appKey
+        sharedInstance.appSecret = appSecret
     }
     
     /// Sign for url
@@ -149,14 +149,14 @@ public class OpenApi {
         return token
     }
     
-    private static func md5Signature(parameters: [String: String], secret: String) -> String {
+    public static func md5Signature(parameters: [String: String], secret: String) -> String {
         var result = secret
         let keys = parameters.keys.sorted()
         for key in keys {
             result += key + parameters[key]!
         }
         result += secret
-        result = result.md5()
+        result = result.md5().uppercased()
         return result
     }
     
