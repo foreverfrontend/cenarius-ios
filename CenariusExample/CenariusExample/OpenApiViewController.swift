@@ -19,9 +19,7 @@ class OpenApiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        OpenApi.setAppKey("APPKEY")
-        OpenApi.setAppSecret("APPSECRET")
-
+        OpenApi.set(appKey: "APPKEY", appSecret: "APPSECRET")
     }
 
     @IBAction func sign(_ sender: UIButton) {

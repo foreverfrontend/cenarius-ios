@@ -23,9 +23,6 @@ class ViewController: UIViewController {
         let activityData = ActivityData(size: CGSize(width: 120, height: 120), message: nil, messageFont: nil, type: .ballClipRotateMultiple, color: nil, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: nil, textColor: nil)
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
         
-        let url = URL(string: "http://172.20.70.80/www")!
-        UpdateManager.setServerUrl(url)
-        UpdateManager.setDevelopMode(false)
         UpdateManager.update { (state, progress) in
             Log.debug(state)
             Log.debug(progress)

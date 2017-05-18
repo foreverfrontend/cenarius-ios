@@ -40,6 +40,10 @@ public class UpdateManager {
         UpdateManager.serverUrl = url
     }
     
+    public static func getServerUrl() -> URL {
+        return UpdateManager.serverUrl
+    }
+    
     public static func setDevelopMode(_ mode: Bool) {
         sharedInstance.developMode = mode
     }

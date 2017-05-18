@@ -41,13 +41,22 @@ public class NetworkManager: SessionManager {
         -> DataRequest
     {
         var urlString = url
+        var headersFinal = headers
         do {
             urlString = try url.asURL().absoluteString
-            urlString = OpenApi.sign(url: urlString as! String, parameters: parameters, headers: headers)
+            if encoding is JSONEncoding {
+                if headersFinal == nil {
+                    headersFinal = HTTPHeaders()
+                }
+                if headersFinal![OpenApi.contentTypeKey] == nil {
+                    headersFinal![OpenApi.contentTypeKey] = OpenApi.contentTypeValue
+                }
+            }
+            urlString = OpenApi.sign(url: urlString as! String, parameters: parameters, headers: headersFinal)
         } catch {
             
         }
-        return super.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headers)
+        return super.request(urlString, method: method, parameters: parameters, encoding: encoding, headers: headersFinal)
     }
     
     /// Creates a `DataRequest` to retrieve the contents of a URL based on the specified `urlRequest`.

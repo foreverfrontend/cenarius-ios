@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        initCenarius()
         initLog()
         registerRoute()
         registerInterceptor()
@@ -26,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         listenNetwork()
         
         return true
+    }
+    
+    func initCenarius() {
+        let url = URL(string: "https://emcs-dev.infinitus.com.cn/h5/www3.0")!
+        UpdateManager.setServerUrl(url)
+        UpdateManager.setDevelopMode(false)
     }
     
     func initLog() {
