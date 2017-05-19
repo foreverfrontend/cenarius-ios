@@ -8,7 +8,8 @@
 
 import UIKit
 import Cenarius
-import NVActivityIndicatorView
+import MBProgressHUD
+import Toaster
 
 class ViewController: UIViewController {
 
@@ -19,22 +20,26 @@ class ViewController: UIViewController {
     }
 
     @IBAction func update(_ sender: UIButton) {
-        
-        let activityData = ActivityData(size: CGSize(width: 120, height: 120), message: nil, messageFont: nil, type: .ballClipRotateMultiple, color: nil, padding: nil, displayTimeThreshold: nil, minimumDisplayTime: nil, backgroundColor: nil, textColor: nil)
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.mode = .determinateHorizontalBar
+        hud.label.text = "update"
         
         UpdateManager.update { (state, progress) in
             Log.debug(state)
             Log.debug(progress)
             switch state {
             case .UNZIP_WWW:
-                NVActivityIndicatorPresenter.sharedInstance.setMessage("unzip \(progress)%")
+                hud.label.text = "unzip"
+                hud.progress = Float(progress) / 100
             case .DOWNLOAD_FILES:
-                NVActivityIndicatorPresenter.sharedInstance.setMessage("download \(progress)%")
+                hud.label.text = "download"
+                hud.progress = Float(progress) / 100
             case .UPDATE_SUCCESS:
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                hud.hide(animated: true)
+                Toast(text: "success").show()
             case .DOWNLOAD_CONFIG_FILE_ERROR, .DOWNLOAD_FILES_ERROR, .DOWNLOAD_FILES_FILE_ERROR, .UNZIP_WWW_ERROR:
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+                hud.hide(animated: true)
+                Toast(text: "error").show()
             default:
                 break
             }
@@ -44,8 +49,6 @@ class ViewController: UIViewController {
     @IBAction func weex(_ sender: UIButton) {
         let wxvc = WXViewController()
         wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/index.js")
-//        let wxrcvc = WXRootViewController(rootViewController: wxvc)
-//        UIApplication.shared.keyWindow?.rootViewController = wxrcvc
         self.navigationController?.pushViewController(wxvc, animated: true)
     }
 
