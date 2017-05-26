@@ -47,8 +47,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func weex(_ sender: UIButton) {
-        let wxvc = WXViewController()
-        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/index.js")
+        let wxvc = WeexViewController()
+        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/information.js")
         self.navigationController?.pushViewController(wxvc, animated: true)
     }
 

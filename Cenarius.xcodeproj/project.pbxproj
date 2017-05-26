@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C4C683B1E9CDB3500C52FB5 /* String+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */; };
-		0C4C683E1E9DC69200C52FB5 /* WXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */; };
+		0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */; };
 		0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */; };
 		0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */; };
 		0C5B26E91EA4A96800CA692D /* WXEventModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5B26E71EA4A96800CA692D /* WXEventModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cenarius.swift"; sourceTree = "<group>"; };
-		0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXViewController.swift; sourceTree = "<group>"; };
+		0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeexViewController.swift; sourceTree = "<group>"; };
 		0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImgLoaderDefaultImpl.swift; sourceTree = "<group>"; };
 		0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXSelectComponent.swift; sourceTree = "<group>"; };
 		0C5B26E71EA4A96800CA692D /* WXEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEventModule.h; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		0C4C683C1E9DC67A00C52FB5 /* Weex */ = {
 			isa = PBXGroup;
 			children = (
-				0C4C683D1E9DC69200C52FB5 /* WXViewController.swift */,
+				0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */,
 				0C4C68421E9DF71400C52FB5 /* Component */,
 				0C4C683F1E9DCA1600C52FB5 /* Handle */,
 				0C5B26D81EA4A25700CA692D /* Module */,
@@ -370,7 +370,7 @@
 				0C5B26FB1EA5E51400CA692D /* RouteProtocol.swift in Sources */,
 				0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */,
 				0CC7FC471EA9D6590051F05A /* WebViewController.swift in Sources */,
-				0C4C683E1E9DC69200C52FB5 /* WXViewController.swift in Sources */,
+				0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */,
 				0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */,
 				0C5B26FD1EA5E52900CA692D /* InterceptorProtocol.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,

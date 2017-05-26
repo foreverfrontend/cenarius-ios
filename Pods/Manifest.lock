@@ -5,7 +5,7 @@ PODS:
   - AsyncSwift (2.0.1)
   - CryptoSwift (0.6.9)
   - HandyJSON (1.7.1)
-  - Kingfisher (3.6.2)
+  - Kingfisher (3.9.1)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -19,7 +19,7 @@ PODS:
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
   - Toaster (2.0.3)
-  - WeexSDK (0.11.0):
+  - WeexSDK (0.12.0):
     - SocketRocket
   - XCGLogger (5.0.1):
     - XCGLogger/Core (= 5.0.1)
@@ -49,7 +49,7 @@ SPEC CHECKSUMS:
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   HandyJSON: 54b6ce942795f7b2e61b82fe73cf25d9f139d125
-  Kingfisher: 2c94e72c6830622c71d06adf4ea024c37d316830
+  Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
   RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
@@ -58,7 +58,7 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
   Toaster: 77c0b03d78e680bbbab0071c9c7ee392b0034010
-  WeexSDK: f9cfe6adc91fba3ca5e36bc9808bf1b6e8be2106
+  WeexSDK: 8573b6e15195d4efc7c786ddc3be6f50d9ccb01c
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 

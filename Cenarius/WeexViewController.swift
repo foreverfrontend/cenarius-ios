@@ -1,5 +1,5 @@
 //
-//  WeexController.swift
+//  WeexViewController.swift
 //  Cenarius
 //
 //  Created by M on 2017/3/13.
@@ -9,7 +9,7 @@
 import UIKit
 import WeexSDK
 
-public class WXViewController: UIViewController {
+public class WeexViewController: UIViewController {
     
     public var url: URL?
     private var instance: WXSDKInstance!

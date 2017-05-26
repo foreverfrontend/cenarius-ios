@@ -13,13 +13,11 @@ import Kingfisher
 public class WXImgLoaderDefaultImpl: NSObject, WXImgLoaderProtocol, WXModuleProtocol {
     
     public func downloadImage(withURL url: String!, imageFrame: CGRect, userInfo options: [AnyHashable : Any]! = [:], completed completedBlock: ((UIImage?, Error?, Bool) -> Void)!) -> WXImageOperationProtocol! {
-        return ImageDownloader.default.downloadImage(with: URL(string: url)!, options: nil, progressBlock: nil, completionHandler: { (image, error, url, data) in
+        return KingfisherManager.shared.retrieveImage(with: URL(string: url)!, options: nil, progressBlock: nil) { (image, error, cacheType, url) in
             if completedBlock != nil {
                 completedBlock(image, error, error == nil)
             }
-        }) as? WXImageOperationProtocol
+        } as? WXImageOperationProtocol
     }
 
-    
-    
 }
