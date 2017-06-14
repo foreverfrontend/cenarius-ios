@@ -12,3 +12,4 @@
 @interface WXEventModule : NSObject <WXModuleProtocol>
 
 @end
+

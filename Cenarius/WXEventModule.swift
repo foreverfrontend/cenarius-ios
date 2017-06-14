@@ -9,12 +9,7 @@
 import Foundation
 
 public extension WXEventModule {
-    
-    public func printSome(someThing:String, callback:WXModuleCallback) {
-        print(someThing)
-        callback(someThing)
-    }
-    
     public func openURL(_ url:String) {
+        
     }
 }

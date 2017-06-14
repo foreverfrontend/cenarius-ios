@@ -8,13 +8,22 @@
 
 import UIKit
 import WeexSDK
+import SwiftyJSON
 
-public class WeexViewController: UIViewController {
+public class WeexViewController: UIViewController, RouteProtocol {
     
     public var url: URL?
     private var instance: WXSDKInstance!
     private var weexView: UIView?
 //    private var weexHeight: CGFloat!
+    
+    public static func instantiate(params: JSON?) -> UIViewController {
+        let controller = WeexViewController()
+        if let file = params?["file"].stringValue {
+            controller.url = UpdateManager.getCacheUrl(file: file)
+        }
+        return controller
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()

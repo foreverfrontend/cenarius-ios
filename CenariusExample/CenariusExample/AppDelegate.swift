@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = URL(string: "https://emcs-dev.infinitus.com.cn/h5/www3.0")!
         UpdateManager.setServerUrl(url)
         UpdateManager.setDevelopMode(false)
+        OpenApi.set(appKey: "a", appSecret: "b")
     }
     
     func initLog() {
@@ -59,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WXSDKEngine.initSDKEnvironment()
         
         WXSDKEngine.registerModule("event", with: WXEventModule.self)
+        WXSDKEngine.registerModule("network", with: WXNetworkModule.self)
         WXSDKEngine.registerHandler(WXImgLoaderDefaultImpl(), with: WXImgLoaderProtocol.self)
         WXSDKEngine.registerComponent("select", with: WXSelectComponent.self)
         

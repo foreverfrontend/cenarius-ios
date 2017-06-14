@@ -12,6 +12,7 @@
 
 #import "Cenarius.h"
 #import "WXEventModule.h"
+#import "WXNetworkModule.h"
 
 FOUNDATION_EXPORT double CenariusVersionNumber;
 FOUNDATION_EXPORT const unsigned char CenariusVersionString[];

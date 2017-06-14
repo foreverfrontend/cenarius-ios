@@ -32,9 +32,6 @@ class OpenApiViewController: UIViewController {
         }
         let parameters = ["pa": "A&A", "c": 0] as [String : Any]
         
-        Network.request(url, parameters: parameters, headers: headers)
-        
-        
         
         let urlSign = OpenApi.sign(url: url, parameters: parameters, headers: headers)
         Log.debug(urlSign)

@@ -52,6 +52,10 @@ public class UpdateManager {
         return UpdateManager.cacheUrl
     }
     
+    public static func getCacheUrl(file: String) -> URL {
+        return UpdateManager.cacheUrl.appendingPathComponent(file)
+    }
+    
     /// 更新
     ///
     /// - Parameter completionHandler: 回调
