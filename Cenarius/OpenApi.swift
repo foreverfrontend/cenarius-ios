@@ -85,7 +85,7 @@ public class OpenApi {
         var bodySting: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
-                bodySting = "openApiBodyString=" + JSON(parameters!).rawString()!.encodeURIComponent()
+                bodySting = "openApiBodyString=" + JSON(parameters!).rawString(options: .init(rawValue: 0))!.encodeURIComponent()
             } else {
                 bodySting = parametersToQuery(parameters!)
             }
