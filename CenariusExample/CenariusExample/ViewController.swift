@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.barTintColor = .red
     }
 
     @IBAction func update(_ sender: UIButton) {

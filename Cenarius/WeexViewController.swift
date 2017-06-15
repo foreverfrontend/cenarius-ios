@@ -15,7 +15,6 @@ public class WeexViewController: UIViewController, RouteProtocol {
     public var url: URL?
     private var instance: WXSDKInstance!
     private var weexView: UIView?
-//    private var weexHeight: CGFloat!
     
     public static func instantiate(params: JSON?) -> UIViewController {
         let controller = WeexViewController()
@@ -29,8 +28,6 @@ public class WeexViewController: UIViewController, RouteProtocol {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-//        weexHeight = view.frame.size.height - 64
-//        navigationController?.navigationBar.isHidden = true
         
         render()
     }
@@ -45,10 +42,11 @@ public class WeexViewController: UIViewController, RouteProtocol {
         var navBarHeight: CGFloat = 0
         if let nav = navigationController {
             if nav.navigationBar.isHidden == false && nav.isNavigationBarHidden == false {
-                navBarHeight = nav.navigationBar.frame.origin.y + nav.navigationBar.frame.size.height
+                navBarHeight = nav.navigationBar.bounds.size.height
             }
         }
-        instance.frame = CGRect(x: 0, y: navBarHeight, width: view.frame.size.width, height: view.frame.size.height - navBarHeight)
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+        instance.frame = CGRect(x: 0, y: statusBarHeight + navBarHeight, width: view.frame.size.width, height: view.frame.size.height - statusBarHeight - navBarHeight)
       
         instance.onCreate = { [weak self] (view) in
             self?.weexView?.removeFromSuperview()
