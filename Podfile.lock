@@ -14,6 +14,9 @@ PODS:
   - Realm/Headers (2.8.1)
   - RealmSwift (2.8.1):
     - Realm (= 2.8.1)
+  - RTRootNavigationController (0.5.26):
+    - RTRootNavigationController/Core (= 0.5.26)
+  - RTRootNavigationController/Core (0.5.26)
   - SnapKit (3.2.0)
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
@@ -35,6 +38,7 @@ DEPENDENCIES:
   - HandyJSON
   - Kingfisher
   - RealmSwift
+  - RTRootNavigationController
   - SnapKit
   - SwiftyJSON
   - SwiftyVersion
@@ -53,6 +57,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Realm: 2627602ad6818451f0cb8c2a6e072f7f10a5f360
   RealmSwift: 4764ca7657f2193c256fb032c0b123926f70dbcd
+  RTRootNavigationController: 153e538439fa20faec706019b04375f6c6fabeb6
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
@@ -62,6 +67,6 @@ SPEC CHECKSUMS:
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 0715e4a27e315d84c5a4a2d3d348b072b39519ed
+PODFILE CHECKSUM: c0606c6f120c06e6f471ed8114e9136949a5e439
 
 COCOAPODS: 1.2.1

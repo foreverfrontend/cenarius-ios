@@ -60,4 +60,8 @@ pod 'Toaster'
 # 🍞 Toast for Swift
 # https://github.com/devxoul/Toaster
 
+pod 'RTRootNavigationController'
+# Transparently make every view controller has its own navigation bar
+# https://github.com/rickytan/RTRootNavigationController
+
 end

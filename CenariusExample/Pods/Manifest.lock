@@ -11,6 +11,7 @@ PODS:
     - HandyJSON
     - Kingfisher
     - RealmSwift
+    - RTRootNavigationController
     - SnapKit
     - SwiftyJSON
     - SwiftyVersion
@@ -30,6 +31,9 @@ PODS:
   - Realm/Headers (2.8.1)
   - RealmSwift (2.8.1):
     - Realm (= 2.8.1)
+  - RTRootNavigationController (0.5.26):
+    - RTRootNavigationController/Core (= 0.5.26)
+  - RTRootNavigationController/Core (0.5.26)
   - SnapKit (3.2.0)
   - SocketRocket (0.5.1)
   - SwiftyJSON (3.1.4)
@@ -55,7 +59,7 @@ SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
-  Cenarius: 3ba126cb3bf590d4dc96d288200d2ec5e0b9147d
+  Cenarius: bd5abad7920efd766898ff5dadc1c8f0f6cdcb40
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   HandyJSON: 54b6ce942795f7b2e61b82fe73cf25d9f139d125
   Kingfisher: 33a1b82140fcb14a9fc13f78dfde2a03ff8de8cb
@@ -63,6 +67,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Realm: 2627602ad6818451f0cb8c2a6e072f7f10a5f360
   RealmSwift: 4764ca7657f2193c256fb032c0b123926f70dbcd
+  RTRootNavigationController: 153e538439fa20faec706019b04375f6c6fabeb6
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220

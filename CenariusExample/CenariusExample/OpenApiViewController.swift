@@ -19,6 +19,8 @@ class OpenApiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
         OpenApi.set(appKey: "APPKEY", appSecret: "APPSECRET")
     }
 
