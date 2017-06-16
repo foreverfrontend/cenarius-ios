@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     
     @IBAction func weex(_ sender: UIButton) {
         let wxvc = WeexViewController()
-        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/network.js")
+        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/product.js")
         self.navigationController?.pushViewController(wxvc, animated: true)
     }
 

@@ -18,16 +18,22 @@ public class Route {
         sharedInstance.routes[path] = controller
     }
     
-    public static func open(_ url: URL, from: UIViewController? = nil) {
-        if let toControllerType = sharedInstance.routes[url.path] {
-            let queryParameters = url.getParameters()
-            let params = url.getParams()
+    public static func open(url: URL, from: UIViewController? = nil) {
+        let path = url.path
+        let params = url.getParams()
+        let present = url.getParameters()["present"] == "true"
+        
+        open(path: path, params: params, from: from, present: present)
+    }
+    
+    public static func open(path: String, params: JSON? = nil, from: UIViewController? = nil, present: Bool = false) {
+        if let toControllerType = sharedInstance.routes[path] {
             let toController = toControllerType.instantiate(params: params)
             let fromViewController = from ?? UIApplication.topViewController()
-            if let navigationController = fromViewController?.navigationController, queryParameters["present"] != "true" {
-                navigationController.pushViewController(toController, animated: true)
-            } else {
+            if present {
                 fromViewController?.present(toController, animated: true, completion: nil)
+            } else if let navigationController = fromViewController?.navigationController {
+                navigationController.pushViewController(toController, animated: true)
             }
         }
     }

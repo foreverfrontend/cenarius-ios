@@ -55,17 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         WXAppConfiguration.setAppGroup("Cenarius")
         WXAppConfiguration.setAppName("CenariusExample")
         WXAppConfiguration.setExternalUserAgent("ExternalUA")
-        
-        //init SDK environment
-        WXSDKEngine.initSDKEnvironment()
-        
-        WXSDKEngine.registerModule("event", with: WXEventModule.self)
-        WXSDKEngine.registerModule("network", with: WXNetworkModule.self)
-        WXSDKEngine.registerHandler(WXImgLoaderDefaultImpl(), with: WXImgLoaderProtocol.self)
-        WXSDKEngine.registerComponent("select", with: WXSelectComponent.self)
-        
+    
         //set log
         WXLog.setLogLevel(.log)
+        
+        Weex.initWeex()
     }
     
     func listenNetwork() {

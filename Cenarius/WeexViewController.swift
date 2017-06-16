@@ -28,6 +28,7 @@ open class WeexViewController: UIViewController, RouteProtocol {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        edgesForExtendedLayout = .init(rawValue: 0)
         
         render()
     }
@@ -39,20 +40,21 @@ open class WeexViewController: UIViewController, RouteProtocol {
     private func render() {
         instance = WXSDKInstance.init()
         instance.viewController = self
-        var navBarHeight: CGFloat = 0
-        if let nav = navigationController {
-            if nav.navigationBar.isHidden == false && nav.isNavigationBarHidden == false {
-                navBarHeight = nav.navigationBar.bounds.size.height
-            }
-        }
-        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
-        instance.frame = CGRect(x: 0, y: statusBarHeight + navBarHeight, width: view.frame.size.width, height: view.frame.size.height - statusBarHeight - navBarHeight)
+//        var navBarHeight: CGFloat = 0
+//        if let nav = navigationController {
+//            if nav.navigationBar.isHidden == false && nav.isNavigationBarHidden == false {
+//                navBarHeight = nav.navigationBar.bounds.size.height
+//            }
+//        }
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+//        instance.frame = CGRect(x: 0, y: statusBarHeight + navBarHeight, width: view.frame.size.width, height: view.frame.size.height - statusBarHeight - navBarHeight)
+        instance.frame = view.bounds
       
         instance.onCreate = { [weak self] (view) in
             self?.weexView?.removeFromSuperview()
             self?.weexView = view
             self?.view.addSubview((self?.weexView)!)
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self?.weexView)
+//            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self?.weexView)
         }
         
         instance.onFailed = { (error) in

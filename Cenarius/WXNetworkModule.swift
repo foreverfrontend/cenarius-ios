@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 public extension WXNetworkModule {
+    
     public func request(_ options: [String: Any], callback: WXModuleCallback?) {
         Log.debug(options)
         

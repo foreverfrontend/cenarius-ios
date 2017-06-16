@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char CenariusVersionString[];
 
 #import <Cenarius/WXEventModule.h>
 #import <Cenarius/WXNetworkModule.h>
+#import <Cenarius/WXRouteModule.h>
