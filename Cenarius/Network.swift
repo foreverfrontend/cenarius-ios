@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class Network {
+open class Network {
     
     // MARK: - Data Request
     
@@ -24,7 +24,7 @@ public class Network {
     ///
     /// - returns: The created `DataRequest`.
     @discardableResult
-    public static func request(
+    open static func request(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -42,7 +42,7 @@ public class Network {
     ///
     /// - returns: The created `DataRequest`.
     @discardableResult
-    public static func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
+    open static func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
         return NetworkManager.defaultManager.request(urlRequest)
     }
     
@@ -65,7 +65,7 @@ public class Network {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    open static func download(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -88,7 +88,7 @@ public class Network {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    open static func download(
         _ urlRequest: URLRequestConvertible,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
@@ -118,7 +118,7 @@ public class Network {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public static func download(
+    open static func download(
         resumingWith resumeData: Data,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
@@ -140,7 +140,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    open static func upload(
         _ fileURL: URL,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -158,7 +158,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open static func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return NetworkManager.defaultManager.upload(fileURL, with: urlRequest)
     }
     
@@ -174,7 +174,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    open static func upload(
         _ data: Data,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -192,7 +192,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open static func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return NetworkManager.defaultManager.upload(data, with: urlRequest)
     }
     
@@ -208,7 +208,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(
+    open static func upload(
         _ stream: InputStream,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -226,7 +226,7 @@ public class Network {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public static func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open static func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return NetworkManager.defaultManager.upload(stream, with: urlRequest)
     }
     
@@ -255,7 +255,7 @@ public class Network {
     /// - parameter method:                  The HTTP method. `.post` by default.
     /// - parameter headers:                 The HTTP headers. `nil` by default.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public static func upload(
+    open static func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         to url: URLConvertible,
@@ -294,7 +294,7 @@ public class Network {
     ///                                      `multipartFormDataEncodingMemoryThreshold` by default.
     /// - parameter urlRequest:              The URL request.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public static func upload(
+    open static func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         with urlRequest: URLRequestConvertible,

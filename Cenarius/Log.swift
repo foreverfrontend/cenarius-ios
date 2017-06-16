@@ -9,9 +9,9 @@
 import Foundation
 import XCGLogger
 
-public class Log: XCGLogger {
+open class Log: XCGLogger {
     
-    public static func setDefaultLog(_ log: XCGLogger = XCGLogger.default) {
+    open static func setDefaultLog(_ log: XCGLogger = XCGLogger.default) {
         log.setup(level: .verbose, showLogIdentifier: false, showFunctionName: true, showThreadName: false, showLevel: true, showFileNames: true, showLineNumbers: true, showDate: true, writeToFile: nil, fileLevel: nil)
         log.levelDescriptions = [.info: "ℹ️", .verbose: "🤐", .debug: "🐛", .warning: "⚠️", .error: "‼️", .severe: "❌"]
         XCGLogger.default = log

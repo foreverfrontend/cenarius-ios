@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-public class NetworkManager: SessionManager {
+open class NetworkManager: SessionManager {
     
-    public static let defaultManager: NetworkManager = {
+    open static let defaultManager: NetworkManager = {
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = NetworkManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = 5
@@ -32,7 +32,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `DataRequest`.
     @discardableResult
-    public override func request(
+    open override func request(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -67,7 +67,7 @@ public class NetworkManager: SessionManager {
     /// - parameter urlRequest: The URL request.
     ///
     /// - returns: The created `DataRequest`.
-    public override func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
+    open override func request(_ urlRequest: URLRequestConvertible) -> DataRequest {
         return super.request(urlRequest)
     }
     
@@ -92,7 +92,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public override func download(
+    open override func download(
         _ url: URLConvertible,
         method: HTTPMethod = .get,
         parameters: Parameters? = nil,
@@ -117,7 +117,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public override func download(
+    open override func download(
         _ urlRequest: URLRequestConvertible,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
@@ -149,7 +149,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `DownloadRequest`.
     @discardableResult
-    public override func download(
+    open override func download(
         resumingWith resumeData: Data,
         to destination: DownloadRequest.DownloadFileDestination? = nil)
         -> DownloadRequest
@@ -172,7 +172,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(
+    open override func upload(
         _ fileURL: URL,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -191,7 +191,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open override func upload(_ fileURL: URL, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return super.upload(fileURL, with: urlRequest)
     }
     
@@ -208,7 +208,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(
+    open override func upload(
         _ data: Data,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -227,7 +227,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open override func upload(_ data: Data, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return super.upload(data, with: urlRequest)
     }
     
@@ -244,7 +244,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(
+    open override func upload(
         _ stream: InputStream,
         to url: URLConvertible,
         method: HTTPMethod = .post,
@@ -263,7 +263,7 @@ public class NetworkManager: SessionManager {
     ///
     /// - returns: The created `UploadRequest`.
     @discardableResult
-    public override func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
+    open override func upload(_ stream: InputStream, with urlRequest: URLRequestConvertible) -> UploadRequest {
         return super.upload(stream, with: urlRequest)
     }
     
@@ -294,7 +294,7 @@ public class NetworkManager: SessionManager {
     /// - parameter method:                  The HTTP method. `.post` by default.
     /// - parameter headers:                 The HTTP headers. `nil` by default.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public override func upload(
+    open override func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         to url: URLConvertible,
@@ -328,7 +328,7 @@ public class NetworkManager: SessionManager {
     ///                                      `multipartFormDataEncodingMemoryThreshold` by default.
     /// - parameter urlRequest:              The URL request.
     /// - parameter encodingCompletion:      The closure called when the `MultipartFormData` encoding is complete.
-    public override func upload(
+    open override func upload(
         multipartFormData: @escaping (MultipartFormData) -> Void,
         usingThreshold encodingMemoryThreshold: UInt64 = SessionManager.multipartFormDataEncodingMemoryThreshold,
         with urlRequest: URLRequestConvertible,

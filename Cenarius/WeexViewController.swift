@@ -10,21 +10,21 @@ import UIKit
 import WeexSDK
 import SwiftyJSON
 
-public class WeexViewController: UIViewController, RouteProtocol {
+open class WeexViewController: UIViewController, RouteProtocol {
     
-    public var url: URL?
+    open var url: URL?
     private var instance: WXSDKInstance!
     private var weexView: UIView?
     
-    public static func instantiate(params: JSON?) -> UIViewController {
-        let controller = WeexViewController()
+    open static func instantiate(params: JSON?) -> UIViewController {
+        let controller = self.init()
         if let file = params?["file"].stringValue {
             controller.url = UpdateManager.getCacheUrl(file: file)
         }
         return controller
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white

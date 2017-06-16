@@ -10,12 +10,12 @@ import UIKit
 import SnapKit
 import SwiftyJSON
 
-public class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol {
+open class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol {
     
-    public var url: URL?
+    open var url: URL?
     private let webView = UIWebView()
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .white
@@ -29,15 +29,15 @@ public class WebViewController: UIViewController, UIWebViewDelegate, RouteProtoc
         }
     }
     
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    open func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if let url = request.url {
             return !Interceptor.perform(url: url, controller: self)
         }
         return true
     }
     
-    public static func instantiate(params: JSON?) -> UIViewController {
-        let controller = WebViewController()
+    open static func instantiate(params: JSON?) -> UIViewController {
+        let controller = self.init()
         let urlString = params?["url"].stringValue
         if urlString != nil {
             controller.url = URL(string: urlString!)
