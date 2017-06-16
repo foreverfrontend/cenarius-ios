@@ -16,6 +16,7 @@ open class NetworkManager: SessionManager {
         configuration.httpAdditionalHeaders = NetworkManager.defaultHTTPHeaders
         configuration.timeoutIntervalForRequest = 5
         configuration.timeoutIntervalForResource = 60
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
         return NetworkManager(configuration: configuration)
     }()
     
