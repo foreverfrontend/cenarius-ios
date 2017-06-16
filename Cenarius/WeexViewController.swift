@@ -40,21 +40,17 @@ open class WeexViewController: UIViewController, RouteProtocol {
     private func render() {
         instance = WXSDKInstance.init()
         instance.viewController = self
-//        var navBarHeight: CGFloat = 0
-//        if let nav = navigationController {
-//            if nav.navigationBar.isHidden == false && nav.isNavigationBarHidden == false {
-//                navBarHeight = nav.navigationBar.bounds.size.height
-//            }
-//        }
-//        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
-//        instance.frame = CGRect(x: 0, y: statusBarHeight + navBarHeight, width: view.frame.size.width, height: view.frame.size.height - statusBarHeight - navBarHeight)
-        instance.frame = view.bounds
+        
+
+        let navBarHeight:CGFloat = navigationController?.navigationBar.frame.maxY ?? 0
+        let height = view.frame.size.height - navBarHeight - UIApplication.shared.statusBarFrame.size.height
+        instance.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: height)
       
         instance.onCreate = { [weak self] (view) in
             self?.weexView?.removeFromSuperview()
             self?.weexView = view
             self?.view.addSubview((self?.weexView)!)
-//            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self?.weexView)
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self?.weexView)
         }
         
         instance.onFailed = { (error) in
