@@ -64,4 +64,8 @@ pod 'RTRootNavigationController'
 # Transparently make every view controller has its own navigation bar
 # https://github.com/rickytan/RTRootNavigationController
 
+pod 'SVProgressHUD'
+# A clean and lightweight progress HUD for your iOS and tvOS app.
+# https://github.com/SVProgressHUD/SVProgressHUD
+
 end

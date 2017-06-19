@@ -9,6 +9,5 @@ end
 
 target 'CenariusExample' do
   pod 'Cenarius', :path => '..'
-  pod 'MBProgressHUD'
 end
 

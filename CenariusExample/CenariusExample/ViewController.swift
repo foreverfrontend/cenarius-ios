@@ -8,7 +8,7 @@
 
 import UIKit
 import Cenarius
-import MBProgressHUD
+import SVProgressHUD
 import Toaster
 
 class ViewController: UIViewController {
@@ -21,26 +21,21 @@ class ViewController: UIViewController {
     }
 
     @IBAction func update(_ sender: UIButton) {
-        let hud = MBProgressHUD.showAdded(to: view, animated: true)
-        hud.mode = .determinateHorizontalBar
-        hud.label.text = "update"
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.showProgress(0, status: "update")
         
         UpdateManager.update { (state, progress) in
             Log.debug(state)
             Log.debug(progress)
             switch state {
             case .UNZIP_WWW:
-                hud.label.text = "unzip"
-                hud.progress = Float(progress) / 100
+                SVProgressHUD.showProgress(Float(progress) / 100, status: "unzip")
             case .DOWNLOAD_FILES:
-                hud.label.text = "download"
-                hud.progress = Float(progress) / 100
+                SVProgressHUD.showProgress(Float(progress) / 100, status: "download")
             case .UPDATE_SUCCESS:
-                hud.hide(animated: true)
-                Toast(text: "success").show()
+                SVProgressHUD.showSuccess(withStatus: "success")
             case .DOWNLOAD_CONFIG_FILE_ERROR, .DOWNLOAD_FILES_ERROR, .DOWNLOAD_FILES_FILE_ERROR, .UNZIP_WWW_ERROR:
-                hud.hide(animated: true)
-                Toast(text: "error").show()
+                SVProgressHUD.showError(withStatus: "error")
             default:
                 break
             }

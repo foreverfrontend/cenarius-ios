@@ -1,24 +1,25 @@
 PODS:
-  - Alamofire (4.4.0)
+  - Alamofire (4.5.0)
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
   - AsyncSwift (2.0.1)
   - CryptoSwift (0.6.9)
   - HandyJSON (1.7.1)
-  - Kingfisher (3.10.1)
+  - Kingfisher (3.10.2)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - Realm (2.8.1):
-    - Realm/Headers (= 2.8.1)
-  - Realm/Headers (2.8.1)
-  - RealmSwift (2.8.1):
-    - Realm (= 2.8.1)
+  - Realm (2.8.2):
+    - Realm/Headers (= 2.8.2)
+  - Realm/Headers (2.8.2)
+  - RealmSwift (2.8.2):
+    - Realm (= 2.8.2)
   - RTRootNavigationController (0.5.26):
     - RTRootNavigationController/Core (= 0.5.26)
   - RTRootNavigationController/Core (0.5.26)
   - SnapKit (3.2.0)
   - SocketRocket (0.5.1)
+  - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
   - Toaster (2.0.4)
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - RealmSwift
   - RTRootNavigationController
   - SnapKit
+  - SVProgressHUD
   - SwiftyJSON
   - SwiftyVersion
   - Toaster
@@ -48,18 +50,19 @@ DEPENDENCIES:
   - Zip
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   HandyJSON: 54b6ce942795f7b2e61b82fe73cf25d9f139d125
-  Kingfisher: 33a1b82140fcb14a9fc13f78dfde2a03ff8de8cb
+  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  Realm: 2627602ad6818451f0cb8c2a6e072f7f10a5f360
-  RealmSwift: 4764ca7657f2193c256fb032c0b123926f70dbcd
+  Realm: 0e262abf087c7054013e00579274f7e070486d4a
+  RealmSwift: 73565e91bc403c1149e4acf31ff9de506b2f9459
   RTRootNavigationController: 153e538439fa20faec706019b04375f6c6fabeb6
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
   Toaster: f13031c636ef065281bc11857be9a16c7659e04f
@@ -67,6 +70,6 @@ SPEC CHECKSUMS:
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: c0606c6f120c06e6f471ed8114e9136949a5e439
+PODFILE CHECKSUM: 31772dea9fd00419ed336c9c87faed6913ddeef8
 
 COCOAPODS: 1.2.1
