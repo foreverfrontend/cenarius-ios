@@ -13,11 +13,20 @@ import SwiftyJSON
 open class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol {
     
     open var url: URL?
-    private let webView = UIWebView()
+    open let webView = UIWebView()
+    
+    open static func instantiate(params: JSON?) -> UIViewController {
+        let controller = self.init()
+        let urlString = params?["url"].stringValue
+        if urlString != nil {
+            controller.url = URL(string: urlString!)
+        }
+        return controller
+    }
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         view.addSubview(webView)
         webView.snp.makeConstraints { (make) in
@@ -36,13 +45,4 @@ open class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol
         return true
     }
     
-    open static func instantiate(params: JSON?) -> UIViewController {
-        let controller = self.init()
-        let urlString = params?["url"].stringValue
-        if urlString != nil {
-            controller.url = URL(string: urlString!)
-        }
-        return controller
-    }
-
 }
