@@ -9,7 +9,7 @@
 import Foundation
 import SVProgressHUD
 
-public extension WXRouteModule {
+public extension WXProgressHUDModule {
     
     public func show() {
         SVProgressHUD.show()

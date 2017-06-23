@@ -12,8 +12,8 @@
 
 @synthesize weexInstance;
 
-WX_EXPORT_METHOD(@selector(show:))
-WX_EXPORT_METHOD(@selector(dismiss:))
+WX_EXPORT_METHOD(@selector(show))
+WX_EXPORT_METHOD(@selector(dismiss))
 
 @end
 

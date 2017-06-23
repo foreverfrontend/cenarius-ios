@@ -18,6 +18,7 @@ public class Weex {
         WXSDKEngine.registerModule("event", with: WXEventModule.self)
         WXSDKEngine.registerModule("network", with: WXNetworkModule.self)
         WXSDKEngine.registerModule("route", with: WXRouteModule.self)
+        WXSDKEngine.registerModule("progressHUD", with: WXProgressHUDModule.self)
         
         WXSDKEngine.registerHandler(WXImgLoaderDefaultImpl(), with: WXImgLoaderProtocol.self)
         
