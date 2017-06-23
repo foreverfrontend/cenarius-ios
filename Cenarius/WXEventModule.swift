@@ -9,6 +9,7 @@
 import Foundation
 
 public extension WXEventModule {
+    
     public func openURL(_ url:String) {
         
     }

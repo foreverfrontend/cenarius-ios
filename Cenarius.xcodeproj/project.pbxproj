@@ -21,12 +21,15 @@
 		0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */; };
 		0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
+		0C8A7BCF1EFCAB9D0068C6EA /* WXProgressHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */; };
+		0C8A7BD21EFCABD60068C6EA /* WXProgressHUDModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */; };
+		0C8A7BD31EFCAC120068C6EA /* WXProgressHUDModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C900C291EEF76E2009655F9 /* WXNetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C281EEF76E2009655F9 /* WXNetworkModule.m */; };
 		0C900C2B1EEF772C009655F9 /* WXNetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C2A1EEF772C009655F9 /* WXNetworkModule.swift */; };
 		0C900C331EF3AAAA009655F9 /* WXRouteModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C321EF3AAAA009655F9 /* WXRouteModule.swift */; };
-		0C900C341EF3AEE9009655F9 /* WXEventModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5B26E71EA4A96800CA692D /* WXEventModule.h */; };
-		0C900C351EF3AEED009655F9 /* WXNetworkModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C261EEF76C9009655F9 /* WXNetworkModule.h */; };
-		0C900C361EF3AEF0009655F9 /* WXRouteModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */; };
+		0C900C341EF3AEE9009655F9 /* WXEventModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5B26E71EA4A96800CA692D /* WXEventModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C900C351EF3AEED009655F9 /* WXNetworkModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C261EEF76C9009655F9 /* WXNetworkModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C900C361EF3AEF0009655F9 /* WXRouteModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C900C371EF3AF6A009655F9 /* WXRouteModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C301EF3AA70009655F9 /* WXRouteModule.m */; };
 		0C900C391EF3B113009655F9 /* Weex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C381EF3B113009655F9 /* Weex.swift */; };
 		0C9CD0561EA7472800BE40BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0551EA7472800BE40BB /* Network.swift */; };
@@ -57,6 +60,9 @@
 		0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cenarius.swift"; sourceTree = "<group>"; };
 		0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Cenarius.swift"; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
+		0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXProgressHUDModule.swift; sourceTree = "<group>"; };
+		0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXProgressHUDModule.h; sourceTree = "<group>"; };
+		0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProgressHUDModule.m; sourceTree = "<group>"; };
 		0C900C261EEF76C9009655F9 /* WXNetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXNetworkModule.h; sourceTree = "<group>"; };
 		0C900C281EEF76E2009655F9 /* WXNetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXNetworkModule.m; sourceTree = "<group>"; };
 		0C900C2A1EEF772C009655F9 /* WXNetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXNetworkModule.swift; sourceTree = "<group>"; };
@@ -142,6 +148,9 @@
 				0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */,
 				0C900C301EF3AA70009655F9 /* WXRouteModule.m */,
 				0C900C321EF3AAAA009655F9 /* WXRouteModule.swift */,
+				0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */,
+				0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */,
+				0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -278,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */,
+				0C8A7BD31EFCAC120068C6EA /* WXProgressHUDModule.h in Headers */,
 				0C900C341EF3AEE9009655F9 /* WXEventModule.h in Headers */,
 				0C900C351EF3AEED009655F9 /* WXNetworkModule.h in Headers */,
 				0C900C361EF3AEF0009655F9 /* WXRouteModule.h in Headers */,
@@ -403,6 +413,7 @@
 				0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */,
 				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
 				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
+				0C8A7BD21EFCABD60068C6EA /* WXProgressHUDModule.m in Sources */,
 				0C900C291EEF76E2009655F9 /* WXNetworkModule.m in Sources */,
 				0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */,
 				0C900C2B1EEF772C009655F9 /* WXNetworkModule.swift in Sources */,
@@ -411,6 +422,7 @@
 				0CC7FC491EAA07250051F05A /* ToastInterceptor.swift in Sources */,
 				0C9CD0561EA7472800BE40BB /* Network.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
+				0C8A7BCF1EFCAB9D0068C6EA /* WXProgressHUDModule.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,
 				0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */,

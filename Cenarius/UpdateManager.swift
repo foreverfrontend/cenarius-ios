@@ -44,9 +44,9 @@ public class UpdateManager {
         return UpdateManager.serverUrl
     }
     
-    public static func setDevelopMode(_ mode: Bool) {
-        sharedInstance.developMode = mode
-    }
+//    public static func setDevelopMode(_ mode: Bool) {
+//        sharedInstance.developMode = mode
+//    }
     
     public static func getCacheUrl() -> URL {
         return UpdateManager.cacheUrl
@@ -92,7 +92,7 @@ public class UpdateManager {
     }
     
 
-    private var developMode = false
+//    private var developMode = false
     private var completion: Completion!
     private var progress: Progress = 0
     private var isDownloadFileError = false
@@ -115,11 +115,11 @@ public class UpdateManager {
     
     private func update(completionHandler: @escaping Completion)  {
         completion = completionHandler
-        // 开发模式，直接成功
-        if developMode {
-            complete(state: .UPDATE_SUCCESS)
-            return
-        }
+//        // 开发模式，直接成功
+//        if developMode {
+//            complete(state: .UPDATE_SUCCESS)
+//            return
+//        }
         
         // 重置变量
         progress = 0;
