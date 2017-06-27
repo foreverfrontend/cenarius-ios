@@ -28,9 +28,9 @@ class OpenApiViewController: UIViewController {
         let url = urlTextView.text!
         Log.debug("url: \(url)")
         
-        var headers = ["X-Requested-With": "OpenAPIRequest"]
+        var headers = [OpenApi.xRequestKey: OpenApi.xRequestValue]
         if jsonSwitch.isOn {
-            headers["Content-Type"] = "application/json"
+            headers[OpenApi.contentTypeKey] = OpenApi.contentTypeValue
         }
         let parameters = ["pa": "A&A", "c": 0] as [String : Any]
         

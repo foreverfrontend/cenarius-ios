@@ -20,7 +20,6 @@ class UserViewController: UIViewController, RouteProtocol {
     
     static func instantiate(params: JSON?) -> UIViewController {
         let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserViewController") as! UserViewController
-        
         controller.userId = params?["id"].stringValue
         controller.userName = params?["name"].stringValue
         return controller

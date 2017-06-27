@@ -51,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Weex
     func initWeexSDK() {
+        Weex.initWeex()
         //not necessary
         WXAppConfiguration.setAppGroup("Cenarius")
         WXAppConfiguration.setAppName("CenariusExample")
@@ -59,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //set log
         WXLog.setLogLevel(.log)
         
-        Weex.initWeex()
+        
     }
     
     func listenNetwork() {
