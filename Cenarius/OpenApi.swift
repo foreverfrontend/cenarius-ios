@@ -80,19 +80,19 @@ public class OpenApi {
             return url
         }
 
-        let querySting = url.getQuery()
-        var queryCombined = querySting
-        var bodySting: String?
+        let queryString = url.getQuery()
+        var queryCombined = queryString
+        var bodyString: String?
         if parameters != nil, parameters!.count > 0 {
             if isJson {
-                bodySting = "openApiBodyString=" + JSON(parameters!).rawString(options: .init(rawValue: 0))!.encodeURIComponent()
+                bodyString = "openApiBodyString=" + JSON(parameters!).rawString(options: .init(rawValue: 0))!.encodeURIComponent()
             } else {
-                bodySting = parametersToQuery(parameters!)
+                bodyString = parameters!.toQuery()
             }
             if queryCombined != nil {
-                queryCombined! += "&" + bodySting!
+                queryCombined! += "&" + bodyString!
             } else {
-                queryCombined = bodySting!
+                queryCombined = bodyString!
             }
         }
         
@@ -108,7 +108,7 @@ public class OpenApi {
         var urlSigned = url
         if urlSigned.contains("?") == false {
             urlSigned += "?"
-        } else if querySting != nil {
+        } else if queryString != nil {
             urlSigned += "&"
         }
         urlSigned += "access_token=" + token.encodeURIComponent()
@@ -121,26 +121,6 @@ public class OpenApi {
         let sign = md5Signature(parameters: parametersSigned, secret: appSecret)
         urlSigned += "&sign=" + sign.encodeURIComponent()
         return urlSigned
-    }
-    
-//    public static func parametersToQuery(_ parameters: [String: String]) -> String {
-//        var pairs = [String]()
-//        for parameter in parameters {
-//            pairs.append(parameter.key.encodeURIComponent() + "=" + parameter.value.encodeURIComponent())
-//        }
-//        let query = pairs.joined(separator: "&")
-//        return query
-//    }
-    
-    public static func parametersToQuery(_ parameters: Parameters) -> String {
-        var components: [(String, String)] = []
-        
-        for key in parameters.keys.sorted(by: <) {
-            let value = parameters[key]!
-            components += URLEncoding.default.queryComponents(fromKey: key, value: value)
-        }
-        
-        return components.map { "\($0)=\($1)" }.joined(separator: "&")
     }
     
     private static func getAnonymousToken() -> String {

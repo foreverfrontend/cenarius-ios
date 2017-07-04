@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func update(_ sender: UIButton) {
+        SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setDefaultStyle(.dark)
         SVProgressHUD.showProgress(0, status: "update")
         
@@ -32,10 +33,10 @@ class ViewController: UIViewController {
                 SVProgressHUD.showProgress(Float(progress) / 100, status: "unzip")
             case .DOWNLOAD_FILES:
                 SVProgressHUD.showProgress(Float(progress) / 100, status: "download")
-            case .UPDATE_SUCCESS:
-                SVProgressHUD.showSuccess(withStatus: "success")
-            case .DOWNLOAD_CONFIG_FILE_ERROR, .DOWNLOAD_FILES_ERROR, .DOWNLOAD_FILES_FILE_ERROR, .UNZIP_WWW_ERROR:
-                SVProgressHUD.showError(withStatus: "error")
+//            case .UPDATE_SUCCESS:
+//                SVProgressHUD.showSuccess(withStatus: "success")
+//            case .DOWNLOAD_CONFIG_FILE_ERROR, .DOWNLOAD_FILES_ERROR, .DOWNLOAD_FILES_FILE_ERROR, .UNZIP_WWW_ERROR:
+//                SVProgressHUD.showError(withStatus: "error")
             default:
                 break
             }
