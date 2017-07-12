@@ -14,28 +14,28 @@ public extension WXNetworkModule {
     
     public func request(_ options: [String: Any], callback: WXModuleCallback?) {
         
-        let url = options["url"] as! String
+        let url = options["url"] as? String ?? ""
         
         var method: HTTPMethod = .get
-        if let m = options["method"] as! String? {
+        if let m = options["method"] as? String {
             if m == "POST" {
                 method = .post
             }
         }
         
         var parameters: Parameters?
-        if let body = options["body"] as! String? {
+        if let body = options["body"] as? String {
             parameters = JSON(body.data(using: .utf8)!).dictionaryObject
         }
         
-        let headers = options["headers"] as! HTTPHeaders?
+        let headers = options["headers"] as? HTTPHeaders
         
         let request = Network.request(url, method: method, parameters: parameters, headers: headers).validate().downloadProgress { (progress) in
             
         }
         
         var callbackResponse: [String: Any] = [:]
-        if let responseType = options["type"] as! String?, (responseType == "json" || responseType == "jsonp") {
+        if let responseType = options["type"] as? String, (responseType == "json" || responseType == "jsonp") {
             request.responseJSON { response in
                 if let statusCode = response.response?.statusCode {
                     callbackResponse["status"] = statusCode
