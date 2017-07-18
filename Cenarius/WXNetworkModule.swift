@@ -18,7 +18,7 @@ public extension WXNetworkModule {
         
         var method: HTTPMethod = .get
         if let m = options["method"] as? String {
-            if m == "POST" {
+            if m.uppercased() == "POST" {
                 method = .post
             }
         }
@@ -35,7 +35,7 @@ public extension WXNetworkModule {
         }
         
         var callbackResponse: [String: Any] = [:]
-        if let responseType = options["type"] as? String, (responseType == "json" || responseType == "jsonp") {
+        if let responseType = options["type"] as? String, responseType == "json" {
             request.responseJSON { response in
                 if let statusCode = response.response?.statusCode {
                     callbackResponse["status"] = statusCode
