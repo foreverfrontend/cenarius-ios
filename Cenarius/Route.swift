@@ -26,13 +26,12 @@ public class Route {
         open(path: path, params: params, from: from, present: present)
     }
     
-    public static func open(path: String, params: JSON? = nil, from: UIViewController? = nil, present: Bool = false) {
+    public static func open(path: String, params: JSON? = nil, from: UIViewController? = UIApplication.topViewController(), present: Bool = false) {
         if let toControllerType = sharedInstance.routes[path] {
             let toController = toControllerType.instantiate(params: params)
-            let fromViewController = from ?? UIApplication.topViewController()
             if present {
-                fromViewController?.present(toController, animated: true, completion: nil)
-            } else if let navigationController = fromViewController?.navigationController {
+                from?.present(toController, animated: true, completion: nil)
+            } else if let navigationController = from?.navigationController {
                 navigationController.pushViewController(toController, animated: true)
             }
         }

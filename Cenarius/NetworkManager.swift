@@ -51,7 +51,7 @@ open class NetworkManager: SessionManager {
                     headersFinal[OpenApi.contentTypeKey] = OpenApi.contentTypeValue
                 }
             }
-            else if headersFinal[OpenApi.contentTypeKey] == OpenApi.contentTypeValue {
+            else if let value = headersFinal[OpenApi.contentTypeKey], value.contains(OpenApi.contentTypeValue) {
                 encodingFinal = JSONEncoding.default
             }
             urlString = OpenApi.sign(url: urlString as! String, parameters: parameters, headers: headersFinal)

@@ -73,7 +73,7 @@ public class UpdateManager {
     private static let filesName = "cenarius-files.json"
     private static let configName = "cenarius-config.json"
     private static let dbName = "cenarius-files.realm"
-    private static let retryConut = 5
+    private static let retryCount = 5
     private static let maxConcurrentOperationCount = 2
     private static let resourceUrl = Bundle.main.bundleURL.appendingPathComponent(wwwName)
     private static let resourceConfigUrl = resourceUrl.appendingPathComponent(configName)
@@ -122,7 +122,7 @@ public class UpdateManager {
 //        }
         
         // 重置变量
-        progress = 0;
+        progress = 0
         
         loadLocalConfig()
         loadLocalFiles()
@@ -293,7 +293,7 @@ public class UpdateManager {
         for file in files {
             autoreleasepool {
                 queue.addOperation { [weak self, weak queue] in
-                    if self!.downloadFile(file!, retryConut: UpdateManager.retryConut) == false {
+                    if self!.downloadFile(file!, retryConut: UpdateManager.retryCount) == false {
                         queue?.cancelAllOperations()
                     }
                 }
