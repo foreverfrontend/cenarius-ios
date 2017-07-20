@@ -21,26 +21,26 @@ PODS:
     - XCGLogger
     - Zip
   - CryptoSwift (0.6.9)
-  - HandyJSON (1.7.1)
-  - Kingfisher (3.10.2)
+  - HandyJSON (1.7.2)
+  - Kingfisher (3.10.3)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
-  - Realm (2.8.2):
-    - Realm/Headers (= 2.8.2)
-  - Realm/Headers (2.8.2)
-  - RealmSwift (2.8.2):
-    - Realm (= 2.8.2)
-  - RTRootNavigationController (0.5.26):
-    - RTRootNavigationController/Core (= 0.5.26)
-  - RTRootNavigationController/Core (0.5.26)
+  - Realm (2.8.3):
+    - Realm/Headers (= 2.8.3)
+  - Realm/Headers (2.8.3)
+  - RealmSwift (2.8.3):
+    - Realm (= 2.8.3)
+  - RTRootNavigationController (0.6.2):
+    - RTRootNavigationController/Core (= 0.6.2)
+  - RTRootNavigationController/Core (0.6.2)
   - SnapKit (3.2.0)
   - SocketRocket (0.5.1)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
   - Toaster (2.0.4)
-  - WeexSDK (0.12.0):
+  - WeexSDK (0.13.0):
     - SocketRocket
   - XCGLogger (5.0.1):
     - XCGLogger/Core (= 5.0.1)
@@ -61,19 +61,19 @@ SPEC CHECKSUMS:
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
   Cenarius: e73b4abd5d55a2c2021725de9b4d1571ff514349
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
-  HandyJSON: 54b6ce942795f7b2e61b82fe73cf25d9f139d125
-  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
+  HandyJSON: e7ad0483005826baba1d1c251cd98d0aa8bd8cce
+  Kingfisher: a0ac82dc5bcf0388dd74b294cf2cc13730c63436
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
-  Realm: 0e262abf087c7054013e00579274f7e070486d4a
-  RealmSwift: 73565e91bc403c1149e4acf31ff9de506b2f9459
-  RTRootNavigationController: 153e538439fa20faec706019b04375f6c6fabeb6
+  Realm: 3601ef091c8c499a31101d8563b991e75546cdce
+  RealmSwift: 8183818515471b01a99abdd2970f8e4fd52b6f4a
+  RTRootNavigationController: 289b0ae63b6c1cd38123408988404cd86fe8a662
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
   Toaster: f13031c636ef065281bc11857be9a16c7659e04f
-  WeexSDK: 8573b6e15195d4efc7c786ddc3be6f50d9ccb01c
+  WeexSDK: 4651f0314ea6d77d771d587a3fcb38cdab9750f5
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 

@@ -80,11 +80,11 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "WeexSDK/WeexSDK.framework/main.js"
+  install_resource "WeexSDK/WeexSDK.framework/native-bundle-main.js"
   install_resource "WeexSDK/WeexSDK.framework/wx_load_error@3x.png"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "WeexSDK/WeexSDK.framework/main.js"
+  install_resource "WeexSDK/WeexSDK.framework/native-bundle-main.js"
   install_resource "WeexSDK/WeexSDK.framework/wx_load_error@3x.png"
 fi
 
