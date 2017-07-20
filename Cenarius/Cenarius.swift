@@ -1,17 +1,30 @@
 //
-//  Weex.swift
+//  Cenarius.swift
 //  Cenarius
 //
-//  Created by M on 2017/6/16.
+//  Created by M on 2017/7/20.
 //  Copyright © 2017年 M. All rights reserved.
 //
 
-import Foundation
+import SVProgressHUD
 import WeexSDK
 
-public class Weex {
+public class Cenarius {
     
-    public static func initWeex() {
+    public static func initCenarius() {
+        Log.setDefaultLog()
+        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setDefaultStyle(.dark)
+        registerInterceptor()
+        initWeex()
+    }
+    
+    private static func registerInterceptor() {
+        Interceptor.register(RouteInterceptor.self)
+        Interceptor.register(ToastInterceptor.self)
+    }
+    
+    private static func initWeex() {
         //init SDK environment
         WXSDKEngine.initSDKEnvironment()
         
@@ -25,4 +38,3 @@ public class Weex {
         WXSDKEngine.registerComponent("select", with: WXSelectComponent.self)
     }
 }
-

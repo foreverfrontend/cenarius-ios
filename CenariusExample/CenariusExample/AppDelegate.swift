@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         initCenarius()
-        initLog()
         registerRoute()
         registerInterceptor()
         initWeexSDK()
@@ -32,12 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func initCenarius() {
         let url = URL(string: "https://emcs-dev.infinitus.com.cn/h5/www3.0")!
         UpdateManager.setServerUrl(url)
-//        UpdateManager.setDevelopMode(false)
         OpenApi.set(appKey: "a", appSecret: "b")
-    }
-    
-    func initLog() {
-        Log.setDefaultLog()
     }
     
     func registerRoute() {
@@ -45,22 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func registerInterceptor() {
-        Interceptor.register(RouteInterceptor.self)
-        Interceptor.register(ToastInterceptor.self)
+//        Interceptor.register(RouteInterceptor.self)
+//        Interceptor.register(ToastInterceptor.self)
     }
     
     // MARK: - Weex
     func initWeexSDK() {
-        Weex.initWeex()
-        //not necessary
-        WXAppConfiguration.setAppGroup("Cenarius")
-        WXAppConfiguration.setAppName("CenariusExample")
-        WXAppConfiguration.setExternalUserAgent("ExternalUA")
-    
         //set log
         WXLog.setLogLevel(.log)
-        
-        
     }
     
     func listenNetwork() {
