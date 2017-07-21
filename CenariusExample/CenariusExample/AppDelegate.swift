@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initCenarius() {
+        Cenarius.initCenarius()
         let url = URL(string: "https://emcs-dev.infinitus.com.cn/h5/www3.0")!
         UpdateManager.setServerUrl(url)
         OpenApi.set(appKey: "a", appSecret: "b")
