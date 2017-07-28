@@ -62,7 +62,7 @@
 
     ],
     "WeexSDK": [
-
+      "0.15.0-dynamic"
     ]
   },
   "requires_arc": true

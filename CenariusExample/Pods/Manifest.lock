@@ -17,6 +17,7 @@ PODS:
     - SwiftyJSON
     - SwiftyVersion
     - Toaster
+    - WeexSDK (= 0.15.0-dynamic)
     - XCGLogger
     - Zip
   - CryptoSwift (0.6.9)
@@ -39,7 +40,7 @@ PODS:
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
   - Toaster (2.0.4)
-  - WeexSDK (0.15.1):
+  - WeexSDK (0.15.0-dynamic):
     - SocketRocket
   - XCGLogger (5.0.1):
     - XCGLogger/Core (= 5.0.1)
@@ -49,17 +50,16 @@ PODS:
 
 DEPENDENCIES:
   - Cenarius (from `..`)
-  - WeexSDK
 
 EXTERNAL SOURCES:
   Cenarius:
-    :path: ".."
+    :path: ..
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
-  Cenarius: 3d5d3f18fc8a43ef4fbfcf75f23a018feb830399
+  Cenarius: 4a6456697f88ec44db2e46d13aaf8e1271262d54
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   HandyJSON: e7ad0483005826baba1d1c251cd98d0aa8bd8cce
   Kingfisher: dc3a4983e86d2dfa89513664983a82340c11a289
@@ -73,10 +73,10 @@ SPEC CHECKSUMS:
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
   Toaster: f13031c636ef065281bc11857be9a16c7659e04f
-  WeexSDK: 5282685df6d7279213a51a3142b915759f6e3413
+  WeexSDK: ce655afef0e2decc89a81324be718ae45af5d43e
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 66acc13345e11076e84e1e659a8ff2e08ed8377c
+PODFILE CHECKSUM: 437abe3b8a5dc8794179eb1a55ecea7258fee3b0
 
 COCOAPODS: 1.2.1

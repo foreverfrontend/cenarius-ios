@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.dependency 'Toaster'
   s.dependency 'RTRootNavigationController'
   s.dependency 'SVProgressHUD'
-  s.dependency 'WeexSDK'
+  s.dependency 'WeexSDK', '0.15.0-dynamic'
   s.requires_arc = true
   
 end

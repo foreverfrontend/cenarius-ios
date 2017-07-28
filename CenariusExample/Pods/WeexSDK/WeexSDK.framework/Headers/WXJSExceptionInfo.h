@@ -53,7 +53,6 @@
  */
 @property(nonatomic,strong, readonly) NSString * jsfmVersion;
 
-
 /**
  * @abstract Initializes a WXJSException instance
  * @param instanceId the id of instance

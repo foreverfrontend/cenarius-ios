@@ -32,7 +32,7 @@ pod 'AsyncSwift'
 # Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch
 # https://github.com/duemunk/Async
 
-pod 'WeexSDK'
+pod 'WeexSDK', '0.15.0-dynamic'
 # A framework for building Mobile cross-platform UI.
 # https://github.com/apache/incubator-weex
 
