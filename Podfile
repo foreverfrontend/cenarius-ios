@@ -28,7 +28,7 @@ pod 'XCGLogger'
 # A debug log framework for use in Swift projects.
 # https://github.com/DaveWoodCom/XCGLogger
 
-pod "AsyncSwift"
+pod 'AsyncSwift'
 # Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch
 # https://github.com/duemunk/Async
 

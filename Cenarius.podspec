@@ -25,9 +25,5 @@ Pod::Spec.new do |s|
   s.dependency 'SVProgressHUD'
   s.dependency 'WeexSDK'
   s.requires_arc = true
-  s.pod_target_xcconfig = {
-        'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/WeexSDK',
-        'OTHER_LDFLAGS'          => '$(inherited) -undefined dynamic_lookup',
-        'ENABLE_BITCODE' => 'NO'
-    }
+  
 end

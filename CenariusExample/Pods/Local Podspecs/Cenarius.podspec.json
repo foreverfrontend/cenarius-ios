@@ -60,15 +60,7 @@
     ],
     "SVProgressHUD": [
 
-    ],
-    "WeexSDK": [
-
     ]
   },
-  "requires_arc": true,
-  "pod_target_xcconfig": {
-    "FRAMEWORK_SEARCH_PATHS": "$(inherited) $(PODS_ROOT)/WeexSDK",
-    "OTHER_LDFLAGS": "$(inherited) -undefined dynamic_lookup",
-    "ENABLE_BITCODE": "NO"
-  }
+  "requires_arc": true
 }
