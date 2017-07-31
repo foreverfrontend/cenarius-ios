@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Hb-b5-dhx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0Hb-b5-dhx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,13 +54,25 @@
                                     <action selector="webView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ayz-gs-ZGj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J70-yz-zBb">
+                                <rect key="frame" x="147" y="485" width="81" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Module"/>
+                                <connections>
+                                    <action selector="module:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4p-mV-MCL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="J70-yz-zBb" firstAttribute="height" secondItem="nUD-ua-bAP" secondAttribute="height" id="9KT-LI-X73"/>
+                            <constraint firstItem="J70-yz-zBb" firstAttribute="leading" secondItem="nUD-ua-bAP" secondAttribute="leading" id="Eqx-CW-gBS"/>
                             <constraint firstItem="ccz-2N-YSv" firstAttribute="trailing" secondItem="nUD-ua-bAP" secondAttribute="trailing" id="Hi5-52-Eot"/>
                             <constraint firstItem="R7a-ES-mbn" firstAttribute="leading" secondItem="ccz-2N-YSv" secondAttribute="leading" id="Lqv-9s-Ia3"/>
+                            <constraint firstItem="J70-yz-zBb" firstAttribute="top" secondItem="nUD-ua-bAP" secondAttribute="bottom" constant="5" id="R6C-Og-WgI"/>
                             <constraint firstItem="nUD-ua-bAP" firstAttribute="top" secondItem="ccz-2N-YSv" secondAttribute="bottom" constant="8" symbolic="YES" id="RfZ-Xq-sRx"/>
                             <constraint firstItem="R7a-ES-mbn" firstAttribute="trailing" secondItem="ccz-2N-YSv" secondAttribute="trailing" id="U9T-H1-zGT"/>
+                            <constraint firstItem="J70-yz-zBb" firstAttribute="width" secondItem="nUD-ua-bAP" secondAttribute="width" id="W6h-8c-cZS"/>
                             <constraint firstItem="ccz-2N-YSv" firstAttribute="leading" secondItem="nUD-ua-bAP" secondAttribute="leading" id="W7V-dE-blX"/>
                             <constraint firstItem="gCI-v6-3SN" firstAttribute="centerX" secondItem="R7a-ES-mbn" secondAttribute="centerX" id="YQh-GH-ctc"/>
                             <constraint firstItem="R7a-ES-mbn" firstAttribute="top" secondItem="gCI-v6-3SN" secondAttribute="bottom" constant="5" id="Z5U-u6-67e"/>

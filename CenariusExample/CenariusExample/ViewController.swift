@@ -55,6 +55,10 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(webViewController, animated: true)
     }
 
+    @IBAction func module(_ sender: UIButton) {
+        let moduleViewController = ModuleViewController()
+        navigationController?.pushViewController(moduleViewController, animated: true)
+    }
 
 }
 
