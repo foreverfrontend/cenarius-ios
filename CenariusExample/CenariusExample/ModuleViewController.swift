@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ModuleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, LocationModuleDelegate {
 
@@ -21,7 +22,6 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
-        mainTableView.separatorStyle = .none
         mainTableView.dataSource = self
         mainTableView.delegate = self
         mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -34,6 +34,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.selectionStyle = .none
         cell.textLabel?.text = arrayM[indexPath.row]
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         return cell
@@ -50,13 +51,19 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
 
     // MARK: - Location Module
     private func openLocation() {
+        SVProgressHUD.show()
+        
         let locationModule = LocationModule.share
         locationModule.delegate = self
         locationModule.getLocation(.always)
     }
     
     func onGetLocation(_ location: LocationModuleModel) {
+        
+        SVProgressHUD.dismiss()
+        
         debugPrint("经度:" + String(location.longitude!))
         debugPrint("纬度:" + String(location.latitude!))
+        SVProgressHUD.showSuccess(withStatus: "经度:" + String(location.longitude!) + "\n" + "纬度:" + String(location.latitude!))
     }
 }
