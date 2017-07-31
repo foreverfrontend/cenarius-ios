@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModuleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ModuleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, LocationModuleDelegate {
 
 
     private var arrayM = Array<String>()
@@ -16,6 +16,9 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        
+        arrayM = ["Location"]
+        
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
         mainTableView.separatorStyle = .none
@@ -35,5 +38,25 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         cell.textLabel?.font = UIFont.systemFont(ofSize: 16)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            openLocation()
+        default:
+            break
+        }
+    }
 
+    // MARK: - Location Module
+    private func openLocation() {
+        let locationModule = LocationModule.share
+        locationModule.delegate = self
+        locationModule.getLocation(.always)
+    }
+    
+    func onGetLocation(_ location: LocationModuleModel) {
+        debugPrint("经度:" + String(location.longitude!))
+        debugPrint("纬度:" + String(location.latitude!))
+    }
 }
