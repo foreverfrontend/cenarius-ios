@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */; };
 		03A7FD891F2F7D53005CF66B /* LocationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD881F2F7D53005CF66B /* LocationModule.swift */; };
+		03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */; };
 		0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */; };
 		0C445BE61E8DFEFA00EC30D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */; };
 		0C445BE91E8DFEFA00EC30D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BE71E8DFEFA00EC30D5 /* Main.storyboard */; };
@@ -23,6 +24,9 @@
 /* Begin PBXFileReference section */
 		0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleViewController.swift; sourceTree = "<group>"; };
 		03A7FD881F2F7D53005CF66B /* LocationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModule.swift; sourceTree = "<group>"; };
+		03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerControllerModule.swift; sourceTree = "<group>"; };
+		03A7FD8D1F2F8CAC005CF66B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		03A7FD8E1F2F8CAC005CF66B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		0C445BE01E8DFEFA00EC30D5 /* CenariusExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CenariusExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +62,14 @@
 			path = LocationModule;
 			sourceTree = "<group>";
 		};
+		03A7FD8A1F2F8A82005CF66B /* ImagePickerControllerModule */ = {
+			isa = PBXGroup;
+			children = (
+				03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */,
+			);
+			path = ImagePickerControllerModule;
+			sourceTree = "<group>";
+		};
 		0C445BD71E8DFEFA00EC30D5 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +91,7 @@
 		0C445BE21E8DFEFA00EC30D5 /* CenariusExample */ = {
 			isa = PBXGroup;
 			children = (
+				03A7FD8A1F2F8A82005CF66B /* ImagePickerControllerModule */,
 				03A7FD871F2F7D33005CF66B /* LocationModule */,
 				0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */,
 				0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */,
@@ -251,6 +264,7 @@
 				0C9CD0531EA61C3300BE40BB /* UserViewController.swift in Sources */,
 				0C445BE61E8DFEFA00EC30D5 /* ViewController.swift in Sources */,
 				03A7FD891F2F7D53005CF66B /* LocationModule.swift in Sources */,
+				03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */,
 				0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */,
 				0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */,
 				0C6CA9CC1E9B5C2800F94C7C /* OpenApiViewController.swift in Sources */,
@@ -264,6 +278,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0C445BE81E8DFEFA00EC30D5 /* Base */,
+				03A7FD8D1F2F8CAC005CF66B /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -272,6 +287,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0C445BED1E8DFEFA00EC30D5 /* Base */,
+				03A7FD8E1F2F8CAC005CF66B /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -283,6 +299,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -333,6 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

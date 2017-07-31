@@ -9,16 +9,18 @@
 import UIKit
 import SVProgressHUD
 
-class ModuleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, LocationModuleDelegate {
+class ModuleViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, LocationModuleDelegate, ImagePickerControllerModuleDelegate {
 
 
     private var arrayM = Array<String>()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location"]
+        arrayM = ["Location","openAlbum","openCamera"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -44,6 +46,10 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         switch indexPath.row {
         case 0:
             openLocation()
+        case 1:
+            openAlbum()
+        case 2:
+            openCamera()
         default:
             break
         }
@@ -65,5 +71,34 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         debugPrint("经度:" + String(location.longitude!))
         debugPrint("纬度:" + String(location.latitude!))
         SVProgressHUD.showSuccess(withStatus: "经度:" + String(location.longitude!) + "\n" + "纬度:" + String(location.latitude!))
+    }
+    
+    // MARK: - ImagePickerControllerModule
+    private func openAlbum() {
+        let module = ImagePickerControllerModule.share
+        module.delegate = self
+        module.chooseLocalPhotos(complete: { [weak self](imagePickerController) in
+            DispatchQueue.main.async {
+                self?.present(imagePickerController, animated: true, completion: nil)
+            }
+        }) { (errorStr) in
+            debugPrint("错误信息:" + errorStr)
+        }
+    }
+    
+    private func openCamera() {
+        let module = ImagePickerControllerModule.share
+        module.delegate = self
+        module.takePhotos(complete: { [weak self](imagePickerController) in
+            DispatchQueue.main.async {
+                self?.present(imagePickerController, animated: true, completion: nil)
+            }
+        }) { (errorStr) in
+             debugPrint("错误信息:" + errorStr)
+        }
+    }
+    
+    func onShowUrl(_ url: NSURL) {
+        SVProgressHUD.showInfo(withStatus: "图片路径：" + url.absoluteString!)
     }
 }

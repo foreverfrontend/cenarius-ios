@@ -1,0 +1,36 @@
+
+/* Class = "UIButton"; normalTitle = "Module"; ObjectID = "J70-yz-zBb"; */
+"J70-yz-zBb.normalTitle" = "Module";
+
+/* Class = "UIViewController"; title = "OpenApi"; ObjectID = "OBm-dZ-0yY"; */
+"OBm-dZ-0yY.title" = "OpenApi";
+
+/* Class = "UIButton"; normalTitle = "openApi"; ObjectID = "R7a-ES-mbn"; */
+"R7a-ES-mbn.normalTitle" = "openApi";
+
+/* Class = "UIButton"; normalTitle = "sign"; ObjectID = "Y1Z-XA-OHR"; */
+"Y1Z-XA-OHR.normalTitle" = "sign";
+
+/* Class = "UIButton"; normalTitle = "weex"; ObjectID = "ccz-2N-YSv"; */
+"ccz-2N-YSv.normalTitle" = "weex";
+
+/* Class = "UILabel"; text = "isJson"; ObjectID = "dET-Cv-Kyv"; */
+"dET-Cv-Kyv.text" = "isJson";
+
+/* Class = "UINavigationItem"; title = "Home"; ObjectID = "g1w-mj-CsF"; */
+"g1w-mj-CsF.title" = "Home";
+
+/* Class = "UIButton"; normalTitle = "update"; ObjectID = "gCI-v6-3SN"; */
+"gCI-v6-3SN.normalTitle" = "update";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jDB-UJ-dAG"; */
+"jDB-UJ-dAG.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "webView"; ObjectID = "nUD-ua-bAP"; */
+"nUD-ua-bAP.normalTitle" = "webView";
+
+/* Class = "UITextView"; text = "https://y.com?a=a&b=b"; ObjectID = "uKM-fZ-oC8"; */
+"uKM-fZ-oC8.text" = "https://y.com?a=a&b=b";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vgO-sq-9Ho"; */
+"vgO-sq-9Ho.text" = "Label";
