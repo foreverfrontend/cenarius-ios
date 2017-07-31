@@ -12,7 +12,7 @@ pod 'Alamofire-Synchronous'
 # Synchronous requests for Alamofire
 # https://github.com/Dalodd/Alamofire-Synchronous
 
-pod 'Kingfisher'
+#pod 'Kingfisher'
 # A lightweight, pure-Swift library for downloading and caching images from the web.
 # https://github.com/onevcat/Kingfisher
 
@@ -32,7 +32,7 @@ pod 'AsyncSwift'
 # Syntactic sugar in Swift for asynchronous dispatches in Grand Central Dispatch
 # https://github.com/duemunk/Async
 
-pod 'WeexSDK', '0.15.0-dynamic'
+#pod 'WeexSDK', '0.15.0-dynamic'
 # A framework for building Mobile cross-platform UI.
 # https://github.com/apache/incubator-weex
 
@@ -52,7 +52,7 @@ pod 'CryptoSwift'
 # CryptoSwift is a growing collection of standard and secure cryptographic algorithms implemented in Swift
 # https://github.com/krzyzanowskim/CryptoSwift
 
-pod 'SnapKit'
+#pod 'SnapKit'
 # A Swift Autolayout DSL for iOS & OS X
 # https://github.com/SnapKit/SnapKit
 
@@ -60,7 +60,7 @@ pod 'Toaster'
 # 🍞 Toast for Swift
 # https://github.com/devxoul/Toaster
 
-pod 'RTRootNavigationController'
+#pod 'RTRootNavigationController'
 # Transparently make every view controller has its own navigation bar
 # https://github.com/rickytan/RTRootNavigationController
 

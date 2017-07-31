@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0C4C683B1E9CDB3500C52FB5 /* String+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */; };
-		0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */; };
-		0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */; };
-		0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */; };
-		0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26E81EA4A96800CA692D /* WXEventModule.m */; };
-		0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */; };
 		0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F31EA5B11000CA692D /* Interceptor.swift */; };
 		0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */; };
 		0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26F81EA5B9B100CA692D /* Route.swift */; };
@@ -21,17 +16,7 @@
 		0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */; };
 		0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */; };
 		0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */; };
-		0C8A7BCF1EFCAB9D0068C6EA /* WXProgressHUDModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */; };
-		0C8A7BD21EFCABD60068C6EA /* WXProgressHUDModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */; };
-		0C8A7BD31EFCAC120068C6EA /* WXProgressHUDModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0C8D64531F0B32280075FB09 /* Dictionary+Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8D64521F0B32280075FB09 /* Dictionary+Cenarius.swift */; };
-		0C900C291EEF76E2009655F9 /* WXNetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C281EEF76E2009655F9 /* WXNetworkModule.m */; };
-		0C900C2B1EEF772C009655F9 /* WXNetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C2A1EEF772C009655F9 /* WXNetworkModule.swift */; };
-		0C900C331EF3AAAA009655F9 /* WXRouteModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C321EF3AAAA009655F9 /* WXRouteModule.swift */; };
-		0C900C341EF3AEE9009655F9 /* WXEventModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C5B26E71EA4A96800CA692D /* WXEventModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C900C351EF3AEED009655F9 /* WXNetworkModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C261EEF76C9009655F9 /* WXNetworkModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C900C361EF3AEF0009655F9 /* WXRouteModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C900C371EF3AF6A009655F9 /* WXRouteModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C900C301EF3AA70009655F9 /* WXRouteModule.m */; };
 		0C9CD0561EA7472800BE40BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0551EA7472800BE40BB /* Network.swift */; };
 		0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */; };
 		0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD05A1EA83F9900BE40BB /* Log.swift */; };
@@ -47,12 +32,6 @@
 
 /* Begin PBXFileReference section */
 		0C4C683A1E9CDB3500C52FB5 /* String+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Cenarius.swift"; sourceTree = "<group>"; };
-		0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeexViewController.swift; sourceTree = "<group>"; };
-		0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImgLoaderDefaultImpl.swift; sourceTree = "<group>"; };
-		0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXSelectComponent.swift; sourceTree = "<group>"; };
-		0C5B26E71EA4A96800CA692D /* WXEventModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXEventModule.h; sourceTree = "<group>"; };
-		0C5B26E81EA4A96800CA692D /* WXEventModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXEventModule.m; sourceTree = "<group>"; };
-		0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXEventModule.swift; sourceTree = "<group>"; };
 		0C5B26F31EA5B11000CA692D /* Interceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		0C5B26F51EA5B2A200CA692D /* RouteInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInterceptor.swift; sourceTree = "<group>"; };
 		0C5B26F81EA5B9B100CA692D /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
@@ -61,16 +40,7 @@
 		0C5B26FE1EA5E9C600CA692D /* UIApplication+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cenarius.swift"; sourceTree = "<group>"; };
 		0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Cenarius.swift"; sourceTree = "<group>"; };
 		0C6CA9C91E9B31B300F94C7C /* OpenApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenApi.swift; sourceTree = "<group>"; };
-		0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXProgressHUDModule.swift; sourceTree = "<group>"; };
-		0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXProgressHUDModule.h; sourceTree = "<group>"; };
-		0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXProgressHUDModule.m; sourceTree = "<group>"; };
 		0C8D64521F0B32280075FB09 /* Dictionary+Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Cenarius.swift"; sourceTree = "<group>"; };
-		0C900C261EEF76C9009655F9 /* WXNetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXNetworkModule.h; sourceTree = "<group>"; };
-		0C900C281EEF76E2009655F9 /* WXNetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXNetworkModule.m; sourceTree = "<group>"; };
-		0C900C2A1EEF772C009655F9 /* WXNetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXNetworkModule.swift; sourceTree = "<group>"; };
-		0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXRouteModule.h; sourceTree = "<group>"; };
-		0C900C301EF3AA70009655F9 /* WXRouteModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXRouteModule.m; sourceTree = "<group>"; };
-		0C900C321EF3AAAA009655F9 /* WXRouteModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXRouteModule.swift; sourceTree = "<group>"; };
 		0C9CD0551EA7472800BE40BB /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0C9CD05A1EA83F9900BE40BB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
@@ -109,52 +79,6 @@
 				0C5B27001EA5FE1B00CA692D /* URL+Cenarius.swift */,
 			);
 			name = Extension;
-			sourceTree = "<group>";
-		};
-		0C4C683C1E9DC67A00C52FB5 /* Weex */ = {
-			isa = PBXGroup;
-			children = (
-				0C4C683D1E9DC69200C52FB5 /* WeexViewController.swift */,
-				0C4C68421E9DF71400C52FB5 /* Component */,
-				0C4C683F1E9DCA1600C52FB5 /* Handle */,
-				0C5B26D81EA4A25700CA692D /* Module */,
-			);
-			name = Weex;
-			sourceTree = "<group>";
-		};
-		0C4C683F1E9DCA1600C52FB5 /* Handle */ = {
-			isa = PBXGroup;
-			children = (
-				0C4C68401E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift */,
-			);
-			name = Handle;
-			sourceTree = "<group>";
-		};
-		0C4C68421E9DF71400C52FB5 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				0C4C68431E9DF81200C52FB5 /* WXSelectComponent.swift */,
-			);
-			name = Component;
-			sourceTree = "<group>";
-		};
-		0C5B26D81EA4A25700CA692D /* Module */ = {
-			isa = PBXGroup;
-			children = (
-				0C5B26E71EA4A96800CA692D /* WXEventModule.h */,
-				0C5B26E81EA4A96800CA692D /* WXEventModule.m */,
-				0C5B26EC1EA4AA7100CA692D /* WXEventModule.swift */,
-				0C900C261EEF76C9009655F9 /* WXNetworkModule.h */,
-				0C900C281EEF76E2009655F9 /* WXNetworkModule.m */,
-				0C900C2A1EEF772C009655F9 /* WXNetworkModule.swift */,
-				0C900C2E1EF3AA47009655F9 /* WXRouteModule.h */,
-				0C900C301EF3AA70009655F9 /* WXRouteModule.m */,
-				0C900C321EF3AAAA009655F9 /* WXRouteModule.swift */,
-				0C8A7BD01EFCABC70068C6EA /* WXProgressHUDModule.h */,
-				0C8A7BD11EFCABD60068C6EA /* WXProgressHUDModule.m */,
-				0C8A7BCE1EFCAB9D0068C6EA /* WXProgressHUDModule.swift */,
-			);
-			name = Module;
 			sourceTree = "<group>";
 		};
 		0C5B26F01EA4D08200CA692D /* Native */ = {
@@ -224,7 +148,6 @@
 			children = (
 				0C5B26F11EA4D09F00CA692D /* Web */,
 				0C5B26F01EA4D08200CA692D /* Native */,
-				0C4C683C1E9DC67A00C52FB5 /* Weex */,
 				0C4C68391E9CD9C000C52FB5 /* Extension */,
 				0CBCCDAB1E8DFB1900A2D1A2 /* Update */,
 				0C9CD0541EA7450D00BE40BB /* Network */,
@@ -290,10 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */,
-				0C8A7BD31EFCAC120068C6EA /* WXProgressHUDModule.h in Headers */,
-				0C900C341EF3AEE9009655F9 /* WXEventModule.h in Headers */,
-				0C900C351EF3AEED009655F9 /* WXNetworkModule.h in Headers */,
-				0C900C361EF3AEF0009655F9 /* WXRouteModule.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,31 +320,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C900C371EF3AF6A009655F9 /* WXRouteModule.m in Sources */,
 				0C5B26FF1EA5E9C600CA692D /* UIApplication+Cenarius.swift in Sources */,
 				0C4C683B1E9CDB3500C52FB5 /* String+Cenarius.swift in Sources */,
 				0C5B26FB1EA5E51400CA692D /* RouteProtocol.swift in Sources */,
-				0C4C68411E9DCA5700C52FB5 /* WXImgLoaderDefaultImpl.swift in Sources */,
 				0CC7FC471EA9D6590051F05A /* WebViewController.swift in Sources */,
-				0C4C683E1E9DC69200C52FB5 /* WeexViewController.swift in Sources */,
-				0C4C68441E9DF81200C52FB5 /* WXSelectComponent.swift in Sources */,
 				0C5B26FD1EA5E52900CA692D /* InterceptorProtocol.swift in Sources */,
 				0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */,
 				0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */,
 				0C5B26F91EA5B9B100CA692D /* Route.swift in Sources */,
-				0C5B26ED1EA4AA7100CA692D /* WXEventModule.swift in Sources */,
-				0C5B26EA1EA4A96800CA692D /* WXEventModule.m in Sources */,
-				0C8A7BD21EFCABD60068C6EA /* WXProgressHUDModule.m in Sources */,
-				0C900C291EEF76E2009655F9 /* WXNetworkModule.m in Sources */,
 				0C5B27011EA5FE1B00CA692D /* URL+Cenarius.swift in Sources */,
-				0C900C2B1EEF772C009655F9 /* WXNetworkModule.swift in Sources */,
 				0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */,
-				0C900C331EF3AAAA009655F9 /* WXRouteModule.swift in Sources */,
 				0CC7FC491EAA07250051F05A /* ToastInterceptor.swift in Sources */,
 				0C9CD0561EA7472800BE40BB /* Network.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
 				0CAA60BF1F203B290044A782 /* Cenarius.swift in Sources */,
-				0C8A7BCF1EFCAB9D0068C6EA /* WXProgressHUDModule.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,
 				0C5B26F61EA5B2A200CA692D /* RouteInterceptor.swift in Sources */,
