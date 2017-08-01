@@ -35,7 +35,7 @@
 		0C9CD0561EA7472800BE40BB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0551EA7472800BE40BB /* Network.swift */; };
 		0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */; };
 		0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD05A1EA83F9900BE40BB /* Log.swift */; };
-		0CAA60BF1F203B290044A782 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA60BE1F203B290044A782 /* Cenarius.swift */; };
+		0CAA60BF1F203B290044A782 /* CenariusEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA60BE1F203B290044A782 /* CenariusEngine.swift */; };
 		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAC1E8DFBAA00A2D1A2 /* UpdateManager.swift */; };
 		0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */; };
@@ -74,7 +74,7 @@
 		0C9CD0551EA7472800BE40BB /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0C9CD05A1EA83F9900BE40BB /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		0CAA60BE1F203B290044A782 /* Cenarius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cenarius.swift; sourceTree = "<group>"; };
+		0CAA60BE1F203B290044A782 /* CenariusEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenariusEngine.swift; sourceTree = "<group>"; };
 		0CBCCD8B1E8DF44500A2D1A2 /* Cenarius.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cenarius.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cenarius.h; sourceTree = "<group>"; };
 		0CBCCD8F1E8DF44500A2D1A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		0C5B26F01EA4D08200CA692D /* Native */ = {
 			isa = PBXGroup;
 			children = (
-				0CAA60BE1F203B290044A782 /* Cenarius.swift */,
+				0CAA60BE1F203B290044A782 /* CenariusEngine.swift */,
 			);
 			name = Native;
 			sourceTree = "<group>";
@@ -424,7 +424,7 @@
 				0CC7FC491EAA07250051F05A /* ToastInterceptor.swift in Sources */,
 				0C9CD0561EA7472800BE40BB /* Network.swift in Sources */,
 				0C5B26F41EA5B11000CA692D /* Interceptor.swift in Sources */,
-				0CAA60BF1F203B290044A782 /* Cenarius.swift in Sources */,
+				0CAA60BF1F203B290044A782 /* CenariusEngine.swift in Sources */,
 				0C8A7BCF1EFCAB9D0068C6EA /* WXProgressHUDModule.swift in Sources */,
 				0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */,
 				0C6CA9CA1E9B31B300F94C7C /* OpenApi.swift in Sources */,

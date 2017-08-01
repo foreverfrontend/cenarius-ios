@@ -10,6 +10,7 @@ import UIKit
 import Cenarius
 import SVProgressHUD
 import Toaster
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
@@ -44,15 +45,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func weex(_ sender: UIButton) {
-        let wxvc = WeexViewController()
-        wxvc.url = UpdateManager.getCacheUrl().appendingPathComponent("weex/news.js")
-        self.navigationController?.pushViewController(wxvc, animated: true)
+        Route.open(path: "/weex", params: JSON(["file": "weex/news.js"]), from: self, present: false)
     }
 
     @IBAction func webView(_ sender: UIButton) {
-        let webViewController = WebViewController()
-        webViewController.url = UpdateManager.getCacheUrl().appendingPathComponent("vux/index.html")
-        self.navigationController?.pushViewController(webViewController, animated: true)
+        Route.open(path: "/web", params: JSON(["url": UpdateManager.getCacheUrl().appendingPathComponent("vux/index.html").absoluteString]), from: self, present: false)
     }
 
 

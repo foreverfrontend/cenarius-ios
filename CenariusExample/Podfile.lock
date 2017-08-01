@@ -3,7 +3,7 @@ PODS:
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
   - AsyncSwift (2.0.1)
-  - Cenarius (3.0.0):
+  - Cenarius (3.0.2):
     - Alamofire
     - Alamofire-Synchronous
     - AsyncSwift
@@ -53,13 +53,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Cenarius:
-    :path: ..
+    :path: ".."
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
-  Cenarius: 4a6456697f88ec44db2e46d13aaf8e1271262d54
+  Cenarius: 2c5e74cd48b6f9ef7701b56727ade69b679dac72
   CryptoSwift: a22f6ba238e9ce4d26ee7bf45b9ed82e7122d4a0
   HandyJSON: e7ad0483005826baba1d1c251cd98d0aa8bd8cce
   Kingfisher: dc3a4983e86d2dfa89513664983a82340c11a289

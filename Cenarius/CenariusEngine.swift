@@ -9,19 +9,25 @@
 import SVProgressHUD
 import WeexSDK
 
-public class Cenarius {
+public class CenariusEngine {
     
     public static func initCenarius() {
         Log.setDefaultLog()
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.setDefaultStyle(.dark)
         registerInterceptor()
+        registerRoute()
         initWeex()
     }
     
     private static func registerInterceptor() {
         Interceptor.register(RouteInterceptor.self)
         Interceptor.register(ToastInterceptor.self)
+    }
+    
+    private static func registerRoute() {
+        Route.register(path: "/web", controller: WebViewController.self)
+        Route.register(path: "/weex", controller: WeexViewController.self)
     }
     
     private static func initWeex() {
