@@ -52,7 +52,7 @@ pod 'CryptoSwift'
 # CryptoSwift is a growing collection of standard and secure cryptographic algorithms implemented in Swift
 # https://github.com/krzyzanowskim/CryptoSwift
 
-#pod 'SnapKit'
+pod 'SnapKit'
 # A Swift Autolayout DSL for iOS & OS X
 # https://github.com/SnapKit/SnapKit
 

@@ -1,6 +1,6 @@
 {
   "name": "Cenarius",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "summary": "Mobile Hybrid Framework Cenarius iOS Container.",
   "homepage": "https://github.com/macula-projects/cenarius-ios",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/macula-projects/cenarius-ios.git",
-    "tag": "3.0.0"
+    "tag": "3.0.2"
   },
   "source_files": "Cenarius/**/*.{swift,h,m}",
   "dependencies": {
@@ -20,9 +20,6 @@
 
     ],
     "Alamofire-Synchronous": [
-
-    ],
-    "Kingfisher": [
 
     ],
     "SwiftyJSON": [
@@ -55,14 +52,8 @@
     "Toaster": [
 
     ],
-    "RTRootNavigationController": [
-
-    ],
     "SVProgressHUD": [
 
-    ],
-    "WeexSDK": [
-      "0.15.0-dynamic"
     ]
   },
   "requires_arc": true

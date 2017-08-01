@@ -13,6 +13,7 @@ PODS:
   - Realm/Headers (2.9.0)
   - RealmSwift (2.9.0):
     - Realm (= 2.9.0)
+  - SnapKit (3.2.0)
   - SVProgressHUD (2.1.2)
   - SwiftyJSON (3.1.4)
   - SwiftyVersion (0.2.1)
@@ -30,6 +31,7 @@ DEPENDENCIES:
   - CryptoSwift
   - HandyJSON
   - RealmSwift
+  - SnapKit
   - SVProgressHUD
   - SwiftyJSON
   - SwiftyVersion
@@ -46,6 +48,7 @@ SPEC CHECKSUMS:
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   Realm: f14ab1673502559cb16592ddb8f383c474c13e05
   RealmSwift: 16ad2c187042c4934f49750375582fe508627dcb
+  SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   SwiftyVersion: 79f589a2f9d252c6493f9d2e0a0296d5008f04ff
@@ -53,6 +56,6 @@ SPEC CHECKSUMS:
   XCGLogger: 0b43697155d41e4a1b15fc776f319c2141646b09
   Zip: e34513299ac38c0686d5b24504da7ce343799ab9
 
-PODFILE CHECKSUM: 7acd8282aa910d9cec1ce28eaf4e4b979289cc57
+PODFILE CHECKSUM: aaf79e8f47833a082f4d05a06bc577304efd72aa
 
 COCOAPODS: 1.2.1

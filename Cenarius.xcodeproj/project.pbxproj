@@ -21,7 +21,6 @@
 		0C9CD0581EA75BE800BE40BB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD0571EA75BE800BE40BB /* NetworkManager.swift */; };
 		0C9CD05B1EA83F9900BE40BB /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9CD05A1EA83F9900BE40BB /* Log.swift */; };
 		0CAA60BF1F203B290044A782 /* Cenarius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA60BE1F203B290044A782 /* Cenarius.swift */; };
-		0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CBCCD8E1E8DF44500A2D1A2 /* Cenarius.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0CBCCDAF1E8DFBAA00A2D1A2 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAC1E8DFBAA00A2D1A2 /* UpdateManager.swift */; };
 		0CBCCDB01E8DFBAA00A2D1A2 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAD1E8DFBAA00A2D1A2 /* File.swift */; };
 		0CBCCDB11E8DFBAA00A2D1A2 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CBCCDAE1E8DFBAA00A2D1A2 /* Config.swift */; };
@@ -212,7 +211,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CBCCD901E8DF44500A2D1A2 /* Cenarius.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

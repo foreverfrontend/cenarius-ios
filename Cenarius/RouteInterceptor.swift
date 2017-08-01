@@ -6,7 +6,7 @@
 //  Copyright © 2017年 M. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class RouteInterceptor: InterceptorProtocol {
     

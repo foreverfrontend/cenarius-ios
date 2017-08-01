@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Cenarius/**/*.{swift,h,m}'
   s.dependency "Alamofire"
   s.dependency "Alamofire-Synchronous"
-  s.dependency "Kingfisher"
+  #s.dependency "Kingfisher"
   s.dependency 'SwiftyJSON'
   s.dependency 'HandyJSON'
   s.dependency 'XCGLogger'
@@ -21,9 +21,9 @@ Pod::Spec.new do |s|
   s.dependency 'CryptoSwift'
   s.dependency 'SnapKit'
   s.dependency 'Toaster'
-  s.dependency 'RTRootNavigationController'
+  #s.dependency 'RTRootNavigationController'
   s.dependency 'SVProgressHUD'
-  s.dependency 'WeexSDK', '0.15.0-dynamic'
+  #s.dependency 'WeexSDK', '0.15.0-dynamic'
   s.requires_arc = true
   
 end
