@@ -8,8 +8,7 @@
 
 import UIKit
 import Cenarius
-import SVProgressHUD
-import Toaster
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
@@ -21,9 +20,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func webView(_ sender: UIButton) {
-        let webViewController = WebViewController()
-        //webViewController.url = UpdateManager.getCacheUrl().appendingPathComponent("vux/index.html")
-        self.navigationController?.pushViewController(webViewController, animated: true)
+        Route.open(path: "/web", params: JSON(["url": "https://emcs-dev.infinitus.com.cn/h5/www3.0/vux"]), from: self, present: false)
     }
 
 

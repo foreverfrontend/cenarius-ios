@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import SwiftyJSON
 
-open class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol {
+@objc open class WebViewController: UIViewController, UIWebViewDelegate, RouteProtocol {
     
     open var url: URL?
     open let webView = UIWebView()
