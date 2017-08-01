@@ -19,9 +19,6 @@
     "Alamofire": [
 
     ],
-    "Alamofire-Synchronous": [
-
-    ],
     "SwiftyJSON": [
 
     ],
@@ -32,18 +29,6 @@
 
     ],
     "AsyncSwift": [
-
-    ],
-    "RealmSwift": [
-
-    ],
-    "SwiftyVersion": [
-
-    ],
-    "Zip": [
-
-    ],
-    "CryptoSwift": [
 
     ],
     "SnapKit": [

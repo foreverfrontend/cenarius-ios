@@ -8,7 +8,7 @@ pod 'Alamofire'
 # Elegant HTTP Networking in Swift
 # https://github.com/Alamofire/Alamofire
 
-pod 'Alamofire-Synchronous'
+#pod 'Alamofire-Synchronous'
 # Synchronous requests for Alamofire
 # https://github.com/Dalodd/Alamofire-Synchronous
 
@@ -36,19 +36,19 @@ pod 'AsyncSwift'
 # A framework for building Mobile cross-platform UI.
 # https://github.com/apache/incubator-weex
 
-pod 'RealmSwift'
+#pod 'RealmSwift'
 # Realm is a mobile database: a replacement for Core Data & SQLite
 # https://github.com/realm/realm-cocoa
 
-pod 'SwiftyVersion'
+#pod 'SwiftyVersion'
 # A simpler way to manage Versions in Swift
 # https://github.com/dcordero/SwiftyVersion
 
-pod 'Zip'
+#pod 'Zip'
 # Swift framework for zipping and unzipping files.
 # https://github.com/marmelroy/Zip
 
-pod 'CryptoSwift'
+#pod 'CryptoSwift'
 # CryptoSwift is a growing collection of standard and secure cryptographic algorithms implemented in Swift
 # https://github.com/krzyzanowskim/CryptoSwift
 

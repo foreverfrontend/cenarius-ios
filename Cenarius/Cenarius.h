@@ -16,7 +16,4 @@ FOUNDATION_EXPORT const unsigned char CenariusVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Cenarius/PublicHeader.h>
 
-#import <Cenarius/WXEventModule.h>
-#import <Cenarius/WXNetworkModule.h>
-#import <Cenarius/WXRouteModule.h>
-#import <Cenarius/WXProgressHUDModule.h>
+
