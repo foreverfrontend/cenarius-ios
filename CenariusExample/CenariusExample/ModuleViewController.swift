@@ -14,13 +14,11 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
 
     private var arrayM = Array<String>()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -50,6 +48,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             openAlbum()
         case 2:
             openCamera()
+        case 3:
+            netWorkSatus()
         default:
             break
         }
@@ -100,5 +100,11 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     
     func onShowUrl(_ url: NSURL) {
         SVProgressHUD.showInfo(withStatus: "图片路径：" + url.absoluteString!)
+    }
+    
+    // MARK: - NetworkModule
+    func netWorkSatus() {
+       let type = NetworkModule.checkNetworkStatus()
+        SVProgressHUD.showInfo(withStatus: "当前网络类型:\(type)")
     }
 }
