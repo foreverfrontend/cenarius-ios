@@ -33,7 +33,7 @@ class ImagePickerControllerModule : NSObject, UIImagePickerControllerDelegate, U
     private var imagePickerController:UIImagePickerController!
     
     // 拍照的图片标识符
-    private let identifier = "IPCMImage"
+    open var identifier = "IPCMImage"
     
     deinit { }
     
