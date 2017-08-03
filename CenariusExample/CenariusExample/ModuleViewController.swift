@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault","SendMessage"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -62,6 +62,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             openQQ()
         case 9:
             userDefault()
+        case 10:
+            sendMessage()
         default:
             break
         }
@@ -193,5 +195,9 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         alertC.addAction(removeAction)
         
         present(alertC, animated: true, completion: nil)
+    }
+    
+   func sendMessage() {
+        SendMessageModule.sendMessage(["10086"], message: "11")
     }
 }
