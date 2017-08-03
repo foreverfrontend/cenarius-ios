@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -52,6 +52,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             netWorkSatus()
         case 4:
             getDeviceInfo()
+        case 5:
+            openSystemSetting()
         default:
             break
         }
@@ -118,5 +120,19 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         debugPrint(DeviceInfoModule.uuid())
         debugPrint(DeviceInfoModule.platform())
         debugPrint(DeviceInfoModule.localizedModel())
+    }
+    
+    // MARK: - OpenSystemSettingModule
+    func openSystemSetting() {
+        OpenSystemSettingModule.openSystemSetting()
+        //        OpenSystemSettingModule.openSystemWifi()
+        //        OpenSystemSettingModule.openSystemPhotos()
+        //        OpenSystemSettingModule.openSystemCamera()
+        //        OpenSystemSettingModule.openSystemContacts()
+        //        OpenSystemSettingModule.openSystemGeneral()
+        //        OpenSystemSettingModule.openSystemPrivacy()
+        //        OpenSystemSettingModule.openSystemLocation()
+        //        OpenSystemSettingModule.openSystemMobileData()
+        //        OpenSystemSettingModule.openSystemNotification()
     }
 }
