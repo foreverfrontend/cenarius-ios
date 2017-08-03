@@ -13,6 +13,7 @@ class OpenSystemSettingModule {
     /// 已经真机测试过下列方法
     ///
     /// 测试iOS版本: iOS9.1、iOS10.3.1
+    /// iOS7 不考虑适配
     
     private static let application = UIApplication.shared
     
@@ -20,11 +21,13 @@ class OpenSystemSettingModule {
         return URL(string: str)!
     }
     
-    /// 跳转`设置`
+    /// 跳转自己应用`设置`
+    ///
+    /// 注意！！！新项目，需要请求一下位置权限或者通知权限，才可以跳进自己的app设置里面，如果没有任何权限请求，则不能跳转
     open static func openSystemSetting() {
         
-        if #available(iOS 10.0, *), application.canOpenURL(openUrl("App-Prefs:root=Setting")){
-            application.open(openUrl("App-Prefs:root=Setting"), options: [:], completionHandler: nil)
+        if #available(iOS 10.0, *), application.canOpenURL(openUrl(UIApplicationOpenSettingsURLString)){
+            application.open(openUrl(UIApplicationOpenSettingsURLString), options: [:], completionHandler: nil)
         }else if application.canOpenURL(openUrl(UIApplicationOpenSettingsURLString)) {
             application.openURL(openUrl(UIApplicationOpenSettingsURLString))
         }
