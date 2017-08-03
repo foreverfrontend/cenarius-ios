@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */; };
+		035A8BC11F31AD320063CCE4 /* DeviceInfoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A8BC01F31AD320063CCE4 /* DeviceInfoModule.swift */; };
 		0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */; };
 		03A7FD891F2F7D53005CF66B /* LocationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD881F2F7D53005CF66B /* LocationModule.swift */; };
 		03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
+		035A8BC01F31AD320063CCE4 /* DeviceInfoModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfoModule.swift; sourceTree = "<group>"; };
 		0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleViewController.swift; sourceTree = "<group>"; };
 		03A7FD881F2F7D53005CF66B /* LocationModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModule.swift; sourceTree = "<group>"; };
 		03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerControllerModule.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 			path = NetworkModule;
 			sourceTree = "<group>";
 		};
+		035A8BBF1F31AD1A0063CCE4 /* DeviceInfoModule */ = {
+			isa = PBXGroup;
+			children = (
+				035A8BC01F31AD320063CCE4 /* DeviceInfoModule.swift */,
+			);
+			path = DeviceInfoModule;
+			sourceTree = "<group>";
+		};
 		03A7FD871F2F7D33005CF66B /* LocationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +111,7 @@
 		0C445BE21E8DFEFA00EC30D5 /* CenariusExample */ = {
 			isa = PBXGroup;
 			children = (
+				035A8BBF1F31AD1A0063CCE4 /* DeviceInfoModule */,
 				035A8BBB1F3162F80063CCE4 /* NetworkModule */,
 				03A7FD8A1F2F8A82005CF66B /* ImagePickerControllerModule */,
 				03A7FD871F2F7D33005CF66B /* LocationModule */,
@@ -273,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C9CD0531EA61C3300BE40BB /* UserViewController.swift in Sources */,
+				035A8BC11F31AD320063CCE4 /* DeviceInfoModule.swift in Sources */,
 				0C445BE61E8DFEFA00EC30D5 /* ViewController.swift in Sources */,
 				03A7FD891F2F7D53005CF66B /* LocationModule.swift in Sources */,
 				03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */,

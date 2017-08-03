@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -50,6 +50,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             openCamera()
         case 3:
             netWorkSatus()
+        case 4:
+            getDeviceInfo()
         default:
             break
         }
@@ -106,5 +108,15 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     func netWorkSatus() {
        let type = NetworkModule.checkNetworkStatus()
         SVProgressHUD.showInfo(withStatus: "当前网络类型:\(type)")
+    }
+    
+    // MARK: - DeviceInfoModule
+    func getDeviceInfo() {
+        debugPrint(DeviceInfoModule.appVerion())
+        debugPrint(DeviceInfoModule.systemName())
+        debugPrint(DeviceInfoModule.systemVersion())
+        debugPrint(DeviceInfoModule.uuid())
+        debugPrint(DeviceInfoModule.platform())
+        debugPrint(DeviceInfoModule.localizedModel())
     }
 }
