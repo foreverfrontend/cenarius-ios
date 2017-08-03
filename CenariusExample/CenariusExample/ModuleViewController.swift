@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -54,6 +54,14 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             getDeviceInfo()
         case 5:
             openSystemSetting()
+        case 6:
+            callPhone()
+        case 7:
+            openWeChat()
+        case 8:
+            openQQ()
+        case 9:
+            userDefault()
         default:
             break
         }
@@ -134,5 +142,56 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         //        OpenSystemSettingModule.openSystemLocation()
         //        OpenSystemSettingModule.openSystemMobileData()
         //        OpenSystemSettingModule.openSystemNotification()
+    }
+    
+    // MARK: - CommonModule
+    func callPhone() {
+        CommonModule.callTel("1008611")
+    }
+    
+    func openWeChat() {
+        CommonModule.openWeChat("打开了微信")
+    }
+    
+    func openQQ() {
+        CommonModule.openQQ("打开了QQ")
+    }
+    
+    func userDefault() {
+        let alertC = UIAlertController(title: "UserDefault", message: nil, preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "保存", style: .default) { (alertAction) in
+            CommonModule.saveUserDefault("UserDefault", forKey: "UserDefault")
+            SVProgressHUD.showSuccess(withStatus: "保存成功")
+        }
+        
+        let redAction = UIAlertAction(title: "读取保存信息", style: .default) { (alertAction) in
+            
+            let saveInfo = CommonModule.getUserDefault("UserDefault")
+            
+            if saveInfo != nil {
+                let saveStr = saveInfo! as! String
+                 SVProgressHUD.showSuccess(withStatus: "保存信息:" + saveStr)
+            }else {
+                SVProgressHUD.showError(withStatus: "为找到key所对应的信息,请先点击保存")
+            }
+        }
+        
+        let removeAction = UIAlertAction(title: "删除", style: .destructive) { (alertAction) in
+            
+            let saveInfo = CommonModule.getUserDefault("UserDefault")
+            if saveInfo != nil {
+                CommonModule.removeUserDefault("UserDefault")
+                 SVProgressHUD.showSuccess(withStatus: "已删除")
+            }else {
+                SVProgressHUD.showError(withStatus: "为找到key所对应的信息,请先点击保存")
+            }
+        }
+        
+        alertC.addAction(saveAction)
+        alertC.addAction(redAction)
+        alertC.addAction(removeAction)
+        
+        present(alertC, animated: true, completion: nil)
     }
 }

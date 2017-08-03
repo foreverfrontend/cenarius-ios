@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		032F44641F32CCF900A3FD21 /* OpenSystemSettingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032F44631F32CCF900A3FD21 /* OpenSystemSettingModule.swift */; };
+		032F44671F32F5C400A3FD21 /* CommonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032F44661F32F5C400A3FD21 /* CommonModule.swift */; };
 		035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */; };
 		035A8BC11F31AD320063CCE4 /* DeviceInfoModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A8BC01F31AD320063CCE4 /* DeviceInfoModule.swift */; };
 		0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		032F44631F32CCF900A3FD21 /* OpenSystemSettingModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSystemSettingModule.swift; sourceTree = "<group>"; };
+		032F44661F32F5C400A3FD21 /* CommonModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModule.swift; sourceTree = "<group>"; };
 		035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
 		035A8BC01F31AD320063CCE4 /* DeviceInfoModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfoModule.swift; sourceTree = "<group>"; };
 		0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +68,14 @@
 				032F44631F32CCF900A3FD21 /* OpenSystemSettingModule.swift */,
 			);
 			path = OpenSystemSettingModule;
+			sourceTree = "<group>";
+		};
+		032F44651F32F5B900A3FD21 /* CommonModule */ = {
+			isa = PBXGroup;
+			children = (
+				032F44661F32F5C400A3FD21 /* CommonModule.swift */,
+			);
+			path = CommonModule;
 			sourceTree = "<group>";
 		};
 		035A8BBB1F3162F80063CCE4 /* NetworkModule */ = {
@@ -121,6 +131,7 @@
 		0C445BE21E8DFEFA00EC30D5 /* CenariusExample */ = {
 			isa = PBXGroup;
 			children = (
+				032F44651F32F5B900A3FD21 /* CommonModule */,
 				032F44621F32CCDB00A3FD21 /* OpenSystemSettingModule */,
 				035A8BBF1F31AD1A0063CCE4 /* DeviceInfoModule */,
 				035A8BBB1F3162F80063CCE4 /* NetworkModule */,
@@ -301,6 +312,7 @@
 				03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */,
 				0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */,
 				0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */,
+				032F44671F32F5C400A3FD21 /* CommonModule.swift in Sources */,
 				032F44641F32CCF900A3FD21 /* OpenSystemSettingModule.swift in Sources */,
 				035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */,
 				0C6CA9CC1E9B5C2800F94C7C /* OpenApiViewController.swift in Sources */,
