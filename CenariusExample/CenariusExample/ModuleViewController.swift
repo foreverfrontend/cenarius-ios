@@ -122,12 +122,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     
     // MARK: - DeviceInfoModule
     func getDeviceInfo() {
-        debugPrint(DeviceInfoModule.appVerion())
-        debugPrint(DeviceInfoModule.systemName())
-        debugPrint(DeviceInfoModule.systemVersion())
-        debugPrint(DeviceInfoModule.uuid())
-        debugPrint(DeviceInfoModule.platform())
-        debugPrint(DeviceInfoModule.localizedModel())
+        
+        SVProgressHUD.showInfo(withStatus: "app版本号: " + DeviceInfoModule.appVerion() + "\n" + "当前系统: " + DeviceInfoModule.systemName() + "\n" + "系统版本号: " + DeviceInfoModule.systemVersion() + "\n" + "设备的惟一标识号: " + "\n" + DeviceInfoModule.uuid() + "\n" + "设备: " + DeviceInfoModule.model() + "\n" + "设备型号: " +  DeviceInfoModule.deviceName())
     }
     
     // MARK: - OpenSystemSettingModule
