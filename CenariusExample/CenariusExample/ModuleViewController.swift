@@ -198,6 +198,12 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
    func sendMessage() {
-        SendMessageModule.sendMessage(["10086"], message: "11")
+//    let controller = SendMessageModule.share
+//    controller.sendMessage(["10086"], message: "11") { (messageComposeViewController) in
+//        DispatchQueue.main.async {
+//            self.present(messageComposeViewController, animated: true, completion: nil)
+//        }
+//    }
+//        SendMessageModule.sendMessage(["10086"], message: "11")
     }
 }

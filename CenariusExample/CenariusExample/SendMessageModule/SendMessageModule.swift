@@ -9,20 +9,27 @@
 import UIKit
 import MessageUI
 
-//typealias messageController = (_ MFMessageComposeViewController:MFMessageComposeViewController)  -> Void
+typealias messageController = (_ MFMessageComposeViewController:MFMessageComposeViewController)  -> Void
 
 class SendMessageModule: NSObject, MFMessageComposeViewControllerDelegate {
     
+    private let controller:MFMessageComposeViewController!
+    
+    override init() {
+        controller = MFMessageComposeViewController()
+        super.init()
+        controller.messageComposeDelegate = self
+    }
+    
     static let share = SendMessageModule()
     
-    open static func sendMessage(_ phones:Array<String>,message:String?) {
+    open func sendMessage(_ phones:Array<String>,message:String?,complete:@escaping messageController) {
         
         if MFMessageComposeViewController.canSendText() {
-            let controller = MFMessageComposeViewController()
             controller.recipients = phones
             controller.body = message
-//            controller.messageComposeDelegate = self
-//            UIApplication.shared.keyWindow?.rootViewController?.present(controller, animated: true, completion: nil)
+            debugPrint(controller)
+            complete(controller)
         }else {
             debugPrint("提示信息:该设备不支持短信功能")
         }
@@ -30,6 +37,17 @@ class SendMessageModule: NSObject, MFMessageComposeViewControllerDelegate {
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        
+        
+        switch result {
+        case .cancelled:
+            debugPrint("取消")
+        case .failed:
+            debugPrint("错误")
+        case .sent:
+            debugPrint("发送")
+        }
+        
         controller.dismiss(animated: true, completion: nil)
     }
 
