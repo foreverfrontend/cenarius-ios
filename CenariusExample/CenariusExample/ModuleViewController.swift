@@ -1,4 +1,4 @@
-//
+    //
 //  ModuleViewController.swift
 //  CenariusExample
 //
@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault","datePicker"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -62,6 +62,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             openQQ()
         case 9:
             userDefault()
+        case 10:
+            datePicker()
         default:
             break
         }
@@ -189,5 +191,14 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         alertC.addAction(removeAction)
         
         present(alertC, animated: true, completion: nil)
+    }
+    
+    // DatePickerModule
+    func datePicker() {
+        let module = DatePickerModule()
+        module.show()
+        module.selectDate = { (dateStr) in
+            SVProgressHUD.showInfo(withStatus: "当前选择的时间：" + dateStr)
+        }
     }
 }

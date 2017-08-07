@@ -14,6 +14,7 @@
 		0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0366C5E31F2F767E00E238B1 /* ModuleViewController.swift */; };
 		03A7FD891F2F7D53005CF66B /* LocationModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD881F2F7D53005CF66B /* LocationModule.swift */; };
 		03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */; };
+		03FC29FC1F385277007948FC /* DatePickerModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FC29FB1F385277007948FC /* DatePickerModule.swift */; };
 		0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */; };
 		0C445BE61E8DFEFA00EC30D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */; };
 		0C445BE91E8DFEFA00EC30D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C445BE71E8DFEFA00EC30D5 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		03A7FD8B1F2F8A8B005CF66B /* ImagePickerControllerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerControllerModule.swift; sourceTree = "<group>"; };
 		03A7FD8D1F2F8CAC005CF66B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		03A7FD8E1F2F8CAC005CF66B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		03FC29FB1F385277007948FC /* DatePickerModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerModule.swift; sourceTree = "<group>"; };
 		0C445BE01E8DFEFA00EC30D5 /* CenariusExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CenariusExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C445BE31E8DFEFA00EC30D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C445BE51E8DFEFA00EC30D5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,14 @@
 			path = ImagePickerControllerModule;
 			sourceTree = "<group>";
 		};
+		03FC29FA1F38526A007948FC /* DatePickerModule */ = {
+			isa = PBXGroup;
+			children = (
+				03FC29FB1F385277007948FC /* DatePickerModule.swift */,
+			);
+			path = DatePickerModule;
+			sourceTree = "<group>";
+		};
 		0C445BD71E8DFEFA00EC30D5 = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +141,7 @@
 		0C445BE21E8DFEFA00EC30D5 /* CenariusExample */ = {
 			isa = PBXGroup;
 			children = (
+				03FC29FA1F38526A007948FC /* DatePickerModule */,
 				032F44651F32F5B900A3FD21 /* CommonModule */,
 				032F44621F32CCDB00A3FD21 /* OpenSystemSettingModule */,
 				035A8BBF1F31AD1A0063CCE4 /* DeviceInfoModule */,
@@ -312,6 +323,7 @@
 				03A7FD8C1F2F8A8B005CF66B /* ImagePickerControllerModule.swift in Sources */,
 				0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */,
 				0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */,
+				03FC29FC1F385277007948FC /* DatePickerModule.swift in Sources */,
 				032F44671F32F5C400A3FD21 /* CommonModule.swift in Sources */,
 				032F44641F32CCF900A3FD21 /* OpenSystemSettingModule.swift in Sources */,
 				035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */,
