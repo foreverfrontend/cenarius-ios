@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030A61E01F39609D00951299 /* ContactsModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030A61DF1F39609D00951299 /* ContactsModule.swift */; };
 		032F44641F32CCF900A3FD21 /* OpenSystemSettingModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032F44631F32CCF900A3FD21 /* OpenSystemSettingModule.swift */; };
 		032F44671F32F5C400A3FD21 /* CommonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032F44661F32F5C400A3FD21 /* CommonModule.swift */; };
 		035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030A61DF1F39609D00951299 /* ContactsModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsModule.swift; sourceTree = "<group>"; };
 		032F44631F32CCF900A3FD21 /* OpenSystemSettingModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenSystemSettingModule.swift; sourceTree = "<group>"; };
 		032F44661F32F5C400A3FD21 /* CommonModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonModule.swift; sourceTree = "<group>"; };
 		035A8BBC1F31723D0063CCE4 /* NetworkModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkModule.swift; sourceTree = "<group>"; };
@@ -64,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030A61DE1F39609600951299 /* ContactsModule */ = {
+			isa = PBXGroup;
+			children = (
+				030A61DF1F39609D00951299 /* ContactsModule.swift */,
+			);
+			path = ContactsModule;
+			sourceTree = "<group>";
+		};
 		032F44621F32CCDB00A3FD21 /* OpenSystemSettingModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +151,7 @@
 		0C445BE21E8DFEFA00EC30D5 /* CenariusExample */ = {
 			isa = PBXGroup;
 			children = (
+				030A61DE1F39609600951299 /* ContactsModule */,
 				03FC29FA1F38526A007948FC /* DatePickerModule */,
 				032F44651F32F5B900A3FD21 /* CommonModule */,
 				032F44621F32CCDB00A3FD21 /* OpenSystemSettingModule */,
@@ -324,6 +335,7 @@
 				0366C5E41F2F767E00E238B1 /* ModuleViewController.swift in Sources */,
 				0C445BE41E8DFEFA00EC30D5 /* AppDelegate.swift in Sources */,
 				03FC29FC1F385277007948FC /* DatePickerModule.swift in Sources */,
+				030A61E01F39609D00951299 /* ContactsModule.swift in Sources */,
 				032F44671F32F5C400A3FD21 /* CommonModule.swift in Sources */,
 				032F44641F32CCF900A3FD21 /* OpenSystemSettingModule.swift in Sources */,
 				035A8BBD1F31723D0063CCE4 /* NetworkModule.swift in Sources */,

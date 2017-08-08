@@ -18,7 +18,7 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault","datePicker"]
+        arrayM = ["Location","openAlbum","openCamera","NetworkModule","DeviceInfo","openSystemSetting","callPhone","openWeChat","openQQ","UserDefault","datePicker","readContacts"]
         
         let mainTableView = UITableView(frame: view.bounds, style: .plain)
         mainTableView.tableFooterView = UIView()
@@ -64,6 +64,8 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
             userDefault()
         case 10:
             datePicker()
+        case 11:
+            readContacts()
         default:
             break
         }
@@ -199,6 +201,17 @@ class ModuleViewController: UIViewController, UITableViewDataSource, UITableView
         module.show()
         module.selectDate = { (dateStr) in
             SVProgressHUD.showInfo(withStatus: "当前选择的时间：" + dateStr)
+        }
+    }
+    
+    // MARK: - ContactsModule
+    func readContacts() {
+        ContactsModule.getContacts { (result, error) in
+            if result != nil , result!.count > 0 {
+                debugPrint(result!)
+            }else if error != nil {
+               debugPrint(error!)
+            }
         }
     }
 }
